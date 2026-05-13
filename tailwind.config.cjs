@@ -1,0 +1,92 @@
+module.exports = {
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  theme: {
+    extend: {
+      fontFamily: {
+        'outfit': ['Outfit', 'sans-serif'],
+        'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
+      },
+      colors: {
+        black: {
+          mid: '#262626',
+          darkest: '#000000',
+          dark: '#1a1a1a',
+          light: '#333333',
+          lightest: '#4d4d4d',
+        },
+        primary: {
+          darkest: '#081f5c',
+          lightest: '#eff1f8',
+          light: '#ccd3ea',
+          DEFAULT: '#334eac',
+          mid: '#99a6d6',
+        },
+        secondary: {
+          darkest: '#117a8a',
+          DEFAULT: '#17a2b8',
+          mid: '#2b8997',
+          light: '#7bb5be',
+          lightest: '#eeeeee',
+        },
+        grey: {
+          darkest: '#666666',
+          dark: '#808080',
+          mid: '#999999',
+          light: '#b3b3b3',
+          lightest: '#e0e0e0',
+        },
+        white: {
+          darkest: '#ffffff',
+          dark: '#fafafa',
+          mid: '#f5f5f5',
+          light: '#f0f0f0',
+          lightest: '#eaeaea',
+        },
+        semantic: {
+          red: {
+            0: '#fff0f0',
+            5: '#fad3d1',
+            10: '#fa817a',
+            20: '#f55a51',
+            30: '#d5332a',
+            40: '#b21d15',
+            50: '#99120b',
+            60: '#7c0903',
+            70: '#650601',
+            80: '#4c0501',
+            90: '#370401',
+          },
+          orange: {
+            0: '#fff6eb',
+            5: '#fedfb9',
+            10: '#fcc178',
+            20: '#f5a038',
+            30: '#eb8a14',
+            40: '#d47602',
+            50: '#c26b00',
+            60: '#ad5f00',
+            70: '#754100',
+            80: '#472700',
+            90: '#2e1900',
+          },
+          green: {
+            0: '#e6f0ea',
+            5: '#ecffeb',
+            10: '#cce1d5',
+            20: '#b3d3c0',
+            30: '#9ac4ab',
+            40: '#8db69d',
+            50: '#80b597',
+            60: '#67a682',
+            70: '#4e986d',
+            80: '#348958',
+            90: '#1b7a43',
+          },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+
+

@@ -1,0 +1,28 @@
+- [ ] Clicking on about doesn't lead to anything -> where sould it lead to ? 
+- [ ] all images on double clicking shows a very transition -> explain this please ? 
+- [ ] Inconsistent gap btw koshpal logo and about on white tab on top of webpage -> is this ok now ? 
+- [ x ] Em dashes to be removed
+- [ ] Arrows after each step has to be made consistently
+- [ ] Arrows should be made hyperlink -> link of the page that it should redirect to? 
+- [ x ] 150+ should be written instead of 153 in coaching hours font of 153 is also different
+- [ ] Images have to be in correct shape and transition should be added for better visual appeal 
+- [ ] Images of ca should be add in same format 
+- [ ] Their experience should be in same line
+- [ ] Random girl image should be removed and some related stock image should be added
+- [ ] “Your personalized money track” and all the other heading in the same page space have to be changed for visual appeal 
+- [ x ] Personalized nudges help teams stay on-budget without micro-management. Should be in one line
+- [ ] Track your finances is added twice -> parth 
+- [ ] While typing email in work email it is adding very slow and with lag and there should be check for gmail.com that is should not be there (yourmoneyline comparison)
+- [ ] Password requirements should be there
+- [ ] Remove demo credentials and use above
+- [ ] Star colour idea?
+- [ ] Same outsourced document on clicking the articles button -> link of artilces that it should redirect to? 
+- [ ] Layout of images in general has to be changed of that whole area and alignment as well
+- [ x ] Explore more and show less has weird transition
+- [ ] Ready to work with us doesnt have same transition as above
+- [ ] At the end of page koshpal logo is clickable change it
+- [ x ] In navigation there is no hover effect and its not a hyperlink
+- [ x ] In License the hover effect makes its invisible
+- [ x] At the end email should be open to mail box
+- [ ] 3 times contact us should be written -> what is it ? 
+- [ x ] Last privacy has to be written 

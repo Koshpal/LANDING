@@ -1,0 +1,252 @@
+/* Import Koshpal Design System Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Koshpal Brand Colors */
+  --primary: #334eac;
+  --primary-darkest: #081f5c;
+  --primary-light: #ccd3ea;
+  --primary-lightest: #eff1f8;
+
+  /* card shadow used for floating UI elements */
+  --card-shadow: 0 20px 40px rgba(6, 11, 40, 0.08);
+}
+
+@layer base {
+  body {
+    @apply font-jakarta text-black-light;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-outfit;
+  }
+}
+
+/* ==========================
+   Existing Hero (deep blue)
+   ========================== */
+.hero-bg {
+  background: linear-gradient(180deg, #2f54b6 0%, #2743a8 48%, #162a63 100%);
+  position: relative;
+  /* grid lines: two sets of repeating linear-gradients to create subtle grid */
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  background-size: 60px 60px, 60px 60px, auto;
+  background-blend-mode: overlay;
+}
+
+/* phone frame sizing + shadow */
+.phone-frame {
+  display: inline-block;
+  transform: translateZ(0);
+}
+.phone-frame img {
+  display: block;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(8, 20, 60, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  background: #f7f9fb;
+}
+
+/* responsive tweaks */
+@media (min-width: 768px) {
+  .hero-bg {
+    padding-bottom: 6rem;
+  }
+}
+@media (max-width: 767px) {
+  .phone-frame img {
+    width: 240px;
+    border-radius: 22px;
+  }
+  .hero-bg {
+    background-size: 40px 40px, 40px 40px, auto;
+  }
+}
+
+/* ==================================================
+   Additional Features / Top gradient and icon grid
+   ================================================== */
+
+/* Top gradient used by the AdditionalFeatures component */
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(46, 70, 182, 1) 0%,
+    rgba(70, 83, 140, 0.85) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle repeating grid / icon pattern overlay */
+.hero-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+}
+
+/* make sure the hero gradient doesn't make text unreadable on small screens */
+@media (max-width: 640px) {
+  .hero-gradient::after {
+    opacity: 0.35;
+    background-size: 40px 40px, 40px 40px;
+  }
+}
+
+/* ==========================
+   Floating card & helpers
+   ========================== */
+
+/* Nearly-opaque white helper used for floating cards */
+.bg-white\/95 {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Reusable card shadow utility (keeps Tailwind's shadow classes intact) */
+.card-shadow {
+  box-shadow: var(--card-shadow);
+}
+
+/* Slightly stronger shadow used by some promo cards */
+.shadow-prominent {
+  box-shadow: 0 30px 60px rgba(6, 11, 40, 0.1);
+}
+
+/* subtle blur helper for decorative glows */
+.blur-glow {
+  filter: blur(20px);
+}
+
+/* ensure floating cards (backdrop blur) look consistent */
+.backdrop-blur-sm {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* small helper to hide pointer events on purely decorative elements */
+.pointer-events-none {
+  pointer-events: none;
+}
+
+/* small responsive helpers for the AdditionalFeatures layout */
+@media (min-width: 1024px) {
+  .af-large-pad {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* keep the look consistent across browsers for rounded image masks */
+.rounded-36 {
+  border-radius: 36px;
+  overflow: hidden;
+}
+
+/* tiny utility for the floating label used in CoachesStats */
+.float-label {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(8, 20, 60, 0.06);
+}
+
+/* a mild transition for cards to lift on hover */
+.card-lift {
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+}
+
+/* ensure the "hero" gradient section text stays clearly visible against the gradient */
+.hero-gradient h2,
+.hero-gradient h3,
+.hero-gradient p {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* small accessibility focus outline for custom clickable floating cards */
+.floating-focus:focus {
+  outline: 3px solid rgba(99, 102, 241, 0.18);
+  outline-offset: 3px;
+}
+
+/* Hide scrollbar for webkit browsers (Chrome, Safari, Edge) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for all browsers */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* 3D Card Flip Optimization - Hardware Acceleration */
+[style*="preserve-3d"] {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* Ensure backface is hidden for smooth flips */
+[style*="backfaceVisibility"] {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Optimize 3D transforms with GPU acceleration */
+.backface-hidden {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* FAQ Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* End of custom styles */
