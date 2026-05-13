@@ -4,7 +4,7 @@ import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://api.koshpal.com/api/v1';
+const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:3000/api/v1';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-4 py-12"
+      className="flex items-center justify-center min-h-screen px-4 py-12"
       style={{ background: 'linear-gradient(150deg, #334EAC 0%, #081F5C 100%)', fontFamily: 'Plus Jakarta Sans, sans-serif' }}
     >
       <motion.div

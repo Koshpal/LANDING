@@ -4,7 +4,7 @@ import { Mail, Lock, Eye, EyeOff, CheckCircle, User, Users, Briefcase } from 'lu
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://api.koshpal.com/api/v1';
+const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:3000/api/v1';
 
 const ROLES = [
   { id: 'EMPLOYEE', label: 'Employee', icon: User },
@@ -105,13 +105,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+    <div className="flex min-h-screen" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       {/* Left panel — blue gradient, hidden on mobile */}
       <div
-        className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 relative overflow-hidden"
+        className="relative flex-col justify-between hidden p-12 overflow-hidden lg:flex lg:w-1/2"
         style={{ background: 'linear-gradient(150deg, #334EAC 0%, #081F5C 100%)' }}
       >
-        <div className="flex items-center gap-3 relative z-10">
+        <div className="relative z-10 flex items-center gap-3">
           <img src="/logo.png" alt="Koshpal" className="h-10" />
           <span style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: '22px', color: '#fff' }}>Koshpal</span>
         </div>
@@ -156,7 +156,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right panel — form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 sm:px-10" style={{ background: '#F9FAFB' }}>
+      <div className="flex items-center justify-center w-full px-6 py-12 lg:w-1/2 sm:px-10" style={{ background: '#F9FAFB' }}>
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
