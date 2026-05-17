@@ -1,6 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import ContactPage from './pages/ContactPage'
 import DemoPage from './pages/DemoPage'
@@ -28,6 +29,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="*" element={<NotFound />} />
         <Route path="/video" element={<VideoWatchPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>
 )
