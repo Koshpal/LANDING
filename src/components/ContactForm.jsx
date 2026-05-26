@@ -158,7 +158,7 @@ export default function ContactForm() {
         <div className="hidden lg:flex w-full lg:w-1/2 items-end justify-end">
           <img
             src="phone20.png"
-            alt=""
+            alt="Koshpal app on mobile"
             className="w-full h-auto object-contain"
             style={{ marginBottom: "1rem" }}
           />

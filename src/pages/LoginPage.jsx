@@ -62,7 +62,7 @@ export default function LoginPage() {
 
   const validateEmail = (val) => {
     if (!val) { setEmailError('Email is required'); return false; }
-    if (!val.includes('@') || !val.split('@')[1]) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) {
       setEmailError('Please enter a valid email address');
       return false;
     }
@@ -187,6 +187,8 @@ export default function LoginPage() {
                     <button
                       key={id}
                       type="button"
+                      aria-pressed={selected}
+                      aria-label={`Sign in as ${label}`}
                       onClick={() => setRole(id)}
                       style={{
                         position: 'relative',
@@ -305,7 +307,8 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#98A2B3', display: 'flex', alignItems: 'center' }}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#98A2B3', display: 'flex', alignItems: 'center' }}
                 >
                   {showPassword ? <EyeOff style={{ width: '17px', height: '17px' }} /> : <Eye style={{ width: '17px', height: '17px' }} />}
                 </button>

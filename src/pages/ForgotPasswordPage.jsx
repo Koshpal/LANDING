@@ -15,7 +15,7 @@ export default function ForgotPasswordPage() {
 
   const validateEmail = (val) => {
     if (!val) { setEmailError('Email is required'); return false; }
-    if (!val.includes('@') || !val.split('@')[1]) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) {
       setEmailError('Please enter a valid email address');
       return false;
     }

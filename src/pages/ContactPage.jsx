@@ -64,7 +64,13 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
+    // Client-side email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      setSubmitStatus({ type: 'error', message: 'Please enter a valid email address.' });
+      return;
+    }
+
     // Check rate limit
     if (!checkRateLimit()) {
       setSubmitStatus({ 
@@ -281,24 +287,24 @@ const ContactPage = () => {
               {/* Contact Details */}
               <div className="space-y-6 mb-auto">
                 {/* Phone */}
-                <div className="flex items-center gap-4 group cursor-pointer">
+                <a href="tel:+919983444740" className="flex items-center gap-4 group">
                   <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
                     <Phone className="w-6 h-6 text-[#ffffff]" />
                   </div>
                   <div>
-                    <p className="text-lg font-semibold text-[#fff]">+91 9983444740</p>
+                    <p className="text-lg font-semibold text-[#fff] group-hover:underline">+91 9983444740</p>
                   </div>
-                </div>
+                </a>
 
                 {/* Email */}
-                <div className="flex items-center gap-4 group cursor-pointer">
+                <a href="mailto:koshpal@koshpal.com" className="flex items-center gap-4 group">
                   <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
                     <Mail className="w-6 h-6 text-[#ffffff]" />
                   </div>
                   <div>
-                    <p className="text-lg font-semibold text-[#fff]">koshpal@koshpal.com</p>
+                    <p className="text-lg font-semibold text-[#fff] group-hover:underline">koshpal@koshpal.com</p>
                   </div>
-                </div>
+                </a>
 
                 {/* LinkedIn */}
                 <div className="flex items-center gap-4 group cursor-pointer">
