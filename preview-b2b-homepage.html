@@ -1,0 +1,884 @@
+<title>Koshpal for Workplaces</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+/* ============================================================ TOKENS */
+:root {
+  /* brand */
+  --brand:        #334EAC;
+  --brand-deep:   #081F5C;
+  --brand-tint:   #EFF1F8;
+  --brand-tint-2: #E1E6F5;
+  --accent:       #17A2B8;   /* teal — used sparingly */
+  --accent-deep:  #117A8A;
+  --pos:          #1B7A43;   /* dashboard positives only */
+
+  /* neutrals — cool bias toward the brand */
+  --bg:        #F6F7FB;
+  --surface:   #FFFFFF;
+  --surface-2: #F0F2F8;
+  --ink:       #0E1A3C;   /* headings */
+  --ink-2:     #3F4A63;   /* body */
+  --ink-3:     #6B7590;   /* muted / captions */
+  --line:      #E3E7F1;
+  --line-2:    #D3D9E8;
+  --on-brand:  #FFFFFF;
+
+  /* stable dark band (a deliberate design element, not theme-dependent) */
+  --band-bg:      radial-gradient(120% 120% at 15% 0%, #2C4699 0%, #14245C 55%, #0B1740 100%);
+  --band-surface: rgba(255,255,255,.06);
+  --band-line:    rgba(255,255,255,.14);
+  --band-ink:     #F4F6FD;
+  --band-ink-2:   #B9C3E6;
+
+  --radius:   18px;
+  --radius-s: 12px;
+  --shadow:   0 1px 2px rgba(14,26,60,.04), 0 12px 32px rgba(14,26,60,.07);
+  --shadow-lg:0 2px 6px rgba(14,26,60,.06), 0 30px 60px rgba(14,26,60,.12);
+  --maxw: 1200px;
+  --gutter: clamp(20px, 5vw, 64px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #0B1024;
+    --surface:   #121936;
+    --surface-2: #0F1530;
+    --ink:       #EEF1FB;
+    --ink-2:     #C0C8E4;
+    --ink-3:     #8A93B6;
+    --line:      #232C4E;
+    --line-2:    #2C365C;
+    --brand-tint:   #1A2450;
+    --brand-tint-2: #202C60;
+    --shadow:    0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.45);
+    --shadow-lg: 0 2px 6px rgba(0,0,0,.45), 0 30px 60px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #0B1024;
+  --surface:   #121936;
+  --surface-2: #0F1530;
+  --ink:       #EEF1FB;
+  --ink-2:     #C0C8E4;
+  --ink-3:     #8A93B6;
+  --line:      #232C4E;
+  --line-2:    #2C365C;
+  --brand-tint:   #1A2450;
+  --brand-tint-2: #202C60;
+  --shadow:    0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.45);
+  --shadow-lg: 0 2px 6px rgba(0,0,0,.45), 0 30px 60px rgba(0,0,0,.55);
+}
+
+/* ============================================================ BASE */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink-2);
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 {
+  font-family: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+section { padding-block: clamp(64px, 9vw, 128px); }
+
+.eyebrow {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.band-dark .eyebrow { color: #8FA6E8; }
+.eyebrow::before { content: ""; width: 22px; height: 1.5px; background: currentColor; opacity: .5; }
+
+h2.h { font-size: clamp(28px, 4.2vw, 46px); font-weight: 700; }
+.lede { font-size: clamp(17px, 1.7vw, 20px); color: var(--ink-2); max-width: 60ch; }
+.band-dark .lede { color: var(--band-ink-2); }
+.section-head { max-width: 62ch; margin-bottom: clamp(36px, 5vw, 60px); display: grid; gap: 16px; }
+
+/* ============================================================ BUTTONS */
+.btn {
+  --_bg: var(--brand); --_fg: var(--on-brand); --_bd: var(--brand);
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: "Outfit", sans-serif; font-weight: 600; font-size: 15.5px;
+  padding: 13px 22px; border-radius: 999px;
+  background: var(--_bg); color: var(--_fg); border: 1.5px solid var(--_bd);
+  cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  box-shadow: 0 6px 18px rgba(51,78,172,.28);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(51,78,172,.34); }
+.btn.ghost {
+  --_bg: transparent; --_fg: var(--brand); --_bd: var(--line-2);
+  box-shadow: none;
+}
+.btn.ghost:hover { --_bd: var(--brand); background: var(--brand-tint); box-shadow: none; }
+.band-dark .btn.ghost { --_fg: #fff; --_bd: rgba(255,255,255,.3); }
+.band-dark .btn.ghost:hover { background: rgba(255,255,255,.08); --_bd: rgba(255,255,255,.6); }
+.btn.lg { padding: 16px 28px; font-size: 16.5px; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* ============================================================ NAV */
+header.nav { position: sticky; top: 0; z-index: 60; padding: 14px var(--gutter); }
+.nav-inner {
+  max-width: var(--maxw); margin-inline: auto;
+  display: flex; align-items: center; gap: 24px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px 10px 22px;
+  box-shadow: var(--shadow);
+}
+.logo { display: flex; align-items: center; gap: 10px; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 19px; color: var(--ink); letter-spacing: -0.02em; }
+.logo .mark {
+  width: 30px; height: 30px; border-radius: 9px; flex: none;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px;
+}
+.nav-links { display: flex; gap: 26px; margin-left: 8px; font-family: "Outfit", sans-serif; font-weight: 500; font-size: 14.5px; color: var(--ink-2); }
+.nav-links a:hover { color: var(--brand); }
+.nav-cta { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.nav-cta .btn { padding: 10px 18px; font-size: 14px; box-shadow: none; }
+.nav-login { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 14px; color: var(--ink-2); padding: 10px 14px; }
+.nav-login:hover { color: var(--brand); }
+@media (max-width: 900px) { .nav-links { display: none; } .nav-login { display: none; } }
+
+/* ============================================================ HERO */
+.hero { padding-top: clamp(28px, 5vw, 56px); }
+.hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+@media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; } }
+.hero h1 {
+  font-size: clamp(34px, 5.6vw, 62px);
+  font-weight: 700;
+  letter-spacing: -0.033em;
+}
+.hero h1 .accent { color: var(--brand); }
+.hero .lede { margin-top: 22px; font-size: clamp(16.5px, 1.8vw, 20px); }
+.hero .cta-row { margin-top: 32px; }
+.cred {
+  margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px 20px;
+  font-family: "Outfit", sans-serif; font-size: 13px; font-weight: 500; color: var(--ink-3);
+  letter-spacing: .01em;
+}
+.cred span { display: inline-flex; align-items: center; gap: 7px; }
+.cred span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* ---- hero composite: Employee App -> Platform -> HR Dashboard ---- */
+.stack { display: grid; gap: 14px; position: relative; }
+.node {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow-lg);
+  padding: 18px 20px;
+}
+.node .node-h { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.node .tag {
+  font-family: "Outfit", sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.node .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pos); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pos) 18%, transparent); }
+.pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.pill { font-size: 12.5px; font-family: "Outfit", sans-serif; font-weight: 500; padding: 5px 11px; border-radius: 999px; background: var(--brand-tint); color: var(--brand); border: 1px solid var(--brand-tint-2); }
+.score-row { display: flex; align-items: baseline; gap: 12px; }
+.score { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 40px; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+.score-lab { font-size: 13px; color: var(--ink-3); font-family: "Outfit", sans-serif; font-weight: 500; }
+.spark { margin-top: 12px; }
+.connector { display: grid; place-items: center; height: 20px; color: var(--line-2); }
+.node.platform {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+  border: none; color: #fff; text-align: center; padding: 14px;
+}
+.node.platform .tag { color: rgba(255,255,255,.7); }
+.node.platform .pname { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .01em; }
+.mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 4px; }
+.mini { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-s); padding: 10px 12px; }
+.mini .n { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 19px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.mini .l { font-size: 11px; color: var(--ink-3); font-family: "Outfit", sans-serif; font-weight: 500; margin-top: 2px; }
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 46px; margin-top: 12px; }
+.bars i { flex: 1; background: linear-gradient(180deg, var(--brand) 0%, color-mix(in srgb, var(--brand) 55%, var(--surface))); border-radius: 3px 3px 0 0; display: block; }
+
+/* ============================================================ LOGO BAR */
+.logobar { padding-block: clamp(36px, 5vw, 56px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+.logobar .lab { text-align: center; font-family: "Outfit", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 26px; }
+.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 40px; }
+.logo-slot {
+  height: 34px; min-width: 120px; border-radius: 8px;
+  border: 1px dashed var(--line-2);
+  display: grid; place-items: center;
+  font-family: "Outfit", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--ink-3); background: var(--surface-2);
+}
+
+/* ============================================================ DARK BAND (problem / privacy) */
+.band-dark { background: var(--band-bg); color: var(--band-ink); position: relative; overflow: hidden; }
+.band-dark h2, .band-dark h3 { color: var(--band-ink); }
+.band-dark::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 75%);
+}
+.band-dark .wrap { position: relative; z-index: 1; }
+
+.four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 860px) { .four { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .four { grid-template-columns: 1fr; } }
+.stat-card {
+  background: var(--band-surface); border: 1px solid var(--band-line); border-radius: var(--radius);
+  padding: 22px 20px; backdrop-filter: blur(4px);
+}
+.stat-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 7px; }
+.stat-card p { font-size: 14.5px; color: var(--band-ink-2); line-height: 1.55; }
+.kicker-line { margin-top: clamp(36px, 5vw, 52px); font-family: "Outfit", sans-serif; font-weight: 600; font-size: clamp(19px, 2.6vw, 28px); color: #fff; max-width: 30ch; line-height: 1.3; letter-spacing: -0.02em; }
+.kicker-line .soft { color: var(--band-ink-2); display: block; font-weight: 500; font-size: .78em; margin-top: 8px; letter-spacing: 0; }
+
+/* ============================================================ SOLUTION / CAPABILITY TABLE */
+.notjust { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-bottom: 22px; }
+.notjust span { font-family: "Outfit", sans-serif; font-weight: 500; font-size: 14px; color: var(--ink-3); padding: 6px 13px; border: 1px solid var(--line); border-radius: 999px; text-decoration: line-through; text-decoration-color: var(--line-2); }
+.captable { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); margin-top: 8px; }
+@media (max-width: 720px) { .captable { grid-template-columns: 1fr; } }
+.captable .col-h { padding: 18px 22px; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+.captable .col-h.emp { background: var(--brand-tint); color: var(--brand); }
+.captable .col-h.co  { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent-deep); border-left: 1px solid var(--line); }
+@media (max-width: 720px) { .captable .col-h.co { border-left: none; border-top: 1px solid var(--line); } }
+.captable ul { list-style: none; margin: 0; padding: 10px 22px 22px; display: grid; gap: 11px; align-content: start; }
+.captable ul.co { border-left: 1px solid var(--line); }
+@media (max-width: 720px) { .captable ul.co { border-left: none; border-top: 1px solid var(--line); } }
+.captable li { font-size: 15px; color: var(--ink-2); display: flex; gap: 10px; align-items: flex-start; }
+.captable li::before { content: ""; flex: none; width: 16px; height: 16px; margin-top: 3px; border-radius: 5px; background: var(--brand-tint); border: 1px solid var(--brand-tint-2); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23334EAC' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+.captable ul.co li::before { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); border-color: color-mix(in srgb, var(--accent) 30%, var(--surface)); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23117A8A' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+
+/* ============================================================ PILLARS */
+.pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 780px) { .pillars { grid-template-columns: 1fr; } }
+.pillar {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 28px; box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.pillar:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--brand-tint-2); }
+.pillar .num { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 13px; color: var(--accent-deep); letter-spacing: .1em; }
+.pillar h3 { font-size: 21px; font-weight: 600; margin: 12px 0 9px; }
+.pillar p { font-size: 15px; color: var(--ink-2); }
+.pillar .tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 7px; }
+.pillar .tags span { font-size: 12px; font-family: "Outfit", sans-serif; font-weight: 500; color: var(--ink-3); background: var(--surface-2); border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px; }
+
+/* ============================================================ SPLIT / DASHBOARD SECTION */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+.split-lists { display: grid; gap: 22px; }
+.mini-head { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+.split-lists ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.split-lists li { font-size: 15px; color: var(--ink-2); display: flex; gap: 9px; }
+.split-lists li::before { content: "→"; color: var(--brand); font-weight: 700; }
+
+.shot {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  box-shadow: var(--shadow-lg); overflow: hidden;
+}
+.shot .chrome { display: flex; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.shot .chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); }
+.shot .body { padding: 20px; display: grid; gap: 16px; }
+.shot .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.shot .kpi { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-s); padding: 14px; }
+.shot .kpi .n { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 26px; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.shot .kpi .l { font-size: 11.5px; color: var(--ink-3); font-family: "Outfit", sans-serif; font-weight: 500; margin-top: 3px; }
+.shot .kpi .n .unit { font-size: 15px; color: var(--ink-3); }
+.shot .chart { border: 1px solid var(--line); border-radius: var(--radius-s); padding: 16px; }
+.shot .chart .ct { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; display: flex; justify-content: space-between; }
+.slot-note { margin-top: 12px; font-size: 12.5px; color: var(--ink-3); font-style: italic; }
+
+/* ============================================================ PRIVACY ARCH */
+.arch { display: grid; gap: 14px; margin-top: 8px; }
+.arch-row {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px;
+  background: var(--band-surface); border: 1px solid var(--band-line); border-radius: var(--radius); padding: 20px 22px;
+}
+@media (max-width: 700px) { .arch-row { grid-template-columns: 1fr; text-align: center; } .arch-row .arrow { transform: rotate(90deg); } }
+.arch-row .from { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 15px; color: #fff; }
+.arch-row .to { font-size: 14.5px; color: var(--band-ink-2); }
+.arch-row .arrow { color: #8FA6E8; font-size: 20px; }
+
+/* ============================================================ WHY / GRID-3 */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 820px) { .grid3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .grid3 { grid-template-columns: 1fr; } }
+.wcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.wcard .ic { width: 38px; height: 38px; border-radius: 10px; background: var(--brand-tint); border: 1px solid var(--brand-tint-2); display: grid; place-items: center; color: var(--brand); margin-bottom: 14px; }
+.wcard h3 { font-size: 17.5px; font-weight: 600; margin-bottom: 7px; }
+.wcard p { font-size: 14.5px; color: var(--ink-2); }
+
+/* ============================================================ STEPS */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+@media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
+.step { padding: 30px 26px; border-right: 1px solid var(--line); }
+.step:last-child { border-right: none; }
+@media (max-width: 800px) { .step { border-right: none; border-bottom: 1px solid var(--line); } .step:last-child { border-bottom: none; } }
+.step .num { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 14px; color: var(--accent-deep); letter-spacing: .1em; }
+.step h3 { font-size: 20px; font-weight: 600; margin: 10px 0 8px; }
+.step p { font-size: 14.5px; color: var(--ink-2); }
+.step .flow { margin-top: 14px; font-family: "Outfit", sans-serif; font-weight: 600; font-size: 12.5px; color: var(--brand); letter-spacing: .02em; }
+
+/* ============================================================ TECH+HUMANS / WHO / EMPLOYEE STRIP */
+.twocol { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+@media (max-width: 820px) { .twocol { grid-template-columns: 1fr; } }
+.advisors { display: flex; gap: -12px; }
+.avatar-row { display: flex; }
+.avatar-row .av { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--surface); margin-left: -12px; background: linear-gradient(135deg, var(--brand-tint), var(--brand-tint-2)); display: grid; place-items: center; color: var(--brand); font-family: "Outfit", sans-serif; font-weight: 700; font-size: 14px; }
+.avatar-row .av:first-child { margin-left: 0; }
+
+.who { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 860px) { .who { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .who { grid-template-columns: 1fr; } }
+.who .wc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.who .wc h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.who .wc p { font-size: 13.5px; color: var(--ink-2); }
+
+.emp-strip { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 4vw, 40px); }
+.emp-strip .eh { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.emp-strip .quote { font-family: "Outfit", sans-serif; font-weight: 500; font-size: 15px; color: var(--ink-3); }
+.emp-feats { display: flex; flex-wrap: wrap; gap: 10px; }
+.emp-feats span { font-size: 13.5px; font-family: "Outfit", sans-serif; font-weight: 500; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+
+/* ============================================================ IMPACT (no fake numbers) */
+.impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 820px) { .impact-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .impact-grid { grid-template-columns: 1fr; } }
+.itile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; text-align: left; }
+.itile .val { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 30px; color: var(--line-2); letter-spacing: -.02em; }
+.itile .lab { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13.5px; color: var(--ink); margin-top: 6px; }
+.itile .sub { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; }
+
+/* ============================================================ FINAL CTA */
+.final { background: var(--band-bg); color: #fff; text-align: center; position: relative; overflow: hidden; }
+.final::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(90% 90% at 50% 50%, #000, transparent 75%); }
+.final .wrap { position: relative; z-index: 1; display: grid; gap: 24px; justify-items: center; }
+.final h2 { color: #fff; font-size: clamp(28px, 4.4vw, 46px); font-weight: 700; max-width: 20ch; }
+.final p { color: var(--band-ink-2); max-width: 52ch; }
+
+/* ============================================================ FOOTER */
+footer { background: var(--surface); border-top: 1px solid var(--line); padding-block: clamp(48px, 6vw, 72px); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; }
+@media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .foot-grid { grid-template-columns: 1fr; } }
+.foot-grid h4 { font-family: "Outfit", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+.foot-grid a { display: block; font-size: 14px; color: var(--ink-2); padding: 5px 0; }
+.foot-grid a:hover { color: var(--brand); }
+.foot-brand p { font-size: 14px; color: var(--ink-3); margin-top: 12px; max-width: 34ch; }
+.badges { display: flex; gap: 10px; margin-top: 16px; }
+.badge { height: 40px; min-width: 130px; border: 1px solid var(--line-2); border-radius: 9px; display: grid; place-items: center; font-family: "Outfit", sans-serif; font-size: 11px; font-weight: 600; color: var(--ink-3); background: var(--surface-2); }
+.foot-legal { max-width: var(--maxw); margin: 36px auto 0; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; font-size: 13px; color: var(--ink-3); }
+
+/* ============================================================ MOTION */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.hero .reveal { transition-delay: calc(var(--i, 0) * 90ms); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  .btn:hover, .pillar:hover { transform: none; }
+}
+</style>
+
+<!-- ============================================================ NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo"><span class="mark">K</span> Koshpal</a>
+    <nav class="nav-links">
+      <a href="#platform">Platform</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why Koshpal</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#who">Who it's for</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#demo" class="nav-login">Login</a>
+      <a href="#demo" class="btn">Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ======================================================== HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow reveal" style="--i:0">For HR &amp; People teams</span>
+        <h1 class="reveal" style="--i:1; margin-top:16px">
+          Financially healthier employees. <span class="accent">Stronger workplaces.</span>
+        </h1>
+        <p class="lede reveal" style="--i:2">
+          Koshpal gives your workforce the tools, insights and expert guidance to build better
+          money habits — and gives HR a simple, privacy-first way to support financial
+          wellbeing and measure its impact.
+        </p>
+        <div class="cta-row reveal" style="--i:3">
+          <a href="#demo" class="btn lg">Book a demo</a>
+          <a href="#how" class="btn ghost lg">See how it works</a>
+        </div>
+        <div class="cred reveal" style="--i:4">
+          <span>Built for modern HR &amp; People teams</span>
+          <span>Privacy-first architecture</span>
+          <span>Employee-first experience</span>
+        </div>
+      </div>
+
+      <!-- composite: Employee App -> Platform -> HR Dashboard -->
+      <div class="stack reveal" style="--i:3" aria-hidden="true">
+        <div class="node">
+          <div class="node-h"><span class="tag">Employee app</span><span class="dot"></span></div>
+          <div class="score-row">
+            <span class="score">82</span>
+            <span class="score-lab">Financial health<br>this month</span>
+          </div>
+          <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" height="34">
+            <polyline fill="none" stroke="#17A2B8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+              points="0,30 30,26 60,28 90,20 120,22 150,14 180,16 210,9 240,11 260,6"/>
+          </svg>
+          <div class="pill-row" style="margin-top:12px">
+            <span class="pill">Spending</span><span class="pill">Goals</span><span class="pill">Insights</span><span class="pill">Coaching</span>
+          </div>
+        </div>
+
+        <div class="connector">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M8 0v14m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="node platform">
+          <div class="tag" style="margin-bottom:6px">Koshpal platform</div>
+          <div class="pname">Privacy-first · Automated · Human-backed</div>
+        </div>
+
+        <div class="connector">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M8 0v14m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="node">
+          <div class="node-h"><span class="tag">HR dashboard</span><span class="dot"></span></div>
+          <div class="mini-grid">
+            <div class="mini"><div class="n">1,248</div><div class="l">Employees</div></div>
+            <div class="mini"><div class="n">78%</div><div class="l">Activated</div></div>
+            <div class="mini"><div class="n">64%</div><div class="l">Engaged</div></div>
+          </div>
+          <div class="bars">
+            <i style="height:40%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:84%"></i><i style="height:76%"></i><i style="height:92%"></i>
+          </div>
+          <div class="l" style="font-size:11px;color:var(--ink-3);font-family:'Outfit';margin-top:8px">Wellness trend — illustrative</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== LOGO BAR -->
+  <div class="logobar">
+    <div class="wrap">
+      <div class="lab">Trusted by teams piloting Koshpal</div>
+      <div class="logos">
+        <div class="logo-slot">CLIENT LOGO</div>
+        <div class="logo-slot">CLIENT LOGO</div>
+        <div class="logo-slot">CLIENT LOGO</div>
+        <div class="logo-slot">CLIENT LOGO</div>
+        <div class="logo-slot">CLIENT LOGO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== PROBLEM (dark) -->
+  <section class="band-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The business case</span>
+        <h2 class="h">Financial stress doesn't stay at home.</h2>
+        <p class="lede">When employees are worried about money, it shows up at work — in focus,
+          output, engagement and, over time, retention.</p>
+      </div>
+      <div class="four">
+        <div class="stat-card reveal"><h3>Focus</h3><p>Money worries compete with attention during the workday.</p></div>
+        <div class="stat-card reveal"><h3>Productivity</h3><p>Financial stress quietly reduces day-to-day effectiveness.</p></div>
+        <div class="stat-card reveal"><h3>Engagement</h3><p>People who feel financially supported feel valued by their employer.</p></div>
+        <div class="stat-card reveal"><h3>Retention</h3><p>Financial wellbeing is now part of a serious benefits strategy.</p></div>
+      </div>
+      <p class="kicker-line reveal">
+        Your employees don't need another webinar.
+        <span class="soft">They need ongoing support — that's where Koshpal comes in.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================================================== SOLUTION / CAPABILITY TABLE -->
+  <section id="platform">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The platform</span>
+        <h2 class="h">A complete financial wellness layer for your workforce.</h2>
+        <div class="notjust" style="margin-top:8px">
+          <span>Not just financial education</span>
+          <span>Not just an expense tracker</span>
+          <span>Not just a coaching service</span>
+        </div>
+        <p class="lede">Koshpal brings them together into one employee experience — with an
+          enterprise management layer for HR.</p>
+      </div>
+
+      <div class="captable reveal">
+        <div class="col-h emp">For employees</div>
+        <div class="col-h co">For the company</div>
+        <ul class="emp">
+          <li>Track spending automatically</li>
+          <li>Understand financial behaviour</li>
+          <li>Set and pursue financial goals</li>
+          <li>Get personalised insights &amp; nudges</li>
+          <li>Access expert financial guidance</li>
+          <li>Build better money habits over time</li>
+        </ul>
+        <ul class="co">
+          <li>Workforce financial-wellness dashboard</li>
+          <li>Adoption &amp; engagement insights</li>
+          <li>Program analytics and trends</li>
+          <li>Aggregated, anonymised outcomes</li>
+          <li>Simple employee rollout</li>
+          <li>Privacy-first data architecture</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== 4 PILLARS -->
+  <section style="background:var(--surface-2); border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What Koshpal does</span>
+        <h2 class="h">Four things, working together for every employee.</h2>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <div class="num">01 — UNDERSTAND</div>
+          <h3>Turn everyday spending into financial clarity.</h3>
+          <p>Automatically capture and categorise transactions so employees can see where their money actually goes.</p>
+          <div class="tags"><span>Auto-tracking</span><span>Categorisation</span><span>Cash-flow view</span></div>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">02 — IMPROVE</div>
+          <h3>Turn insight into better habits.</h3>
+          <p>Personalised insights, budgets, alerts and recommendations that guide better everyday decisions.</p>
+          <div class="tags"><span>Budgets</span><span>Smart insights</span><span>Nudges</span></div>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">03 — LEARN</div>
+          <h3>Make financial knowledge practical.</h3>
+          <p>Focused education on tax, budgeting, investing, loans &amp; debt, insurance, retirement and goal planning.</p>
+          <div class="tags"><span>Tax</span><span>Investing</span><span>Debt</span><span>Retirement</span></div>
+        </div>
+        <div class="pillar reveal">
+          <div class="num">04 — GET GUIDANCE</div>
+          <h3>When money gets complicated, employees get help.</h3>
+          <p>One-to-one sessions with qualified financial experts for personalised guidance when it matters.</p>
+          <div class="tags"><span>1:1 sessions</span><span>Qualified experts</span><span>On-demand</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== ONE PLATFORM / HR DASHBOARD -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Employees &amp; HR</span>
+        <h2 class="h">One platform for employees. One view for HR.</h2>
+        <p class="lede">Employees get a personal financial experience. HR gets aggregated visibility
+          into how the program is landing — never individual financial detail.</p>
+      </div>
+
+      <div class="split">
+        <div class="split-lists reveal">
+          <div>
+            <div class="mini-head">For employees</div>
+            <ul>
+              <li>Financial health &amp; spending insights</li>
+              <li>Budgets, goals &amp; personalised nudges</li>
+              <li>Financial education library</li>
+              <li>Expert consultations</li>
+            </ul>
+          </div>
+          <div>
+            <div class="mini-head">For HR</div>
+            <ul>
+              <li>Employee onboarding &amp; rollout</li>
+              <li>Program adoption &amp; engagement</li>
+              <li>Financial-wellness trends (aggregated)</li>
+              <li>Program utilisation &amp; impact</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="shot" aria-label="HR dashboard screenshot placeholder">
+            <div class="chrome"><i></i><i></i><i></i><span style="font-family:'Outfit';font-size:11px;font-weight:600;color:var(--ink-3);margin-left:8px">Koshpal · HR dashboard</span></div>
+            <div class="body">
+              <div class="row">
+                <div class="kpi"><div class="n">1,248</div><div class="l">Employees enrolled</div></div>
+                <div class="kpi"><div class="n">78<span class="unit">%</span></div><div class="l">Activated</div></div>
+                <div class="kpi"><div class="n">64<span class="unit">%</span></div><div class="l">Monthly engagement</div></div>
+              </div>
+              <div class="chart">
+                <div class="ct"><span>Financial-wellness index</span><span>last 8 months</span></div>
+                <svg viewBox="0 0 480 120" preserveAspectRatio="none" height="110" width="100%">
+                  <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#334EAC" stop-opacity="0.28"/><stop offset="1" stop-color="#334EAC" stop-opacity="0"/>
+                  </linearGradient></defs>
+                  <path d="M0,95 L60,88 L120,90 L180,72 L240,74 L300,55 L360,58 L420,40 L480,32 L480,120 L0,120 Z" fill="url(#fill)"/>
+                  <polyline points="0,95 60,88 120,90 180,72 240,74 300,55 360,58 420,40 480,32" fill="none" stroke="#334EAC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="480" cy="32" r="4" fill="#17A2B8"/>
+                </svg>
+              </div>
+              <div class="row">
+                <div class="kpi"><div class="n">312</div><div class="l">Coaching sessions</div></div>
+                <div class="kpi"><div class="n">1.9k</div><div class="l">Goals set</div></div>
+                <div class="kpi"><div class="n">+11<span class="unit">pt</span></div><div class="l">Index vs. launch</div></div>
+              </div>
+            </div>
+          </div>
+          <p class="slot-note">Placeholder — swap for a real HR-dashboard screenshot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== PRIVACY (dark, major) -->
+  <section id="privacy" class="band-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Privacy</span>
+        <h2 class="h">Your employees' money is private. Always.</h2>
+        <p class="lede">Employees should never have to choose between financial support and financial
+          privacy. Koshpal is built so companies see program impact — not individual financial detail.</p>
+      </div>
+      <div class="arch">
+        <div class="arch-row reveal">
+          <div class="from">Employee financial data</div>
+          <div class="arrow">→</div>
+          <div class="to">Stays in the employee's protected personal experience</div>
+        </div>
+        <div class="arch-row reveal">
+          <div class="from">Aggregated, anonymised insights</div>
+          <div class="arrow">→</div>
+          <div class="to">Roll up to the employer dashboard — adoption, engagement, trends</div>
+        </div>
+      </div>
+      <div class="cta-row reveal" style="margin-top:32px">
+        <a href="#demo" class="btn ghost">Read about security &amp; privacy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== WHY KOSHPAL -->
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why companies choose Koshpal</span>
+        <h2 class="h">A benefit your people actually use — all year.</h2>
+      </div>
+      <div class="grid3">
+        <div class="wcard reveal"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><h3>Increase employee wellbeing</h3><p>Practical support for the everyday financial challenges people actually face.</p></div>
+        <div class="wcard reveal"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div><h3>Strengthen your benefits</h3><p>Add financial wellness to your benefits ecosystem with one rollout.</p></div>
+        <div class="wcard reveal"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3>Improve engagement</h3><p>Value employees feel every month — not just during an annual session.</p></div>
+        <div class="wcard reveal"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Reduce financial distraction</h3><p>Help employees get clarity and confidence around money.</p></div>
+        <div class="wcard reveal"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="4" width="3" height="14"/></svg></div><h3>Measure impact</h3><p>Understand adoption, engagement and wellness outcomes through aggregated insights.</p></div>
+        <div class="wcard reveal"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></div><h3>Easy to deploy</h3><p>Designed to fit existing HR and employee-benefit workflows.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== STEPS -->
+  <section style="background:var(--surface-2); border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Rollout</span>
+        <h2 class="h">From rollout to impact in three steps.</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="num">01 — LAUNCH</div>
+          <h3>Set the program up</h3>
+          <p>We work with your HR team to configure the program and communicate it to employees.</p>
+          <div class="flow">Onboarding → Setup → Comms</div>
+        </div>
+        <div class="step">
+          <div class="num">02 — ENGAGE</div>
+          <h3>Employees get support</h3>
+          <p>Your people use Koshpal and receive ongoing, personalised financial support.</p>
+          <div class="flow">Track → Learn → Improve → Guidance</div>
+        </div>
+        <div class="step">
+          <div class="num">03 — MEASURE</div>
+          <h3>HR sees the impact</h3>
+          <p>Aggregated insight into adoption, engagement and financial-wellness outcomes.</p>
+          <div class="flow">Adoption → Engagement → Outcomes → ROI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== TECH + HUMANS -->
+  <section>
+    <div class="wrap twocol">
+      <div class="reveal">
+        <span class="eyebrow">Technology &amp; people</span>
+        <h2 class="h" style="margin-top:16px">Automation when employees need speed. Humans when they need answers.</h2>
+      </div>
+      <div class="reveal">
+        <p class="lede" style="margin-bottom:20px">Koshpal pairs intelligent financial technology with human expertise —
+          continuous digital support, plus qualified advisors when a decision actually needs one.</p>
+        <div class="avatar-row" aria-hidden="true">
+          <span class="av">RS</span><span class="av">AK</span><span class="av">PM</span><span class="av">NV</span><span class="av">+</span>
+        </div>
+        <p style="font-family:'Outfit';font-weight:500;font-size:13.5px;color:var(--ink-3);margin-top:12px">Koshpal financial advisors</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== WHO IT'S FOR -->
+  <section id="who" style="background:var(--surface-2); border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Who it's for</span>
+        <h2 class="h">Built for modern workplaces.</h2>
+      </div>
+      <div class="who">
+        <div class="wc reveal"><h3>HR &amp; People teams</h3><p>Build financial wellness into your benefits strategy.</p></div>
+        <div class="wc reveal"><h3>L&amp;D teams</h3><p>Give employees practical, continuous financial education.</p></div>
+        <div class="wc reveal"><h3>Founders &amp; leadership</h3><p>Build a healthier, more resilient workforce.</p></div>
+        <div class="wc reveal"><h3>Benefits teams</h3><p>Offer a financial-wellness benefit employees actually use.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== EMPLOYEE STRIP (demoted) -->
+  <section>
+    <div class="wrap">
+      <div class="emp-strip reveal">
+        <div class="eh">
+          <h3 style="font-size:clamp(20px,2.6vw,26px);font-weight:600">What employees get</h3>
+          <span class="quote">"Help me understand my money."</span>
+        </div>
+        <div class="emp-feats">
+          <span>Automatic tracking</span><span>Financial health score</span><span>Smart insights</span>
+          <span>Budgets &amp; goals</span><span>Education library</span><span>Expert consultations</span><span>Personalised nudges</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== IMPACT (no fabricated numbers) -->
+  <section style="background:var(--surface-2); border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Outcomes</span>
+        <h2 class="h">Designed for measurable impact.</h2>
+        <p class="lede">Every Koshpal program reports on the same four signals. Your numbers appear here
+          once the program is live.</p>
+      </div>
+      <div class="impact-grid reveal">
+        <div class="itile"><div class="val">—</div><div class="lab">Employee activation</div><div class="sub">% of workforce onboarded</div></div>
+        <div class="itile"><div class="val">—</div><div class="lab">Monthly engagement</div><div class="sub">% active in a given month</div></div>
+        <div class="itile"><div class="val">—</div><div class="lab">Financial confidence</div><div class="sub">self-reported, aggregated</div></div>
+        <div class="itile"><div class="val">—</div><div class="lab">Program ROI</div><div class="sub">utilisation vs. investment</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== FINAL CTA -->
+  <section id="demo" class="final">
+    <div class="wrap">
+      <span class="eyebrow">Get started</span>
+      <h2>Support your people beyond the payslip.</h2>
+      <p>See how Koshpal would work for your team — a 30-minute walkthrough of the employee
+        experience and the HR dashboard.</p>
+      <div class="cta-row" style="justify-content:center">
+        <a href="#" class="btn lg">Book a demo</a>
+        <a href="#platform" class="btn ghost lg">Explore the platform</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ======================================================== FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><span class="mark">K</span> Koshpal</a>
+        <p>Employee financial wellness for modern workplaces.</p>
+        <div class="badges" aria-hidden="true">
+          <span class="badge">App Store</span>
+          <span class="badge">Google Play</span>
+        </div>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <a href="#platform">Financial wellness</a>
+        <a href="#how">Employee &amp; HR experience</a>
+        <a href="#why">HR dashboard</a>
+        <a href="#platform">Financial coaching</a>
+        <a href="#platform">Financial education</a>
+      </div>
+      <div>
+        <h4>For companies</h4>
+        <a href="#why">Why Koshpal</a>
+        <a href="#how">How it works</a>
+        <a href="#who">Who it's for</a>
+        <a href="#privacy">Security &amp; privacy</a>
+        <a href="#demo">Book a demo</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Advisors</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy-policy">Privacy policy</a>
+        <a href="/terms-of-service">Terms of service</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Koshpal. All rights reserved.</span>
+      <span>Privacy-first financial wellness</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  // hero reveals fire immediately (staggered by CSS delay)
+  document.querySelectorAll('.hero .reveal').forEach(function (e) { requestAnimationFrame(function(){ e.classList.add('in'); }); });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  els.forEach(function (e) { if (!e.closest('.hero')) io.observe(e); });
+})();
+</script>

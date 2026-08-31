@@ -1,85 +1,42 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import FinancialWellness from "../components/FinancialWellness";
-import EmployeeFinancialHealth from "../components/EmployeeFinancialHealth";
-import TrustedExperts from "../components/TrustedExperts";
-import WhatMakesUsDifferent from "../components/WhatMakesUsDifferent";
-import About from "../components/About";
-import TrustStats from "../components/TrustStats";
-import ProductCapabilities from "../components/ProductCapabilities";
-import KnowYourMoney from "../components/KnowYourMoney";
-import HowKoshpalWorks from "../components/HowKoshpalWorks";
-import CardsSection from "../components/CardsSection";
-import ContactForm from "../components/ContactForm";
-import ExploreArticles from "../components/ExploreArticles";
 import Footer from "../components/Footer";
-import FAQ from "../components/FAQ";
+
+import Hero from "../components/b2b/Hero";
+// import LogoBar from "../components/b2b/LogoBar"; // hidden for now — re-enable once real client logos are ready
+import ProblemSection from "../components/b2b/ProblemSection";
+import PlatformSection from "../components/b2b/PlatformSection";
+import Pillars from "../components/b2b/Pillars";
+import PlatformSplit from "../components/b2b/PlatformSplit";
+import PrivacySection from "../components/b2b/PrivacySection";
+import WhyKoshpal from "../components/b2b/WhyKoshpal";
+import RolloutSteps from "../components/b2b/RolloutSteps";
+import TechAndHumans from "../components/b2b/TechAndHumans";
+import WhoItsFor from "../components/b2b/WhoItsFor";
+import EmployeeStrip from "../components/b2b/EmployeeStrip";
+import ImpactSection from "../components/b2b/ImpactSection";
+import FinalCta from "../components/b2b/FinalCta";
 
 export default function Home() {
   return (
-    <div className="min-h-screen font-sans bg-white">
-      {/* Navigation Bar Section */}
+    <div className="min-h-screen font-jakarta bg-[#fff] text-[#3f4a63]">
       <Navbar />
-
       <main>
-        {/* Hero Section */}
         <Hero />
-
-        {/* Financial Wellness Section */}
-        <FinancialWellness />
-
-        {/* Employee Financial Health Section */}
-        <EmployeeFinancialHealth />
-
-        {/* What Makes Us Different? */}
-        <div id="overview">
-          <WhatMakesUsDifferent />
-        </div>
-
-        {/* About Section */}
-        <div id="about">
-          <About />
-        </div>
-
-        {/* Stats */}
-        <TrustStats />
-
-        {/* How it works Section */}
-        <div id="how-it-works">
-          <HowKoshpalWorks />
-        </div>
-
-        {/* Advisor Section */}
-        <div id="finance-experts">
-          <TrustedExperts />
-        </div>
-
-        {/* Additional Features Section */}
-        <div id="what-we-do">
-          <ProductCapabilities />
-        </div>
-
-        {/* Cards Section */}
-        <CardsSection />
-
-        {/* FAQ Section */}
-        <div id="faq">
-          <FAQ />
-        </div>
-
-        {/* Form Section */}
-        <div id="contact">
-          <ContactForm />
-        </div>
-
-        {/* Article Section */}
-        <div id="resources">
-          <ExploreArticles />
-        </div>
+        {/* <LogoBar /> */}
+        <ProblemSection />
+        <PlatformSection />
+        <Pillars />
+        <PlatformSplit />
+        <PrivacySection />
+        <WhyKoshpal />
+        <RolloutSteps />
+        <TechAndHumans />
+        <WhoItsFor />
+        <EmployeeStrip />
+        <ImpactSection />
+        <FinalCta />
       </main>
-
-      {/* footer */}
       <Footer />
     </div>
   );

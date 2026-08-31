@@ -11,6 +11,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import ScrollToTop from './components/ScrollToTop'
+import CustomCursor from './components/b2b/CustomCursor'
 import './index.css'
 import VideoWatchPage from './pages/VideoWatch'
 
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollToTop />
+      <CustomCursor />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
