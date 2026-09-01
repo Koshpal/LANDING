@@ -26,7 +26,7 @@ export default function EmployeeJourney() {
             <Reveal
               key={s.t}
               delay={i * 0.05}
-              className="flex gap-4 rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-4 sm:p-5"
+              className="b2b-card-hover flex gap-4 rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-4 sm:p-5"
             >
               <span className="flex-none w-7 h-7 rounded-full bg-primary text-[#fff] grid place-items-center font-outfit font-bold text-[13px]">
                 {i + 1}

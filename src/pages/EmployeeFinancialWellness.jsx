@@ -66,7 +66,7 @@ export default function EmployeeFinancialWellness() {
             ["Personal", "Guidance shaped by each person's real situation."],
             ["Private", "Individual financial data never reaches the employer."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+            <Reveal key={h} delay={i * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
               <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-[7px]">{h}</h3>
               <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468]">{p}</p>
             </Reveal>

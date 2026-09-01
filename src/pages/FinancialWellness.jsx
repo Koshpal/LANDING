@@ -42,7 +42,7 @@ export default function FinancialWellness() {
         <SectionHead dark eyebrow="What it's made of" title="Six components, plus confidence." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]">
           {COMPONENTS.map(([h, p], i) => (
-            <Reveal key={h} delay={(i % 3) * 0.05} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
+            <Reveal key={h} delay={(i % 3) * 0.05} className="b2b-card-hover rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
               <h3 className="font-outfit font-semibold text-[17px] b2b-on-dark-h mb-1.5">{h}</h3>
               <p className="font-jakarta text-[14px] leading-[1.55] b2b-on-dark-soft">{p}</p>
             </Reveal>
@@ -62,7 +62,7 @@ export default function FinancialWellness() {
             ["It's contextual", "The lesson on restructuring a loan appears when a loan does."],
             ["It's measurable", "Adoption and engagement are visible from day one."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+            <Reveal key={h} delay={i * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
               <h3 className="font-outfit font-semibold text-[17px] text-[#0b1533] mb-1.5">{h}</h3>
               <p className="font-jakarta text-[14px] leading-[1.55] text-[#3a4468]">{p}</p>
             </Reveal>
@@ -104,7 +104,7 @@ export default function FinancialWellness() {
             ["Privacy & security", "What HR can and can't see.", "/security"],
             ["HR guides", "Evaluate providers, launch a program, measure ROI.", "/resources/guides"],
           ].map(([h, p, to], i) => (
-            <Reveal key={h} delay={i * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+            <Reveal key={h} delay={i * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
               <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mb-1.5">{h}</h3>
               <p className="font-jakarta text-[13.5px] leading-[1.55] text-[#3a4468] mb-3">{p}</p>
               <CTA to={to} variant="ghost">Read</CTA>

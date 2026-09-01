@@ -31,17 +31,17 @@ export function Eyebrow({ children, className = "" }) {
 /** eyebrow + h2 + optional lede, consistent rhythm. */
 export function SectionHead({ eyebrow, title, lede, dark = false, className = "" }) {
   return (
-    <div className={`max-w-[64ch] mb-10 sm:mb-14 lg:mb-16 ${className}`}>
+    <div className={`max-w-[62ch] mb-8 sm:mb-10 lg:mb-12 ${className}`}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h2
-        className="font-outfit font-bold tracking-[-0.028em] leading-[1.08] mt-5 text-[30px] sm:text-[40px] lg:text-[48px]"
+        className="font-outfit font-bold tracking-[-0.028em] leading-[1.1] mt-4 text-[27px] sm:text-[34px] lg:text-[40px]"
         style={{ color: dark ? "#f6f8ff" : "var(--b2b-ink)" }}
       >
         {title}
       </h2>
       {lede && (
         <p
-          className="font-jakarta mt-4 text-[17px] sm:text-[19px] leading-[1.65] max-w-[60ch]"
+          className="font-jakarta mt-3.5 text-[16px] sm:text-[17.5px] leading-[1.6] max-w-[58ch]"
           style={{ color: dark ? "#c3cdec" : "var(--b2b-ink-2)" }}
         >
           {lede}
@@ -54,10 +54,10 @@ export function SectionHead({ eyebrow, title, lede, dark = false, className = ""
 /** Pill button. `variant`: "solid" | "ghost". */
 export function CTA({ to = "/demo", children, variant = "solid", size = "md", dark = false, className = "" }) {
   const base =
-    "relative inline-flex items-center justify-center gap-2 font-outfit font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap active:scale-[0.97] overflow-hidden";
-  const sizes = { md: "px-[22px] py-[13px] text-[15px]", lg: "px-8 py-[17px] text-[16px]" };
+    "b2b-press relative inline-flex items-center justify-center gap-2 font-outfit font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap overflow-hidden";
+  const sizes = { md: "px-[22px] py-[13px] text-[15px]", lg: "px-8 py-[16px] text-[16px]" };
   const solid =
-    "text-[#fff] shadow-[0_10px_28px_-8px_rgba(51,78,172,0.6)] hover:shadow-[0_16px_40px_-8px_rgba(51,78,172,0.72)] hover:-translate-y-0.5";
+    "b2b-sheen text-[#fff] shadow-[0_10px_28px_-8px_rgba(51,78,172,0.6)] hover:shadow-[0_16px_40px_-8px_rgba(51,78,172,0.72)] hover:-translate-y-0.5";
   const ghost = dark
     ? "text-[#fff] border border-[#ffffff33] bg-[#ffffff0f] backdrop-blur-sm hover:bg-[#ffffff1f] hover:border-[#ffffff66]"
     : "text-primary border border-[#dfe3f2] bg-[#fff] hover:border-primary hover:bg-primary-lightest";
@@ -109,7 +109,7 @@ export function Section({ id, children, tone = "white", className = "" }) {
     dark: "b2b-dark-band text-[#f6f8ff]",
   };
   return (
-    <section id={id} className={`relative ${tones[tone]} py-20 sm:py-28 lg:py-32 ${className}`}>
+    <section id={id} className={`relative ${tones[tone]} py-14 sm:py-[72px] lg:py-24 ${className}`}>
       {tone === "dark" && <JellyGrid color="255, 255, 255" opacity={0.16} />}
       <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">{children}</div>
     </section>

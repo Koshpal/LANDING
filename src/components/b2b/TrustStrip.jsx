@@ -23,10 +23,10 @@ export default function TrustStrip() {
             <Reveal
               key={h}
               delay={i * 0.05}
-              className="b2b-card b2b-card-hover bg-[#f7f8fd] !rounded-[16px] p-5 text-center sm:text-left"
+              className="group b2b-card b2b-card-hover bg-[#f7f8fd] !rounded-[16px] p-5 text-center sm:text-left"
             >
               <div
-                className="w-9 h-9 rounded-[10px] border border-[#e5e9fb] grid place-items-center text-primary mb-3 mx-auto sm:mx-0"
+                className="b2b-ico w-9 h-9 rounded-[10px] border border-[#e5e9fb] grid place-items-center text-primary mb-3 mx-auto sm:mx-0"
                 style={{ background: "linear-gradient(135deg,#eef1ff,#e6faf7)" }}
               >
                 <Icon size={17} strokeWidth={2} />

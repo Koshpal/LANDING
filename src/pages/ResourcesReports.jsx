@@ -41,7 +41,7 @@ export default function ResourcesReports() {
             </p>
             <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468] max-w-[520px]">
               {["Financial stress by salary band and life stage", "Emergency savings and debt exposure", "UPI and everyday spending behaviour", "Financial literacy and investment confidence", "What employees want from a financial wellness benefit"].map((t) => (
-                <li key={t} className="flex gap-2"><span className="text-primary font-bold">·</span>{t}</li>
+                <li key={t} className="b2b-row flex gap-2"><span className="text-primary font-bold">·</span>{t}</li>
               ))}
             </ul>
             <div className="mt-7">
@@ -52,18 +52,18 @@ export default function ResourcesReports() {
         </div>
       </Section>
 
-      <Section tone="dark">
-        <SectionHead dark eyebrow="Pipeline" title="What's next." />
+      <Section tone="surface2">
+        <SectionHead eyebrow="Pipeline" title="What's next." />
         <div className="grid md:grid-cols-3 gap-[18px]">
           {UPCOMING.map(([h, p, status], i) => (
-            <Reveal key={h} delay={i * 0.06} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6 flex flex-col">
-              <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-[#8fa6e8] mb-2">{status}</span>
-              <h3 className="font-outfit font-semibold text-[16px] b2b-on-dark-h mb-1.5 leading-snug">{h}</h3>
-              <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p}</p>
+            <Reveal key={h} delay={i * 0.06} className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#fff] p-6 flex flex-col">
+              <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-secondary-darkest mb-2">{status}</span>
+              <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mb-1.5 leading-snug">{h}</h3>
+              <p className="font-jakarta text-[13px] leading-[1.5] text-[#3a4468]">{p}</p>
             </Reveal>
           ))}
         </div>
-        <p className="mt-8 font-jakarta text-[12.5px] b2b-on-dark-muted italic">
+        <p className="mt-8 font-jakarta text-[12.5px] text-[#6b7597] italic">
           Titles and scope are indicative — no findings are published until the research is complete and sourced.
         </p>
       </Section>

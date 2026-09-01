@@ -344,13 +344,65 @@
   border: 1px solid var(--b2b-line);
   border-radius: 20px;
   box-shadow: var(--b2b-shadow);
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.22s ease, border-color 0.22s ease;
+}
+/* self-contained hover interaction — works with or without .b2b-card */
+.b2b-card-hover {
+  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.24s ease, border-color 0.24s ease;
+  will-change: transform;
 }
 .b2b-card-hover:hover {
   transform: translateY(-4px);
   box-shadow: var(--b2b-glow);
   border-color: rgba(51, 78, 172, 0.24);
+}
+.b2b-dark-band .b2b-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 60px -18px rgba(4, 10, 35, 0.7);
+}
+
+/* ---------- micro-interactions ---------- */
+
+/* press feedback for any clickable */
+.b2b-press { transition: transform 0.12s ease; }
+.b2b-press:active { transform: scale(0.97); }
+
+/* link / button with a trailing mark that slides on hover */
+.b2b-arrow .arw {
+  display: inline-block;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.b2b-arrow:hover .arw { transform: translateX(4px); }
+
+/* list row nudge */
+.b2b-row { transition: transform 0.18s ease, color 0.18s ease; }
+.b2b-row:hover { transform: translateX(4px); }
+
+/* icon tile grows slightly when its card is hovered */
+.b2b-ico { transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.group:hover .b2b-ico { transform: scale(1.08) rotate(-2deg); }
+
+/* moving-sheen sweep across the primary button on hover */
+.b2b-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.4) 50%, transparent 68%);
+  transform: translateX(-130%);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+.b2b-sheen:hover::after { transform: translateX(130%); }
+
+/* soft tag chips */
+.b2b-chip { transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .b2b-card-hover:hover,
+  .b2b-row:hover,
+  .b2b-arrow:hover .arw,
+  .group:hover .b2b-ico { transform: none; }
+  .b2b-sheen::after { display: none; }
 }
 
 /* eyebrow / section kicker — gradient-outlined pill with a gradient dot */

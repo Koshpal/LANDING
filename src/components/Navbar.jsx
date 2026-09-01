@@ -56,10 +56,10 @@ export default function Navbar() {
         }`}
       >
         <div
-          className={`mx-auto rounded-full backdrop-blur-xl px-4 sm:px-5 md:px-6 flex items-center justify-between border border-[#e9ecf7] transition-all duration-300 ${
+          className={`mx-auto rounded-full backdrop-blur-xl px-4 sm:px-5 md:px-6 flex items-center justify-between border border-[#ffffffcc] ring-1 ring-[#0b153312] transition-all duration-300 ${
             scrolled
-              ? "bg-white/90 h-[52px] sm:h-[58px] md:h-[62px] shadow-[0_10px_40px_-12px_rgba(11,21,51,0.28)]"
-              : "bg-white/80 h-[56px] sm:h-[64px] md:h-[70px] shadow-[0_8px_30px_-14px_rgba(11,21,51,0.22)]"
+              ? "bg-white/95 h-[52px] sm:h-[56px] md:h-[60px] shadow-[0_14px_44px_-12px_rgba(4,10,35,0.45)]"
+              : "bg-white/95 h-[56px] sm:h-[62px] md:h-[66px] shadow-[0_16px_50px_-12px_rgba(4,10,35,0.5)]"
           }`}
         >
           {/* logo */}

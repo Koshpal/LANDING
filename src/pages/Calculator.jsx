@@ -97,7 +97,7 @@ export default function Calculator() {
           </div>
 
           {/* results */}
-          <div className="rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 sm:p-8 b2b-shadow lg:sticky lg:top-28">
+          <div className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 sm:p-8 b2b-shadow lg:sticky lg:top-28">
             <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7597]">
               Illustrative estimate
             </p>

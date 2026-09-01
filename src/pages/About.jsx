@@ -43,7 +43,7 @@ export default function About() {
         <SectionHead dark eyebrow="What we believe" title="Four principles behind every decision." />
         <div className="grid sm:grid-cols-2 gap-[18px]">
           {BELIEFS.map(([h, p], i) => (
-            <Reveal key={h} delay={(i % 2) * 0.06} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
+            <Reveal key={h} delay={(i % 2) * 0.06} className="b2b-card-hover rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
               <h3 className="font-outfit font-semibold text-[17.5px] b2b-on-dark-h mb-[7px]">{h}</h3>
               <p className="font-jakarta text-[14.5px] leading-[1.6] b2b-on-dark-soft">{p}</p>
             </Reveal>

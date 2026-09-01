@@ -15,7 +15,7 @@ function Block({ block }) {
     return (
       <ul className="grid gap-2 my-4 font-jakarta text-[16px] leading-[1.7] text-[#3a4468]">
         {block.c.map((li) => (
-          <li key={li} className="flex gap-3">
+          <li key={li} className="b2b-row flex gap-3">
             <span className="text-primary font-bold mt-0.5">·</span>
             {li}
           </li>
@@ -60,7 +60,7 @@ export default function BlogPost() {
             <Block key={i} block={b} />
           ))}
 
-          <div className="mt-12 rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-6">
+          <div className="b2b-card-hover mt-12 rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-6">
             <p className="font-outfit font-semibold text-[15px] text-[#0b1533]">
               Koshpal delivers each part of this in one platform.
             </p>
@@ -86,7 +86,7 @@ export default function BlogPost() {
                   <Link
                     key={p.slug}
                     to={`/blog/${p.slug}`}
-                    className="rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-5 hover:-translate-y-0.5 transition"
+                    className="b2b-card-hover rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-5 hover:-translate-y-0.5 transition"
                   >
                     <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-secondary-darkest">
                       {p.category}

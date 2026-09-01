@@ -49,7 +49,7 @@ export default function ResourcesGuides() {
           <div>
             <ol className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468] max-w-[560px]">
               {TOC.map((t, i) => (
-                <li key={t} className="flex gap-3">
+                <li key={t} className="b2b-row flex gap-3">
                   <span className="font-outfit font-bold text-primary tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   {t}
                 </li>
@@ -63,14 +63,14 @@ export default function ResourcesGuides() {
         </div>
       </Section>
 
-      <Section tone="dark">
-        <SectionHead dark eyebrow="More guides" title="Focused deep-dives." />
+      <Section tone="surface2">
+        <SectionHead eyebrow="More guides" title="Focused deep-dives." />
         <div className="grid md:grid-cols-3 gap-[18px]">
           {MORE.map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.06} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
-              <h3 className="font-outfit font-semibold text-[16px] b2b-on-dark-h mb-1.5 leading-snug">{h}</h3>
-              <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p}</p>
-              <span className="inline-block mt-3 font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-[#8fa6e8]">
+            <Reveal key={h} delay={i * 0.06} className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#fff] p-6">
+              <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mb-1.5 leading-snug">{h}</h3>
+              <p className="font-jakarta text-[13px] leading-[1.5] text-[#3a4468]">{p}</p>
+              <span className="inline-block mt-3 font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-secondary-darkest">
                 Coming soon
               </span>
             </Reveal>

@@ -21,9 +21,9 @@ const CO = [
 export default function PlatformSection() {
   return (
     <Section id="platform" tone="dark">
-      <div className="max-w-[62ch] mb-9 sm:mb-12 lg:mb-14">
+      <div className="max-w-[60ch] mb-8 sm:mb-10">
         <Eyebrow>The platform</Eyebrow>
-        <h2 className="font-outfit font-bold tracking-[-0.02em] leading-[1.12] mt-4 text-[28px] sm:text-[36px] lg:text-[46px] b2b-on-dark-h">
+        <h2 className="font-outfit font-bold tracking-[-0.028em] leading-[1.1] mt-4 text-[27px] sm:text-[34px] lg:text-[40px] b2b-on-dark-h">
           A complete financial wellness layer for your workforce.
         </h2>
         <div className="flex flex-wrap gap-x-3.5 gap-y-2.5 mt-5">
@@ -42,7 +42,25 @@ export default function PlatformSection() {
         </p>
       </div>
 
-      <Reveal className="grid md:grid-cols-2 border border-[#e9ecf7] rounded-[20px] overflow-hidden bg-[#fff] b2b-shadow">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+        {[
+          ["01 — Understand", "Automated tracking turns everyday spending into a clear picture."],
+          ["02 — Improve", "Insights, budgets and nudges that guide better daily decisions."],
+          ["03 — Learn", "Focused education on tax, debt, investing and life planning."],
+          ["04 — Get guidance", "One-to-one sessions with qualified financial experts."],
+        ].map(([h, p], i) => (
+          <Reveal
+            key={h}
+            delay={i * 0.05}
+            className="b2b-card-hover rounded-[16px] border border-[#ffffff26] bg-[#ffffff12] backdrop-blur-sm p-4"
+          >
+            <div className="font-outfit font-bold text-[12.5px] tracking-[0.04em] text-[#9db4ff] mb-1.5">{h}</div>
+            <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p}</p>
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal className="grid md:grid-cols-2 border border-[#ffffff26] rounded-[20px] overflow-hidden bg-[#fff] b2b-shadow-lg">
         <div className="font-outfit font-bold text-[14px] tracking-[0.04em] uppercase px-[22px] py-[18px] bg-primary-lightest text-primary">
           For employees
         </div>

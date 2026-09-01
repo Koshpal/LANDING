@@ -40,7 +40,7 @@ export default function Platform() {
         />
         <div className="grid gap-[18px] lg:grid-cols-3">
           {LAYERS.map((l, i) => (
-            <Reveal key={l.h} delay={(i % 3) * 0.06} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-7 b2b-shadow">
+            <Reveal key={l.h} delay={(i % 3) * 0.06} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-7 b2b-shadow">
               <h3 className="font-outfit font-semibold text-[21px] leading-[1.2] text-[#0b1533] mb-2">{l.h}</h3>
               <p className="font-jakarta text-[15px] leading-[1.6] text-[#3a4468]">{l.p}</p>
               <div className="flex flex-wrap gap-1.5 mt-4">

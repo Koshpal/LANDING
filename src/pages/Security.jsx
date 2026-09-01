@@ -24,19 +24,19 @@ export default function Security() {
           <Placeholder variant="browser" label="Employer view — aggregated only" ratio="16/9" />
         </Reveal>
         <div className="grid sm:grid-cols-2 gap-[18px]">
-          <Reveal className="rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 b2b-shadow">
+          <Reveal className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 b2b-shadow">
             <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-2">What HR can see</h3>
             <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468]">
               {["Enrolment and activation rates", "Monthly engagement", "Aggregated financial-wellness trends", "Program utilisation (coaching, education, goals)", "Board-ready impact summaries"].map((t) => (
-                <li key={t} className="flex gap-2"><span className="text-primary font-bold">✓</span>{t}</li>
+                <li key={t} className="b2b-row flex gap-2"><span className="text-primary font-bold">✓</span>{t}</li>
               ))}
             </ul>
           </Reveal>
-          <Reveal delay={0.06} className="rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 b2b-shadow">
+          <Reveal delay={0.06} className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 b2b-shadow">
             <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-2">What HR can never see</h3>
             <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468]">
               {["Individual transactions or balances", "A named employee's spending or debt", "Budgets or goals for a specific person", "The content of any coaching conversation", "Anything that identifies one employee's finances"].map((t) => (
-                <li key={t} className="flex gap-2"><span className="text-[#b21d15] font-bold">✕</span>{t}</li>
+                <li key={t} className="b2b-row flex gap-2"><span className="text-[#b21d15] font-bold">✕</span>{t}</li>
               ))}
             </ul>
           </Reveal>
@@ -88,7 +88,7 @@ export default function Security() {
             ["Data ownership", "The employee's data is theirs — export or delete on request."],
             ["Vendor diligence", "Sub-processors held to the same standard."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={(i % 3) * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+            <Reveal key={h} delay={(i % 3) * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
               <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-[7px]">{h}</h3>
               <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468]">{p}</p>
             </Reveal>

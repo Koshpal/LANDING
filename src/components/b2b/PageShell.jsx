@@ -37,7 +37,7 @@ export function PageShell({ seo, children }) {
 /** Standard interior-page hero — dark mesh band, glow, jelly grid, big headline. */
 export function PageHero({ eyebrow, title, sub, primary, secondary }) {
   return (
-    <section className="b2b-dark-band relative overflow-hidden pt-36 sm:pt-40 lg:pt-48 pb-20 sm:pb-28 lg:pb-32">
+    <section className="b2b-dark-band relative overflow-hidden pt-32 sm:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
       <JellyGrid color="255, 255, 255" opacity={0.16} />
       <GlowOrb className="w-[560px] h-[560px] top-[-160px] right-[-120px]" />
       <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">
@@ -48,11 +48,11 @@ export function PageHero({ eyebrow, title, sub, primary, secondary }) {
           className="max-w-[58ch]"
         >
           {eyebrow && <span className="b2b-eyebrow">{eyebrow}</span>}
-          <h1 className="font-outfit font-bold tracking-[-0.035em] leading-[1.04] mt-5 text-[34px] sm:text-[52px] lg:text-[62px] text-[#f6f8ff]">
+          <h1 className="font-outfit font-bold tracking-[-0.035em] leading-[1.04] mt-4 text-[32px] sm:text-[46px] lg:text-[54px] text-[#f6f8ff]">
             {title}
           </h1>
           {sub && (
-            <p className="font-jakarta mt-6 text-[17px] sm:text-[20px] leading-[1.6] max-w-[54ch] text-[#c3cdec]">
+            <p className="font-jakarta mt-5 text-[16.5px] sm:text-[18.5px] leading-[1.6] max-w-[54ch] text-[#c3cdec]">
               {sub}
             </p>
           )}
@@ -79,13 +79,13 @@ export function PageHero({ eyebrow, title, sub, primary, secondary }) {
 /** Reusable closing call-to-action band. */
 export function PageCta({ eyebrow = "Get started", title, sub, primary, secondary }) {
   return (
-    <section className="b2b-dark-band relative overflow-hidden py-24 sm:py-32 text-center">
+    <section className="b2b-dark-band relative overflow-hidden py-16 sm:py-24 text-center">
       <JellyGrid color="255, 255, 255" opacity={0.16} />
       <GlowOrb className="w-[520px] h-[520px] left-1/2 -translate-x-1/2 top-[-140px]" />
-      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16 grid gap-7 justify-items-center">
-        <Reveal className="grid gap-7 justify-items-center">
+      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16 grid gap-6 justify-items-center">
+        <Reveal className="grid gap-6 justify-items-center">
           <span className="b2b-eyebrow">{eyebrow}</span>
-          <h2 className="font-outfit font-bold tracking-[-0.03em] leading-[1.08] text-[30px] sm:text-[42px] lg:text-[50px] text-[#f6f8ff] max-w-[22ch]">
+          <h2 className="font-outfit font-bold tracking-[-0.03em] leading-[1.08] text-[27px] sm:text-[36px] lg:text-[42px] text-[#f6f8ff] max-w-[22ch]">
             {title}
           </h2>
           {sub && (

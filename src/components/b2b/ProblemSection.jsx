@@ -21,7 +21,7 @@ export default function ProblemSection() {
           <Reveal
             key={h}
             delay={i * 0.06}
-            className="rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-5 sm:p-[22px]"
+            className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-5 sm:p-[22px]"
           >
             <h3 className="font-outfit font-semibold text-[18px] text-[#0b1533] mb-[7px]">{h}</h3>
             <p className="font-jakarta text-[14.5px] leading-[1.55] text-[#3a4468]">{p}</p>

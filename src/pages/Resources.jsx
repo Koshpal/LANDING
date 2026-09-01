@@ -34,7 +34,7 @@ export default function Resources() {
         <SectionHead eyebrow="Browse" title="Four places to start." />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px]">
           {HUB.map(([h, p, to], i) => (
-            <Reveal key={h} delay={(i % 2) * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow flex flex-col">
+            <Reveal key={h} delay={(i % 2) * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow flex flex-col">
               <h3 className="font-outfit font-semibold text-[19px] text-[#0b1533] mb-1.5">{h}</h3>
               <p className="font-jakarta text-[14px] leading-[1.55] text-[#3a4468] mb-4 flex-1">{p}</p>
               <CTA to={to} variant="ghost">Open</CTA>
@@ -43,26 +43,26 @@ export default function Resources() {
         </div>
       </Section>
 
-      <Section tone="dark">
-        <SectionHead dark eyebrow="From the blog" title="Latest writing." />
+      <Section tone="surface2">
+        <SectionHead eyebrow="From the blog" title="Latest writing." />
         <div className="grid md:grid-cols-3 gap-[18px]">
           {latest.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link
                 to={`/blog/${p.slug}`}
-                className="block rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6 h-full hover:bg-[#ffffff1a] transition"
+                className="b2b-card-hover block rounded-[20px] border border-[#e9ecf7] bg-[#fff] p-6 h-full hover:bg-[#f7f8fd] transition"
               >
-                <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-[#8fa6e8]">
+                <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-secondary-darkest">
                   {p.category}
                 </span>
-                <h3 className="font-outfit font-semibold text-[16px] b2b-on-dark-h mt-2 mb-1.5 leading-snug">{p.title}</h3>
-                <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p.excerpt}</p>
+                <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mt-2 mb-1.5 leading-snug">{p.title}</h3>
+                <p className="font-jakarta text-[13px] leading-[1.5] text-[#3a4468]">{p.excerpt}</p>
               </Link>
             </Reveal>
           ))}
         </div>
         <div className="mt-8">
-          <CTA to="/blog" variant="ghost" dark>All articles</CTA>
+          <CTA to="/blog" variant="ghost">All articles</CTA>
         </div>
       </Section>
 

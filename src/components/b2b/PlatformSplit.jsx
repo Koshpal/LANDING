@@ -102,7 +102,7 @@ export default function PlatformSplit() {
               </div>
               <ul className="grid gap-2">
                 {list.map((t) => (
-                  <li key={t} className="font-jakarta text-[15px] b2b-on-dark flex gap-2.5">
+                  <li key={t} className="b2b-row font-jakarta text-[15px] b2b-on-dark flex gap-2.5">
                     <span className="b2b-on-dark-accent font-bold">→</span>
                     {t}
                   </li>
@@ -117,6 +117,26 @@ export default function PlatformSplit() {
             Placeholder — swap for a real HR-dashboard screenshot.
           </p>
         </Reveal>
+      </div>
+
+      {/* rollout: deploy / engage / measure */}
+      <div className="mt-12 grid sm:grid-cols-3 gap-3">
+        {[
+          ["Launch", "Configure the program with your HR team and communicate it."],
+          ["Engage", "Employees get ongoing, personalised financial support."],
+          ["Measure", "Aggregated insight into adoption, engagement and outcomes."],
+        ].map(([h, p], i) => (
+          <Reveal
+            key={h}
+            delay={i * 0.05}
+            className="b2b-card-hover rounded-[16px] border border-[#ffffff26] bg-[#ffffff12] backdrop-blur-sm p-4"
+          >
+            <div className="font-outfit font-bold text-[12px] tracking-[0.1em] uppercase text-[#9db4ff] mb-1.5">
+              {`0${i + 1} — ${h}`}
+            </div>
+            <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p}</p>
+          </Reveal>
+        ))}
       </div>
     </Section>
   );
