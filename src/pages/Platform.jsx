@@ -1,6 +1,7 @@
 import React from "react";
 import { PageShell, PageHero, PageCta, CardGrid } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
+import Placeholder from "../components/b2b/Placeholder";
 
 const LAYERS = [
   {
@@ -22,7 +23,7 @@ const LAYERS = [
 
 export default function Platform() {
   return (
-    <PageShell>
+    <PageShell seo={{ title: "Platform", path: "/platform", description: "One platform for employee financial wellbeing: financial intelligence, financial education and human guidance in a single employee experience, with an aggregated dashboard for HR." }}>
       <PageHero
         eyebrow="The platform"
         title="One platform for your employees' financial wellbeing."
@@ -89,6 +90,7 @@ export default function Platform() {
           title="One view for the people running the program."
           lede="Everything HR needs to launch, sustain and report on financial wellness — built on aggregated data, never individual financial detail."
         />
+        <Reveal className="mb-10"><Placeholder variant="browser" label="HR dashboard — aggregated view" ratio="16/9" /></Reveal>
         <CardGrid
           items={[
             { h: "Adoption", p: "Who's enrolled and activated, by team or location." },

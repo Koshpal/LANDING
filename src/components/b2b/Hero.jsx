@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CTA } from "./primitives";
 import JellyGrid from "./JellyGrid";
+import Counter from "./Counter";
 
 const ease = [0.2, 0.8, 0.2, 1];
 const rise = (i) => ({
@@ -89,13 +90,15 @@ function PlatformComposite() {
         </div>
         <div className="grid grid-cols-3 gap-2.5">
           {[
-            ["1,248", "Employees"],
-            ["78%", "Activated"],
-            ["64%", "Engaged"],
-          ].map(([n, l]) => (
-            <div key={l} className="bg-[#f0f2f8] border border-[#e3e7f1] rounded-xl px-3 py-2.5">
-              <div className="font-outfit font-extrabold text-[19px] tabular-nums text-[#0e1a3c]">{n}</div>
-              <div className="font-outfit font-medium text-[11px] text-[#6b7590] mt-0.5">{l}</div>
+            { v: 1248, s: "", l: "Employees" },
+            { v: 78, s: "%", l: "Activated" },
+            { v: 64, s: "%", l: "Engaged" },
+          ].map((k) => (
+            <div key={k.l} className="bg-[#f0f2f8] border border-[#e3e7f1] rounded-xl px-3 py-2.5">
+              <div className="font-outfit font-extrabold text-[19px] tabular-nums text-[#0e1a3c]">
+                <Counter value={k.v} suffix={k.s} />
+              </div>
+              <div className="font-outfit font-medium text-[11px] text-[#6b7590] mt-0.5">{k.l}</div>
             </div>
           ))}
         </div>
@@ -141,7 +144,7 @@ export default function Hero() {
             </motion.p>
             <motion.div {...rise(3)} className="flex flex-wrap gap-3.5 items-center mt-8">
               <CTA to="/demo" size="lg">Book a demo</CTA>
-              <CTA to="#how" variant="ghost" size="lg" dark>See how it works</CTA>
+              <CTA to="/platform" variant="ghost" size="lg" dark>Explore the platform</CTA>
             </motion.div>
             <motion.div
               {...rise(4)}

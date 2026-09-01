@@ -1,6 +1,8 @@
 import React from "react";
 import { PageShell, PageHero, PageCta, CardGrid } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
+import Placeholder from "../components/b2b/Placeholder";
+import WhoItsFor from "../components/b2b/WhoItsFor";
 
 const PROBLEMS = [
   "Employees are financially stressed — and it shows up at work.",
@@ -19,7 +21,7 @@ const DEIM = [
 
 export default function ForHr() {
   return (
-    <PageShell>
+    <PageShell seo={{ title: "For HR & People Teams", path: "/for-hr", description: "Make financial wellness a benefit employees actually use. Deploy in days, keep people engaged, and report on adoption and outcomes — without exposing anyone’s private finances." }}>
       <PageHero
         eyebrow="For HR & People teams"
         title="Make financial wellness a benefit employees actually use."
@@ -55,6 +57,7 @@ export default function ForHr() {
           title="Deploy. Engage. Measure. Improve."
         />
         <CardGrid items={DEIM} cols={4} tone="onDark" />
+        <Reveal className="mt-10"><Placeholder variant="browser" label="HR dashboard" ratio="16/9" tone="brand" /></Reveal>
       </Section>
 
       <Section tone="white">
@@ -73,6 +76,8 @@ export default function ForHr() {
           cols={4}
         />
       </Section>
+
+      <WhoItsFor />
 
       <PageCta
         title="Bring financial wellness to your workforce."

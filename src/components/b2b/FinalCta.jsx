@@ -21,7 +21,7 @@ export default function FinalCta() {
           </p>
           <div className="flex flex-wrap gap-3.5 justify-center">
             <CTA to="/demo" size="lg">Book a demo</CTA>
-            <CTA to="#platform" variant="ghost" size="lg" dark>Explore the platform</CTA>
+            <CTA to="/platform" variant="ghost" size="lg" dark>Explore the platform</CTA>
           </div>
         </Reveal>
       </div>

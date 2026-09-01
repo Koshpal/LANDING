@@ -1,13 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const NAV = [
-  { label: "Platform", to: "/platform" },
+const COL_PLATFORM = [
+  { label: "Platform overview", to: "/platform" },
   { label: "Employee financial wellness", to: "/employee-financial-wellness" },
+  { label: "Financial education", to: "/financial-education" },
   { label: "Financial coaching", to: "/financial-coaching" },
   { label: "For HR & People teams", to: "/for-hr" },
+];
+
+const COL_WHY = [
   { label: "Business impact", to: "/business-impact" },
   { label: "Privacy & security", to: "/security" },
+  { label: "Customers", to: "/customers" },
+  { label: "Book a demo", to: "/demo" },
+];
+
+const COL_COMPANY = [
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+  { label: "Privacy policy", to: "/privacy-policy" },
+  { label: "Terms of service", to: "/terms-of-service" },
 ];
 
 export default function Footer() {
@@ -138,7 +151,7 @@ export default function Footer() {
 
       {/* footer content */}
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 lg:gap-16 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10 md:gap-12 lg:gap-14 mb-12">
           {/* brand */}
           <div className="lg:col-span-2 w-full">
             <div className="flex items-center gap-2 mb-4">
@@ -162,48 +175,39 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* platform / company nav */}
+          {/* platform */}
           <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">
-              Platform
-            </h4>
+            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Platform</h4>
             <ul className="space-y-2.5">
-              {NAV.map((item) => (
+              {COL_PLATFORM.map((item) => (
                 <li key={item.to}>
-                  <Link to={item.to} className={linkCls}>
-                    {item.label}
-                  </Link>
+                  <Link to={item.to} className={linkCls}>{item.label}</Link>
                 </li>
               ))}
-              <li>
-                <Link to="/demo" className={linkCls}>
-                  Book a demo
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* legal */}
+          {/* why koshpal */}
           <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">
-              Company
-            </h4>
+            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Why Koshpal</h4>
             <ul className="space-y-2.5">
-              <li>
-                <Link to="/contact" className={linkCls}>
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy" className={linkCls}>
-                  Privacy policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms-of-service" className={linkCls}>
-                  Terms of service
-                </Link>
-              </li>
+              {COL_WHY.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className={linkCls}>{item.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* company */}
+          <div className="lg:col-span-1">
+            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Company</h4>
+            <ul className="space-y-2.5">
+              {COL_COMPANY.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className={linkCls}>{item.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -1,10 +1,11 @@
 import React from "react";
 import { PageShell, PageHero, PageCta } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
+import Placeholder from "../components/b2b/Placeholder";
 
 export default function Security() {
   return (
-    <PageShell>
+    <PageShell seo={{ title: "Privacy & Security", path: "/security", description: "Koshpal is built so a company can measure the impact of its financial wellness program without ever seeing an individual employee’s financial detail." }}>
       <PageHero
         eyebrow="Privacy & security"
         title="Your employees' financial lives are private."
@@ -19,6 +20,9 @@ export default function Security() {
           title="Support and privacy are not a trade-off."
           lede="Employees should never have to expose their finances to their employer to get help with them. So they don't."
         />
+        <Reveal className="mb-10">
+          <Placeholder variant="browser" label="Employer view — aggregated only" ratio="16/9" />
+        </Reveal>
         <div className="grid sm:grid-cols-2 gap-[18px]">
           <Reveal className="rounded-[18px] border border-[#e3e7f1] bg-[#f6f7fb] p-6 b2b-shadow">
             <h3 className="font-outfit font-semibold text-[17.5px] text-[#0e1a3c] mb-2">What HR can see</h3>

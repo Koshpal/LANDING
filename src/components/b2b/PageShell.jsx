@@ -2,15 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import Seo from "./Seo";
 import JellyGrid from "./JellyGrid";
 import { Reveal, CTA } from "./primitives";
 
 const ease = [0.2, 0.8, 0.2, 1];
 
-/** Full page frame: fixed navbar + main + white footer. */
-export function PageShell({ children }) {
+/** Full page frame: SEO + fixed navbar + main + white footer. */
+export function PageShell({ seo, children }) {
   return (
     <div className="min-h-screen font-jakarta bg-[#fff] text-[#3f4a63]">
+      {seo && <Seo {...seo} />}
       <Navbar />
       <main>{children}</main>
       <Footer />

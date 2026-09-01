@@ -21,7 +21,10 @@ import Platform from './pages/Platform'
 import ForHr from './pages/ForHr'
 import BusinessImpact from './pages/BusinessImpact'
 import FinancialCoaching from './pages/FinancialCoaching'
+import FinancialEducation from './pages/FinancialEducation'
 import Security from './pages/Security'
+import About from './pages/About'
+import Customers from './pages/Customers'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -33,9 +36,13 @@ createRoot(document.getElementById('root')).render(
         <Route path="/employee-financial-wellness" element={<EmployeeFinancialWellness />} />
         <Route path="/platform" element={<Platform />} />
         <Route path="/for-hr" element={<ForHr />} />
+        <Route path="/solutions/hr" element={<ForHr />} />
         <Route path="/business-impact" element={<BusinessImpact />} />
         <Route path="/financial-coaching" element={<FinancialCoaching />} />
+        <Route path="/financial-education" element={<FinancialEducation />} />
         <Route path="/security" element={<Security />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/customers" element={<Customers />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/contact" element={<ContactPage />} />

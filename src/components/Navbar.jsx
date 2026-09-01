@@ -9,6 +9,7 @@ const MENU = [
     items: [
       { label: "Overview", to: "/platform" },
       { label: "Employee financial wellness", to: "/employee-financial-wellness" },
+      { label: "Financial education", to: "/financial-education" },
       { label: "Financial coaching", to: "/financial-coaching" },
     ],
   },
@@ -20,7 +21,8 @@ const MENU = [
       { label: "Privacy & security", to: "/security" },
     ],
   },
-  { label: "Contact", to: "/contact" },
+  { label: "Customers", to: "/customers" },
+  { label: "About", to: "/about" },
 ];
 
 export default function Navbar() {

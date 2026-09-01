@@ -1,6 +1,7 @@
 import React from "react";
 import { PageShell, PageHero, PageCta, CardGrid } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
+import Placeholder from "../components/b2b/Placeholder";
 
 const EMP = [
   { h: "Financial health overview", p: "A single score and view of where each employee stands this month." },
@@ -24,7 +25,7 @@ const HR = [
 
 export default function EmployeeFinancialWellness() {
   return (
-    <PageShell>
+    <PageShell seo={{ title: "Employee Financial Wellness", path: "/employee-financial-wellness", description: "Give employees the tools, insights and expert guidance to make better financial decisions — and give employers a simple, measurable way to deliver financial wellness at scale." }}>
       <PageHero
         eyebrow="Employee financial wellness"
         title="Build a financially healthier workforce."
@@ -40,6 +41,7 @@ export default function EmployeeFinancialWellness() {
           lede="One experience that turns everyday financial activity into clarity, better habits and confident decisions."
         />
         <CardGrid items={EMP} cols={4} />
+        <Reveal className="mt-10 flex justify-center"><Placeholder variant="phone" label="Employee app" /></Reveal>
       </Section>
 
       <Section tone="dark">

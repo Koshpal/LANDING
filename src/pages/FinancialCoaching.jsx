@@ -1,6 +1,7 @@
 import React from "react";
 import { PageShell, PageHero, PageCta, CardGrid } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
+import Placeholder from "../components/b2b/Placeholder";
 
 const QUESTIONS = [
   "Should I take this loan?",
@@ -13,7 +14,7 @@ const QUESTIONS = [
 
 export default function FinancialCoaching() {
   return (
-    <PageShell>
+    <PageShell seo={{ title: "Financial Coaching", path: "/financial-coaching", description: "Every employee gets access to qualified financial coaches — confidential, one-to-one, and focused on guidance, not selling products." }}>
       <PageHero
         eyebrow="Financial coaching"
         title="Technology for everyday decisions. Experts for the moments that matter."
@@ -28,6 +29,9 @@ export default function FinancialCoaching() {
           title="Real questions, answered by someone qualified."
           lede="The decisions where a nudge isn't enough — where an employee needs to talk it through with an expert who has no product to push."
         />
+        <Reveal className="mb-10 max-w-[520px]">
+          <Placeholder variant="plain" label="Book a coaching session" ratio="16/10" />
+        </Reveal>
         <div className="grid sm:grid-cols-2 gap-2.5 max-w-[720px]">
           {QUESTIONS.map((q, i) => (
             <Reveal
