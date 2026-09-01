@@ -38,9 +38,9 @@ export default function FinancialEducation() {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]">
           {TRACKS.map((t, i) => (
-            <Reveal key={t.h} delay={(i % 3) * 0.05} className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-6 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0e1a3c] mb-3">{t.h}</h3>
-              <ul className="grid gap-1.5 font-jakarta text-[14px] text-[#3f4a63]">
+            <Reveal key={t.h} delay={(i % 3) * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-3">{t.h}</h3>
+              <ul className="grid gap-1.5 font-jakarta text-[14px] text-[#3a4468]">
                 {t.items.map((x) => (
                   <li key={x} className="flex gap-2"><span className="text-primary font-bold">·</span>{x}</li>
                 ))}

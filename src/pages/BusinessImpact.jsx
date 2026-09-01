@@ -36,10 +36,10 @@ export default function BusinessImpact() {
               <React.Fragment key={s}>
                 <Reveal
                   delay={i * 0.04}
-                  className={`rounded-[14px] border px-5 py-3.5 font-outfit font-semibold text-[15px] ${
+                  className={`rounded-[16px] border px-5 py-3.5 font-outfit font-semibold text-[15px] ${
                     turn
                       ? "border-primary bg-primary-lightest text-primary"
-                      : "border-[#e3e7f1] bg-[#f6f7fb] text-[#0e1a3c]"
+                      : "border-[#e9ecf7] bg-[#f7f8fd] text-[#0b1533]"
                   }`}
                 >
                   {s}
@@ -70,7 +70,7 @@ export default function BusinessImpact() {
             ["Engagement", "People who feel financially supported feel valued."],
             ["Retention", "Financial wellbeing is now table stakes in a serious benefits offer."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.06} className="rounded-[18px] border border-[#ffffff24] bg-[#ffffff0f] p-5 sm:p-[22px]">
+            <Reveal key={h} delay={i * 0.06} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-5 sm:p-[22px]">
               <h3 className="font-outfit font-semibold text-[18px] b2b-on-dark-h mb-[7px]">{h}</h3>
               <p className="font-jakarta text-[14.5px] leading-[1.55] b2b-on-dark-soft">{p}</p>
             </Reveal>
@@ -94,9 +94,9 @@ export default function BusinessImpact() {
             ["Measurable", "Adoption and engagement reported from day one."],
             ["Targeted", "Aimed squarely at a documented workforce risk."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.05} className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-6 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0e1a3c] mb-[7px]">{h}</h3>
-              <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3f4a63]">{p}</p>
+            <Reveal key={h} delay={i * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-[7px]">{h}</h3>
+              <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468]">{p}</p>
             </Reveal>
           ))}
         </div>

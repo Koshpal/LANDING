@@ -42,7 +42,7 @@ export default function FinancialWellness() {
         <SectionHead dark eyebrow="What it's made of" title="Six components, plus confidence." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]">
           {COMPONENTS.map(([h, p], i) => (
-            <Reveal key={h} delay={(i % 3) * 0.05} className="rounded-[18px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
+            <Reveal key={h} delay={(i % 3) * 0.05} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
               <h3 className="font-outfit font-semibold text-[17px] b2b-on-dark-h mb-1.5">{h}</h3>
               <p className="font-jakarta text-[14px] leading-[1.55] b2b-on-dark-soft">{p}</p>
             </Reveal>
@@ -62,9 +62,9 @@ export default function FinancialWellness() {
             ["It's contextual", "The lesson on restructuring a loan appears when a loan does."],
             ["It's measurable", "Adoption and engagement are visible from day one."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.05} className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-6 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[17px] text-[#0e1a3c] mb-1.5">{h}</h3>
-              <p className="font-jakarta text-[14px] leading-[1.55] text-[#3f4a63]">{p}</p>
+            <Reveal key={h} delay={i * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+              <h3 className="font-outfit font-semibold text-[17px] text-[#0b1533] mb-1.5">{h}</h3>
+              <p className="font-jakarta text-[14px] leading-[1.55] text-[#3a4468]">{p}</p>
             </Reveal>
           ))}
         </div>
@@ -81,7 +81,7 @@ export default function FinancialWellness() {
             "Aggregated reporting for HR — never individual detail",
           ].map((s, i, arr) => (
             <React.Fragment key={s}>
-              <Reveal delay={i * 0.05} className="rounded-[14px] border border-[#ffffff24] bg-[#ffffff0f] px-5 py-3.5 font-outfit font-semibold text-[15px] b2b-on-dark-h">
+              <Reveal delay={i * 0.05} className="rounded-[16px] border border-[#ffffff24] bg-[#ffffff0f] px-5 py-3.5 font-outfit font-semibold text-[15px] b2b-on-dark-h">
                 {s}
               </Reveal>
               {i < arr.length - 1 && (
@@ -104,9 +104,9 @@ export default function FinancialWellness() {
             ["Privacy & security", "What HR can and can't see.", "/security"],
             ["HR guides", "Evaluate providers, launch a program, measure ROI.", "/resources/guides"],
           ].map(([h, p, to], i) => (
-            <Reveal key={h} delay={i * 0.05} className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-6 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[16px] text-[#0e1a3c] mb-1.5">{h}</h3>
-              <p className="font-jakarta text-[13.5px] leading-[1.55] text-[#3f4a63] mb-3">{p}</p>
+            <Reveal key={h} delay={i * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
+              <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mb-1.5">{h}</h3>
+              <p className="font-jakarta text-[13.5px] leading-[1.55] text-[#3a4468] mb-3">{p}</p>
               <CTA to={to} variant="ghost">Read</CTA>
             </Reveal>
           ))}

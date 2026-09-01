@@ -38,6 +38,7 @@ const Calculator = lazy(() => import('./pages/Calculator'))
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+      <div className="b2b-topbar" />
       <ScrollToTop />
       <CustomCursor />
       <Suspense fallback={<div className="min-h-screen bg-[#fff]" />}>

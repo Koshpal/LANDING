@@ -42,19 +42,19 @@ export default function PlatformSection() {
         </p>
       </div>
 
-      <Reveal className="grid md:grid-cols-2 border border-[#e3e7f1] rounded-[18px] overflow-hidden bg-[#fff] b2b-shadow">
+      <Reveal className="grid md:grid-cols-2 border border-[#e9ecf7] rounded-[20px] overflow-hidden bg-[#fff] b2b-shadow">
         <div className="font-outfit font-bold text-[14px] tracking-[0.04em] uppercase px-[22px] py-[18px] bg-primary-lightest text-primary">
           For employees
         </div>
-        <div className="font-outfit font-bold text-[14px] tracking-[0.04em] uppercase px-[22px] py-[18px] bg-[#e4f3f5] text-secondary-darkest border-t md:border-t-0 md:border-l border-[#e3e7f1]">
+        <div className="font-outfit font-bold text-[14px] tracking-[0.04em] uppercase px-[22px] py-[18px] bg-[#e4f3f5] text-secondary-darkest border-t md:border-t-0 md:border-l border-[#e9ecf7]">
           For the company
         </div>
-        <ul className="b2b-check grid gap-[11px] content-start px-[22px] pt-2.5 pb-[22px] font-jakarta text-[15px] text-[#3f4a63] border-t border-[#e3e7f1]">
+        <ul className="b2b-check grid gap-[11px] content-start px-[22px] pt-2.5 pb-[22px] font-jakarta text-[15px] text-[#3a4468] border-t border-[#e9ecf7]">
           {EMP.map((t) => (
             <li key={t}>{t}</li>
           ))}
         </ul>
-        <ul className="b2b-check b2b-check-teal grid gap-[11px] content-start px-[22px] pt-2.5 pb-[22px] font-jakarta text-[15px] text-[#3f4a63] border-t border-[#e3e7f1] md:border-l">
+        <ul className="b2b-check b2b-check-teal grid gap-[11px] content-start px-[22px] pt-2.5 pb-[22px] font-jakarta text-[15px] text-[#3a4468] border-t border-[#e9ecf7] md:border-l">
           {CO.map((t) => (
             <li key={t}>{t}</li>
           ))}

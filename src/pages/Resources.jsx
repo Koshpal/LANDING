@@ -34,9 +34,9 @@ export default function Resources() {
         <SectionHead eyebrow="Browse" title="Four places to start." />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px]">
           {HUB.map(([h, p, to], i) => (
-            <Reveal key={h} delay={(i % 2) * 0.05} className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-6 b2b-shadow flex flex-col">
-              <h3 className="font-outfit font-semibold text-[19px] text-[#0e1a3c] mb-1.5">{h}</h3>
-              <p className="font-jakarta text-[14px] leading-[1.55] text-[#3f4a63] mb-4 flex-1">{p}</p>
+            <Reveal key={h} delay={(i % 2) * 0.05} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow flex flex-col">
+              <h3 className="font-outfit font-semibold text-[19px] text-[#0b1533] mb-1.5">{h}</h3>
+              <p className="font-jakarta text-[14px] leading-[1.55] text-[#3a4468] mb-4 flex-1">{p}</p>
               <CTA to={to} variant="ghost">Open</CTA>
             </Reveal>
           ))}
@@ -50,7 +50,7 @@ export default function Resources() {
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link
                 to={`/blog/${p.slug}`}
-                className="block rounded-[18px] border border-[#ffffff24] bg-[#ffffff0f] p-6 h-full hover:bg-[#ffffff1a] transition"
+                className="block rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6 h-full hover:bg-[#ffffff1a] transition"
               >
                 <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-[#8fa6e8]">
                   {p.category}

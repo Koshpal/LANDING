@@ -20,7 +20,7 @@ import FinalCta from "../components/b2b/FinalCta";
 
 export default function Home() {
   return (
-    <div className="min-h-screen font-jakarta bg-[#fff] text-[#3f4a63]">
+    <div className="min-h-screen font-jakarta bg-[#fff] text-[#3a4468]">
       <Seo
         path="/"
         title=""

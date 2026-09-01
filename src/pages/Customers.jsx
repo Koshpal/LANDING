@@ -31,7 +31,7 @@ export default function Customers() {
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="h-10 min-w-[140px] grid place-items-center rounded-lg border border-dashed border-[#d3d9e8] bg-[#f6f7fb] font-outfit font-semibold text-[11px] tracking-[0.06em] text-[#8a95b4]"
+              className="h-10 min-w-[140px] grid place-items-center rounded-lg border border-dashed border-[#dfe3f2] bg-[#f7f8fd] font-outfit font-semibold text-[11px] tracking-[0.06em] text-[#8a95b4]"
             >
               CLIENT LOGO
             </div>
@@ -43,7 +43,7 @@ export default function Customers() {
         <SectionHead dark eyebrow="Case studies" title="Challenge → solution → outcome." />
         <div className="grid md:grid-cols-3 gap-[18px]">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Reveal key={i} delay={i * 0.06} className="rounded-[18px] border border-dashed border-[#ffffff24] bg-[#ffffff0f] p-6 min-h-[220px] flex flex-col justify-between">
+            <Reveal key={i} delay={i * 0.06} className="rounded-[20px] border border-dashed border-[#ffffff24] bg-[#ffffff0f] p-6 min-h-[220px] flex flex-col justify-between">
               <span className="font-outfit font-semibold text-[12px] tracking-[0.1em] uppercase b2b-on-dark-muted">
                 Case study {i + 1}
               </span>
@@ -59,7 +59,7 @@ export default function Customers() {
         <SectionHead eyebrow="In their words" title="Quotes from HR teams and employees." />
         <div className="grid md:grid-cols-2 gap-[18px]">
           {Array.from({ length: 4 }).map((_, i) => (
-            <Reveal key={i} delay={(i % 2) * 0.06} className="rounded-[18px] border border-dashed border-[#d3d9e8] bg-[#f6f7fb] p-6 min-h-[150px]">
+            <Reveal key={i} delay={(i % 2) * 0.06} className="rounded-[20px] border border-dashed border-[#dfe3f2] bg-[#f7f8fd] p-6 min-h-[150px]">
               <span className="font-outfit font-semibold text-[12px] tracking-[0.1em] uppercase text-[#8a95b4]">
                 {i % 2 === 0 ? "HR / People team" : "Employee"} quote
               </span>

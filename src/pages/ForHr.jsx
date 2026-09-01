@@ -41,7 +41,7 @@ export default function ForHr() {
             <Reveal
               key={p}
               delay={i * 0.04}
-              className="flex gap-3 items-start rounded-[14px] border border-[#e3e7f1] bg-[#f6f7fb] px-5 py-3.5 font-jakarta text-[15px] text-[#3f4a63]"
+              className="flex gap-3 items-start rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] px-5 py-3.5 font-jakarta text-[15px] text-[#3a4468]"
             >
               <span className="text-primary font-bold mt-0.5">—</span>
               {p}

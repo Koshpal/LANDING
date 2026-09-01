@@ -38,13 +38,13 @@ export default function EmailCapture({
 
   const inputCls = dark
     ? "bg-[#ffffff0f] border-[#ffffff24] text-[#fff] placeholder:text-[#ffffff66]"
-    : "bg-[#fff] border-[#d3d9e8] text-[#0e1a3c] placeholder:text-[#9aa6c8]";
-  const noteCls = dark ? "text-[#93a1cf]" : "text-[#6b7590]";
+    : "bg-[#fff] border-[#dfe3f2] text-[#0b1533] placeholder:text-[#9aa6c8]";
+  const noteCls = dark ? "text-[#93a1cf]" : "text-[#6b7597]";
 
   if (state === "done") {
     return (
       <div
-        className={`rounded-[14px] border px-5 py-4 font-jakarta text-[14px] ${
+        className={`rounded-[16px] border px-5 py-4 font-jakarta text-[14px] ${
           dark ? "border-[#ffffff24] bg-[#ffffff0f] text-[#c3cdec]" : "border-[#cfe6d8] bg-[#eef7f1] text-[#1b7a43]"
         }`}
       >
@@ -56,7 +56,7 @@ export default function EmailCapture({
   return (
     <form onSubmit={submit} className="max-w-[440px]">
       {label && (
-        <label className={`block font-outfit font-semibold text-[13px] mb-2 ${dark ? "text-[#c3cdec]" : "text-[#0e1a3c]"}`}>
+        <label className={`block font-outfit font-semibold text-[13px] mb-2 ${dark ? "text-[#c3cdec]" : "text-[#0b1533]"}`}>
           {label}
         </label>
       )}

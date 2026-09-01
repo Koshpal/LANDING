@@ -17,10 +17,10 @@ export default function WhoItsFor() {
           <Reveal
             key={h}
             delay={(i % 4) * 0.05}
-            className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-[22px]"
+            className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-[22px]"
           >
-            <h3 className="font-outfit font-semibold text-[16px] text-[#0e1a3c] mb-1.5">{h}</h3>
-            <p className="font-jakarta text-[13.5px] leading-[1.55] text-[#3f4a63]">{p}</p>
+            <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mb-1.5">{h}</h3>
+            <p className="font-jakarta text-[13.5px] leading-[1.55] text-[#3a4468]">{p}</p>
           </Reveal>
         ))}
       </div>

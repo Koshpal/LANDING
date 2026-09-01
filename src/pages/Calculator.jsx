@@ -10,7 +10,7 @@ const INR = (n) =>
 function Field({ label, children, hint }) {
   return (
     <label className="block">
-      <span className="font-outfit font-semibold text-[13px] text-[#0e1a3c]">{label}</span>
+      <span className="font-outfit font-semibold text-[13px] text-[#0b1533]">{label}</span>
       <div className="mt-1.5">{children}</div>
       {hint && <span className="font-jakarta text-[11.5px] text-[#8a95b4] mt-1 block">{hint}</span>}
     </label>
@@ -53,7 +53,7 @@ export default function Calculator() {
           {/* inputs */}
           <div className="grid gap-6">
             <div>
-              <h2 className="font-outfit font-bold text-[20px] text-[#0e1a3c] mb-4">Your workforce</h2>
+              <h2 className="font-outfit font-bold text-[20px] text-[#0b1533] mb-4">Your workforce</h2>
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Number of employees">
                   <input
@@ -61,7 +61,7 @@ export default function Calculator() {
                     min="1"
                     value={employees}
                     onChange={(e) => setEmployees(Math.max(1, +e.target.value || 0))}
-                    className="w-full rounded-lg border border-[#d3d9e8] px-3.5 py-2.5 font-jakarta text-[14px] text-[#0e1a3c] outline-none focus:border-primary"
+                    className="w-full rounded-lg border border-[#dfe3f2] px-3.5 py-2.5 font-jakarta text-[14px] text-[#0b1533] outline-none focus:border-primary"
                   />
                 </Field>
                 <Field label="Average annual salary (₹)">
@@ -71,15 +71,15 @@ export default function Calculator() {
                     step="10000"
                     value={salary}
                     onChange={(e) => setSalary(Math.max(0, +e.target.value || 0))}
-                    className="w-full rounded-lg border border-[#d3d9e8] px-3.5 py-2.5 font-jakarta text-[14px] text-[#0e1a3c] outline-none focus:border-primary"
+                    className="w-full rounded-lg border border-[#dfe3f2] px-3.5 py-2.5 font-jakarta text-[14px] text-[#0b1533] outline-none focus:border-primary"
                   />
                 </Field>
               </div>
             </div>
 
             <div>
-              <h2 className="font-outfit font-bold text-[20px] text-[#0e1a3c] mb-1">Model assumptions</h2>
-              <p className="font-jakarta text-[12.5px] text-[#6b7590] mb-4">
+              <h2 className="font-outfit font-bold text-[20px] text-[#0b1533] mb-1">Model assumptions</h2>
+              <p className="font-jakarta text-[12.5px] text-[#6b7597] mb-4">
                 Defaults are conservative placeholders. Adjust them to match your own data or research you trust.
               </p>
               <div className="grid gap-5">
@@ -97,28 +97,28 @@ export default function Calculator() {
           </div>
 
           {/* results */}
-          <div className="rounded-[18px] border border-[#e3e7f1] bg-[#f6f7fb] p-6 sm:p-8 b2b-shadow lg:sticky lg:top-28">
-            <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7590]">
+          <div className="rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 sm:p-8 b2b-shadow lg:sticky lg:top-28">
+            <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7597]">
               Illustrative estimate
             </p>
             <div className="grid gap-5 mt-5">
               <div>
-                <div className="font-outfit font-extrabold text-[34px] text-[#0e1a3c] tracking-[-0.02em]">
+                <div className="font-outfit font-extrabold text-[34px] text-[#0b1533] tracking-[-0.02em]">
                   <Counter value={Math.round(stressedCount)} />
                 </div>
-                <div className="font-jakarta text-[13px] text-[#6b7590]">employees likely to be carrying money stress</div>
+                <div className="font-jakarta text-[13px] text-[#6b7597]">employees likely to be carrying money stress</div>
               </div>
               <div>
-                <div className="font-outfit font-extrabold text-[34px] text-[#0e1a3c] tracking-[-0.02em]">
+                <div className="font-outfit font-extrabold text-[34px] text-[#0b1533] tracking-[-0.02em]">
                   <Counter value={Math.round(annualHours)} />
                 </div>
-                <div className="font-jakarta text-[13px] text-[#6b7590]">distracted working hours across the year</div>
+                <div className="font-jakarta text-[13px] text-[#6b7597]">distracted working hours across the year</div>
               </div>
               <div>
                 <div className="font-outfit font-extrabold text-[34px] text-secondary-darkest tracking-[-0.02em]">
                   {INR(productivityValue)}
                 </div>
-                <div className="font-jakarta text-[13px] text-[#6b7590]">
+                <div className="font-jakarta text-[13px] text-[#6b7597]">
                   approximate annual value of that lost focus
                 </div>
               </div>

@@ -10,10 +10,10 @@ const fmtDate = (d) =>
 
 function Block({ block }) {
   if (block.t === "h")
-    return <h2 className="font-outfit font-bold text-[22px] sm:text-[26px] text-[#0e1a3c] mt-10 mb-3 tracking-[-0.01em]">{block.c}</h2>;
+    return <h2 className="font-outfit font-bold text-[22px] sm:text-[26px] text-[#0b1533] mt-10 mb-3 tracking-[-0.01em]">{block.c}</h2>;
   if (block.t === "list")
     return (
-      <ul className="grid gap-2 my-4 font-jakarta text-[16px] leading-[1.7] text-[#3f4a63]">
+      <ul className="grid gap-2 my-4 font-jakarta text-[16px] leading-[1.7] text-[#3a4468]">
         {block.c.map((li) => (
           <li key={li} className="flex gap-3">
             <span className="text-primary font-bold mt-0.5">·</span>
@@ -22,7 +22,7 @@ function Block({ block }) {
         ))}
       </ul>
     );
-  return <p className="font-jakarta text-[16px] leading-[1.75] text-[#3f4a63] my-4">{block.c}</p>;
+  return <p className="font-jakarta text-[16px] leading-[1.75] text-[#3a4468] my-4">{block.c}</p>;
 }
 
 export default function BlogPost() {
@@ -47,10 +47,10 @@ export default function BlogPost() {
               · {fmtDate(post.date)} · {post.readMins} min read
             </span>
           </div>
-          <h1 className="font-outfit font-bold text-[30px] sm:text-[40px] leading-[1.12] tracking-[-0.02em] text-[#0e1a3c] mt-3">
+          <h1 className="font-outfit font-bold text-[30px] sm:text-[40px] leading-[1.12] tracking-[-0.02em] text-[#0b1533] mt-3">
             {post.title}
           </h1>
-          <p className="font-jakarta text-[18px] leading-[1.6] text-[#6b7590] mt-4">{post.excerpt}</p>
+          <p className="font-jakarta text-[18px] leading-[1.6] text-[#6b7597] mt-4">{post.excerpt}</p>
         </div>
       </article>
 
@@ -60,11 +60,11 @@ export default function BlogPost() {
             <Block key={i} block={b} />
           ))}
 
-          <div className="mt-12 rounded-[16px] border border-[#e3e7f1] bg-[#f6f7fb] p-6">
-            <p className="font-outfit font-semibold text-[15px] text-[#0e1a3c]">
+          <div className="mt-12 rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-6">
+            <p className="font-outfit font-semibold text-[15px] text-[#0b1533]">
               Koshpal delivers each part of this in one platform.
             </p>
-            <p className="font-jakarta text-[14px] text-[#3f4a63] mt-1 mb-3">
+            <p className="font-jakarta text-[14px] text-[#3a4468] mt-1 mb-3">
               Tracking, education and coaching for employees; adoption and outcomes for HR.
             </p>
             <Link
@@ -78,7 +78,7 @@ export default function BlogPost() {
 
           {more.length > 0 && (
             <div className="mt-12">
-              <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7590] mb-4">
+              <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7597] mb-4">
                 Keep reading
               </p>
               <div className="grid sm:grid-cols-2 gap-[18px]">
@@ -86,12 +86,12 @@ export default function BlogPost() {
                   <Link
                     key={p.slug}
                     to={`/blog/${p.slug}`}
-                    className="rounded-[16px] border border-[#e3e7f1] bg-[#f6f7fb] p-5 hover:-translate-y-0.5 transition"
+                    className="rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-5 hover:-translate-y-0.5 transition"
                   >
                     <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-secondary-darkest">
                       {p.category}
                     </span>
-                    <h3 className="font-outfit font-semibold text-[15px] text-[#0e1a3c] mt-1.5 leading-snug">{p.title}</h3>
+                    <h3 className="font-outfit font-semibold text-[15px] text-[#0b1533] mt-1.5 leading-snug">{p.title}</h3>
                   </Link>
                 ))}
               </div>

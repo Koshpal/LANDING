@@ -17,12 +17,12 @@ const HR = [
 /* Stylised HR-dashboard mock. Replace with a real screenshot when available. */
 function DashboardShot() {
   return (
-    <div className="border border-[#e3e7f1] rounded-[18px] bg-[#fff] b2b-shadow-lg overflow-hidden">
-      <div className="flex items-center gap-1.5 px-3.5 py-3 border-b border-[#e3e7f1] bg-[#f0f2f8]">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#d3d9e8]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#d3d9e8]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#d3d9e8]" />
-        <span className="font-outfit font-semibold text-[11px] text-[#6b7590] ml-2">Koshpal · HR dashboard</span>
+    <div className="border border-[#e9ecf7] rounded-[20px] bg-[#fff] b2b-shadow-lg overflow-hidden">
+      <div className="flex items-center gap-1.5 px-3.5 py-3 border-b border-[#e9ecf7] bg-[#f1f3fb]">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#dfe3f2]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#dfe3f2]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#dfe3f2]" />
+        <span className="font-outfit font-semibold text-[11px] text-[#6b7597] ml-2">Koshpal · HR dashboard</span>
       </div>
       <div className="p-5 grid gap-4">
         <div className="grid grid-cols-3 gap-3">
@@ -31,14 +31,14 @@ function DashboardShot() {
             ["78%", "Activated"],
             ["64%", "Monthly engagement"],
           ].map(([n, l]) => (
-            <div key={l} className="bg-[#f0f2f8] border border-[#e3e7f1] rounded-xl p-3.5">
-              <div className="font-outfit font-extrabold text-[26px] tracking-[-0.02em] tabular-nums text-[#0e1a3c]">{n}</div>
-              <div className="font-outfit font-medium text-[11.5px] text-[#6b7590] mt-[3px]">{l}</div>
+            <div key={l} className="bg-[#f1f3fb] border border-[#e9ecf7] rounded-xl p-3.5">
+              <div className="font-outfit font-extrabold text-[26px] tracking-[-0.02em] tabular-nums text-[#0b1533]">{n}</div>
+              <div className="font-outfit font-medium text-[11.5px] text-[#6b7597] mt-[3px]">{l}</div>
             </div>
           ))}
         </div>
-        <div className="border border-[#e3e7f1] rounded-xl p-4">
-          <div className="flex justify-between font-outfit font-semibold text-[12.5px] text-[#6b7590] mb-3">
+        <div className="border border-[#e9ecf7] rounded-xl p-4">
+          <div className="flex justify-between font-outfit font-semibold text-[12.5px] text-[#6b7597] mb-3">
             <span>Financial-wellness index</span>
             <span>last 8 months</span>
           </div>
@@ -70,9 +70,9 @@ function DashboardShot() {
             ["1.9k", "Goals set"],
             ["+11pt", "Index vs. launch"],
           ].map(([n, l]) => (
-            <div key={l} className="bg-[#f0f2f8] border border-[#e3e7f1] rounded-xl p-3.5">
-              <div className="font-outfit font-extrabold text-[26px] tracking-[-0.02em] tabular-nums text-[#0e1a3c]">{n}</div>
-              <div className="font-outfit font-medium text-[11.5px] text-[#6b7590] mt-[3px]">{l}</div>
+            <div key={l} className="bg-[#f1f3fb] border border-[#e9ecf7] rounded-xl p-3.5">
+              <div className="font-outfit font-extrabold text-[26px] tracking-[-0.02em] tabular-nums text-[#0b1533]">{n}</div>
+              <div className="font-outfit font-medium text-[11.5px] text-[#6b7597] mt-[3px]">{l}</div>
             </div>
           ))}
         </div>

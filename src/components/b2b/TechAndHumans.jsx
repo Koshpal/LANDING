@@ -26,7 +26,7 @@ export default function TechAndHumans() {
                   className="w-[46px] h-[46px] rounded-full border-2 border-[#14245c] grid place-items-center font-outfit font-bold text-[14px] text-primary"
                   style={{
                     marginLeft: i ? -12 : 0,
-                    background: "linear-gradient(135deg, #eff1f8, #e1e6f5)",
+                    background: "linear-gradient(135deg, #eff1f8, #e5e9fb)",
                   }}
                 >
                   {a}

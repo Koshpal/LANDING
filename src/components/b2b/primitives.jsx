@@ -3,21 +3,21 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import JellyGrid from "./JellyGrid";
 
-/* Shared building blocks for the B2B homepage.
-   Keeps the section components small and the visual language consistent. */
+/* Shared building blocks for the B2B site. Everything routes through these, so
+   restyling them lifts every page. */
 
 const ease = [0.2, 0.8, 0.2, 1];
 
-/** Scroll-into-view fade/rise. Mirrors the framer-motion usage elsewhere in the app. */
-export function Reveal({ children, delay = 0, y = 18, className = "", as = "div" }) {
+/** Scroll-into-view reveal — soft fade + rise + blur-in. */
+export function Reveal({ children, delay = 0, y = 20, className = "", as = "div" }) {
   const M = motion[as] || motion.div;
   return (
     <M
       className={`b2b-reveal ${className}`}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-      transition={{ duration: 0.6, ease, delay }}
+      initial={{ opacity: 0, y, filter: "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 0.7, ease, delay }}
     >
       {children}
     </M>
@@ -28,21 +28,21 @@ export function Eyebrow({ children, className = "" }) {
   return <span className={`b2b-eyebrow ${className}`}>{children}</span>;
 }
 
-/** eyebrow + h2 + optional lede, with consistent spacing */
+/** eyebrow + h2 + optional lede, consistent rhythm. */
 export function SectionHead({ eyebrow, title, lede, dark = false, className = "" }) {
   return (
-    <div className={`max-w-[62ch] mb-9 sm:mb-12 lg:mb-14 ${className}`}>
+    <div className={`max-w-[64ch] mb-10 sm:mb-14 lg:mb-16 ${className}`}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h2
-        className="font-outfit font-bold tracking-[-0.02em] leading-[1.12] mt-4 text-[28px] sm:text-[36px] lg:text-[46px]"
-        style={{ color: dark ? "#f4f6fd" : "var(--b2b-ink)" }}
+        className="font-outfit font-bold tracking-[-0.028em] leading-[1.08] mt-5 text-[30px] sm:text-[40px] lg:text-[48px]"
+        style={{ color: dark ? "#f6f8ff" : "var(--b2b-ink)" }}
       >
         {title}
       </h2>
       {lede && (
         <p
-          className="font-jakarta mt-4 text-[17px] sm:text-[19px] leading-[1.6] max-w-[60ch]"
-          style={{ color: dark ? "#b9c3e6" : "var(--b2b-ink-2)" }}
+          className="font-jakarta mt-4 text-[17px] sm:text-[19px] leading-[1.65] max-w-[60ch]"
+          style={{ color: dark ? "#c3cdec" : "var(--b2b-ink-2)" }}
         >
           {lede}
         </p>
@@ -51,45 +51,67 @@ export function SectionHead({ eyebrow, title, lede, dark = false, className = ""
   );
 }
 
-/** Pill button. `variant`: "solid" | "ghost". Renders <Link> for internal, <a> for hash/external. */
+/** Pill button. `variant`: "solid" | "ghost". */
 export function CTA({ to = "/demo", children, variant = "solid", size = "md", dark = false, className = "" }) {
   const base =
-    "inline-flex items-center gap-2 font-outfit font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap";
-  const sizes = { md: "px-[22px] py-[13px] text-[15.5px]", lg: "px-7 py-4 text-[16.5px]" };
+    "relative inline-flex items-center justify-center gap-2 font-outfit font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap active:scale-[0.97] overflow-hidden";
+  const sizes = { md: "px-[22px] py-[13px] text-[15px]", lg: "px-8 py-[17px] text-[16px]" };
   const solid =
-    "bg-primary text-[#fff] border-[1.5px] border-primary shadow-[0_6px_18px_rgba(51,78,172,0.28)] hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(51,78,172,0.34)]";
+    "text-[#fff] shadow-[0_10px_28px_-8px_rgba(51,78,172,0.6)] hover:shadow-[0_16px_40px_-8px_rgba(51,78,172,0.72)] hover:-translate-y-0.5";
   const ghost = dark
-    ? "bg-transparent text-[#fff] border-[1.5px] border-[#ffffff4d] hover:bg-[#ffffff1a] hover:border-[#ffffff99]"
-    : "bg-transparent text-primary border-[1.5px] border-[#d3d9e8] hover:bg-primary-lightest hover:border-primary";
+    ? "text-[#fff] border border-[#ffffff33] bg-[#ffffff0f] backdrop-blur-sm hover:bg-[#ffffff1f] hover:border-[#ffffff66]"
+    : "text-primary border border-[#dfe3f2] bg-[#fff] hover:border-primary hover:bg-primary-lightest";
   const cls = `${base} ${sizes[size]} ${variant === "solid" ? solid : ghost} ${className}`;
   const isHash = typeof to === "string" && to.startsWith("#");
   const isExternal = typeof to === "string" && /^https?:/.test(to);
+
+  const inner = (
+    <>
+      {variant === "solid" && (
+        <>
+          <span
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(100deg,#334eac 0%,#4459c9 52%,#3a86b0 100%)" }}
+          />
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-1/2 opacity-50"
+            style={{ background: "linear-gradient(180deg,rgba(255,255,255,0.4),transparent)" }}
+          />
+        </>
+      )}
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+    </>
+  );
+
+  const style = variant === "solid" ? { color: "#fff" } : undefined;
   if (isHash || isExternal) {
     return (
-      <a href={to} className={cls} style={variant === "solid" ? { color: "#fff" } : undefined}>
-        {children}
+      <a href={to} className={cls} style={style}>
+        {inner}
       </a>
     );
   }
   return (
-    <Link to={to} className={cls} style={variant === "solid" ? { color: "#fff" } : undefined}>
-      {children}
+    <Link to={to} className={cls} style={style}>
+      {inner}
     </Link>
   );
 }
 
-/** Standard section wrapper: vertical rhythm + centered max-width container. */
+/** Standard section wrapper: vertical rhythm + centered container. */
 export function Section({ id, children, tone = "white", className = "" }) {
   const tones = {
     white: "bg-[#fff]",
-    tint: "bg-[#f6f7fb] border-y border-[#e3e7f1]",
-    surface2: "bg-[#f0f2f8] border-y border-[#e3e7f1]",
-    dark: "b2b-dark-band text-[#f4f6fd]",
+    tint: "bg-[#f7f8fd] border-y border-[#e9ecf7]",
+    surface2: "bg-[#f1f3fb] border-y border-[#e9ecf7]",
+    dark: "b2b-dark-band text-[#f6f8ff]",
   };
   return (
-    <section id={id} className={`${tones[tone]} py-16 sm:py-24 lg:py-32 ${className}`}>
-      {tone === "dark" && <JellyGrid color="255, 255, 255" opacity={0.2} />}
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">{children}</div>
+    <section id={id} className={`relative ${tones[tone]} py-20 sm:py-28 lg:py-32 ${className}`}>
+      {tone === "dark" && <JellyGrid color="255, 255, 255" opacity={0.16} />}
+      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">{children}</div>
     </section>
   );
 }

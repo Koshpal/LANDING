@@ -22,8 +22,8 @@ export default function Placeholder({
   const brand = tone === "brand";
   const frame = brand
     ? "border-[#ffffff24] bg-[#0f1d4a]"
-    : "border-[#e3e7f1] bg-[#f6f7fb]";
-  const bar = brand ? "bg-[#ffffff1a] border-[#ffffff14]" : "bg-[#eef1f8] border-[#e3e7f1]";
+    : "border-[#e9ecf7] bg-[#f7f8fd]";
+  const bar = brand ? "bg-[#ffffff1a] border-[#ffffff14]" : "bg-[#eef1f8] border-[#e9ecf7]";
   const dot = brand ? "bg-[#ffffff40]" : "bg-[#c9d2e6]";
   const text = brand ? "text-[#c3cdec]" : "text-[#8a95b4]";
   const sub = brand ? "text-[#8fa0cf]" : "text-[#a9b2ca]";

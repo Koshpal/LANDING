@@ -36,10 +36,10 @@ export default function ResourcesReports() {
         />
         <div className="grid lg:grid-cols-[1fr_360px] gap-10 items-start">
           <div>
-            <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7590] mb-4">
+            <p className="font-outfit font-semibold text-[12px] tracking-[0.14em] uppercase text-[#6b7597] mb-4">
               In production
             </p>
-            <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3f4a63] max-w-[520px]">
+            <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468] max-w-[520px]">
               {["Financial stress by salary band and life stage", "Emergency savings and debt exposure", "UPI and everyday spending behaviour", "Financial literacy and investment confidence", "What employees want from a financial wellness benefit"].map((t) => (
                 <li key={t} className="flex gap-2"><span className="text-primary font-bold">·</span>{t}</li>
               ))}
@@ -56,7 +56,7 @@ export default function ResourcesReports() {
         <SectionHead dark eyebrow="Pipeline" title="What's next." />
         <div className="grid md:grid-cols-3 gap-[18px]">
           {UPCOMING.map(([h, p, status], i) => (
-            <Reveal key={h} delay={i * 0.06} className="rounded-[18px] border border-[#ffffff24] bg-[#ffffff0f] p-6 flex flex-col">
+            <Reveal key={h} delay={i * 0.06} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6 flex flex-col">
               <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-[#8fa6e8] mb-2">{status}</span>
               <h3 className="font-outfit font-semibold text-[16px] b2b-on-dark-h mb-1.5 leading-snug">{h}</h3>
               <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p}</p>

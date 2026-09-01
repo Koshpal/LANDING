@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
@@ -39,11 +39,29 @@ const MENU = [
 export default function Navbar() {
   const [open, setOpen] = useState(false); // mobile sheet
   const [menu, setMenu] = useState(null); // open desktop dropdown label
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
-      <div className="max-w-6xl px-3 pt-2 mx-auto pointer-events-auto sm:px-4 md:px-6 sm:pt-3 md:pt-4">
-        <div className="mx-auto rounded-full bg-white/95 backdrop-blur-lg px-4 sm:px-5 md:px-6 flex items-center justify-between shadow-2xl ring-1 ring-grey-lightest border border-white-light h-[56px] sm:h-[64px] md:h-[70px]">
+      <div
+        className={`max-w-6xl px-3 mx-auto pointer-events-auto sm:px-4 md:px-6 transition-all duration-300 ${
+          scrolled ? "pt-1.5 sm:pt-2" : "pt-3 sm:pt-4 md:pt-5"
+        }`}
+      >
+        <div
+          className={`mx-auto rounded-full backdrop-blur-xl px-4 sm:px-5 md:px-6 flex items-center justify-between border border-[#e9ecf7] transition-all duration-300 ${
+            scrolled
+              ? "bg-white/90 h-[52px] sm:h-[58px] md:h-[62px] shadow-[0_10px_40px_-12px_rgba(11,21,51,0.28)]"
+              : "bg-white/80 h-[56px] sm:h-[64px] md:h-[70px] shadow-[0_8px_30px_-14px_rgba(11,21,51,0.22)]"
+          }`}
+        >
           {/* logo */}
           <Link to="/" className="flex items-center flex-shrink-0 h-full gap-2">
             <img
@@ -74,7 +92,7 @@ export default function Navbar() {
                     />
                   </button>
                   <div
-                    className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] min-w-[248px] rounded-2xl bg-[#fff] border border-[#e3e7f1] shadow-[0_20px_50px_rgba(14,26,60,0.16)] p-2 transition-all duration-150 origin-top ${
+                    className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] min-w-[252px] rounded-2xl bg-[#fff] border border-[#e9ecf7] shadow-[0_24px_60px_-12px_rgba(11,21,51,0.22)] p-2 transition-all duration-150 origin-top ${
                       menu === m.label
                         ? "opacity-100 visible translate-y-0"
                         : "opacity-0 invisible -translate-y-1"
@@ -85,7 +103,7 @@ export default function Navbar() {
                         key={it.to}
                         to={it.to}
                         onClick={() => setMenu(null)}
-                        className="block px-3 py-2.5 rounded-xl text-[14px] text-[#3f4a63] hover:bg-primary-lightest hover:text-primary transition"
+                        className="block px-3.5 py-2.5 rounded-xl text-[14px] text-[#3a4468] hover:bg-primary-lightest hover:text-primary transition"
                       >
                         {it.label}
                       </Link>
@@ -114,8 +132,8 @@ export default function Navbar() {
             </Link>
             <Link
               to="/demo"
-              className="bg-primary text-[#fff] font-semibold font-outfit px-4 xl:px-6 py-2 xl:py-2.5 text-sm xl:text-[15px] rounded-full shadow-md hover:bg-primary-darkest transition-all cursor-pointer whitespace-nowrap"
-              style={{ color: "#FFFFFF" }}
+              className="relative overflow-hidden text-[#fff] font-semibold font-outfit px-5 xl:px-6 py-2.5 text-sm xl:text-[15px] rounded-full shadow-[0_10px_28px_-10px_rgba(51,78,172,0.7)] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-10px_rgba(51,78,172,0.8)] transition-all cursor-pointer whitespace-nowrap"
+              style={{ color: "#FFFFFF", background: "linear-gradient(100deg,#334eac,#4459c9 55%,#3a86b0)" }}
             >
               Book a demo
             </Link>

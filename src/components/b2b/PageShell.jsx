@@ -8,10 +8,24 @@ import { Reveal, CTA } from "./primitives";
 
 const ease = [0.2, 0.8, 0.2, 1];
 
-/** Full page frame: SEO + fixed navbar + main + white footer. */
+/** Soft brand glow blob behind a dark hero / CTA band. */
+function GlowOrb({ className = "" }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute -z-0 blur-[90px] opacity-70 ${className}`}
+      style={{
+        background:
+          "radial-gradient(closest-side, rgba(93,110,246,0.55), rgba(23,162,184,0.28) 60%, transparent)",
+      }}
+    />
+  );
+}
+
+/** Full page frame: top gradient bar + SEO + fixed navbar + main + footer. */
 export function PageShell({ seo, children }) {
   return (
-    <div className="min-h-screen font-jakarta bg-[#fff] text-[#3f4a63]">
+    <div className="min-h-screen font-jakarta bg-[#fff] text-[#3a4468]">
       {seo && <Seo {...seo} />}
       <Navbar />
       <main>{children}</main>
@@ -20,29 +34,30 @@ export function PageShell({ seo, children }) {
   );
 }
 
-/** Standard interior-page hero — navy band, jelly grid, big headline + CTAs. */
+/** Standard interior-page hero — dark mesh band, glow, jelly grid, big headline. */
 export function PageHero({ eyebrow, title, sub, primary, secondary }) {
   return (
-    <section className="b2b-dark-band relative overflow-hidden pt-32 sm:pt-36 lg:pt-44 pb-16 sm:pb-24 lg:pb-28">
-      <JellyGrid color="255, 255, 255" opacity={0.2} />
+    <section className="b2b-dark-band relative overflow-hidden pt-36 sm:pt-40 lg:pt-48 pb-20 sm:pb-28 lg:pb-32">
+      <JellyGrid color="255, 255, 255" opacity={0.16} />
+      <GlowOrb className="w-[560px] h-[560px] top-[-160px] right-[-120px]" />
       <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
-          className="max-w-[54ch]"
+          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.7, ease }}
+          className="max-w-[58ch]"
         >
           {eyebrow && <span className="b2b-eyebrow">{eyebrow}</span>}
-          <h1 className="font-outfit font-bold tracking-[-0.03em] leading-[1.08] mt-4 text-[32px] sm:text-[46px] lg:text-[58px] b2b-on-dark-h">
+          <h1 className="font-outfit font-bold tracking-[-0.035em] leading-[1.04] mt-5 text-[34px] sm:text-[52px] lg:text-[62px] text-[#f6f8ff]">
             {title}
           </h1>
           {sub && (
-            <p className="font-jakarta mt-5 text-[16.5px] sm:text-[20px] leading-[1.6] max-w-[52ch] b2b-on-dark-soft">
+            <p className="font-jakarta mt-6 text-[17px] sm:text-[20px] leading-[1.6] max-w-[54ch] text-[#c3cdec]">
               {sub}
             </p>
           )}
           {(primary || secondary) && (
-            <div className="flex flex-wrap gap-3.5 items-center mt-8">
+            <div className="flex flex-wrap gap-3.5 items-center mt-9">
               {primary && (
                 <CTA to={primary.to || "/demo"} size="lg">
                   {primary.label || "Book a demo"}
@@ -64,16 +79,17 @@ export function PageHero({ eyebrow, title, sub, primary, secondary }) {
 /** Reusable closing call-to-action band. */
 export function PageCta({ eyebrow = "Get started", title, sub, primary, secondary }) {
   return (
-    <section className="b2b-dark-band relative overflow-hidden py-20 sm:py-28 text-center">
-      <JellyGrid color="255, 255, 255" opacity={0.2} />
-      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16 grid gap-6 justify-items-center">
-        <Reveal className="grid gap-6 justify-items-center">
+    <section className="b2b-dark-band relative overflow-hidden py-24 sm:py-32 text-center">
+      <JellyGrid color="255, 255, 255" opacity={0.16} />
+      <GlowOrb className="w-[520px] h-[520px] left-1/2 -translate-x-1/2 top-[-140px]" />
+      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16 grid gap-7 justify-items-center">
+        <Reveal className="grid gap-7 justify-items-center">
           <span className="b2b-eyebrow">{eyebrow}</span>
-          <h2 className="font-outfit font-bold tracking-[-0.02em] leading-[1.12] text-[28px] sm:text-[38px] lg:text-[46px] b2b-on-dark-h max-w-[24ch]">
+          <h2 className="font-outfit font-bold tracking-[-0.03em] leading-[1.08] text-[30px] sm:text-[42px] lg:text-[50px] text-[#f6f8ff] max-w-[22ch]">
             {title}
           </h2>
           {sub && (
-            <p className="font-jakarta text-[16px] leading-[1.6] b2b-on-dark-soft max-w-[52ch]">{sub}</p>
+            <p className="font-jakarta text-[17px] leading-[1.6] text-[#c3cdec] max-w-[52ch]">{sub}</p>
           )}
           <div className="flex flex-wrap gap-3.5 justify-center">
             <CTA to={primary?.to || "/demo"} size="lg">
@@ -101,16 +117,17 @@ export function CardGrid({ items, cols = 3, tone = "light" }) {
       : cols === 4
       ? "sm:grid-cols-2 lg:grid-cols-4"
       : "sm:grid-cols-2 lg:grid-cols-3";
-  const card =
-    tone === "onDark"
-      ? "bg-[#fff] border border-[#e3e7f1]"
-      : "bg-[#f6f7fb] border border-[#e3e7f1]";
+  const card = tone === "onDark" ? "bg-[#fff]" : "bg-[#f7f8fd]";
   return (
     <div className={`grid grid-cols-1 ${grid} gap-[18px]`}>
       {items.map((it, i) => (
-        <Reveal key={it.h} delay={(i % 4) * 0.05} className={`${card} rounded-[18px] p-6 b2b-shadow`}>
-          <h3 className="font-outfit font-semibold text-[17.5px] text-[#0e1a3c] mb-[7px]">{it.h}</h3>
-          <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3f4a63]">{it.p}</p>
+        <Reveal
+          key={it.h}
+          delay={(i % 4) * 0.05}
+          className={`b2b-card b2b-card-hover ${card} p-6`}
+        >
+          <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-[7px]">{it.h}</h3>
+          <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468]">{it.p}</p>
         </Reveal>
       ))}
     </div>
@@ -125,10 +142,10 @@ export function FlowChain({ steps, dark = false }) {
         <React.Fragment key={s}>
           <Reveal
             delay={i * 0.04}
-            className={`rounded-[14px] border px-5 py-3.5 font-outfit font-semibold text-[15px] ${
+            className={`rounded-[16px] border px-5 py-4 font-outfit font-semibold text-[15px] ${
               dark
-                ? "border-[#ffffff24] bg-[#ffffff0f] b2b-on-dark-h"
-                : "border-[#e3e7f1] bg-[#f6f7fb] text-[#0e1a3c]"
+                ? "border-[#ffffff24] bg-[#ffffff0f] text-[#f6f8ff]"
+                : "border-[#e9ecf7] bg-[#f7f8fd] text-[#0b1533]"
             }`}
           >
             {s}

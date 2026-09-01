@@ -45,7 +45,7 @@ export default function ImpactSection() {
           <Reveal
             key={lab}
             delay={(i % 4) * 0.05}
-            className="rounded-[18px] border border-[#ffffff24] bg-[#ffffff0f] p-[22px]"
+            className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-[22px]"
           >
             <div className="font-outfit font-extrabold text-[30px] tracking-[-0.02em] text-[#ffffff4d]">—</div>
             <div className="font-outfit font-semibold text-[13.5px] b2b-on-dark-h mt-1.5">{lab}</div>

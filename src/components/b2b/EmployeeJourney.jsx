@@ -26,14 +26,14 @@ export default function EmployeeJourney() {
             <Reveal
               key={s.t}
               delay={i * 0.05}
-              className="flex gap-4 rounded-[16px] border border-[#e3e7f1] bg-[#f6f7fb] p-4 sm:p-5"
+              className="flex gap-4 rounded-[16px] border border-[#e9ecf7] bg-[#f7f8fd] p-4 sm:p-5"
             >
               <span className="flex-none w-7 h-7 rounded-full bg-primary text-[#fff] grid place-items-center font-outfit font-bold text-[13px]">
                 {i + 1}
               </span>
               <div>
-                <h3 className="font-outfit font-semibold text-[16px] text-[#0e1a3c]">{s.t}</h3>
-                <p className="font-jakarta text-[14px] leading-[1.55] text-[#3f4a63] mt-1">{s.d}</p>
+                <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533]">{s.t}</h3>
+                <p className="font-jakarta text-[14px] leading-[1.55] text-[#3a4468] mt-1">{s.d}</p>
               </div>
             </Reveal>
           ))}

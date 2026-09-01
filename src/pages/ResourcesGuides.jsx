@@ -47,7 +47,7 @@ export default function ResourcesGuides() {
         />
         <div className="grid lg:grid-cols-[1fr_360px] gap-10 items-start">
           <div>
-            <ol className="grid gap-2 font-jakarta text-[14.5px] text-[#3f4a63] max-w-[560px]">
+            <ol className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468] max-w-[560px]">
               {TOC.map((t, i) => (
                 <li key={t} className="flex gap-3">
                   <span className="font-outfit font-bold text-primary tabular-nums">{String(i + 1).padStart(2, "0")}</span>
@@ -67,7 +67,7 @@ export default function ResourcesGuides() {
         <SectionHead dark eyebrow="More guides" title="Focused deep-dives." />
         <div className="grid md:grid-cols-3 gap-[18px]">
           {MORE.map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.06} className="rounded-[18px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
+            <Reveal key={h} delay={i * 0.06} className="rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
               <h3 className="font-outfit font-semibold text-[16px] b2b-on-dark-h mb-1.5 leading-snug">{h}</h3>
               <p className="font-jakarta text-[13px] leading-[1.5] b2b-on-dark-soft">{p}</p>
               <span className="inline-block mt-3 font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-[#8fa6e8]">

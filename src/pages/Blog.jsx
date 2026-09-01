@@ -38,7 +38,7 @@ export default function Blog() {
               className={`font-outfit font-semibold text-[13px] px-4 py-2 rounded-full border transition ${
                 cat === c
                   ? "bg-primary text-[#fff] border-primary"
-                  : "bg-[#fff] text-[#3f4a63] border-[#d3d9e8] hover:border-primary hover:text-primary"
+                  : "bg-[#fff] text-[#3a4468] border-[#dfe3f2] hover:border-primary hover:text-primary"
               }`}
               style={cat === c ? { color: "#fff" } : undefined}
             >
@@ -51,10 +51,10 @@ export default function Blog() {
           {shown.map((p, i) => {
             const card = (
               <div
-                className={`h-full rounded-[18px] border p-6 flex flex-col ${
+                className={`h-full rounded-[20px] border p-6 flex flex-col ${
                   p.published
-                    ? "bg-[#f6f7fb] border-[#e3e7f1] b2b-shadow hover:-translate-y-1 hover:shadow-[0_2px_6px_rgba(14,26,60,0.06),0_30px_60px_rgba(14,26,60,0.12)] transition-all duration-200"
-                    : "bg-[#f6f7fb] border-dashed border-[#d3d9e8]"
+                    ? "bg-[#f7f8fd] border-[#e9ecf7] b2b-shadow hover:-translate-y-1 hover:shadow-[0_2px_6px_rgba(14,26,60,0.06),0_30px_60px_rgba(14,26,60,0.12)] transition-all duration-200"
+                    : "bg-[#f7f8fd] border-dashed border-[#dfe3f2]"
                 }`}
               >
                 <div className="flex items-center gap-2 mb-3">
@@ -69,10 +69,10 @@ export default function Blog() {
                     <span className="font-jakarta text-[11px] text-[#a9b2ca]">· coming soon</span>
                   )}
                 </div>
-                <h3 className={`font-outfit font-semibold text-[18px] leading-snug mb-2 ${p.published ? "text-[#0e1a3c]" : "text-[#8a95b4]"}`}>
+                <h3 className={`font-outfit font-semibold text-[18px] leading-snug mb-2 ${p.published ? "text-[#0b1533]" : "text-[#8a95b4]"}`}>
                   {p.title}
                 </h3>
-                <p className={`font-jakarta text-[13.5px] leading-[1.55] flex-1 ${p.published ? "text-[#3f4a63]" : "text-[#a9b2ca]"}`}>
+                <p className={`font-jakarta text-[13.5px] leading-[1.55] flex-1 ${p.published ? "text-[#3a4468]" : "text-[#a9b2ca]"}`}>
                   {p.excerpt}
                 </p>
                 {p.published && (

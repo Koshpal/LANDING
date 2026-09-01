@@ -40,12 +40,12 @@ export default function Platform() {
         />
         <div className="grid gap-[18px] lg:grid-cols-3">
           {LAYERS.map((l, i) => (
-            <Reveal key={l.h} delay={(i % 3) * 0.06} className="bg-[#f6f7fb] border border-[#e3e7f1] rounded-[18px] p-7 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[21px] leading-[1.2] text-[#0e1a3c] mb-2">{l.h}</h3>
-              <p className="font-jakarta text-[15px] leading-[1.6] text-[#3f4a63]">{l.p}</p>
+            <Reveal key={l.h} delay={(i % 3) * 0.06} className="bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-7 b2b-shadow">
+              <h3 className="font-outfit font-semibold text-[21px] leading-[1.2] text-[#0b1533] mb-2">{l.h}</h3>
+              <p className="font-jakarta text-[15px] leading-[1.6] text-[#3a4468]">{l.p}</p>
               <div className="flex flex-wrap gap-1.5 mt-4">
                 {l.tags.map((t) => (
-                  <span key={t} className="font-outfit font-medium text-[12px] text-[#6b7590] bg-[#fff] border border-[#e3e7f1] px-2.5 py-1 rounded-full">
+                  <span key={t} className="font-outfit font-medium text-[12px] text-[#6b7597] bg-[#fff] border border-[#e9ecf7] px-2.5 py-1 rounded-full">
                     {t}
                   </span>
                 ))}
@@ -69,7 +69,7 @@ export default function Platform() {
             "HR dashboard — adoption, engagement, outcomes",
           ].map((s, i, arr) => (
             <React.Fragment key={s}>
-              <Reveal delay={i * 0.05} className="rounded-[14px] border border-[#ffffff24] bg-[#ffffff0f] px-5 py-3.5 font-outfit font-semibold text-[15px] b2b-on-dark-h">
+              <Reveal delay={i * 0.05} className="rounded-[16px] border border-[#ffffff24] bg-[#ffffff0f] px-5 py-3.5 font-outfit font-semibold text-[15px] b2b-on-dark-h">
                 {s}
               </Reveal>
               {i < arr.length - 1 && (
