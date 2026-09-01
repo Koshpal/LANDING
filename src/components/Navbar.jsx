@@ -13,12 +13,23 @@ const MENU = [
       { label: "Financial coaching", to: "/financial-coaching" },
     ],
   },
-  { label: "For HR", to: "/for-hr" },
   {
-    label: "Why Koshpal",
+    label: "Solutions",
     items: [
+      { label: "For HR & People teams", to: "/for-hr" },
       { label: "Business impact", to: "/business-impact" },
       { label: "Privacy & security", to: "/security" },
+      { label: "What is financial wellness?", to: "/financial-wellness" },
+    ],
+  },
+  {
+    label: "Resources",
+    items: [
+      { label: "Resource hub", to: "/resources" },
+      { label: "Reports & research", to: "/resources/reports" },
+      { label: "HR guides", to: "/resources/guides" },
+      { label: "Blog", to: "/blog" },
+      { label: "Impact calculator", to: "/calculator" },
     ],
   },
   { label: "Customers", to: "/customers" },

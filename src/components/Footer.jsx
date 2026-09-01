@@ -7,18 +7,24 @@ const COL_PLATFORM = [
   { label: "Financial education", to: "/financial-education" },
   { label: "Financial coaching", to: "/financial-coaching" },
   { label: "For HR & People teams", to: "/for-hr" },
-];
-
-const COL_WHY = [
   { label: "Business impact", to: "/business-impact" },
   { label: "Privacy & security", to: "/security" },
-  { label: "Customers", to: "/customers" },
-  { label: "Book a demo", to: "/demo" },
+];
+
+const COL_RESOURCES = [
+  { label: "Resource hub", to: "/resources" },
+  { label: "What is financial wellness?", to: "/financial-wellness" },
+  { label: "Reports & research", to: "/resources/reports" },
+  { label: "HR guides", to: "/resources/guides" },
+  { label: "Blog", to: "/blog" },
+  { label: "Impact calculator", to: "/calculator" },
 ];
 
 const COL_COMPANY = [
   { label: "About", to: "/about" },
+  { label: "Customers", to: "/customers" },
   { label: "Contact", to: "/contact" },
+  { label: "Book a demo", to: "/demo" },
   { label: "Privacy policy", to: "/privacy-policy" },
   { label: "Terms of service", to: "/terms-of-service" },
 ];
@@ -187,11 +193,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* why koshpal */}
+          {/* resources */}
           <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Why Koshpal</h4>
+            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Resources</h4>
             <ul className="space-y-2.5">
-              {COL_WHY.map((item) => (
+              {COL_RESOURCES.map((item) => (
                 <li key={item.to}>
                   <Link to={item.to} className={linkCls}>{item.label}</Link>
                 </li>
