@@ -37,7 +37,7 @@ export function PageShell({ seo, children }) {
 /** Standard interior-page hero — dark mesh band, glow, jelly grid, big headline. */
 export function PageHero({ eyebrow, title, sub, primary, secondary }) {
   return (
-    <section className="b2b-dark-band relative overflow-hidden pt-32 sm:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-24">
+    <section className="b2b-dark-band relative overflow-hidden pt-28 sm:pt-32 lg:pt-36 pb-14 sm:pb-16 lg:pb-20">
       <JellyGrid color="255, 255, 255" opacity={0.16} />
       <GlowOrb className="w-[560px] h-[560px] top-[-160px] right-[-120px]" />
       <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">
@@ -57,7 +57,7 @@ export function PageHero({ eyebrow, title, sub, primary, secondary }) {
             </p>
           )}
           {(primary || secondary) && (
-            <div className="flex flex-wrap gap-3.5 items-center mt-9">
+            <div className="flex flex-wrap gap-3.5 items-center mt-8">
               {primary && (
                 <CTA to={primary.to || "/demo"} size="lg">
                   {primary.label || "Book a demo"}
@@ -79,7 +79,7 @@ export function PageHero({ eyebrow, title, sub, primary, secondary }) {
 /** Reusable closing call-to-action band. */
 export function PageCta({ eyebrow = "Get started", title, sub, primary, secondary }) {
   return (
-    <section className="b2b-dark-band relative overflow-hidden py-16 sm:py-24 text-center">
+    <section className="b2b-dark-band relative overflow-hidden py-14 sm:py-20 text-center">
       <JellyGrid color="255, 255, 255" opacity={0.16} />
       <GlowOrb className="w-[520px] h-[520px] left-1/2 -translate-x-1/2 top-[-140px]" />
       <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16 grid gap-6 justify-items-center">

@@ -117,7 +117,7 @@ function PlatformComposite() {
 
 export default function Hero() {
   return (
-    <section className="b2b-dark-band relative overflow-hidden pt-32 sm:pt-36 lg:pt-44 pb-20 sm:pb-28">
+    <section className="b2b-dark-band relative overflow-hidden pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20">
       <JellyGrid color="255, 255, 255" opacity={0.16} />
       <div
         aria-hidden="true"
