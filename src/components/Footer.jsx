@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const NAV = [
-  { label: "Platform", id: "platform" },
-  { label: "How it works", id: "how" },
-  { label: "Why Koshpal", id: "why" },
-  { label: "Who it's for", id: "who" },
-  { label: "Privacy", id: "privacy" },
+  { label: "Platform", to: "/platform" },
+  { label: "Employee financial wellness", to: "/employee-financial-wellness" },
+  { label: "Financial coaching", to: "/financial-coaching" },
+  { label: "For HR & People teams", to: "/for-hr" },
+  { label: "Business impact", to: "/business-impact" },
+  { label: "Privacy & security", to: "/security" },
 ];
 
 export default function Footer() {
@@ -168,23 +169,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5">
               {NAV.map((item) => (
-                <li key={item.id}>
-                  {isHomePage ? (
-                    <a
-                      href={`#${item.id}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        smoothScrollTo(item.id);
-                      }}
-                      className={linkCls}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link to={`/#${item.id}`} className={linkCls}>
-                      {item.label}
-                    </Link>
-                  )}
+                <li key={item.to}>
+                  <Link to={item.to} className={linkCls}>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
               <li>

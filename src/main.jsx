@@ -15,6 +15,14 @@ import CustomCursor from './components/b2b/CustomCursor'
 import './index.css'
 import VideoWatchPage from './pages/VideoWatch'
 
+// B2B interior pages (Phase 1)
+import EmployeeFinancialWellness from './pages/EmployeeFinancialWellness'
+import Platform from './pages/Platform'
+import ForHr from './pages/ForHr'
+import BusinessImpact from './pages/BusinessImpact'
+import FinancialCoaching from './pages/FinancialCoaching'
+import Security from './pages/Security'
+
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -22,6 +30,12 @@ createRoot(document.getElementById('root')).render(
       <CustomCursor />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/employee-financial-wellness" element={<EmployeeFinancialWellness />} />
+        <Route path="/platform" element={<Platform />} />
+        <Route path="/for-hr" element={<ForHr />} />
+        <Route path="/business-impact" element={<BusinessImpact />} />
+        <Route path="/financial-coaching" element={<FinancialCoaching />} />
+        <Route path="/security" element={<Security />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/contact" element={<ContactPage />} />
@@ -35,5 +49,3 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>
 )
-
-

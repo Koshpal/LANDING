@@ -1,49 +1,38 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 
-const LINKS = [
-  { label: "Platform", id: "platform" },
-  { label: "How it works", id: "how" },
-  { label: "Why Koshpal", id: "why" },
-  { label: "Privacy", id: "privacy" },
-  { label: "Who it's for", id: "who" },
+/* Primary nav. Dropdowns on desktop, flattened groups in the mobile sheet. */
+const MENU = [
+  {
+    label: "Platform",
+    items: [
+      { label: "Overview", to: "/platform" },
+      { label: "Employee financial wellness", to: "/employee-financial-wellness" },
+      { label: "Financial coaching", to: "/financial-coaching" },
+    ],
+  },
+  { label: "For HR", to: "/for-hr" },
+  {
+    label: "Why Koshpal",
+    items: [
+      { label: "Business impact", to: "/business-impact" },
+      { label: "Privacy & security", to: "/security" },
+    ],
+  },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
-
-  const smoothScrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    setOpen(false);
-  };
-
-  const NavItem = ({ id, label, className }) =>
-    isHomePage ? (
-      <a
-        href={`#${id}`}
-        onClick={(e) => {
-          e.preventDefault();
-          smoothScrollTo(id);
-        }}
-        className={className}
-      >
-        {label}
-      </a>
-    ) : (
-      <Link to={`/#${id}`} className={className} onClick={() => setOpen(false)}>
-        {label}
-      </Link>
-    );
+  const [open, setOpen] = useState(false); // mobile sheet
+  const [menu, setMenu] = useState(null); // open desktop dropdown label
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
       <div className="max-w-6xl px-3 pt-2 mx-auto pointer-events-auto sm:px-4 md:px-6 sm:pt-3 md:pt-4">
         <div className="mx-auto rounded-full bg-white/95 backdrop-blur-lg px-4 sm:px-5 md:px-6 flex items-center justify-between shadow-2xl ring-1 ring-grey-lightest border border-white-light h-[56px] sm:h-[64px] md:h-[70px]">
           {/* logo */}
-          <Link to="/" className="flex items-center flex-shrink-0 h-full gap-2 sm:gap-3">
+          <Link to="/" className="flex items-center flex-shrink-0 h-full gap-2">
             <img
               src="/assets/logo-removebg.png"
               alt="Koshpal"
@@ -51,28 +40,62 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* desktop links */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-black-light font-outfit font-medium px-2 py-2.5 text-sm xl:text-[15px] flex-1 justify-center">
-            {LINKS.map((l) => (
-              <NavItem
-                key={l.id}
-                {...l}
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              />
-            ))}
-            <Link
-              to="/contact"
-              className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-            >
-              Contact
-            </Link>
+          {/* desktop menu */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center font-outfit font-medium text-sm xl:text-[15px] text-black-light">
+            {MENU.map((m) =>
+              m.items ? (
+                <div
+                  key={m.label}
+                  className="relative"
+                  onMouseEnter={() => setMenu(m.label)}
+                  onMouseLeave={() => setMenu(null)}
+                >
+                  <button
+                    className="flex items-center gap-1 px-3 py-2 rounded-full transition hover:text-primary whitespace-nowrap"
+                    onClick={() => setMenu(menu === m.label ? null : m.label)}
+                  >
+                    {m.label}
+                    <ChevronDown
+                      size={15}
+                      className={`transition-transform ${menu === m.label ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] min-w-[248px] rounded-2xl bg-[#fff] border border-[#e3e7f1] shadow-[0_20px_50px_rgba(14,26,60,0.16)] p-2 transition-all duration-150 origin-top ${
+                      menu === m.label
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-1"
+                    }`}
+                  >
+                    {m.items.map((it) => (
+                      <Link
+                        key={it.to}
+                        to={it.to}
+                        onClick={() => setMenu(null)}
+                        className="block px-3 py-2.5 rounded-xl text-[14px] text-[#3f4a63] hover:bg-primary-lightest hover:text-primary transition"
+                      >
+                        {it.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={m.to}
+                  to={m.to}
+                  className="px-3 py-2 rounded-full transition hover:text-primary whitespace-nowrap"
+                >
+                  {m.label}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* desktop CTAs */}
           <div className="items-center flex-shrink-0 hidden gap-2 lg:flex">
             <Link
               to="/login"
-              className="px-3 py-2 text-sm font-semibold transition-all rounded-full cursor-pointer font-outfit text-black-light hover:text-primary whitespace-nowrap"
+              className="px-3 py-2 text-sm font-semibold transition rounded-full font-outfit text-black-light hover:text-primary whitespace-nowrap"
             >
               Login
             </Link>
@@ -108,29 +131,41 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* mobile dropdown */}
+        {/* mobile sheet */}
         <div
-          className={`lg:hidden mt-3 bg-white/95 backdrop-blur-lg rounded-2xl text-black-light shadow-lg border border-grey-lightest transition-all duration-300 ease-in-out origin-top ${
-            open
-              ? "opacity-100 scale-y-100 max-h-[520px] p-5 space-y-3"
-              : "opacity-0 scale-y-0 max-h-0 p-0 border-0"
+          className={`lg:hidden mt-3 bg-white/95 backdrop-blur-lg rounded-2xl text-black-light shadow-lg border border-grey-lightest transition-all duration-300 ease-in-out origin-top overflow-hidden ${
+            open ? "opacity-100 scale-y-100 max-h-[640px] p-5" : "opacity-0 scale-y-0 max-h-0 p-0 border-0"
           }`}
         >
-          {LINKS.map((l) => (
-            <NavItem
-              key={l.id}
-              {...l}
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-            />
-          ))}
-          <Link
-            to="/contact"
-            className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-            onClick={() => setOpen(false)}
-          >
-            Contact
-          </Link>
-          <div className="pt-3 space-y-2">
+          {MENU.map((m) =>
+            m.items ? (
+              <div key={m.label} className="py-2 border-b border-grey-lightest last:border-0">
+                <div className="font-outfit font-bold text-[11px] tracking-[0.12em] uppercase text-[#6b7590] mb-1">
+                  {m.label}
+                </div>
+                {m.items.map((it) => (
+                  <Link
+                    key={it.to}
+                    to={it.to}
+                    onClick={() => setOpen(false)}
+                    className="block py-2 text-[15px] font-medium font-outfit hover:text-primary touch-manipulation"
+                  >
+                    {it.label}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <Link
+                key={m.to}
+                to={m.to}
+                onClick={() => setOpen(false)}
+                className="block py-3 text-base font-medium font-outfit hover:text-primary touch-manipulation border-b border-grey-lightest last:border-0"
+              >
+                {m.label}
+              </Link>
+            )
+          )}
+          <div className="pt-4 space-y-2">
             <Link
               to="/demo"
               onClick={() => setOpen(false)}
