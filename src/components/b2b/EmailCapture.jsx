@@ -10,7 +10,7 @@ const FREE_DOMAINS = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "i
 export default function EmailCapture({
   label = "Get it by email",
   cta = "Send it to me",
-  note = "Work email only. No spam — one email with the download link.",
+  note = "Work email only.",
   dark = false,
 }) {
   const [email, setEmail] = useState("");
@@ -31,9 +31,10 @@ export default function EmailCapture({
       setMsg("Please use your work email.");
       return;
     }
-    // TODO: replace with real submission
-    setState("done");
-    setMsg("Thanks — we'll email the link to you shortly.");
+    // No delivery destination is configured yet (see CONTENT_NEEDED.md #18).
+    // Do not claim success until a real submission exists.
+    setState("error");
+    setMsg("This download isn't available yet. Please email koshpal@koshpal.com and we'll send it to you.");
   };
 
   const inputCls = dark

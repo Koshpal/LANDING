@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import ScrollToTop from './components/ScrollToTop'
@@ -47,7 +47,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/employee-financial-wellness" element={<EmployeeFinancialWellness />} />
           <Route path="/platform" element={<Platform />} />
           <Route path="/for-hr" element={<ForHr />} />
-          <Route path="/solutions/hr" element={<ForHr />} />
+          <Route path="/solutions/hr" element={<Navigate to="/for-hr" replace />} />
           <Route path="/business-impact" element={<BusinessImpact />} />
           <Route path="/financial-coaching" element={<FinancialCoaching />} />
           <Route path="/financial-education" element={<FinancialEducation />} />

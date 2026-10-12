@@ -7,7 +7,7 @@ import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
 export default function Customers() {
   return (
     <PageShell
-      seo={{
+      seo={{ noindex: true,
         title: "Customers",
         path: "/customers",
         description:

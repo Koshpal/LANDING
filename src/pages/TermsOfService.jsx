@@ -11,10 +11,12 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Helmet } from "react-helmet";
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <Helmet><meta name="robots" content="noindex, follow" /></Helmet>
       <div className="pt-16"></div>
       <Navbar />
 

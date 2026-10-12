@@ -23,6 +23,7 @@ function DashboardShot() {
         <span className="w-2.5 h-2.5 rounded-full bg-[#dfe3f2]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#dfe3f2]" />
         <span className="font-outfit font-semibold text-[11px] text-[#6b7597] ml-2">Koshpal · HR dashboard</span>
+        <span className="ml-auto font-outfit font-bold text-[10.5px] tracking-[0.08em] uppercase px-2 py-[3px] rounded-full bg-[#fff4d6] text-[#7a5200] border border-[#f0d58a]">Sample data</span>
       </div>
       <div className="p-5 grid gap-4">
         <div className="grid grid-cols-3 gap-3">
@@ -64,11 +65,10 @@ function DashboardShot() {
             <circle cx="480" cy="32" r="4" fill="#17A2B8" />
           </svg>
         </div>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {[
             ["312", "Coaching sessions"],
             ["1.9k", "Goals set"],
-            ["+11pt", "Index vs. launch"],
           ].map(([n, l]) => (
             <div key={l} className="bg-[#f1f3fb] border border-[#e9ecf7] rounded-xl p-3.5">
               <div className="font-outfit font-extrabold text-[26px] tracking-[-0.02em] tabular-nums text-[#0b1533]">{n}</div>
@@ -114,7 +114,7 @@ export default function PlatformSplit() {
         <Reveal delay={0.08}>
           <DashboardShot />
           <p className="mt-3 font-jakarta italic text-[12.5px] b2b-on-dark-muted">
-            Placeholder — swap for a real HR-dashboard screenshot.
+            Sample data, shown for illustration. Aggregated views only; no individual employee is ever shown.
           </p>
         </Reveal>
       </div>

@@ -7,22 +7,18 @@ const COL_PLATFORM = [
   { label: "Financial education", to: "/financial-education" },
   { label: "Financial coaching", to: "/financial-coaching" },
   { label: "For HR & People teams", to: "/for-hr" },
-  { label: "Business impact", to: "/business-impact" },
   { label: "Privacy & security", to: "/security" },
 ];
 
 const COL_RESOURCES = [
   { label: "Resource hub", to: "/resources" },
-  { label: "What is financial wellness?", to: "/financial-wellness" },
   { label: "Reports & research", to: "/resources/reports" },
   { label: "HR guides", to: "/resources/guides" },
   { label: "Blog", to: "/blog" },
-  { label: "Impact calculator", to: "/calculator" },
 ];
 
 const COL_COMPANY = [
   { label: "About", to: "/about" },
-  { label: "Customers", to: "/customers" },
   { label: "Contact", to: "/contact" },
   { label: "Book a demo", to: "/demo" },
   { label: "Privacy policy", to: "/privacy-policy" },
@@ -169,16 +165,6 @@ export default function Footer() {
               insights, financial education and expert guidance in one privacy-first platform, with an
               aggregated dashboard for HR.
             </p>
-            <div className="flex gap-2.5 mt-5">
-              {["App Store", "Google Play"].map((b) => (
-                <span
-                  key={b}
-                  className="h-10 min-w-[130px] grid place-items-center rounded-lg border border-[#d3d9e8] bg-[#f6f7fb] font-outfit text-[11px] font-semibold text-[#6b7590]"
-                >
-                  {b}
-                </span>
-              ))}
-            </div>
           </div>
 
           {/* platform */}

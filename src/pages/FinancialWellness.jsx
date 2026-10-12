@@ -15,7 +15,7 @@ const COMPONENTS = [
 export default function FinancialWellness() {
   return (
     <PageShell
-      seo={{
+      seo={{ noindex: true,
         title: "What is Employee Financial Wellness?",
         path: "/financial-wellness",
         description:

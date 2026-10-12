@@ -140,12 +140,10 @@ const ContactPage = () => {
               <span className="font-medium text-sm md:text-base">Let's Talk</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#101828] mb-4">
-              Ready to <span className="text-[#17A2B8]">Transform</span>
-              <br />
-              Your Finances?
+              Get in <span className="text-[#17A2B8]">touch</span>
             </h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Get in touch with our team and discover how Koshpal can help you achieve financial wellness.
+              Questions about Koshpal for your workplace? Write to us.
             </p>
           </div>
 
@@ -160,7 +158,7 @@ const ContactPage = () => {
                 Send us a Message
               </h2>
               <p className="text-gray-600 mb-8">
-                Fill out the form below and we'll get back to you within 24 hours.
+                Fill out the form below and a member of our team will reply by email.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">

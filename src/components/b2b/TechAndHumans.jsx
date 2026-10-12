@@ -19,21 +19,6 @@ export default function TechAndHumans() {
               Koshpal pairs intelligent financial technology with human expertise — continuous digital
               support, plus qualified advisors when a decision actually needs one.
             </p>
-            <div className="flex">
-              {["RS", "AK", "PM", "NV", "+"].map((a, i) => (
-                <span
-                  key={a}
-                  className="w-[46px] h-[46px] rounded-full border-2 border-[#14245c] grid place-items-center font-outfit font-bold text-[14px] text-primary"
-                  style={{
-                    marginLeft: i ? -12 : 0,
-                    background: "linear-gradient(135deg, #eff1f8, #e5e9fb)",
-                  }}
-                >
-                  {a}
-                </span>
-              ))}
-            </div>
-            <p className="font-outfit font-medium text-[13.5px] b2b-on-dark-muted mt-3">Koshpal financial advisors</p>
           </Reveal>
         </div>
       </div>

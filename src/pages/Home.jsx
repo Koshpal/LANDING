@@ -12,12 +12,11 @@ import PlatformSplit from "../components/b2b/PlatformSplit";
 import PrivacySection from "../components/b2b/PrivacySection";
 import ImpactSection from "../components/b2b/ImpactSection";
 import TechAndHumans from "../components/b2b/TechAndHumans";
-import Proof from "../components/b2b/Proof";
 import FinalCta from "../components/b2b/FinalCta";
 
 /* Section tone alternates strictly — no two dark bands adjacent:
    Hero(D) · Trust(W) · Problem(W) · Platform(D) · Journey(W) · Split(D)
-   · Privacy(W) · Impact(W) · Tech(D) · Proof(W) · FinalCta(D) */
+   · Privacy(W) · Impact(W) · Tech(D) · FinalCta(D) */
 export default function Home() {
   return (
     <div className="min-h-screen font-jakarta bg-[#fff] text-[#3a4468]">
@@ -37,7 +36,6 @@ export default function Home() {
         <PrivacySection />
         <ImpactSection />
         <TechAndHumans />
-        <Proof />
         <FinalCta />
       </main>
       <Footer />

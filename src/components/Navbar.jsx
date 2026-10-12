@@ -17,9 +17,7 @@ const MENU = [
     label: "Solutions",
     items: [
       { label: "For HR & People teams", to: "/for-hr" },
-      { label: "Business impact", to: "/business-impact" },
       { label: "Privacy & security", to: "/security" },
-      { label: "What is financial wellness?", to: "/financial-wellness" },
     ],
   },
   {
@@ -29,10 +27,8 @@ const MENU = [
       { label: "Reports & research", to: "/resources/reports" },
       { label: "HR guides", to: "/resources/guides" },
       { label: "Blog", to: "/blog" },
-      { label: "Impact calculator", to: "/calculator" },
     ],
   },
-  { label: "Customers", to: "/customers" },
   { label: "About", to: "/about" },
 ];
 

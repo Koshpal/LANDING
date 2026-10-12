@@ -33,7 +33,7 @@ export default function Calculator() {
 
   return (
     <PageShell
-      seo={{
+      seo={{ noindex: true,
         title: "Financial Stress Impact Calculator",
         path: "/calculator",
         description:

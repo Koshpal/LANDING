@@ -29,7 +29,7 @@ function PlatformComposite() {
       {/* Employee app */}
       <div className={glass}>
         <div className="flex items-center justify-between mb-3">
-          <span className="font-outfit font-bold text-[11px] tracking-[0.12em] uppercase text-[#c3cdec]">Employee app</span>
+          <span className="font-outfit font-bold text-[11px] tracking-[0.12em] uppercase text-[#c3cdec]">Employee app · Sample data</span>
           <span className="w-2 h-2 rounded-full bg-[#3ddc97] shadow-[0_0_0_4px_rgba(61,220,151,0.22)]" />
         </div>
         <div className="flex items-baseline gap-3">
@@ -83,7 +83,7 @@ function PlatformComposite() {
       {/* HR dashboard */}
       <div className={glass}>
         <div className="flex items-center justify-between mb-3">
-          <span className="font-outfit font-bold text-[11px] tracking-[0.12em] uppercase text-[#c3cdec]">HR dashboard</span>
+          <span className="font-outfit font-bold text-[11px] tracking-[0.12em] uppercase text-[#c3cdec]">HR dashboard · Sample data</span>
           <span className="w-2 h-2 rounded-full bg-[#3ddc97] shadow-[0_0_0_4px_rgba(61,220,151,0.22)]" />
         </div>
         <div className="grid grid-cols-3 gap-2.5">
@@ -109,7 +109,7 @@ function PlatformComposite() {
             />
           ))}
         </div>
-        <div className="font-outfit font-medium text-[11px] text-[#8fa0cf] mt-2">Wellness trend — illustrative</div>
+        <div className="font-outfit font-medium text-[11px] text-[#8fa0cf] mt-2">Sample data, aggregated</div>
       </div>
     </div>
   );
@@ -149,13 +149,13 @@ export default function Hero() {
             </motion.p>
             <motion.div {...rise(3)} className="flex flex-wrap gap-3.5 items-center mt-9">
               <CTA to="/demo" size="lg">Book a demo</CTA>
-              <CTA to="/platform" variant="ghost" size="lg" dark>Explore the platform</CTA>
+              <CTA to="#employee-experience" variant="ghost" size="lg" dark>See how it works</CTA>
             </motion.div>
             <motion.div
               {...rise(4)}
               className="flex flex-wrap gap-x-5 gap-y-2 mt-8 font-outfit font-medium text-[13px] text-[#aab6dd]"
             >
-              {["Built for modern HR & People teams", "Privacy-first architecture", "Employee-first experience"].map((t) => (
+              {["Private by design", "No commissions", "No products sold"].map((t) => (
                 <span key={t} className="inline-flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: "linear-gradient(100deg,#9db4ff,#7fe3ef)" }} />
                   {t}

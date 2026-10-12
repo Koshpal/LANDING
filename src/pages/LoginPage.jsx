@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, CheckCircle, User, Users, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:3000/api/v1';
@@ -105,6 +106,8 @@ export default function LoginPage() {
   };
 
   return (
+    <>
+    <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
     <div className="flex min-h-screen" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       {/* Left panel — blue gradient, hidden on mobile */}
       <div
@@ -350,5 +353,6 @@ export default function LoginPage() {
         </motion.div>
       </div>
     </div>
+    </>
   );
 }

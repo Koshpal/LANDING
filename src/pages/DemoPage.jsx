@@ -99,7 +99,7 @@ export default function DemoPage() {
 
         setSubmitStatus({
           type: 'success',
-          message: 'Request sent successfully! We\'ll get back to you soon.'
+          message: 'Thanks, we have your request. A member of the Koshpal team will email you to set up a time.'
         });
 
         setFormData({ firstName: '', lastName: '', email: '', company: '', role: '', message: '' });
@@ -128,11 +128,11 @@ export default function DemoPage() {
               <span className="font-medium text-sm md:text-base">Let's Meet</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#101828] mb-4">
-              Ready to <span className="text-[#17A2B8]">Transform</span>
-              <br /> Your Finances?
+              Book a <span className="text-[#17A2B8]">demo</span>
+              <br /> for your team
             </h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Get in touch with our team and discover how Koshpal can help you achieve financial wellness.
+              See how Koshpal would work for your employees and what HR would see.
             </p>
           </div>
 
@@ -141,7 +141,7 @@ export default function DemoPage() {
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
 
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Request a Demo</h2>
-              <p className="text-gray-600 mb-6">Fill out the form below and we'll get back to you within 24 hours.</p>
+              <p className="text-gray-600 mb-6">Tell us a little about your team and we'll get in touch to set up a time.</p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -218,7 +218,7 @@ export default function DemoPage() {
                   </div>
                   <div>
                     <p className="text-lg font-semibold text-[#fff]">Quick Response</p>
-                    <p className="text-sm text-[#e6eefc]">We'll reach out within 48 hours</p>
+                    <p className="text-sm text-[#e6eefc]">A member of our team will reply by email</p>
                   </div>
                 </div>
 

@@ -14,7 +14,7 @@ const CHAIN = [
 
 export default function BusinessImpact() {
   return (
-    <PageShell seo={{ title: "Business Impact", path: "/business-impact", description: "Financial stress is a documented driver of lost focus, engagement and retention. See how an employee financial wellness program acts on all three — with metrics you can report." }}>
+    <PageShell seo={{ noindex: true, title: "Business Impact", path: "/business-impact", description: "Financial stress is a documented driver of lost focus, engagement and retention. See how an employee financial wellness program acts on all three — with metrics you can report." }}>
       <PageHero
         eyebrow="Business impact"
         title="Financial wellness isn't just a benefit. It's a business strategy."
