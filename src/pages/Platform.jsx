@@ -1,7 +1,7 @@
 import React from "react";
 import { PageShell, PageHero, CtaBand } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal, Eyebrow } from "../components/b2b/primitives";
-import { BudgetCard, RemindersCard, SessionCard, CashFlowCard, GoalsCard } from "../components/b2b/SampleUI";
+import { BudgetCard, RemindersCard, SessionCard, CashFlowCard, GoalsCard, TagsCard, CashOnHandCard } from "../components/b2b/SampleUI";
 import NumberedSteps from "../components/b2b/NumberedSteps";
 import DeviceFrame from "../components/b2b/DeviceFrame";
 import Needs from "../components/b2b/Needs";
@@ -126,6 +126,8 @@ export default function Platform() {
           <div className="grid sm:grid-cols-2 gap-4">
             <CashFlowCard />
             <BudgetCard />
+            <TagsCard />
+            <CashOnHandCard />
           </div>
         </div>
         <div className="mt-4"><Needs kind="PROOF" note="approved high-resolution app screenshots (Budgets, Transactions, Dues & Reminders, Goals, Tags, Cash on Hand, Cash Flow)" /></div>

@@ -17,6 +17,8 @@ import Rollout from "../components/b2b/Rollout";
 import PricingTeaser from "../components/b2b/PricingTeaser";
 import FaqAccordion from "../components/b2b/FaqAccordion";
 import FinalCta from "../components/b2b/FinalCta";
+import ProofDummy from "../components/b2b/ProofDummy";
+import ExpertPanelDummy from "../components/b2b/ExpertPanelDummy";
 import Needs from "../components/b2b/Needs";
 import { HR_FAQ } from "../content/faq";
 
@@ -70,7 +72,9 @@ export default function Home() {
           </Section>
         </SectionTrack>
 
-        <SectionTrack name="rollout"><Rollout /></SectionTrack>
+        <SectionTrack name="experts"><ExpertPanelDummy tone="tint" /></SectionTrack>
+        <SectionTrack name="rollout"><Rollout tone="white" /></SectionTrack>
+        <SectionTrack name="proof"><ProofDummy /></SectionTrack>
         <SectionTrack name="pricing"><PricingTeaser /></SectionTrack>
 
         <SectionTrack name="faq">

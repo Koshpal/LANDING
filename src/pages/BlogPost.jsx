@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { PageShell, PageCta } from "../components/b2b/PageShell";
 import { Section } from "../components/b2b/primitives";
 import Seo from "../components/b2b/Seo";
+import { DummyBadge } from "../components/b2b/Dummy";
 import { POSTS, getPost } from "../content/posts";
 
 const fmtDate = (d) =>
@@ -34,7 +35,7 @@ export default function BlogPost() {
 
   return (
     <PageShell>
-      <Seo title={post.title} path={`/blog/${post.slug}`} description={post.excerpt} />
+      <Seo title={post.title} path={`/blog/${post.slug}`} description={post.excerpt} noindex={!!post.dummy} />
 
       <article className="pt-32 sm:pt-36 lg:pt-40 pb-6 bg-[#fff]">
         <div className="max-w-[720px] mx-auto px-5 sm:px-8">
@@ -47,6 +48,7 @@ export default function BlogPost() {
               · {fmtDate(post.date)} · {post.readMins} min read
             </span>
           </div>
+          {post.dummy && <div className="mt-4"><DummyBadge>Dummy article</DummyBadge></div>}
           <h1 className="font-outfit font-bold text-[30px] sm:text-[40px] leading-[1.12] tracking-[-0.02em] text-[#0b1533] mt-3">
             {post.title}
           </h1>

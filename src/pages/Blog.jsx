@@ -2,7 +2,9 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageShell, PageHero, PageCta } from "../components/b2b/PageShell";
 import { Section, Reveal } from "../components/b2b/primitives";
-import { POSTS } from "../content/posts";
+import { POSTS as ALL_POSTS } from "../content/posts";
+import { SHOW_DUMMY } from "../lib/dummy";
+const POSTS = ALL_POSTS.filter((p) => SHOW_DUMMY || !p.dummy);
 
 const fmtDate = (d) =>
   d ? new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "";

@@ -5,11 +5,13 @@ import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
 import EmailCapture from "../components/b2b/EmailCapture";
 import Needs from "../components/b2b/Needs";
 import { POSTS } from "../content/posts";
+import { DummyBadge } from "../components/b2b/Dummy";
+import { SHOW_DUMMY } from "../lib/dummy";
 
 const fmt = (d) => new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 
 export default function Resources() {
-  const posts = POSTS.filter((p) => p.published);
+  const posts = POSTS.filter((p) => p.published && (SHOW_DUMMY || !p.dummy));
   return (
     <PageShell
       seo={{
@@ -36,7 +38,7 @@ export default function Resources() {
                 to={`/blog/${p.slug}`}
                 className="b2b-card b2b-card-hover bg-[#f7f8fd] p-6 h-full flex flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
               >
-                <span className="font-outfit font-semibold text-[12px] tracking-[0.1em] uppercase text-primary">{p.category}</span>
+                <span className="font-outfit font-semibold text-[12px] tracking-[0.1em] uppercase text-primary flex items-center gap-2">{p.category}{p.dummy && <DummyBadge>Dummy</DummyBadge>}</span>
                 <h3 className="font-outfit font-semibold text-[18px] leading-[1.3] text-[#0b1533] mt-2">{p.title}</h3>
                 <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468] mt-2 flex-1">{p.excerpt}</p>
                 <span className="font-jakarta text-[12.5px] text-[#6b7597] mt-4">{fmt(p.date)} · {p.readMins} min read</span>
@@ -51,8 +53,9 @@ export default function Resources() {
           <div>
             <SectionHead eyebrow="Employer guide" title="Offering financial wellness: a guide for HR." lede="Not ready to talk? Leave your work email and we'll send the guide as soon as it's ready." />
             <Needs kind="PROOF" note="the gated employer guide (PDF) and its approved contents" />
+            {SHOW_DUMMY && <DummyBadge className="mt-3">Dummy guide PDF</DummyBadge>}
           </div>
-          <EmailCapture label="Work email" cta="Notify me" resource="Employer guide" />
+          <EmailCapture label="Work email" cta="Get the guide" resource="Employer guide" downloadHref={SHOW_DUMMY ? "/downloads/employer-guide-dummy.pdf" : undefined} />
         </div>
       </Section>
 

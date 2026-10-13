@@ -29,3 +29,10 @@ Phases follow `PLAN.md`. Each entry says what a visitor now sees and why.
 
 ## Phase B and A
 See git history: seven-link nav, analytics events, safety fixes, noindex on hidden pages.
+
+## Dummy content (2026-10-13)
+Added on request, always visible and labelled "Dummy". Set `VITE_HIDE_DUMMY=true` at build time to remove all of it.
+- Home: fictional partner names, three dummy quotes, three dummy stat blocks (each with a "Dummy source" line), and a dummy expert panel.
+- About: dummy team and expert panel.
+- Platform: Tags and Cash on Hand sample screens.
+- Blog: three dummy articles (marked, `noindex`) and a dummy employer-guide PDF behind the work-email form.

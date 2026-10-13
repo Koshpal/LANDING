@@ -140,3 +140,39 @@ export function CashFlowCard() {
     </Panel>
   );
 }
+
+export function TagsCard() {
+  const tags = [
+    ["#family", 12400],
+    ["#travel", 9800],
+    ["#festival", 6500],
+    ["#health", 3200],
+  ];
+  return (
+    <Panel title="Tags · this quarter">
+      <ul className="grid gap-3">
+        {tags.map(([t, v]) => (
+          <li key={t} className="flex items-center justify-between">
+            <span className="font-outfit font-semibold text-[13.5px] px-3 py-1 rounded-full bg-primary-lightest text-primary">{t}</span>
+            <span className="font-outfit font-bold text-[15px] tabular-nums text-[#0b1533]">{rupee(v)}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 font-jakarta text-[12.5px] text-[#6b7597]">Tags group spending across categories.</p>
+    </Panel>
+  );
+}
+
+export function CashOnHandCard() {
+  return (
+    <Panel title="Cash on hand">
+      <div className="font-outfit font-extrabold text-[32px] tabular-nums text-[#0b1533]">{rupee(4200)}</div>
+      <p className="font-jakarta text-[13.5px] text-[#6b7597] mt-1">In your wallet right now</p>
+      <ul className="mt-4 grid gap-2 font-jakarta text-[13.5px] text-[#3a4468]">
+        <li className="flex justify-between"><span>Auto fare</span><span className="tabular-nums">−{rupee(120)}</span></li>
+        <li className="flex justify-between"><span>Chai and snacks</span><span className="tabular-nums">−{rupee(80)}</span></li>
+        <li className="flex justify-between"><span>ATM withdrawal</span><span className="tabular-nums">+{rupee(2000)}</span></li>
+      </ul>
+    </Panel>
+  );
+}

@@ -15,6 +15,7 @@ export default function EmailCapture({
   note = "Work email only.",
   dark = false,
   resource = "Employer guide",
+  downloadHref,
 }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle"); // idle | sending | error | done
@@ -57,7 +58,7 @@ export default function EmailCapture({
       .then(() => {
         track("resource_submit", { resource, status: "success" });
         setState("done");
-        setMsg("Thanks. We've noted your request and will email it to you as soon as it's ready.");
+        setMsg(downloadHref ? "Thanks. Your download is ready below." : "Thanks. We've noted your request and will email it to you as soon as it's ready.");
       })
       .catch(() => {
         track("resource_submit", { resource, status: "error" });
@@ -79,6 +80,11 @@ export default function EmailCapture({
         }`}
       >
         {msg}
+        {downloadHref && (
+          <a href={downloadHref} download className="block mt-2 font-outfit font-semibold underline">
+            Download the guide (PDF)
+          </a>
+        )}
       </div>
     );
   }

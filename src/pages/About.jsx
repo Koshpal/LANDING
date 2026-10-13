@@ -2,6 +2,9 @@ import React from "react";
 import { PageShell, PageHero, CtaBand } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
 import Needs from "../components/b2b/Needs";
+import { SHOW_DUMMY } from "../lib/dummy";
+import TeamDummy from "../components/b2b/TeamDummy";
+import ExpertPanelDummy from "../components/b2b/ExpertPanelDummy";
 
 export default function About() {
   return (
@@ -68,6 +71,7 @@ export default function About() {
         </p>
       </Section>
 
+      {!SHOW_DUMMY && (
       <Section tone="tint" id="team">
         <SectionHead eyebrow="Team" title="The people behind Koshpal." />
         <Needs kind="PROOF" note="team bios, roles and photos; expert panel names and credentials" />
@@ -76,6 +80,10 @@ export default function About() {
           ask.
         </p>
       </Section>
+      )}
+
+      <TeamDummy tone="white" />
+      <ExpertPanelDummy tone="tint" />
 
       <CtaBand title="Bring financial wellness to your workplace." sub="See how Koshpal would work for your team." secondary={{ to: "/privacy-trust", label: "Privacy and trust" }} />
     </PageShell>
