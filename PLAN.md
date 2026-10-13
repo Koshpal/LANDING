@@ -117,17 +117,13 @@ Design tokens: keep `#334EAC` and the existing token files. New components consu
 
 ## 4. Patterns to apply from the references
 
-**Not yet reviewed live** (needs a browser session; the references are unopened). From the brief, the intended takeaways are below. I'll replace this list with observed specifics before Phase C.
+**Reviewed live in Chrome on 2026-10-13.** Full table in `docs/references/REFERENCE_PATTERNS.md`. Headlines:
 
-| Source | Pattern to verify and apply |
+| Source | Applied to Koshpal |
 |---|---|
-| YML | Hero with two CTAs and three-line value summary under it; logo bar immediately under hero; visible pricing; report lead-magnet |
-| BetterUp | Outcome-led hero; proof early; "one platform, four ways in" for the pillars; Trust & Security as a destination |
-| Mave | One message per screen; generous whitespace; device-framed product imagery; restrained motion |
-
-Decision for you: **may I open these sites in Chrome now and write the observed list?** (Recommended; it takes one short pass and avoids designing from the brief's paraphrase.)
-
----
+| YML | Quiet Login, one filled demo button; hero names the product *and* the human element; price/effort questions answered visibly; warm closing line. Skip: speed/outcome promises, credit-score overlay. |
+| BetterUp | Business outcome in the headline; proof row format "one number, one name, one source"; problem paragraph that names categories of point solutions; three-part product explanation; four capability cards. Skip: ROI numbers, "transformation". |
+| Mave | Calm 7-link nav; one message on the first screen; problem → product → three steps → app → proof → FAQ arc; plain disclaimer of what the product is *not*. Skip: citation walls, percentage "results". |
 
 ## 5. Engineering work
 
@@ -163,7 +159,6 @@ Changelog: `CHANGELOG.md` entry per commit, phrased as "what the visitor now see
 
 1. **Approve this plan** (or mark changes).
 2. **Hero headline:** A (recommended) or B?
-3. **Open the reference sites in Chrome** to write the observed pattern list? (Recommended: yes.)
 4. **Host:** `koshpal.com` or `www.koshpal.com` as canonical?
 5. **Is there a public app link** (App Store / Play)? Until then, no badges.
 6. **Legal text:** who writes Privacy Policy and Terms? Both are launch blockers for a privacy-first brand.
