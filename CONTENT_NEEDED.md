@@ -56,3 +56,16 @@ Needed in `docs/references/` before final copy:
 - YML HR guide (structure only)
 
 Present: `KoshpalPresentationForInvestors.pptx` (in `/Koshpal/documents/`, outside the repo; stats unsourced and not used).
+
+## Added during build (2026-10-13)
+
+| # | Item | Why |
+|---|---|---|
+| 24 | Confirm `public/assets/phone-mock.png` (now `app-home.png`) is a current, approved app screen | Dated 13/05/2022 with sample bank balances; used in the hero and Platform |
+| 25 | Real screens for Budgets, Goals, Dues & Reminders, Cash Flow, Tags | Walkthrough and Platform use coded "Sample data" panels until these arrive |
+| 26 | What the expert can see of an employee's data | Privacy table has no Expert column until confirmed |
+| 27 | Exact "what HR can see" metrics and minimum group size | Dashboard mock is illustrative |
+| 28 | Employer guide PDF | Resources form collects requests by email only |
+| 29 | Privacy Policy and Terms of Service text | Both pages are honest interim notes, `noindex` |
+| 30 | Onboarding steps for employees (invite, sign-in, first session) | Phrased generically in FAQ and For Employees |
+| 31 | Where demo and guide requests should be routed | Both go through client-side EmailJS to koshpal@koshpal.com |

@@ -1,113 +1,156 @@
 import React from "react";
-import { PageShell, PageHero, PageCta, CardGrid } from "../components/b2b/PageShell";
-import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
-import Placeholder from "../components/b2b/Placeholder";
+import { PageShell, PageHero, CtaBand } from "../components/b2b/PageShell";
+import { Section, SectionHead, Reveal, Eyebrow } from "../components/b2b/primitives";
+import { BudgetCard, RemindersCard, SessionCard, CashFlowCard, GoalsCard } from "../components/b2b/SampleUI";
+import NumberedSteps from "../components/b2b/NumberedSteps";
+import DeviceFrame from "../components/b2b/DeviceFrame";
+import Needs from "../components/b2b/Needs";
 
-const LAYERS = [
-  {
-    h: "Financial intelligence",
-    p: "Automated tracking, categorisation and insight — Koshpal turns raw financial activity into a clear picture and a next best action.",
-    tags: ["Auto-tracking", "Insights", "Budgets", "Goals"],
-  },
-  {
-    h: "Financial education",
-    p: "Short, practical lessons on tax, debt, investing, insurance and life planning — knowledge employees can use the same week.",
-    tags: ["Tax", "Debt", "Investing", "Planning"],
-  },
-  {
-    h: "Human guidance",
-    p: "Qualified financial coaches for the decisions technology can't make alone — confidential, one-to-one, on demand.",
-    tags: ["1:1 sessions", "Confidential", "Qualified"],
-  },
-];
+/* Brief section 7: open with "one program, four pillars", one block per
+   pillar, real screens in the app section, close with how the coach and
+   the app work together. */
+function Pillar({ id, n, title, lead, points, visual, flip, tone = "white" }) {
+  return (
+    <Section tone={tone} id={id}>
+      <div className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center`}>
+        <Reveal className={flip ? "lg:order-2" : ""}>
+          <Eyebrow>{`Pillar ${n}`}</Eyebrow>
+          <h2 className="font-outfit font-bold tracking-[-0.028em] leading-[1.1] mt-4 text-[27px] sm:text-[34px] lg:text-[40px] text-[#0b1533]">
+            {title}
+          </h2>
+          <p className="font-jakarta mt-4 text-[17px] leading-[1.65] text-[#3a4468] max-w-[52ch]">{lead}</p>
+          <ul className="mt-5 grid gap-2.5 font-jakarta text-[15px] text-[#3a4468]">
+            {points.map((t) => (
+              <li key={t} className="b2b-row flex gap-2.5">
+                <span className="text-primary font-bold">✓</span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal delay={0.08} className={`max-w-[520px] w-full mx-auto lg:mx-0 ${flip ? "lg:order-1" : ""}`}>
+          {visual}
+        </Reveal>
+      </div>
+    </Section>
+  );
+}
 
 export default function Platform() {
   return (
-    <PageShell seo={{ title: "Platform", path: "/platform", description: "One platform for employee financial wellbeing: financial intelligence, financial education and human guidance in a single employee experience, with an aggregated dashboard for HR." }}>
+    <PageShell
+      seo={{
+        title: "Platform",
+        path: "/platform",
+        description:
+          "One program, four pillars: personalised education, AI-powered insight, 1:1 sessions with certified financial experts, and continuous support for employees.",
+      }}
+    >
       <PageHero
-        eyebrow="The platform"
-        title="One platform for your employees' financial wellbeing."
-        sub="Financial intelligence, financial education and human guidance — combined into a single employee experience, with an aggregated dashboard for HR."
+        eyebrow="Platform"
+        title="One program, four pillars."
+        sub="Learn, Understand, Connect and Grow. Together they give every employee continuous financial support, from their first salary to major life milestones."
         primary={{ to: "/demo", label: "Book a demo" }}
-        secondary={{ to: "/for-employees", label: "For employees" }}
+        secondary={{ to: "/privacy-trust", label: "How privacy works" }}
       />
 
-      <Section tone="white">
+      <Pillar
+        id="learn"
+        n="1"
+        title="Learn"
+        lead="Financial education that adapts to an employee's stage of life. Practical and relevant, so it can be used the same week."
+        points={[
+          "Personalised to where each person is in life",
+          "Workshops and webinars alongside on-demand learning",
+          "Financial health assessments to see where to start",
+        ]}
+        visual={<GoalsCard />}
+      />
+      <Pillar
+        id="understand"
+        n="2"
+        title="Understand"
+        lead="AI-powered insight and behavioural intelligence help employees see their own habits and patterns, and make better decisions with them."
+        points={[
+          "Budgets and transactions in one place, with tags to organise them",
+          "Cash flow that shows where the month went",
+          "Insights written in plain language",
+        ]}
+        visual={<BudgetCard />}
+        flip
+        tone="tint"
+      />
+      <Pillar
+        id="connect"
+        n="3"
+        title="Connect"
+        lead="One-on-one conversations with certified financial experts. These sessions are about understanding goals, answering questions and solving challenges. They are never about selling products."
+        points={[
+          "Certified experts, such as CFPs, CAs and CFAs",
+          "No commissions, so the guidance is independent",
+          "Conversations with experts are private",
+        ]}
+        visual={<SessionCard />}
+      />
+      <Needs kind="VERIFY" note="'unlimited' access to experts, session allowance" />
+      <Pillar
+        id="grow"
+        n="4"
+        title="Grow"
+        lead="Financial confidence isn't how much someone knows. It's how confidently they decide over time. Koshpal keeps supporting employees as their lives change."
+        points={[
+          "From a first salary to major life milestones",
+          "Dues and reminders keep the plan on track",
+          "Progress is measured over time, not in a single session",
+        ]}
+        visual={<RemindersCard />}
+        flip
+        tone="tint"
+      />
+
+      <Section tone="white" id="app">
         <SectionHead
-          eyebrow="Architecture"
-          title="Three layers, one experience."
-          lede="Each layer is useful on its own. Together they cover the full range of what an employee needs — from a daily spending nudge to a major life decision."
+          eyebrow="The app"
+          title="The coach gives understanding. The app keeps the plan alive."
+          lede="Budgets, transactions, dues and reminders, goals, tags, cash on hand and cash flow. All in one place, on mobile and on the web."
         />
-        <div className="grid gap-[18px] lg:grid-cols-3">
-          {LAYERS.map((l, i) => (
-            <Reveal key={l.h} delay={(i % 3) * 0.06} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-7 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[21px] leading-[1.2] text-[#0b1533] mb-2">{l.h}</h3>
-              <p className="font-jakarta text-[15px] leading-[1.6] text-[#3a4468]">{l.p}</p>
-              <div className="flex flex-wrap gap-1.5 mt-4">
-                {l.tags.map((t) => (
-                  <span key={t} className="font-outfit font-medium text-[12px] text-[#6b7597] bg-[#fff] border border-[#e9ecf7] px-2.5 py-1 rounded-full">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </Reveal>
-          ))}
+        <div className="grid md:grid-cols-[minmax(0,320px)_1fr] gap-10 items-center">
+          <DeviceFrame
+            variant="phone"
+            src="/assets/app-home.png"
+            alt="The Koshpal app home screen with sample balances and linked accounts"
+            width={600}
+            height={1218}
+            sample
+          />
+          <div className="grid sm:grid-cols-2 gap-4">
+            <CashFlowCard />
+            <BudgetCard />
+          </div>
         </div>
+        <div className="mt-4"><Needs kind="PROOF" note="approved high-resolution app screenshots (Budgets, Transactions, Dues & Reminders, Goals, Tags, Cash on Hand, Cash Flow)" /></div>
       </Section>
 
-      <Section tone="dark">
+      <Section tone="tint" id="together">
         <SectionHead
-          dark
-          eyebrow="How it comes together"
-          title="From financial activity to financial wellbeing."
+          eyebrow="How they work together"
+          title="Talk, plan, act, stay on track."
         />
-        <div className="grid gap-2.5 max-w-[560px]">
-          {[
-            "Financial intelligence · education · human guidance",
-            "Employee financial wellness experience",
-            "Aggregated, anonymised program signals",
-            "HR dashboard — adoption, engagement, outcomes",
-          ].map((s, i, arr) => (
-            <React.Fragment key={s}>
-              <Reveal delay={i * 0.05} className="rounded-[16px] border border-[#ffffff24] bg-[#ffffff0f] px-5 py-3.5 font-outfit font-semibold text-[15px] b2b-on-dark-h">
-                {s}
-              </Reveal>
-              {i < arr.length - 1 && (
-                <div className="justify-self-center text-[#8fa6e8]">
-                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
-                    <path d="M7 0v11m0 0-4-4m4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </Section>
-
-      <Section tone="white" id="hr-dashboard">
-        <SectionHead
-          eyebrow="HR dashboard"
-          title="One view for the people running the program."
-          lede="Everything HR needs to launch, sustain and report on financial wellness — built on aggregated data, never individual financial detail."
-        />
-        <Reveal className="mb-10"><Placeholder variant="browser" label="HR dashboard — aggregated view" ratio="16/9" /></Reveal>
-        <CardGrid
-          items={[
-            { h: "Adoption", p: "Who's enrolled and activated, by team or location." },
-            { h: "Engagement", p: "Monthly active use and the features people rely on." },
-            { h: "Wellness trends", p: "Aggregated financial-health movement over time." },
-            { h: "Program utilisation", p: "Coaching sessions, education completed, goals set." },
-            { h: "Impact reporting", p: "Board-ready summaries you can export." },
-            { h: "Communications", p: "Launch assets and ongoing nudges for your workforce." },
+        <NumberedSteps
+          steps={[
+            { h: "Talk", p: "A session with an expert to understand goals and questions." },
+            { h: "Plan", p: "The plan becomes budgets and goals in the app." },
+            { h: "Act", p: "Day-to-day tracking shows what's actually happening." },
+            { h: "Stay on track", p: "Reminders and insights keep the plan from being forgotten." },
           ]}
-          cols={3}
         />
       </Section>
 
-      <PageCta
-        title="See the platform in one walkthrough."
-        sub="The employee app, the coaching layer and the HR dashboard — in 30 minutes."
-        secondary={{ to: "/privacy-trust", label: "Privacy & security" }}
+      <CtaBand
+        title="See the program in action."
+        sub="We'll show you the employee experience and what HR sees."
+        secondary={{ to: "/for-hr", label: "For HR" }}
+        note="Your salary is private. Financial stress doesn't have to be invisible."
       />
     </PageShell>
   );

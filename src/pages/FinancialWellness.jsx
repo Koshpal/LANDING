@@ -102,7 +102,7 @@ export default function FinancialWellness() {
           {[
             ["Business impact", "How financial stress becomes a business cost.", "/business-impact"],
             ["Privacy & security", "What HR can and can't see.", "/privacy-trust"],
-            ["HR guides", "Evaluate providers, launch a program, measure ROI.", "/resources/guides"],
+            ["HR guides", "Evaluate providers, launch a program, measure ROI.", "/resources"],
           ].map(([h, p, to], i) => (
             <Reveal key={h} delay={i * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
               <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533] mb-1.5">{h}</h3>

@@ -1,25 +1,28 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { track } from "../../lib/analytics";
 
 const FREE_DOMAINS = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "proton.me"];
 
 /**
- * Work-email lead capture. Client-side only right now — on submit it validates a
- * business email and shows a success state.
- * TODO: wire `onSubmit` to EmailJS / CRM (see DemoPage for the EmailJS pattern).
+ * Work-email lead capture. Validates a business email and sends the request
+ * to the Koshpal inbox through EmailJS (same service as the demo form).
+ * Success is shown only after the send succeeds.
  */
 export default function EmailCapture({
   label = "Get it by email",
   cta = "Send it to me",
   note = "Work email only.",
   dark = false,
+  resource = "Employer guide",
 }) {
   const [email, setEmail] = useState("");
-  const [state, setState] = useState("idle"); // idle | error | done
+  const [state, setState] = useState("idle"); // idle | sending | error | done
   const [msg, setMsg] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
+    if (state === "sending") return;
     const v = email.trim().toLowerCase();
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
     if (!ok) {
@@ -32,11 +35,35 @@ export default function EmailCapture({
       setMsg("Please use your work email.");
       return;
     }
-    track("resource_submit", { resource: window.location.pathname, status: "unavailable" });
-    // No delivery destination is configured yet (see CONTENT_NEEDED.md #18).
-    // Do not claim success until a real submission exists.
-    setState("error");
-    setMsg("This download isn't available yet. Please email koshpal@koshpal.com and we'll send it to you.");
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_DEMO;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    setState("sending");
+    emailjs
+      .send(
+        serviceId,
+        templateId,
+        {
+          from_name: "Resource request",
+          from_email: v,
+          company: "",
+          role: "",
+          message: `${resource}: please send when available (requested from ${window.location.pathname})`,
+          to_email: "koshpal@koshpal.com",
+          submitted_at: new Date().toISOString(),
+        },
+        publicKey
+      )
+      .then(() => {
+        track("resource_submit", { resource, status: "success" });
+        setState("done");
+        setMsg("Thanks. We've noted your request and will email it to you as soon as it's ready.");
+      })
+      .catch(() => {
+        track("resource_submit", { resource, status: "error" });
+        setState("error");
+        setMsg("That didn't go through. Please email koshpal@koshpal.com and we'll send it to you.");
+      });
   };
 
   const inputCls = dark
@@ -77,10 +104,11 @@ export default function EmailCapture({
         />
         <button
           type="submit"
+          disabled={state === "sending"}
           className="rounded-full bg-primary text-[#fff] font-outfit font-semibold text-[14px] px-6 py-3 hover:bg-primary-darkest transition whitespace-nowrap"
           style={{ color: "#fff" }}
         >
-          {cta}
+          {state === "sending" ? "Sending..." : cta}
         </button>
       </div>
       <p className={`font-jakarta text-[12px] mt-2 ${state === "error" ? "text-[#b21d15]" : noteCls}`}>

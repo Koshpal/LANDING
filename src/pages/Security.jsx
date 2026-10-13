@@ -1,108 +1,99 @@
 import React from "react";
-import { PageShell, PageHero, PageCta } from "../components/b2b/PageShell";
+import { PageShell, PageHero, CtaBand } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
-import Placeholder from "../components/b2b/Placeholder";
+import Needs from "../components/b2b/Needs";
+import { PRIVACY_STATEMENTS } from "../components/b2b/PrivacyBand";
+
+/* Privacy & Trust. Only approved statements (brief section 9.6). No technical
+   or compliance claims until the team supplies approved wording
+   (CONTENT_NEEDED.md #10). */
+const ROWS = [
+  ["Your individual financial information", "Yes. It's yours.", "No"],
+  ["Your conversations with experts", "Yes. You're in them.", "No"],
+  ["Aggregated, anonymised trends for the group", "Part of the group", "Yes"],
+];
 
 export default function Security() {
   return (
-    <PageShell seo={{ title: "Privacy & Trust", path: "/privacy-trust", description: "Koshpal is built so a company can measure the impact of its financial wellness program without ever seeing an individual employee’s financial detail." }}>
+    <PageShell
+      seo={{
+        title: "Privacy & Trust",
+        path: "/privacy-trust",
+        description:
+          "Who sees what in Koshpal: an employee's financial information is theirs, and employers see only aggregated, anonymised insights.",
+      }}
+    >
       <PageHero
-        eyebrow="Privacy & security"
-        title="Your employees' financial lives are private."
-        sub="Koshpal is built so a company can measure the impact of its financial wellness program without ever seeing an individual employee's financial detail."
+        eyebrow="Privacy and trust"
+        title="Who sees what."
+        sub="People won't talk about money if they think someone is watching. So an employee's financial information stays theirs, and employers see only anonymised trends."
         primary={{ to: "/demo", label: "Book a demo" }}
-        secondary={{ to: "/platform", label: "See the platform" }}
+        secondary={{ to: "/for-employees", label: "For employees" }}
       />
 
-      <Section tone="white">
-        <SectionHead
-          eyebrow="The principle"
-          title="Support and privacy are not a trade-off."
-          lede="Employees should never have to expose their finances to their employer to get help with them. So they don't."
-        />
-        <Reveal className="mb-10">
-          <Placeholder variant="browser" label="Employer view — aggregated only" ratio="16/9" />
-        </Reveal>
+      <Section tone="white" id="who-sees-what">
+        <SectionHead eyebrow="At a glance" title="Employee and employer, side by side." />
+        <div className="overflow-x-auto rounded-[20px] border border-[#e9ecf7] b2b-shadow">
+          <table className="w-full min-w-[560px] text-left border-collapse">
+            <caption className="sr-only">What employees and employers can see in Koshpal</caption>
+            <thead>
+              <tr className="bg-[#f7f8fd]">
+                <th scope="col" className="px-5 py-4" />
+                <th scope="col" className="px-5 py-4 font-outfit font-semibold text-[14px] text-[#0b1533]">Employee</th>
+                <th scope="col" className="px-5 py-4 font-outfit font-semibold text-[14px] text-[#0b1533]">Employer (HR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ROWS.map(([l, e, h]) => (
+                <tr key={l} className="border-t border-[#e9ecf7]">
+                  <th scope="row" className="px-5 py-4 font-outfit font-semibold text-[14.5px] text-[#0b1533]">{l}</th>
+                  <td className="px-5 py-4 font-jakarta text-[14.5px] text-[#3a4468]">{e}</td>
+                  <td className={`px-5 py-4 font-jakarta text-[14.5px] ${h === "No" ? "text-[#b21d15] font-semibold" : "text-[#3a4468]"}`}>{h}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-3"><Needs kind="VERIFY" note="what the expert can see (add an Expert column once confirmed)" /></div>
+      </Section>
+
+      <Section tone="tint" id="principles">
+        <SectionHead eyebrow="Our commitments" title="What we promise employees." />
         <div className="grid sm:grid-cols-2 gap-[18px]">
-          <Reveal className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 b2b-shadow">
-            <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-2">What HR can see</h3>
-            <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468]">
-              {["Enrolment and activation rates", "Monthly engagement", "Aggregated financial-wellness trends", "Program utilisation (coaching, education, goals)", "Board-ready impact summaries"].map((t) => (
-                <li key={t} className="b2b-row flex gap-2"><span className="text-primary font-bold">✓</span>{t}</li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.06} className="b2b-card-hover rounded-[20px] border border-[#e9ecf7] bg-[#f7f8fd] p-6 b2b-shadow">
-            <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-2">What HR can never see</h3>
-            <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468]">
-              {["Individual transactions or balances", "A named employee's spending or debt", "Budgets or goals for a specific person", "The content of any coaching conversation", "Anything that identifies one employee's finances"].map((t) => (
-                <li key={t} className="b2b-row flex gap-2"><span className="text-[#b21d15] font-bold">✕</span>{t}</li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </Section>
-
-      <Section tone="dark">
-        <SectionHead
-          dark
-          eyebrow="Data architecture"
-          title="How data moves through Koshpal."
-        />
-        <div className="grid gap-2.5 max-w-[560px]">
-          {[
-            "Employee connects their financial activity",
-            "Data is protected inside Koshpal",
-            "It powers that employee's personal experience only",
-            "Separately: activity is stripped of identity and aggregated",
-            "Aggregated signals roll up to the HR dashboard",
-          ].map((s, i, arr) => (
-            <React.Fragment key={s}>
-              <Reveal delay={i * 0.05} className="rounded-[16px] border border-[#ffffff24] bg-[#ffffff0f] px-5 py-3.5 font-outfit font-semibold text-[15px] b2b-on-dark-h">
-                {s}
-              </Reveal>
-              {i < arr.length - 1 && (
-                <div className="justify-self-center text-[#8fa6e8]">
-                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
-                    <path d="M7 0v11m0 0-4-4m4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </Section>
-
-      <Section tone="white">
-        <SectionHead
-          eyebrow="Practices"
-          title="How employee data is protected."
-          lede="Financial data is treated as sensitive by default — encrypted, access-controlled, and retained only as long as it's needed."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]">
-          {[
-            ["Encryption", "Data encrypted in transit and at rest."],
-            ["Least privilege", "Strict internal access controls and audit logging."],
-            ["Aggregation by design", "Employer reporting is built only from de-identified, grouped data."],
-            ["Consent", "Employees choose what to connect and can disconnect any time."],
-            ["Data ownership", "The employee's data is theirs — export or delete on request."],
-            ["Vendor diligence", "Sub-processors held to the same standard."],
-          ].map(([h, p], i) => (
-            <Reveal key={h} delay={(i % 3) * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-[7px]">{h}</h3>
-              <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468]">{p}</p>
+          {PRIVACY_STATEMENTS.map(([h, p], i) => (
+            <Reveal key={h} delay={(i % 2) * 0.06} className="b2b-card bg-[#fff] p-6">
+              <h3 className="font-outfit font-semibold text-[18px] text-[#0b1533]">{h}</h3>
+              <p className="font-jakarta text-[15px] leading-[1.6] text-[#3a4468] mt-1.5">{p}</p>
             </Reveal>
           ))}
         </div>
-        <p className="mt-6 font-jakarta text-[13px] text-[#6b7597] italic">
-          Placeholder copy — align exact wording and certifications with your security team before launch.
+        <div className="mt-3"><Needs kind="PROOF" note="approved security, data-handling and compliance statements" /></div>
+      </Section>
+
+      <Section tone="white" id="not">
+        <SectionHead
+          eyebrow="What Koshpal is not"
+          title="No commissions. No products."
+          lede="Trust is our business model. Guidance only works when people know it's independent."
+        />
+        <ul className="grid sm:grid-cols-2 gap-3 max-w-[720px]">
+          {["A budgeting app", "A loan platform", "An investment marketplace", "A financial advisory firm that earns commissions"].map((t) => (
+            <li key={t} className="rounded-[14px] border border-[#e9ecf7] bg-[#f7f8fd] px-5 py-3.5 font-outfit font-semibold text-[15px] text-[#0b1533] flex gap-2.5">
+              <span className="text-[#b21d15] font-bold">✕</span>{t}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 font-jakarta text-[14px] text-[#6b7597]">
+          Questions for your security or legal team? Email{" "}
+          <a className="underline" href="mailto:koshpal@koshpal.com">koshpal@koshpal.com</a>. Our privacy policy
+          is on its way.
         </p>
       </Section>
 
-      <PageCta
-        title="Bring your security questions to the demo."
-        sub="We'll walk your team through the data model and answer procurement's checklist."
-        secondary={{ to: "/for-hr", label: "For HR & People teams" }}
+      <CtaBand
+        title="Bring your privacy questions to the demo."
+        sub="We'll show exactly what employees see and what HR sees."
+        secondary={{ to: "/for-hr", label: "For HR" }}
       />
     </PageShell>
   );

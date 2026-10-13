@@ -3,6 +3,7 @@ import { Phone, Mail, Linkedin, Send } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Seo from '../components/b2b/Seo';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -129,6 +130,7 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo path="/contact" title="Contact" description="Get in touch with the Koshpal team about employee financial wellness for your workplace." />
       <Navbar />
       
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

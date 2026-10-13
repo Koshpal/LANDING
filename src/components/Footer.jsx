@@ -4,8 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 const COL_PLATFORM = [
   { label: "Platform overview", to: "/platform" },
   { label: "For employees", to: "/for-employees" },
-  { label: "Financial education", to: "/financial-education" },
-  { label: "Financial coaching", to: "/financial-coaching" },
   { label: "For HR & People teams", to: "/for-hr" },
   { label: "Privacy & trust", to: "/privacy-trust" },
   { label: "Pricing", to: "/pricing" },
@@ -13,8 +11,6 @@ const COL_PLATFORM = [
 
 const COL_RESOURCES = [
   { label: "Resource hub", to: "/resources" },
-  { label: "Reports & research", to: "/resources/reports" },
-  { label: "HR guides", to: "/resources/guides" },
   { label: "Blog", to: "/blog" },
 ];
 
@@ -163,9 +159,9 @@ export default function Footer() {
               <h3 className="text-[#0e1a3c] text-2xl font-bold font-outfit">Koshpal</h3>
             </div>
             <p className="text-[#3f4a63] text-sm font-jakarta leading-relaxed max-w-[40ch]">
-              Employee financial wellness for modern workplaces — automated tracking, personalised
-              insights, financial education and expert guidance in one privacy-first platform, with an
-              aggregated dashboard for HR.
+              A privacy-first employee financial wellness platform. 1:1 sessions with certified financial
+              experts, an app to act on the plan, and anonymised insight for HR. No commissions. No
+              products sold.
             </p>
           </div>
 

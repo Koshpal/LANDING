@@ -51,7 +51,7 @@ export default function Pricing() {
         title="Get a number for your company."
         sub="A short conversation is enough. We'll ask about your size and how you'd like to roll out."
         primary={{ to: "/demo", label: "Talk to us" }}
-        secondary={{ to: "/resources/guides", label: "Read the HR guides" }}
+        secondary={{ to: "/resources", label: "Read the guides" }}
       />
     </PageShell>
   );

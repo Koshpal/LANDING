@@ -1,285 +1,57 @@
-import React, { useState } from 'react';
-import { Phone, Mail, Linkedin, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { track } from '../lib/analytics';
+import React from "react";
+import { PageShell } from "../components/b2b/PageShell";
+import DemoForm from "../components/DemoForm";
+import JellyGrid from "../components/b2b/JellyGrid";
+import Needs from "../components/b2b/Needs";
+
+const NEXT = [
+  ["You send the form", "It takes about a minute."],
+  ["We email you", "A member of the team replies to find a time that suits."],
+  ["We show you the program", "The employee experience, and the anonymised view HR gets."],
+];
 
 export default function DemoPage() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    company: '',
-    role: '',
-    message: ''
-  });
-
-  const [charCount, setCharCount] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    if (name === 'message') {
-      setCharCount(value.length);
-    }
-  };
-
-  // Rate limiting: Check submission count
-  const checkRateLimit = () => {
-    const today = new Date().toDateString();
-    const storedData = localStorage.getItem('demoSubmissions');
-
-    if (storedData) {
-      const { date, count } = JSON.parse(storedData);
-
-      // Reset count if it's a new day
-      if (date !== today) {
-        localStorage.setItem('demoSubmissions', JSON.stringify({ date: today, count: 0 }));
-        return true;
-      }
-
-      // Check if limit exceeded
-      if (count >= 10) {
-        return false;
-      }
-    } else {
-      // First submission
-      localStorage.setItem('demoSubmissions', JSON.stringify({ date: today, count: 0 }));
-    }
-
-    return true;
-  };
-
-  const incrementSubmissionCount = () => {
-    const today = new Date().toDateString();
-    const storedData = localStorage.getItem('demoSubmissions');
-    const { count } = JSON.parse(storedData);
-    localStorage.setItem('demoSubmissions', JSON.stringify({ date: today, count: count + 1 }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Check rate limit
-    if (!checkRateLimit()) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Daily submission limit reached (10 per day). Please try again tomorrow.'
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus({ type: '', message: '' });
-
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_DEMO;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    const templateParams = {
-      from_name: `${formData.firstName} ${formData.lastName}`,
-      from_email: formData.email,
-      company: formData.company,
-      role: formData.role,
-      message: formData.message,
-      to_email: 'koshpal@koshpal.com',
-      submitted_at: new Date().toISOString(),
-    };
-
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
-      .then((response) => {
-        // Increment submission count
-        incrementSubmissionCount();
-        track('demo_submit', { status: 'success' });
-
-        setSubmitStatus({
-          type: 'success',
-          message: 'Thanks, we have your request. A member of the Koshpal team will email you to set up a time.'
-        });
-
-        setFormData({ firstName: '', lastName: '', email: '', company: '', role: '', message: '' });
-        setCharCount(0);
-      })
-      .catch((error) => {
-        track('demo_submit', { status: 'error' });
-        setSubmitStatus({
-          type: 'error',
-          message: 'Failed to send request. Please try again or email us directly.'
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full mb-6">
-              <Phone className="w-4 h-4" />
-              <span className="font-medium text-sm md:text-base">Let's Meet</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#101828] mb-4">
-              Book a <span className="text-[#17A2B8]">demo</span>
-              <br /> for your team
+    <PageShell
+      seo={{
+        title: "Book a demo",
+        path: "/demo",
+        description:
+          "Book a Koshpal demo. See the employee experience and the anonymised HR dashboard for your workplace.",
+      }}
+    >
+      <section className="b2b-dark-band relative overflow-hidden pt-28 sm:pt-32 pb-16">
+        <JellyGrid color="255, 255, 255" opacity={0.16} />
+        <div className="relative max-w-[1100px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+          <div>
+            <span className="b2b-eyebrow">Book a demo</span>
+            <h1 className="font-outfit font-bold tracking-[-0.03em] leading-[1.06] mt-4 text-[32px] sm:text-[44px] text-[#f6f8ff]">
+              See how Koshpal would work for your team.
             </h1>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              See how Koshpal would work for your employees and what HR would see.
+            <p className="font-jakarta mt-5 text-[17px] leading-[1.6] text-[#c3cdec] max-w-[44ch]">
+              Tell us a little about your company. We&apos;ll show you the employee experience and what HR sees.
             </p>
+            <ol className="mt-8 grid gap-4">
+              {NEXT.map(([h, p], i) => (
+                <li key={h} className="flex gap-4">
+                  <span className="flex-none w-8 h-8 rounded-full bg-[#ffffff1f] border border-[#ffffff33] text-[#fff] grid place-items-center font-outfit font-bold text-[14px]">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <div className="font-outfit font-semibold text-[16px] text-[#f6f8ff]">{h}</div>
+                    <div className="font-jakarta text-[14.5px] text-[#aab6dd]">{p}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-8 font-jakarta text-[14px] text-[#aab6dd]">
+              Private by design. No commissions. No products sold.
+            </p>
+            <Needs kind="VERIFY" note="demo response time and who is notified" />
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            <div className="bg-white rounded-3xl shadow-lg p-8 md:p-10 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
-
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Request a Demo</h2>
-              <p className="text-gray-600 mb-6">Tell us a little about your team and we'll get in touch to set up a time.</p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                    <input name="firstName" value={formData.firstName} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                    <input name="lastName" value={formData.lastName} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Work Email <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input name="email" value={formData.email} onChange={handleChange} type="email" required placeholder="john.doe@company.com" className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name <span className="text-red-500">*</span></label>
-                  <input name="company" value={formData.company} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Role <span className="text-red-500">*</span></label>
-                  <select name="role" value={formData.role} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                    <option value="">Select role</option>
-                    <option>HR</option>
-                    <option>Finance</option>
-                    <option>Admin</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
-                  <textarea name="message" value={formData.message} onChange={handleChange} maxLength={500} rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none" />
-                  <p className="text-sm text-gray-500 mt-2">{charCount}/500 characters</p>
-                </div>
-
-                {submitStatus.message && (
-                  <div className={`p-4 rounded-lg ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
-                    <p className="text-sm font-medium">{submitStatus.message}</p>
-                  </div>
-                )}
-
-                <button type="submit" disabled={isSubmitting} className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}>
-                  {isSubmitting ? 'Sending...' : 'Request demo'}
-                  <Send className={`w-5 h-5 transition-transform ${isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1'}`} />
-                </button>
-
-                <p className="text-sm text-gray-500 text-center mt-4">We respect your privacy and will never share your information</p>
-              </form>
-            </div>
-
-            <div className="bg-[#2B8997] rounded-3xl shadow-lg p-8 md:p-10 text-white relative overflow-hidden min-h-[800px] flex flex-col">
-              <div className="space-y-6 mb-auto">
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Phone className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff]">Personalized Demo</p>
-                    <p className="text-sm text-[#e6eefc]">Tailored to your role and needs</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Mail className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff]">Quick Response</p>
-                    <p className="text-sm text-[#e6eefc]">A member of our team will reply by email</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className=" p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Linkedin fill='#ffffff' className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff]">Privacy First</p>
-                    <p className="text-sm text-[#e6eefc]">Your data is secure and never shared</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative mt-8">
-                <div className="flex items-center justify-center gap-6">
-                  <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-lg"></div>
-                  <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div className="w-24 h-20 bg-yellow-500 rounded-2xl shadow-lg transform -rotate-12 relative">
-                    <div className="absolute -top-2 left-4 w-12 h-3 bg-yellow-600 rounded-t-lg"></div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center gap-8 mt-6">
-                  <div className="w-20 h-20 bg-pink-300 rounded-full shadow-lg" style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}></div>
-                  <div className="relative">
-                    <div className="w-32 h-20 bg-orange-500 rounded-t-full shadow-lg"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute top-0 right-10 w-6 h-6 text-orange-400">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <div className="absolute bottom-10 left-8 w-4 h-4 text-orange-400">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
+          <DemoForm />
         </div>
       </section>
-
-      <Footer />
-    </div>
-  )
+    </PageShell>
+  );
 }

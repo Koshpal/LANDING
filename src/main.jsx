@@ -21,8 +21,6 @@ const EmployeeFinancialWellness = lazy(() => import('./pages/EmployeeFinancialWe
 const Platform = lazy(() => import('./pages/Platform'))
 const ForHr = lazy(() => import('./pages/ForHr'))
 const BusinessImpact = lazy(() => import('./pages/BusinessImpact'))
-const FinancialCoaching = lazy(() => import('./pages/FinancialCoaching'))
-const FinancialEducation = lazy(() => import('./pages/FinancialEducation'))
 const Security = lazy(() => import('./pages/Security'))
 const Pricing = lazy(() => import('./pages/Pricing'))
 const About = lazy(() => import('./pages/About'))
@@ -30,8 +28,6 @@ const Customers = lazy(() => import('./pages/Customers'))
 
 const FinancialWellness = lazy(() => import('./pages/FinancialWellness'))
 const Resources = lazy(() => import('./pages/Resources'))
-const ResourcesReports = lazy(() => import('./pages/ResourcesReports'))
-const ResourcesGuides = lazy(() => import('./pages/ResourcesGuides'))
 const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const Calculator = lazy(() => import('./pages/Calculator'))
@@ -51,8 +47,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/for-hr" element={<ForHr />} />
           <Route path="/solutions/hr" element={<Navigate to="/for-hr" replace />} />
           <Route path="/business-impact" element={<BusinessImpact />} />
-          <Route path="/financial-coaching" element={<FinancialCoaching />} />
-          <Route path="/financial-education" element={<FinancialEducation />} />
+          <Route path="/financial-coaching" element={<Navigate to="/platform#connect" replace />} />
+          <Route path="/financial-education" element={<Navigate to="/platform#learn" replace />} />
           <Route path="/privacy-trust" element={<Security />} />
           <Route path="/security" element={<Navigate to="/privacy-trust" replace />} />
           <Route path="/pricing" element={<Pricing />} />
@@ -60,8 +56,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/customers" element={<Customers />} />
           <Route path="/financial-wellness" element={<FinancialWellness />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/reports" element={<ResourcesReports />} />
-          <Route path="/resources/guides" element={<ResourcesGuides />} />
+          <Route path="/resources/reports" element={<Navigate to="/resources" replace />} />
+          <Route path="/resources/guides" element={<Navigate to="/resources" replace />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/calculator" element={<Calculator />} />

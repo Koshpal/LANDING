@@ -1,14 +1,7 @@
 import React from "react";
-import { PageShell, PageHero, PageCta } from "../components/b2b/PageShell";
+import { PageShell, PageHero, CtaBand } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
-import Placeholder from "../components/b2b/Placeholder";
-
-const BELIEFS = [
-  ["Financial wellbeing is workplace infrastructure", "Not a perk bolted on at open enrolment — a benefit people rely on every month."],
-  ["Privacy is non-negotiable", "An employee should never trade financial privacy for financial help."],
-  ["Technology and people, not one or the other", "Automation for the everyday; a qualified human for the decisions that matter."],
-  ["Impact you can measure", "If a program can't be measured, it can't be improved — or defended in a budget review."],
-];
+import Needs from "../components/b2b/Needs";
 
 export default function About() {
   return (
@@ -17,59 +10,74 @@ export default function About() {
         title: "About",
         path: "/about",
         description:
-          "Koshpal is building the employee financial wellness infrastructure for India's workforce — a platform companies use to support their people's financial wellbeing.",
+          "Koshpal exists to build financially confident workplaces. Our belief: financial wellness will become the next standard employee benefit.",
       }}
     >
       <PageHero
         eyebrow="About Koshpal"
-        title="We're building the financial wellness infrastructure for India's workforce."
-        sub="Koshpal helps companies give every employee continuous financial support — practical tools, real education, and access to qualified experts — with a privacy-first view for HR."
+        title="Building financially confident workplaces."
+        sub="Workplaces now invest in physical and mental wellness. Money is the stress that's still largely invisible. We exist to change that."
         primary={{ to: "/demo", label: "Book a demo" }}
         secondary={{ to: "/platform", label: "See the platform" }}
       />
 
-      <Section tone="white">
-        <SectionHead
-          eyebrow="Why we exist"
-          title="Most people never got taught how money works. Their employer can change that."
-          lede="Financial stress is one of the most common, least-addressed pressures employees carry. Koshpal exists to make credible financial support a standard part of working somewhere."
-        />
-        <Reveal className="mt-2">
-          <Placeholder variant="browser" label="Team / workplace photo" ratio="16/9" />
-        </Reveal>
-      </Section>
-
-      <Section tone="dark">
-        <SectionHead dark eyebrow="What we believe" title="Four principles behind every decision." />
-        <div className="grid sm:grid-cols-2 gap-[18px]">
-          {BELIEFS.map(([h, p], i) => (
-            <Reveal key={h} delay={(i % 2) * 0.06} className="b2b-card-hover rounded-[20px] border border-[#ffffff24] bg-[#ffffff0f] p-6">
-              <h3 className="font-outfit font-semibold text-[17.5px] b2b-on-dark-h mb-[7px]">{h}</h3>
-              <p className="font-jakarta text-[14.5px] leading-[1.6] b2b-on-dark-soft">{p}</p>
-            </Reveal>
-          ))}
+      <Section tone="white" id="belief">
+        <SectionHead eyebrow="Our belief" title="Financial wellness will be the next standard benefit." />
+        <div className="max-w-[68ch] grid gap-4 font-jakarta text-[17px] leading-[1.7] text-[#3a4468]">
+          <p>
+            Financial stress doesn&apos;t stay at home when people come to work. It follows them into
+            meetings, difficult decisions and family conversations, and it affects focus, confidence and
+            long-term well-being.
+          </p>
+          <p>
+            Just as organisations now treat physical and mental wellness as essential benefits, we believe
+            financial wellness will become the next standard of the modern workplace. That belief is why
+            Koshpal exists.
+          </p>
         </div>
       </Section>
 
-      <Section tone="white">
-        <SectionHead eyebrow="Team & advisors" title="The people behind Koshpal." lede="Founders, product and engineering, plus a panel of qualified financial advisors." />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-[18px]">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Reveal key={i} delay={i * 0.05} className="rounded-[20px] border border-dashed border-[#dfe3f2] bg-[#f7f8fd] p-5 text-center">
-              <div className="w-16 h-16 rounded-full bg-[#eef1f8] border border-[#e9ecf7] mx-auto mb-3" />
-              <div className="font-outfit font-semibold text-[13.5px] text-[#8a95b4]">Name</div>
-              <div className="font-jakarta text-[12px] text-[#a9b2ca]">Role</div>
-            </Reveal>
-          ))}
+      <Section tone="tint" id="philosophy">
+        <SectionHead eyebrow="Our philosophy" title="Teach people to fish." />
+        <div className="grid lg:grid-cols-2 gap-10">
+          <div className="grid gap-4 font-jakarta text-[17px] leading-[1.7] text-[#3a4468]">
+            <p>
+              Helping someone choose an investment, refinance a loan or reduce a tax bill solves today&apos;s
+              problem. Tomorrow a new decision arrives.
+            </p>
+            <p>
+              Our goal isn&apos;t only to solve individual financial problems. It&apos;s to help people become
+              confident enough to solve future ones themselves.
+            </p>
+          </div>
+          <Reveal className="b2b-card bg-[#fff] p-6">
+            <h3 className="font-outfit font-semibold text-[18px] text-[#0b1533]">Why a conversation beats a one-off fix</h3>
+            <p className="font-jakarta text-[15px] leading-[1.65] text-[#3a4468] mt-2">
+              Seeing a doctor only when you&apos;re ill gets you a prescription. Spending time with a trusted
+              doctor regularly teaches you how to stay healthy. We want to be the second kind of help.
+            </p>
+          </Reveal>
         </div>
-        <p className="mt-6 font-jakarta text-[12.5px] text-[#6b7597] italic">Team section — add real names, roles and photos.</p>
       </Section>
 
-      <PageCta
-        title="Bring financial wellness to your workplace."
-        sub="See how Koshpal would work for a team your size."
-        secondary={{ to: "/business-impact", label: "The business case" }}
-      />
+      <Section tone="white" id="principle">
+        <SectionHead eyebrow="Our principle" title="Always act in the employee's best interest." />
+        <p className="max-w-[60ch] font-jakarta text-[17px] leading-[1.7] text-[#3a4468]">
+          We don&apos;t earn commissions by promoting investments and we don&apos;t push financial products.
+          Trust is our business model.
+        </p>
+      </Section>
+
+      <Section tone="tint" id="team">
+        <SectionHead eyebrow="Team" title="The people behind Koshpal." />
+        <Needs kind="PROOF" note="team bios, roles and photos; expert panel names and credentials" />
+        <p className="font-jakarta text-[15px] text-[#3a4468]">
+          Want to know who you&apos;d be talking to? <a className="underline" href="/demo">Book a demo</a> and
+          ask.
+        </p>
+      </Section>
+
+      <CtaBand title="Bring financial wellness to your workplace." sub="See how Koshpal would work for your team." secondary={{ to: "/privacy-trust", label: "Privacy and trust" }} />
     </PageShell>
   );
 }

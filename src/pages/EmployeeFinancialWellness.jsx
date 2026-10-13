@@ -1,83 +1,107 @@
 import React from "react";
-import { PageShell, PageHero, PageCta, CardGrid } from "../components/b2b/PageShell";
+import { PageShell, PageHero, CtaBand } from "../components/b2b/PageShell";
 import { Section, SectionHead, Reveal } from "../components/b2b/primitives";
-import Placeholder from "../components/b2b/Placeholder";
+import NumberedSteps from "../components/b2b/NumberedSteps";
+import FaqAccordion from "../components/b2b/FaqAccordion";
+import Needs from "../components/b2b/Needs";
+import { EMPLOYEE_FAQ } from "../content/faq";
 
-const EMP = [
-  { h: "Financial health overview", p: "A single score and view of where each employee stands this month." },
-  { h: "Automated transaction tracking", p: "Spending is captured and categorised automatically — no spreadsheets." },
-  { h: "Spending insights", p: "Plain-language patterns: where money goes and what changed." },
-  { h: "Budgets", p: "Simple limits per category with gentle, timely alerts." },
-  { h: "Financial goals", p: "Emergency fund, a home, a trip — tracked with monthly targets." },
-  { h: "Personalised recommendations", p: "Next best action, tuned to each person's situation." },
-  { h: "Financial education", p: "Short, practical lessons on tax, debt, investing and planning." },
-  { h: "Expert guidance", p: "One-to-one sessions with qualified financial coaches when it matters." },
-];
-
-const HR = [
-  { h: "Easy rollout", p: "Onboard your workforce in days, not quarters." },
-  { h: "Employee engagement", p: "A benefit people open every month, not once a year." },
-  { h: "Program analytics", p: "Adoption, activity and wellness trends over time." },
-  { h: "Aggregated insights", p: "Understand workforce financial health — never individual detail." },
-  { h: "Wellness reporting", p: "Board-ready summaries of participation and outcomes." },
-  { h: "Communication support", p: "Templates and assets to launch and sustain the program." },
-];
-
-export default function EmployeeFinancialWellness() {
+/* Warm and reassuring. Exists to build trust and adoption. */
+export default function ForEmployees() {
   return (
-    <PageShell seo={{ title: "Employee Financial Wellness", path: "/for-employees", description: "Give employees the tools, insights and expert guidance to make better financial decisions — and give employers a simple, measurable way to deliver financial wellness at scale." }}>
+    <PageShell
+      seo={{
+        title: "For Employees",
+        path: "/for-employees",
+        description:
+          "Private 1:1 sessions with certified financial experts and an app to act on the plan, offered by your employer. Your finances stay yours.",
+      }}
+    >
       <PageHero
-        eyebrow="Employee financial wellness"
-        title="Build a financially healthier workforce."
-        sub="Koshpal gives employees the tools, insights and guidance to make better financial decisions — and gives employers a simple way to deliver financial wellness at scale."
-        primary={{ to: "/demo", label: "Book a demo" }}
-        secondary={{ to: "/platform", label: "See the platform" }}
+        eyebrow="For employees"
+        title="A private place to talk about money."
+        sub="Your employer offers Koshpal as a benefit. You get a certified financial expert to talk to, and an app to put the plan into action."
+        primary={{ to: "/privacy-trust", label: "What my employer can see" }}
+        secondary={{ to: "#session", label: "What a session is like" }}
       />
 
-      <Section tone="white">
+      <Section tone="white" id="session">
         <SectionHead
-          eyebrow="For employees"
-          title="Everything an employee needs to feel in control of money."
-          lede="One experience that turns everyday financial activity into clarity, better habits and confident decisions."
+          eyebrow="What happens in a session"
+          title="You bring the question. They bring the time."
+          lede="Sessions are about understanding your goals and answering your questions. Nobody is trying to sell you anything."
         />
-        <CardGrid items={EMP} cols={4} />
-        <Reveal className="mt-10 flex justify-center"><Placeholder variant="phone" label="Employee app" /></Reveal>
+        <NumberedSteps
+          cols={3}
+          steps={[
+            { h: "Tell them what's on your mind", p: "A goal, a worry, a decision you're stuck on. Big or small." },
+            { h: "Talk it through", p: "A certified financial expert listens, asks questions and explains your options." },
+            { h: "Leave with a plan", p: "Next steps you can follow in the app, with reminders so they don't slip." },
+          ]}
+        />
       </Section>
 
-      <Section tone="dark">
+      <Section tone="tint" id="visibility">
         <SectionHead
-          dark
-          eyebrow="For employers"
-          title="Financial wellness you can actually run — and measure."
-          lede="Koshpal handles the employee experience. You get a clean way to launch it, keep people engaged and report on impact."
+          eyebrow="What your employer can and cannot see"
+          title="They see trends. They never see you."
         />
-        <CardGrid items={HR} cols={3} tone="onDark" />
+        <div className="grid sm:grid-cols-2 gap-[18px]">
+          <Reveal className="b2b-card bg-[#fff] p-6">
+            <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-3">Your employer can see</h3>
+            <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468]">
+              {["Aggregated, anonymised insights about the group", "How the benefit is being used, in total"].map((t) => (
+                <li key={t} className="flex gap-2"><span className="text-primary font-bold">✓</span>{t}</li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={0.06} className="b2b-card bg-[#fff] p-6">
+            <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-3">Your employer cannot see</h3>
+            <ul className="grid gap-2 font-jakarta text-[14.5px] text-[#3a4468]">
+              {[
+                "Your individual financial information",
+                "What you discuss with an expert",
+                "Anything that identifies you in the group view",
+              ].map((t) => (
+                <li key={t} className="flex gap-2"><span className="text-[#b21d15] font-bold">✕</span>{t}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+        <p className="mt-5 font-jakarta text-[15px] text-[#3a4468]">
+          Asking for guidance should never affect your career.
+        </p>
+        <div className="mt-2"><Needs kind="VERIFY" note="approved wording of what employers can/cannot see" /></div>
       </Section>
 
-      <Section tone="white">
-        <SectionHead
-          eyebrow="Why it works"
-          title="A benefit that compounds."
-          lede="Financial confidence isn't built in a single webinar. Koshpal is always on — small nudges, steady progress, expert help on the hard questions."
-        />
-        <div className="grid sm:grid-cols-3 gap-[18px]">
+      <Section tone="white" id="todo">
+        <SectionHead eyebrow="What you'll need to do" title="Not much." lede="Start with whatever feels easiest." />
+        <div className="grid md:grid-cols-3 gap-[18px]">
           {[
-            ["Always on", "Support every payday, not once a year."],
-            ["Personal", "Guidance shaped by each person's real situation."],
-            ["Private", "Individual financial data never reaches the employer."],
+            ["Sign in", "Your employer invites you. Create your account and you're in."],
+            ["Pick a starting point", "Book a session, open the app, or begin with the learning content."],
+            ["Go at your pace", "Use it when it's useful. There's nothing you have to complete."],
           ].map(([h, p], i) => (
-            <Reveal key={h} delay={i * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">
-              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533] mb-[7px]">{h}</h3>
-              <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468]">{p}</p>
+            <Reveal key={h} delay={i * 0.06} className="b2b-card bg-[#f7f8fd] p-6">
+              <h3 className="font-outfit font-semibold text-[17.5px] text-[#0b1533]">{h}</h3>
+              <p className="font-jakarta text-[14.5px] leading-[1.6] text-[#3a4468] mt-1.5">{p}</p>
             </Reveal>
           ))}
         </div>
+        <p className="mt-6 font-jakarta text-[16px] text-[#0b1533] font-medium">
+          What it costs you: nothing, if your employer sponsors it.
+        </p>
       </Section>
 
-      <PageCta
-        title="Give your people a financial wellness benefit they'll use."
-        sub="A 30-minute walkthrough of the employee experience and the HR view."
-        secondary={{ to: "/business-impact", label: "See the business case" }}
+      <Section tone="tint" id="faq">
+        <SectionHead eyebrow="Questions" title="What people ask before they trust it." />
+        <FaqAccordion items={EMPLOYEE_FAQ} />
+      </Section>
+
+      <CtaBand
+        eyebrow="Not an employee?"
+        title="Thinking about this for your team?"
+        sub="Book a demo and we'll show you what employees and HR each see."
       />
     </PageShell>
   );
