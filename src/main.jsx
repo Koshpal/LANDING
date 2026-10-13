@@ -24,6 +24,7 @@ const BusinessImpact = lazy(() => import('./pages/BusinessImpact'))
 const FinancialCoaching = lazy(() => import('./pages/FinancialCoaching'))
 const FinancialEducation = lazy(() => import('./pages/FinancialEducation'))
 const Security = lazy(() => import('./pages/Security'))
+const Pricing = lazy(() => import('./pages/Pricing'))
 const About = lazy(() => import('./pages/About'))
 const Customers = lazy(() => import('./pages/Customers'))
 
@@ -44,14 +45,17 @@ createRoot(document.getElementById('root')).render(
       <Suspense fallback={<div className="min-h-screen bg-[#fff]" />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/employee-financial-wellness" element={<EmployeeFinancialWellness />} />
+          <Route path="/for-employees" element={<EmployeeFinancialWellness />} />
+          <Route path="/employee-financial-wellness" element={<Navigate to="/for-employees" replace />} />
           <Route path="/platform" element={<Platform />} />
           <Route path="/for-hr" element={<ForHr />} />
           <Route path="/solutions/hr" element={<Navigate to="/for-hr" replace />} />
           <Route path="/business-impact" element={<BusinessImpact />} />
           <Route path="/financial-coaching" element={<FinancialCoaching />} />
           <Route path="/financial-education" element={<FinancialEducation />} />
-          <Route path="/security" element={<Security />} />
+          <Route path="/privacy-trust" element={<Security />} />
+          <Route path="/security" element={<Navigate to="/privacy-trust" replace />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/financial-wellness" element={<FinancialWellness />} />

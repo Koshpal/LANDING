@@ -3,11 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 
 const COL_PLATFORM = [
   { label: "Platform overview", to: "/platform" },
-  { label: "Employee financial wellness", to: "/employee-financial-wellness" },
+  { label: "For employees", to: "/for-employees" },
   { label: "Financial education", to: "/financial-education" },
   { label: "Financial coaching", to: "/financial-coaching" },
   { label: "For HR & People teams", to: "/for-hr" },
-  { label: "Privacy & security", to: "/security" },
+  { label: "Privacy & trust", to: "/privacy-trust" },
+  { label: "Pricing", to: "/pricing" },
 ];
 
 const COL_RESOURCES = [
@@ -20,6 +21,7 @@ const COL_RESOURCES = [
 const COL_COMPANY = [
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
+  { label: "Log in", to: "/login" },
   { label: "Book a demo", to: "/demo" },
   { label: "Privacy policy", to: "/privacy-policy" },
   { label: "Terms of service", to: "/terms-of-service" },

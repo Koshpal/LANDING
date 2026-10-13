@@ -82,7 +82,7 @@ export default function ForHr() {
       <PageCta
         title="Bring financial wellness to your workforce."
         sub="See exactly what rollout, engagement and reporting look like for a team your size."
-        secondary={{ to: "/employee-financial-wellness", label: "What employees get" }}
+        secondary={{ to: "/for-employees", label: "What employees get" }}
       />
     </PageShell>
   );

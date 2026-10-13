@@ -28,7 +28,7 @@ export default function PrivacySection() {
         ))}
       </div>
       <Reveal className="mt-8" delay={0.1}>
-        <CTA to="/security" variant="ghost">
+        <CTA to="/privacy-trust" variant="ghost">
           Read about security &amp; privacy
         </CTA>
       </Reveal>

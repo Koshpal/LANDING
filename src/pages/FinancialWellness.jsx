@@ -101,7 +101,7 @@ export default function FinancialWellness() {
         <div className="grid sm:grid-cols-3 gap-[18px]">
           {[
             ["Business impact", "How financial stress becomes a business cost.", "/business-impact"],
-            ["Privacy & security", "What HR can and can't see.", "/security"],
+            ["Privacy & security", "What HR can and can't see.", "/privacy-trust"],
             ["HR guides", "Evaluate providers, launch a program, measure ROI.", "/resources/guides"],
           ].map(([h, p, to], i) => (
             <Reveal key={h} delay={i * 0.05} className="b2b-card-hover bg-[#f7f8fd] border border-[#e9ecf7] rounded-[20px] p-6 b2b-shadow">

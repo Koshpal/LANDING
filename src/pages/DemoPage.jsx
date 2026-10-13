@@ -3,6 +3,7 @@ import { Phone, Mail, Linkedin, Send } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { track } from '../lib/analytics';
 
 export default function DemoPage() {
   const [formData, setFormData] = useState({
@@ -96,6 +97,7 @@ export default function DemoPage() {
       .then((response) => {
         // Increment submission count
         incrementSubmissionCount();
+        track('demo_submit', { status: 'success' });
 
         setSubmitStatus({
           type: 'success',
@@ -106,6 +108,7 @@ export default function DemoPage() {
         setCharCount(0);
       })
       .catch((error) => {
+        track('demo_submit', { status: 'error' });
         setSubmitStatus({
           type: 'error',
           message: 'Failed to send request. Please try again or email us directly.'

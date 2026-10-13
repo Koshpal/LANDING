@@ -76,8 +76,8 @@ export function PageHero({ eyebrow, title, sub, primary, secondary }) {
   );
 }
 
-/** Reusable closing call-to-action band. */
-export function PageCta({ eyebrow = "Get started", title, sub, primary, secondary }) {
+/** Reusable closing call-to-action band. `note` is an optional warm closing line. */
+export function PageCta({ eyebrow = "Get started", title, sub, primary, secondary, note }) {
   return (
     <section className="b2b-dark-band relative overflow-hidden py-14 sm:py-20 text-center">
       <JellyGrid color="255, 255, 255" opacity={0.16} />
@@ -101,11 +101,15 @@ export function PageCta({ eyebrow = "Get started", title, sub, primary, secondar
               </CTA>
             )}
           </div>
+          {note && <p className="font-jakarta text-[15px] text-[#aab6dd] max-w-[46ch]">{note}</p>}
         </Reveal>
       </div>
     </section>
   );
 }
+
+/** Preferred name going forward; PageCta is kept so existing pages still work. */
+export const CtaBand = PageCta;
 
 /* ---- small shared content primitives for interior pages ---- */
 

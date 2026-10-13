@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { track } from "../../lib/analytics";
 
 const FREE_DOMAINS = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "proton.me"];
 
@@ -31,6 +32,7 @@ export default function EmailCapture({
       setMsg("Please use your work email.");
       return;
     }
+    track("resource_submit", { resource: window.location.pathname, status: "unavailable" });
     // No delivery destination is configured yet (see CONTENT_NEEDED.md #18).
     // Do not claim success until a real submission exists.
     setState("error");

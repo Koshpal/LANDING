@@ -5,7 +5,7 @@ import Placeholder from "../components/b2b/Placeholder";
 
 export default function Security() {
   return (
-    <PageShell seo={{ title: "Privacy & Security", path: "/security", description: "Koshpal is built so a company can measure the impact of its financial wellness program without ever seeing an individual employee’s financial detail." }}>
+    <PageShell seo={{ title: "Privacy & Trust", path: "/privacy-trust", description: "Koshpal is built so a company can measure the impact of its financial wellness program without ever seeing an individual employee’s financial detail." }}>
       <PageHero
         eyebrow="Privacy & security"
         title="Your employees' financial lives are private."

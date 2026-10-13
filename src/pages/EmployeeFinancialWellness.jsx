@@ -25,7 +25,7 @@ const HR = [
 
 export default function EmployeeFinancialWellness() {
   return (
-    <PageShell seo={{ title: "Employee Financial Wellness", path: "/employee-financial-wellness", description: "Give employees the tools, insights and expert guidance to make better financial decisions — and give employers a simple, measurable way to deliver financial wellness at scale." }}>
+    <PageShell seo={{ title: "Employee Financial Wellness", path: "/for-employees", description: "Give employees the tools, insights and expert guidance to make better financial decisions — and give employers a simple, measurable way to deliver financial wellness at scale." }}>
       <PageHero
         eyebrow="Employee financial wellness"
         title="Build a financially healthier workforce."

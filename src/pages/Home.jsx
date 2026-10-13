@@ -13,6 +13,7 @@ import PrivacySection from "../components/b2b/PrivacySection";
 import ImpactSection from "../components/b2b/ImpactSection";
 import TechAndHumans from "../components/b2b/TechAndHumans";
 import FinalCta from "../components/b2b/FinalCta";
+import SectionTrack from "../components/b2b/SectionTrack";
 
 /* Section tone alternates strictly — no two dark bands adjacent:
    Hero(D) · Trust(W) · Problem(W) · Platform(D) · Journey(W) · Split(D)
@@ -27,16 +28,16 @@ export default function Home() {
       />
       <Navbar />
       <main>
-        <Hero />
-        <TrustStrip />
-        <ProblemSection />
-        <PlatformSection />
-        <EmployeeJourney />
-        <PlatformSplit />
-        <PrivacySection />
-        <ImpactSection />
-        <TechAndHumans />
-        <FinalCta />
+        <SectionTrack name="hero"><Hero /></SectionTrack>
+        <SectionTrack name="trust"><TrustStrip /></SectionTrack>
+        <SectionTrack name="problem"><ProblemSection /></SectionTrack>
+        <SectionTrack name="platform"><PlatformSection /></SectionTrack>
+        <SectionTrack name="employee_experience"><EmployeeJourney /></SectionTrack>
+        <SectionTrack name="hr_view"><PlatformSplit /></SectionTrack>
+        <SectionTrack name="privacy"><PrivacySection /></SectionTrack>
+        <SectionTrack name="impact"><ImpactSection /></SectionTrack>
+        <SectionTrack name="tech_humans"><TechAndHumans /></SectionTrack>
+        <SectionTrack name="final_cta"><FinalCta /></SectionTrack>
       </main>
       <Footer />
     </div>

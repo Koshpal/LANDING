@@ -29,7 +29,7 @@ export default function Platform() {
         title="One platform for your employees' financial wellbeing."
         sub="Financial intelligence, financial education and human guidance — combined into a single employee experience, with an aggregated dashboard for HR."
         primary={{ to: "/demo", label: "Book a demo" }}
-        secondary={{ to: "/employee-financial-wellness", label: "For employees" }}
+        secondary={{ to: "/for-employees", label: "For employees" }}
       />
 
       <Section tone="white">
@@ -107,7 +107,7 @@ export default function Platform() {
       <PageCta
         title="See the platform in one walkthrough."
         sub="The employee app, the coaching layer and the HR dashboard — in 30 minutes."
-        secondary={{ to: "/security", label: "Privacy & security" }}
+        secondary={{ to: "/privacy-trust", label: "Privacy & security" }}
       />
     </PageShell>
   );

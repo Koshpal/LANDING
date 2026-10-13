@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import JellyGrid from "./JellyGrid";
+import { track } from "../../lib/analytics";
 
 /* Shared building blocks for the B2B site. Everything routes through these, so
    restyling them lifts every page. */
@@ -52,7 +53,7 @@ export function SectionHead({ eyebrow, title, lede, dark = false, className = ""
 }
 
 /** Pill button. `variant`: "solid" | "ghost". */
-export function CTA({ to = "/demo", children, variant = "solid", size = "md", dark = false, className = "" }) {
+export function CTA({ to = "/demo", children, variant = "solid", size = "md", dark = false, className = "", trackLabel, location }) {
   const base =
     "b2b-press relative inline-flex items-center justify-center gap-2 font-outfit font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap overflow-hidden";
   const sizes = { md: "px-[22px] py-[13px] text-[15px]", lg: "px-8 py-[16px] text-[16px]" };
@@ -86,15 +87,21 @@ export function CTA({ to = "/demo", children, variant = "solid", size = "md", da
   );
 
   const style = variant === "solid" ? { color: "#fff" } : undefined;
+  const onClick = () =>
+    track("cta_click", {
+      label: trackLabel || (typeof children === "string" ? children : String(to)),
+      to: String(to),
+      location: location || (typeof window !== "undefined" ? window.location.pathname : ""),
+    });
   if (isHash || isExternal) {
     return (
-      <a href={to} className={cls} style={style}>
+      <a href={to} className={cls} style={style} onClick={onClick}>
         {inner}
       </a>
     );
   }
   return (
-    <Link to={to} className={cls} style={style}>
+    <Link to={to} className={cls} style={style} onClick={onClick}>
       {inner}
     </Link>
   );

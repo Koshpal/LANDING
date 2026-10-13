@@ -1,40 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
 
-/* Primary nav. Dropdowns on desktop, flattened groups in the mobile sheet. */
+/* Primary nav: seven flat links (no dropdowns) plus the persistent demo CTA.
+   Login is a quiet text link, not a competing button. */
 const MENU = [
-  {
-    label: "Platform",
-    items: [
-      { label: "Overview", to: "/platform" },
-      { label: "Employee financial wellness", to: "/employee-financial-wellness" },
-      { label: "Financial education", to: "/financial-education" },
-      { label: "Financial coaching", to: "/financial-coaching" },
-    ],
-  },
-  {
-    label: "Solutions",
-    items: [
-      { label: "For HR & People teams", to: "/for-hr" },
-      { label: "Privacy & security", to: "/security" },
-    ],
-  },
-  {
-    label: "Resources",
-    items: [
-      { label: "Resource hub", to: "/resources" },
-      { label: "Reports & research", to: "/resources/reports" },
-      { label: "HR guides", to: "/resources/guides" },
-      { label: "Blog", to: "/blog" },
-    ],
-  },
+  { label: "Platform", to: "/platform" },
+  { label: "For HR", to: "/for-hr" },
+  { label: "For Employees", to: "/for-employees" },
+  { label: "Privacy & Trust", to: "/privacy-trust" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Resources", to: "/resources" },
   { label: "About", to: "/about" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false); // mobile sheet
-  const [menu, setMenu] = useState(null); // open desktop dropdown label
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -68,58 +48,20 @@ export default function Navbar() {
           </Link>
 
           {/* desktop menu */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center font-outfit font-medium text-sm xl:text-[15px] text-black-light">
-            {MENU.map((m) =>
-              m.items ? (
-                <div
-                  key={m.label}
-                  className="relative"
-                  onMouseEnter={() => setMenu(m.label)}
-                  onMouseLeave={() => setMenu(null)}
-                >
-                  <button
-                    className="flex items-center gap-1 px-3 py-2 rounded-full transition hover:text-primary whitespace-nowrap"
-                    onClick={() => setMenu(menu === m.label ? null : m.label)}
-                  >
-                    {m.label}
-                    <ChevronDown
-                      size={15}
-                      className={`transition-transform ${menu === m.label ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  <div
-                    className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] min-w-[252px] rounded-2xl bg-[#fff] border border-[#e9ecf7] shadow-[0_24px_60px_-12px_rgba(11,21,51,0.22)] p-2 transition-all duration-150 origin-top ${
-                      menu === m.label
-                        ? "opacity-100 visible translate-y-0"
-                        : "opacity-0 invisible -translate-y-1"
-                    }`}
-                  >
-                    {m.items.map((it) => (
-                      <Link
-                        key={it.to}
-                        to={it.to}
-                        onClick={() => setMenu(null)}
-                        className="block px-3.5 py-2.5 rounded-xl text-[14px] text-[#3a4468] hover:bg-primary-lightest hover:text-primary transition"
-                      >
-                        {it.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  key={m.to}
-                  to={m.to}
-                  className="px-3 py-2 rounded-full transition hover:text-primary whitespace-nowrap"
-                >
-                  {m.label}
-                </Link>
-              )
-            )}
+          <nav className="hidden xl:flex items-center gap-0 2xl:gap-1 flex-1 justify-center font-outfit font-medium text-sm xl:text-[15px] text-black-light">
+            {MENU.map((m) => (
+              <Link
+                key={m.to}
+                to={m.to}
+                className="px-3 py-2 rounded-full transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary whitespace-nowrap"
+              >
+                {m.label}
+              </Link>
+            ))}
           </nav>
 
           {/* desktop CTAs */}
-          <div className="items-center flex-shrink-0 hidden gap-2 lg:flex">
+          <div className="items-center flex-shrink-0 hidden gap-2 xl:flex">
             <Link
               to="/login"
               className="px-3 py-2 text-sm font-semibold transition rounded-full font-outfit text-black-light hover:text-primary whitespace-nowrap"
@@ -137,9 +79,10 @@ export default function Navbar() {
 
           {/* mobile toggle */}
           <button
-            className="p-2 -mr-2 transition-transform duration-300 lg:hidden text-black-light touch-manipulation"
+            className="p-2 -mr-2 transition-transform duration-300 xl:hidden text-black-light touch-manipulation"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -160,38 +103,20 @@ export default function Navbar() {
 
         {/* mobile sheet */}
         <div
-          className={`lg:hidden mt-3 bg-white/95 backdrop-blur-lg rounded-2xl text-black-light shadow-lg border border-grey-lightest transition-all duration-300 ease-in-out origin-top overflow-hidden ${
+          className={`xl:hidden mt-3 bg-white/95 backdrop-blur-lg rounded-2xl text-black-light shadow-lg border border-grey-lightest transition-all duration-300 ease-in-out origin-top overflow-hidden ${
             open ? "opacity-100 scale-y-100 max-h-[640px] p-5" : "opacity-0 scale-y-0 max-h-0 p-0 border-0"
           }`}
         >
-          {MENU.map((m) =>
-            m.items ? (
-              <div key={m.label} className="py-2 border-b border-grey-lightest last:border-0">
-                <div className="font-outfit font-bold text-[11px] tracking-[0.12em] uppercase text-[#6b7590] mb-1">
-                  {m.label}
-                </div>
-                {m.items.map((it) => (
-                  <Link
-                    key={it.to}
-                    to={it.to}
-                    onClick={() => setOpen(false)}
-                    className="block py-2 text-[15px] font-medium font-outfit hover:text-primary touch-manipulation"
-                  >
-                    {it.label}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <Link
-                key={m.to}
-                to={m.to}
-                onClick={() => setOpen(false)}
-                className="block py-3 text-base font-medium font-outfit hover:text-primary touch-manipulation border-b border-grey-lightest last:border-0"
-              >
-                {m.label}
-              </Link>
-            )
-          )}
+          {MENU.map((m) => (
+            <Link
+              key={m.to}
+              to={m.to}
+              onClick={() => setOpen(false)}
+              className="block py-3 text-base font-medium font-outfit hover:text-primary touch-manipulation border-b border-grey-lightest last:border-0"
+            >
+              {m.label}
+            </Link>
+          ))}
           <div className="pt-4 space-y-2">
             <Link
               to="/demo"
@@ -204,7 +129,7 @@ export default function Navbar() {
             <Link
               to="/login"
               onClick={() => setOpen(false)}
-              className="block w-full px-4 py-3 text-base font-semibold text-center transition-all border-2 rounded-full cursor-pointer text-primary border-primary font-outfit hover:bg-primary hover:text-[#fff] touch-manipulation"
+              className="block w-full py-2 text-sm font-medium text-center text-[#3a4468] underline-offset-4 hover:underline font-outfit touch-manipulation"
             >
               Login
             </Link>

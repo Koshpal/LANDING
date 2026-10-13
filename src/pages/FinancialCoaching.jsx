@@ -88,7 +88,7 @@ export default function FinancialCoaching() {
       <PageCta
         title="Give employees an expert to call."
         sub="See how coaching fits alongside the app and the HR dashboard."
-        secondary={{ to: "/security", label: "How privacy works" }}
+        secondary={{ to: "/privacy-trust", label: "How privacy works" }}
       />
     </PageShell>
   );
