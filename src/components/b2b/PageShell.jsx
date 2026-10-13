@@ -28,7 +28,7 @@ export function PageShell({ seo, children }) {
     <div className="min-h-screen font-jakarta bg-[#fff] text-[#3a4468]">
       {seo && <Seo {...seo} />}
       <Navbar />
-      <main>{children}</main>
+      <main id="main">{children}</main>
       <Footer />
     </div>
   );

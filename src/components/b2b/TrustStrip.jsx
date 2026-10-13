@@ -25,7 +25,7 @@ export default function TrustStrip() {
                 <Icon size={19} strokeWidth={2} />
               </span>
               <div>
-                <h3 className="font-outfit font-semibold text-[16px] text-[#0b1533]">{h}</h3>
+                <p className="font-outfit font-semibold text-[16px] text-[#0b1533]">{h}</p>
                 <p className="font-jakarta text-[14px] leading-[1.55] text-[#3a4468] mt-0.5">{p}</p>
               </div>
             </li>

@@ -75,7 +75,8 @@ export default function JellyGrid({
     parent.addEventListener("mouseleave", onLeave);
 
     const maxDistance = 350;
-    let raf;
+    let raf = 0;
+    let visible = true;
     const tick = () => {
       const w = canvas.width / dpr;
       const h = canvas.height / dpr;
@@ -125,11 +126,19 @@ export default function JellyGrid({
           ctx.fill();
         }
       }
-      raf = requestAnimationFrame(tick);
+      // Stop drawing when scrolled out of view or when motion is reduced.
+      raf = visible && !reduce ? requestAnimationFrame(tick) : 0;
     };
     tick();
 
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !raf && !reduce) raf = requestAnimationFrame(tick);
+    });
+    io.observe(parent);
+
     return () => {
+      io.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMove);

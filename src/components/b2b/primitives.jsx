@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import JellyGrid from "./JellyGrid";
 import { track } from "../../lib/analytics";
@@ -12,13 +12,18 @@ const ease = [0.2, 0.8, 0.2, 1];
 /** Scroll-into-view reveal — soft fade + rise + blur-in. */
 export function Reveal({ children, delay = 0, y = 20, className = "", as = "div" }) {
   const M = motion[as] || motion.div;
+  const reduce = useReducedMotion();
+  if (reduce) {
+    const Tag = as;
+    return <Tag className={`b2b-reveal ${className}`}>{children}</Tag>;
+  }
   return (
     <M
       className={`b2b-reveal ${className}`}
-      initial={{ opacity: 0, y, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.7, ease, delay }}
+      transition={{ duration: 0.6, ease, delay }}
     >
       {children}
     </M>

@@ -5,11 +5,9 @@ import JellyGrid from "./JellyGrid";
 import { SessionCard } from "./SampleUI";
 
 const ease = [0.2, 0.8, 0.2, 1];
-const rise = (i) => ({
-  initial: { opacity: 0, y: 22 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease, delay: i * 0.08 },
-});
+// Text is painted immediately (it is the largest contentful element);
+// only the visual eases in.
+const rise = () => ({});
 
 /* Question 1: what is this, and is it for me?
    Visual: the real app Home screen next to a coach-session summary card. */
@@ -54,17 +52,17 @@ export default function Hero() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0.001, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.2 }}
+            transition={{ duration: 0.5, ease }}
             className="relative mx-auto w-full max-w-[460px] lg:max-w-none"
           >
             <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] gap-4 items-end">
               <img
                 src="/assets/app-home.png"
                 alt="The Koshpal app home screen showing total balance and linked bank accounts, with sample figures"
-                width="600"
-                height="1218"
+                width="480"
+                height="974"
                 fetchpriority="high"
                 className="w-full h-auto drop-shadow-[0_30px_50px_rgba(4,10,35,0.55)]"
               />

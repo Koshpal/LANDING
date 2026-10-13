@@ -119,8 +119,8 @@ export default function Platform() {
             variant="phone"
             src="/assets/app-home.png"
             alt="The Koshpal app home screen with sample balances and linked accounts"
-            width={600}
-            height={1218}
+            width={480}
+            height={974}
             sample
           />
           <div className="grid sm:grid-cols-2 gap-4">

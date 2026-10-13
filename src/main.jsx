@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import ScrollToTop from './components/ScrollToTop'
-import CustomCursor from './components/b2b/CustomCursor'
 import './index.css'
 
 // Route-level code splitting — keeps the initial bundle to the homepage + shell.
@@ -35,9 +34,9 @@ const Calculator = lazy(() => import('./pages/Calculator'))
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+      <a href="#main" className="skip-link">Skip to content</a>
       <div className="b2b-topbar" />
       <ScrollToTop />
-      <CustomCursor />
       <Suspense fallback={<div className="min-h-screen bg-[#fff]" />}>
         <Routes>
           <Route path="/" element={<Home />} />

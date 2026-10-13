@@ -29,7 +29,7 @@ export default function ProofDummy() {
           {LOGOS.map((l) => (
             <li
               key={l}
-              className="h-11 px-5 grid place-items-center rounded-lg border border-dashed border-[#dfe3f2] bg-[#f7f8fd] font-outfit font-bold text-[13px] tracking-[0.04em] text-[#6b7597] list-none"
+              className="h-11 px-5 grid place-items-center rounded-lg border border-dashed border-[#dfe3f2] bg-[#f7f8fd] font-outfit font-bold text-[13px] tracking-[0.04em] text-[#3a4468] list-none"
             >
               {l}
             </li>

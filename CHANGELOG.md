@@ -36,3 +36,9 @@ Added on request, always visible and labelled "Dummy". Set `VITE_HIDE_DUMMY=true
 - About: dummy team and expert panel.
 - Platform: Tags and Cash on Hand sample screens.
 - Blog: three dummy articles (marked, `noindex`) and a dummy employer-guide PDF behind the work-email form.
+
+## Phase F: polish
+- Custom cursor removed (it hid the system cursor); visible keyboard focus and a skip link added.
+- Motion respects "reduce motion"; background canvases stop when off-screen.
+- Home hero text is in the static HTML, below-the-fold sections load as a separate chunk, fonts no longer block rendering. Lighthouse mobile on Home: performance 92, accessibility 100, SEO 100.
+- Every main page ships its own title, description, canonical and social tags in static HTML; new 1200x630 social card.

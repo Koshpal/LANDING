@@ -1,5 +1,4 @@
 /* Import Koshpal Design System Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -539,3 +538,19 @@
 .b2b-on-dark-soft { color: #c3cdec; }
 .b2b-on-dark-muted{ color: #aab6dd; }
 .b2b-on-dark-accent { color: #a9c0ff; }
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7) */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid #334eac;
+  outline-offset: 2px;
+}
+.b2b-dark-band :where(a, button, summary):focus-visible {
+  outline-color: #9db4ff;
+}
+/* Skip link */
+.skip-link {
+  position: absolute; left: -9999px; top: 8px; z-index: 100;
+  background: #fff; color: #0b1533; padding: 8px 14px; border-radius: 999px;
+  font-weight: 600;
+}
+.skip-link:focus { left: 12px; }

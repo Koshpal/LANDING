@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 const SITE = "https://koshpal.com";
-const OG_IMAGE = `${SITE}/assets/logo.png`;
+const OG_IMAGE = `${SITE}/og-card.png`;
 
 /**
  * Per-page SEO. Renders title, description, canonical and Open Graph / Twitter
