@@ -2,12 +2,20 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      keyframes: {
+        'avatar-scroll': { to: { transform: 'translateX(-50%)' } },
+        'marquee': { to: { transform: 'translateX(-50%)' } },
+      },
       fontFamily: {
         'outfit': ['Outfit', 'sans-serif'],
         'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
+        'figtree': ['Figtree', 'sans-serif'],
+        'geist': ['Geist', 'sans-serif'],
+        'stack': ['Stack Sans Headline', 'Figtree', 'sans-serif'],
       },
       colors: {
         black: {
+          DEFAULT: '#000000',
           mid: '#262626',
           darkest: '#000000',
           dark: '#1a1a1a',
@@ -36,6 +44,7 @@ module.exports = {
           lightest: '#e0e0e0',
         },
         white: {
+          DEFAULT: '#ffffff',
           darkest: '#ffffff',
           dark: '#fafafa',
           mid: '#f5f5f5',

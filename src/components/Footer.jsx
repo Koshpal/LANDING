@@ -1,259 +1,212 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Instagram, Linkedin } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { H2 } from "./site/Heading";
+import { track } from "../lib/analytics";
 
-const COL_PLATFORM = [
-  { label: "Platform overview", to: "/platform" },
-  { label: "For employees", to: "/for-employees" },
-  { label: "For HR & People teams", to: "/for-hr" },
-  { label: "Privacy & trust", to: "/privacy-trust" },
+/* Figma "Koshpal Footer" (2:20832): CTA headline, newsletter, link columns,
+   large logo with company blurb, legal lines. */
+const PLATFORM = [
+  { label: "Employee Dashboard", to: "/platform" },
+  { label: "Mobile App", to: "/platform" },
+  { label: "Experts & Coaching", to: "/platform#connect" },
   { label: "Pricing", to: "/pricing" },
 ];
-
-const COL_RESOURCES = [
-  { label: "Resource hub", to: "/resources" },
-  { label: "Blog", to: "/blog" },
+const SOLUTIONS = [
+  { label: "For Employees", to: "/for-employees" },
+  { label: "For HR & People", to: "/for-hr" },
+  { label: "For CFO’s & Finance", to: "/business-impact" },
 ];
-
-const COL_COMPANY = [
+const RESOURCES = [
+  { label: "Blogs", to: "/blog" },
+  { label: "Guides", to: "/resources" },
+  { label: "Reports", to: "/resources" },
+  { label: "FAQ & Help", to: "/contact" },
+];
+const COMPANY = [
   { label: "About", to: "/about" },
-  { label: "Contact", to: "/contact" },
-  { label: "Log in", to: "/login" },
-  { label: "Book a demo", to: "/demo" },
-  { label: "Privacy policy", to: "/privacy-policy" },
-  { label: "Terms of service", to: "/terms-of-service" },
+  { label: "Our Vision", to: "/about" },
+  { label: "Privacy & Security", to: "/privacy-trust" },
+  { label: "Resources", to: "/resources" },
 ];
 
-export default function Footer() {
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const canvasRef = useRef(null);
+const head = "font-figtree text-[16px] uppercase leading-5 text-white";
+const link = "font-figtree text-[14px] leading-5 text-white/90 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white";
 
-  const smoothScrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+function Col({ title, items }) {
+  return (
+    <div>
+      <h3 className={head}>{title}</h3>
+      <ul className="mt-4 flex flex-col gap-[6px]">
+        {items.map((i) => (
+          <li key={i.label}>
+            <Link to={i.to} className={link}>{i.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function XMark(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+function Newsletter() {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("idle"); // idle | sending | done | error
+
+  const submit = (e) => {
+    e.preventDefault();
+    const v = email.trim().toLowerCase();
+    if (state === "sending") return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+      setState("error");
+      return;
+    }
+    setState("sending");
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_DEMO,
+        {
+          from_name: "Newsletter signup",
+          from_email: v,
+          company: "",
+          role: "",
+          message: `Newsletter signup from ${window.location.pathname}`,
+          to_email: "koshpal@koshpal.com",
+          submitted_at: new Date().toISOString(),
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        track("newsletter_submit", { status: "success" });
+        setState("done");
+        setEmail("");
+      })
+      .catch(() => setState("error"));
   };
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    const gridSize = 60;
-    let particles = [];
-
-    const resizeCanvas = () => {
-      const parent = canvas.parentElement;
-      if (parent) {
-        canvas.width = parent.offsetWidth;
-        canvas.height = parent.offsetHeight;
-      }
-    };
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    const initParticles = () => {
-      particles = [];
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        for (let y = 0; y < canvas.height; y += gridSize) {
-          particles.push({ x, y, baseX: x, baseY: y, opacity: 0.2, targetOpacity: 0.2, offsetX: 0, offsetY: 0, targetOffsetX: 0, targetOffsetY: 0 });
-        }
-      }
-    };
-    initParticles();
-
-    let animFrameId;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle) => {
-        const dx = mousePos.x - particle.baseX;
-        const dy = mousePos.y - particle.baseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const maxDistance = 350;
-        if (distance < maxDistance) {
-          const intensity = 1 - distance / maxDistance;
-          particle.targetOpacity = Math.max(0, 0.25 * (distance / maxDistance));
-          const distortionStrength = intensity * 45;
-          particle.targetOffsetX = (Math.random() - 0.5) * distortionStrength;
-          particle.targetOffsetY = (Math.random() - 0.5) * distortionStrength;
-        } else {
-          particle.targetOpacity = 0.25;
-          particle.targetOffsetX = 0;
-          particle.targetOffsetY = 0;
-        }
-        particle.opacity += (particle.targetOpacity - particle.opacity) * 0.08;
-        particle.offsetX += (particle.targetOffsetX - particle.offsetX) * 0.12;
-        particle.offsetY += (particle.targetOffsetY - particle.offsetY) * 0.12;
-        const drawX = particle.baseX + particle.offsetX;
-        const drawY = particle.baseY + particle.offsetY;
-        ctx.strokeStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(drawX, drawY);
-        ctx.lineTo(drawX + gridSize, drawY);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(drawX, drawY);
-        ctx.lineTo(drawX, drawY + gridSize);
-        ctx.stroke();
-        if (distance < maxDistance) {
-          const dotSize = (1 - distance / maxDistance) * 3;
-          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity * 1.5})`;
-          ctx.beginPath();
-          ctx.arc(drawX, drawY, dotSize, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      });
-      animFrameId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animFrameId);
-    };
-  }, [mousePos]);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  const linkCls =
-    "text-[#3f4a63] text-sm font-jakarta hover:text-primary hover:underline transition-all duration-200";
 
   return (
-    <footer className="bg-[#fff] border-t border-[#e3e7f1] px-4 sm:px-6 md:px-12 lg:px-20 py-8 sm:py-12 md:py-16">
-      {/* CTA block — only off the homepage; Home already ends on <FinalCta /> */}
-      {!isHomePage && (
-        <div className="max-w-7xl mx-auto mb-12 sm:mb-16 md:mb-20">
-          <div
-            className="relative bg-gradient-to-b to-[#334EAC] from-[#32437D] rounded-3xl sm:rounded-[32px] px-6 sm:px-10 md:px-16 lg:px-20 py-8 sm:py-12 md:py-16 overflow-hidden"
-            onMouseMove={handleMouseMove}
-          >
-            <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
-              <h2 style={{ color: "#fff" }} className="text-[#fff] text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-semibold font-outfit text-center lg:text-left leading-tight">
-                Support your people beyond the payslip.
-              </h2>
-              <div className="flex justify-center lg:justify-end">
-                <Link
-                  to="/demo"
-                  className="bg-[#334EAC] text-lg px-6 py-2.5 font-outfit rounded-full hover:bg-[#5B7FDB] transition-all duration-300 ease-in-out border-2 border-[#fff]"
-                  style={{ color: "#fff" }}
-                >
-                  Book a demo
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+    <form onSubmit={submit} noValidate className="w-full max-w-[400px]">
+      <label htmlFor="footer-email" className="sr-only">Your email address</label>
+      <div className="flex h-[60px] items-center rounded-full border border-white/30 bg-white/10 py-[5px] pl-5 pr-[5px] backdrop-blur-sm">
+        <input
+          id="footer-email"
+          type="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (state !== "sending") setState("idle");
+          }}
+          placeholder="Your email address*"
+          autoComplete="email"
+          className="min-w-0 flex-1 bg-transparent font-figtree text-[16px] text-white outline-none placeholder:text-white/60"
+        />
+        <button type="submit" aria-label="Subscribe" disabled={state === "sending"} className="flex size-[50px] shrink-0 items-center justify-center rounded-full bg-black text-white transition-transform hover:scale-105 disabled:opacity-60">
+          <ArrowRight size={22} aria-hidden="true" />
+        </button>
+      </div>
+      <p role="status" className="mt-2 min-h-[20px] pl-5 font-figtree text-[14px] text-white/80">
+        {state === "done" && "Thanks, you’re on the list."}
+        {state === "error" && "Please enter a valid email address."}
+      </p>
+    </form>
+  );
+}
 
-      {/* footer content */}
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10 md:gap-12 lg:gap-14 mb-12">
-          {/* brand */}
-          <div className="lg:col-span-2 w-full">
-            <div className="flex items-center gap-2 mb-4">
-              <img src="/assets/logo-removebg.png" alt="Koshpal" className="h-[28px] sm:h-[32px] md:h-[36px] w-auto" />
-              <h3 className="text-[#0e1a3c] text-2xl font-bold font-outfit">Koshpal</h3>
-            </div>
-            <p className="text-[#3f4a63] text-sm font-jakarta leading-relaxed max-w-[40ch]">
-              A privacy-first employee financial wellness platform. 1:1 sessions with certified financial
-              experts, an app to act on the plan, and anonymised insight for HR. No commissions. No
-              products sold.
+export default function Footer() {
+  return (
+    <footer className="bg-white px-2 pb-2 md:px-[6px] md:pb-[6px]">
+      <div
+        className="relative mx-auto max-w-[1420px] overflow-hidden rounded-[28px] px-4 pb-12 pt-14 md:rounded-[40px] md:px-8 md:pt-[100px]"
+        style={{ backgroundImage: "linear-gradient(180deg,#3b3fbc 0%,#1b1d6e 100%)" }}
+      >
+        {[13.4, 50, 86.6].map((x) => (
+          <span key={x} aria-hidden="true" className="pointer-events-none absolute inset-y-0 hidden w-px bg-white/10 lg:block" style={{ left: `${x}%` }} />
+        ))}
+
+        <div className="relative mx-auto flex max-w-[1100px] flex-col items-center">
+          <H2 className="text-center text-[#f4f4f8]">
+            Ready to outpace your <span className="text-[#c8f169]">category?</span>
+          </H2>
+        </div>
+
+        <div className="relative mx-auto mt-12 flex max-w-[960px] flex-col items-start justify-between gap-8 md:mt-[56px] md:flex-row md:items-center">
+          <div>
+            <p className="font-stack text-[32px] font-light leading-[1.2] text-white md:text-[36px]">Stay connected</p>
+            <p className="mt-3 max-w-[340px] font-figtree text-[18px] leading-[22px] text-white/65">Join our newsletter for tips, updates, and project highlights only the good stuff.</p>
+          </div>
+          <Newsletter />
+        </div>
+
+        <div className="relative mx-auto mt-16 grid max-w-[1280px] gap-12 lg:mt-[100px] lg:grid-cols-[1fr_540px_1fr] lg:gap-0">
+          <div className="order-2 flex flex-col gap-9 lg:order-1">
+            <Col title="Platform" items={PLATFORM} />
+            <Col title="Solutions" items={SOLUTIONS} />
+            <Col title="Resources" items={RESOURCES} />
+          </div>
+
+          <div className="order-1 flex flex-col items-center text-center lg:order-2">
+            <Link to="/" aria-label="Koshpal home" className="relative block h-[58px] w-[235px] md:h-[116px] md:w-[470px]">
+              <span className="absolute" style={{ top: "-60.67%", right: "-16.37%", bottom: "-68.22%", left: "-15.49%" }}>
+                <img src="/img/home/logo-light.svg" alt="Koshpal" className="block size-full max-w-none" />
+              </span>
+            </Link>
+            <p className="mt-8 max-w-[460px] font-figtree text-[14px] leading-[18px] text-white">
+              Koshpal provides an all-in-one financial management platform designed for businesses. From real-time expense tracking and automated budgeting to analytics and seamless integrations, we equip teams with the tools and insights they need to manage finances efficiently and scale with confidence.
             </p>
+            <div className="mt-9 flex items-center gap-5 text-white">
+              <a href="https://www.linkedin.com/company/koshpal/" target="_blank" rel="noopener noreferrer" aria-label="Koshpal on LinkedIn" className="transition-opacity hover:opacity-80">
+                <Linkedin size={30} aria-hidden="true" />
+              </a>
+              <span aria-hidden="true" title="Instagram"><Instagram size={30} /></span>
+              <span aria-hidden="true" title="X"><XMark width="28" height="28" /></span>
+            </div>
           </div>
 
-          {/* platform */}
-          <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Platform</h4>
-            <ul className="space-y-2.5">
-              {COL_PLATFORM.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className={linkCls}>{item.label}</Link>
+          <div className="order-3 flex flex-col gap-9 lg:pl-[74px]">
+            <Col title="Company" items={COMPANY} />
+            <div>
+              <h3 className={head}>Contact</h3>
+              <ul className="mt-4 flex flex-col gap-[6px] font-figtree text-[14px] leading-5 text-white/90">
+                <li><a href="mailto:koshpal@koshpal.com" className={link}>Koshpal Support</a></li>
+                <li>
+                  General Enquiries:
+                  <br />
+                  <a href="mailto:koshpal@koshpal.com" className={link}>koshpal@koshpal.com</a>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* resources */}
-          <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Resources</h4>
-            <ul className="space-y-2.5">
-              {COL_RESOURCES.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className={linkCls}>{item.label}</Link>
+                <li>
+                  Other Enquiries:
+                  <br />
+                  <a href="https://koshpal.com" className={link}>koshpal.com</a>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* company */}
-          <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">Company</h4>
-            <ul className="space-y-2.5">
-              {COL_COMPANY.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className={linkCls}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* contact */}
-          <div className="lg:col-span-1">
-            <h4 className="text-[#0e1a3c] text-lg font-semibold font-outfit mb-4">
-              Contact
-            </h4>
-            <ul className="space-y-2.5">
-              <li className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-[#6b7590] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <a href="tel:+919983444740" className={linkCls}>
-                  +91 9983444740
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-[#6b7590] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <a href="mailto:koshpal@koshpal.com" className={linkCls}>
-                  koshpal@koshpal.com
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-[#6b7590] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-                <a href="https://www.linkedin.com/company/koshpal/" target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-[#e3e7f1] mb-6" />
-
-        <div className="flex justify-center">
-          <p
-            style={{
-              color: "#6b7590",
-              fontSize: "15px",
-              letterSpacing: "0.02em",
-              lineHeight: "28px",
-              fontFamily: "Plus Jakarta Sans, sans-serif",
-              textAlign: "center",
-              maxWidth: "1098px",
-            }}
-          >
-            © 2026 Koshpal. All rights reserved.
+        <div className="relative mx-auto mt-14 max-w-[540px] border-t border-white/40 pt-8 text-center font-figtree text-[14px] leading-5 text-white">
+          <p>Primeco Union City, Block B, 6th Floor, ITPL Main Rd, Jaipur, Rajasthan 560067</p>
+          <p className="mt-4">ISO/IEC 27001:2013, SOC 2 Type 2, and GDPR certified</p>
+          <p className="mt-4">
+            Insurance products offered and serviced by Koshpal Fintech Pvt Ltd
             <br />
-            Privacy-first employee financial wellness · Privacy Policy · Terms of Service · Responsible Disclosure
+            IRDAI Registration No: 897, Direct Broker (Life &amp; General)
+            <br />
+            CIN: U66000KA2022PTC160458
           </p>
+          <nav aria-label="Legal" className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+            <Link to="/terms-of-service" className={link}>Disclaimer</Link>
+            <Link to="/privacy-policy" className={link}>Privacy policy</Link>
+            <Link to="/contact" className={link}>Grievance redressal</Link>
+          </nav>
         </div>
       </div>
     </footer>

@@ -1,141 +1,101 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PillButton from "./site/PillButton";
 
-/* Primary nav: seven flat links (no dropdowns) plus the persistent demo CTA.
-   Login is a quiet text link, not a competing button. */
+/* Figma nav: logo · five dropdown triggers · "Book a demo" pill.
+   `glass` is the translucent bar that sits over the home hero; the default is
+   a solid white bar for pages that have not been moved to the new design yet. */
 const MENU = [
-  { label: "Platform", to: "/platform" },
-  { label: "For HR", to: "/for-hr" },
-  { label: "For Employees", to: "/for-employees" },
-  { label: "Privacy & Trust", to: "/privacy-trust" },
-  { label: "Pricing", to: "/pricing" },
-  { label: "Resources", to: "/resources" },
-  { label: "About", to: "/about" },
+  { label: "Platform", items: [{ label: "Overview", to: "/platform" }, { label: "Privacy & Trust", to: "/privacy-trust" }] },
+  { label: "Solution", items: [{ label: "For employees", to: "/for-employees" }, { label: "For companies", to: "/for-hr" }] },
+  { label: "Resources", items: [{ label: "Blog", to: "/blog" }, { label: "Guides & reports", to: "/resources" }] },
+  { label: "Company", items: [{ label: "About", to: "/about" }, { label: "Contact us", to: "/contact" }] },
+  { label: "Pricing", items: [{ label: "Pricing", to: "/pricing" }] },
 ];
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false); // mobile sheet
-  const [scrolled, setScrolled] = useState(false);
+function Logo() {
+  return (
+    <Link to="/" aria-label="Koshpal home" className="relative block h-[45px] w-[182px] shrink-0 max-md:w-[128px] max-md:h-[32px]">
+      <span className="absolute" style={{ top: "-60.67%", right: "-16.37%", bottom: "-68.22%", left: "-15.49%" }}>
+        <img src="/img/home/logo.svg" alt="Koshpal" className="block size-full max-w-none" />
+      </span>
+    </Link>
+  );
+}
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+function Chevron() {
+  return <img src="/img/home/chevron.svg" alt="" width="10" height="6" className="transition-transform duration-200 group-hover/nav:rotate-180 group-focus-within/nav:rotate-180" />;
+}
+
+export default function Navbar({ glass = false }) {
+  const [open, setOpen] = useState(false);
+  const bar = glass ? "bg-white/[0.08] border-b border-white/25 backdrop-blur-[2px]" : "bg-white border-b border-[#e6e8f2]";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
-      <div
-        className={`max-w-6xl px-3 mx-auto pointer-events-auto sm:px-4 md:px-6 transition-all duration-300 ${
-          scrolled ? "pt-1.5 sm:pt-2" : "pt-3 sm:pt-4 md:pt-5"
-        }`}
-      >
-        <div
-          className={`mx-auto rounded-full backdrop-blur-xl px-4 sm:px-5 md:px-6 flex items-center justify-between border border-[#ffffffcc] ring-1 ring-[#0b153312] transition-all duration-300 ${
-            scrolled
-              ? "bg-white/95 h-[52px] sm:h-[56px] md:h-[60px] shadow-[0_14px_44px_-12px_rgba(4,10,35,0.45)]"
-              : "bg-white/95 h-[56px] sm:h-[62px] md:h-[66px] shadow-[0_16px_50px_-12px_rgba(4,10,35,0.5)]"
-          }`}
-        >
-          {/* logo */}
-          <Link to="/" className="flex items-center flex-shrink-0 h-full gap-2">
-            <img
-              src="/assets/logo-removebg.png"
-              alt="Koshpal"
-              className="h-[24px] sm:h-[26px] md:h-[28px] w-auto cursor-pointer"
-            />
-          </Link>
+    <header className="absolute inset-x-0 top-0 z-50">
+      <div className={`mx-auto flex h-[101.6px] max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-20 max-md:h-[72px] ${bar}`}>
+        <Logo />
 
-          {/* desktop menu */}
-          <nav className="hidden xl:flex items-center gap-0 2xl:gap-1 flex-1 justify-center font-outfit font-medium text-sm xl:text-[15px] text-black-light">
-            {MENU.map((m) => (
-              <Link
-                key={m.to}
-                to={m.to}
-                className="px-3 py-2 rounded-full transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary whitespace-nowrap"
+        <nav aria-label="Primary" className="hidden flex-1 items-center justify-center gap-[10px] lg:flex">
+          {MENU.map((m) => (
+            <div key={m.label} className="group/nav relative">
+              <button
+                type="button"
+                aria-haspopup="true"
+                className="flex h-[33.6px] items-center gap-[6px] rounded-full px-[9px] py-2 font-stack text-[18px] leading-[17.6px] text-[#0b0b0c] transition-colors hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#3b3fbc]"
               >
                 {m.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* desktop CTAs */}
-          <div className="items-center flex-shrink-0 hidden gap-2 xl:flex">
-            <Link
-              to="/login"
-              className="px-3 py-2 text-sm font-semibold transition rounded-full font-outfit text-black-light hover:text-primary whitespace-nowrap"
-            >
-              Login
-            </Link>
-            <Link
-              to="/demo"
-              className="relative overflow-hidden text-[#fff] font-semibold font-outfit px-5 xl:px-6 py-2.5 text-sm xl:text-[15px] rounded-full shadow-[0_10px_28px_-10px_rgba(51,78,172,0.7)] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-10px_rgba(51,78,172,0.8)] transition-all cursor-pointer whitespace-nowrap"
-              style={{ color: "#FFFFFF", background: "linear-gradient(100deg,#334eac,#4459c9 55%,#3a86b0)" }}
-            >
-              Book a demo
-            </Link>
-          </div>
-
-          {/* mobile toggle */}
-          <button
-            className="p-2 -mr-2 transition-transform duration-300 xl:hidden text-black-light touch-manipulation"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`w-6 h-6 transition-transform duration-300 ${open ? "rotate-90" : ""}`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* mobile sheet */}
-        <div
-          className={`xl:hidden mt-3 bg-white/95 backdrop-blur-lg rounded-2xl text-black-light shadow-lg border border-grey-lightest transition-all duration-300 ease-in-out origin-top overflow-hidden ${
-            open ? "opacity-100 scale-y-100 max-h-[640px] p-5" : "opacity-0 scale-y-0 max-h-0 p-0 border-0"
-          }`}
-        >
-          {MENU.map((m) => (
-            <Link
-              key={m.to}
-              to={m.to}
-              onClick={() => setOpen(false)}
-              className="block py-3 text-base font-medium font-outfit hover:text-primary touch-manipulation border-b border-grey-lightest last:border-0"
-            >
-              {m.label}
-            </Link>
+                <Chevron />
+              </button>
+              <div className="invisible absolute left-1/2 top-full z-10 w-max min-w-[190px] -translate-x-1/2 pt-3 opacity-0 transition duration-150 group-hover/nav:visible group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:opacity-100">
+                <ul className="rounded-[20px] bg-white p-2 shadow-[0_16px_40px_rgba(11,11,12,0.16)]">
+                  {m.items.map((it) => (
+                    <li key={it.to}>
+                      <Link to={it.to} className="block rounded-[14px] px-4 py-2.5 font-stack text-[16px] text-[#0b0b0c] transition-colors hover:bg-[#f1f1fb]">
+                        {it.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           ))}
-          <div className="pt-4 space-y-2">
-            <Link
-              to="/demo"
-              onClick={() => setOpen(false)}
-              className="block w-full px-4 py-3 text-base font-semibold text-center text-[#fff] transition-all rounded-full cursor-pointer bg-primary font-outfit hover:bg-primary-darkest touch-manipulation"
-              style={{ color: "#FFFFFF" }}
-            >
-              Book a demo
-            </Link>
-            <Link
-              to="/login"
-              onClick={() => setOpen(false)}
-              className="block w-full py-2 text-sm font-medium text-center text-[#3a4468] underline-offset-4 hover:underline font-outfit touch-manipulation"
-            >
-              Login
-            </Link>
+        </nav>
+
+        <div className="hidden lg:block">
+          <PillButton to="/demo" size="lg" className="!text-[24px]">Book a demo</PillButton>
+        </div>
+
+        <button
+          type="button"
+          className="p-2 -mr-2 text-[#0b0b0c] lg:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+        >
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
+      </div>
+
+      {open && (
+        <div className="mx-4 mt-2 rounded-[24px] bg-white p-5 shadow-[0_16px_40px_rgba(11,11,12,0.18)] lg:hidden">
+          {MENU.map((m) => (
+            <div key={m.label} className="border-b border-[#eceef6] py-3 last:border-0">
+              <p className="font-stack text-[13px] uppercase tracking-wider text-[#7a7f99]">{m.label}</p>
+              {m.items.map((it) => (
+                <Link key={it.to} to={it.to} onClick={() => setOpen(false)} className="block py-1.5 font-stack text-[18px] text-[#0b0b0c]">
+                  {it.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+          <div className="pt-4">
+            <PillButton to="/demo" size="sm" onClick={() => setOpen(false)}>Book a demo</PillButton>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

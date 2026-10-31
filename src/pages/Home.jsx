@@ -1,32 +1,43 @@
-import React, { lazy, Suspense } from "react";
-import Navbar from "../components/Navbar";
+import React from "react";
 import Footer from "../components/Footer";
 import Seo from "../components/b2b/Seo";
-import SectionTrack from "../components/b2b/SectionTrack";
-import Hero from "../components/b2b/Hero";
-import TrustStrip from "../components/b2b/TrustStrip";
+import HomeHero from "../components/site/HomeHero";
+import PillarSection from "../components/site/PillarSection";
+import RealProblem from "../components/site/RealProblem";
+import ProblemWeSee from "../components/site/ProblemWeSee";
+import CompaniesGet from "../components/site/CompaniesGet";
+import ProgramPillars from "../components/site/ProgramPillars";
+import OnePlace from "../components/site/OnePlace";
+import Rollout from "../components/site/Rollout";
+import Compare from "../components/site/Compare";
+import Experts from "../components/site/Experts";
+import PrivacyFirst from "../components/site/PrivacyFirst";
+import FinalCta from "../components/site/FinalCta";
+import Faq from "../components/site/Faq";
 
-const HomeBelowFold = lazy(() => import("../components/b2b/HomeBelowFold"));
-
-/* Order follows the buyer's questions (brief section 2):
-   1 what is it · 2 is it my problem · 3 what do employees get · 4 what do I get
-   5 is data safe · 6 how is it different · 7 rollout effort · 8 proof
-   9 cost · 10 next step. See HomeBelowFold for sections 2 onward. */
+/* Section order follows the Figma "Website 2.0" home frame (2:19331). */
 export default function Home() {
   return (
-    <div className="min-h-screen font-jakarta bg-[#fff] text-[#3a4468]">
+    <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
       <Seo
         path="/"
         title=""
         description="Koshpal is a privacy-first employee financial wellness platform. Every employee gets 1:1 sessions with certified financial experts and an app to act on the plan; HR gets anonymised insight."
       />
-      <Navbar />
       <main id="main">
-        <SectionTrack name="hero"><Hero /></SectionTrack>
-        <SectionTrack name="trust"><TrustStrip /></SectionTrack>
-        <Suspense fallback={<div className="min-h-[60vh]" />}>
-          <HomeBelowFold />
-        </Suspense>
+        <HomeHero />
+        <PillarSection />
+        <RealProblem />
+        <ProblemWeSee />
+        <CompaniesGet />
+        <ProgramPillars />
+        <OnePlace />
+        <Rollout />
+        <Compare />
+        <Experts />
+        <PrivacyFirst />
+        <FinalCta />
+        <Faq />
       </main>
       <Footer />
     </div>
