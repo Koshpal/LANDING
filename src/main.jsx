@@ -16,14 +16,27 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const TermsOfService = lazy(() => import('./pages/TermsOfService'))
 const VideoWatchPage = lazy(() => import('./pages/VideoWatch'))
 
-const EmployeeFinancialWellness = lazy(() => import('./pages/EmployeeFinancialWellness'))
+const EmployeeFinancialWellness = lazy(() => import('./pages/EmployeesPage'))
 const Platform = lazy(() => import('./pages/Platform'))
-const ForHr = lazy(() => import('./pages/ForHr'))
+const ForHr = lazy(() => import('./pages/ForCompanies'))
 const BusinessImpact = lazy(() => import('./pages/BusinessImpact'))
 const Security = lazy(() => import('./pages/Security'))
 const Pricing = lazy(() => import('./pages/Pricing'))
 const About = lazy(() => import('./pages/About'))
 const Customers = lazy(() => import('./pages/Customers'))
+const Vision = lazy(() => import('./pages/Vision'))
+const Advise = lazy(() => import('./pages/Advise'))
+const FaqPage = lazy(() => import('./pages/FaqPage'))
+const appPage = (name) => lazy(() => import('./pages/AppPages').then((m) => ({ default: m[name] })))
+const MobileApp = appPage('MobileApp')
+const SpendingInsights = appPage('SpendingInsights')
+const DuesReminders = appPage('DuesReminders')
+const BudgetsGoals = appPage('BudgetsGoals')
+const DashboardOverview = appPage('DashboardOverview')
+const DashboardSessions = appPage('DashboardSessions')
+const DashboardInsights = appPage('DashboardInsights')
+const Story = lazy(() => import('./pages/Story'))
+const Privacy = lazy(() => import('./pages/Privacy'))
 
 const FinancialWellness = lazy(() => import('./pages/FinancialWellness'))
 const Resources = lazy(() => import('./pages/Resources'))
@@ -48,11 +61,22 @@ createRoot(document.getElementById('root')).render(
           <Route path="/business-impact" element={<BusinessImpact />} />
           <Route path="/financial-coaching" element={<Navigate to="/platform#connect" replace />} />
           <Route path="/financial-education" element={<Navigate to="/platform#learn" replace />} />
-          <Route path="/privacy-trust" element={<Security />} />
+          <Route path="/privacy-trust" element={<Privacy />} />
           <Route path="/security" element={<Navigate to="/privacy-trust" replace />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<Story />} />
+          <Route path="/our-story" element={<Navigate to="/about" replace />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/our-vision" element={<Vision />} />
+          <Route path="/advise" element={<Advise />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/platform/mobile-app" element={<MobileApp />} />
+          <Route path="/platform/spending-insights" element={<SpendingInsights />} />
+          <Route path="/platform/dues-reminders" element={<DuesReminders />} />
+          <Route path="/platform/budgets-goals" element={<BudgetsGoals />} />
+          <Route path="/platform/dashboard" element={<DashboardOverview />} />
+          <Route path="/platform/book-a-session" element={<DashboardSessions />} />
+          <Route path="/platform/dashboard-insights" element={<DashboardInsights />} />
           <Route path="/financial-wellness" element={<FinancialWellness />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/reports" element={<Navigate to="/resources" replace />} />

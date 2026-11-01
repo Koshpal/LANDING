@@ -1,101 +1,85 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { PageShell, PageHero, PageCta } from "../components/b2b/PageShell";
-import { Section, Reveal } from "../components/b2b/primitives";
+import Footer from "../components/Footer";
+import Seo from "../components/b2b/Seo";
+import { MagentaHero, CtaBand, ORANGE } from "../components/site/PageParts";
 import { POSTS as ALL_POSTS } from "../content/posts";
 import { SHOW_DUMMY } from "../lib/dummy";
-const POSTS = ALL_POSTS.filter((p) => SHOW_DUMMY || !p.dummy);
 
-const fmtDate = (d) =>
-  d ? new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "";
+/* Figma "Blog" (orange hero, featured post, 3-column grid). Posts come from content/posts.js;
+   thumbnails are the design's illustrations, cycled across posts. */
+const POSTS = ALL_POSTS.filter((p) => SHOW_DUMMY || !p.dummy);
+const IMG = ["carabiner", "binders", "piggy", "coin-card"].map((n) => `/img/pages/blog/${n}.png`);
+export const postImage = (i) => IMG[i % IMG.length];
+
+export const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "");
+
+function Card({ p, i }) {
+  const body = (
+    <>
+      <img src={postImage(i)} alt="" width="410" height="307" loading="lazy" className="aspect-[410/307] w-full rounded-[24px] object-cover transition-transform duration-300 group-hover:scale-[1.01]" />
+      <p className="mt-3 font-figtree text-[14px] leading-5 text-[#666]">
+        {p.category} <span aria-hidden="true">•</span> {p.published ? `${p.readMins} min read` : "Coming soon"}
+      </p>
+      <h3 className={`mt-1 font-figtree text-[16px] leading-[22px] md:text-[17px] ${p.published ? "text-[#0b0b0c]" : "text-[#8a8a8a]"}`}>{p.title}</h3>
+    </>
+  );
+  return p.published ? (
+    <Link to={`/blog/${p.slug}`} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#3b3fbc]">{body}</Link>
+  ) : (
+    <div className="block">{body}</div>
+  );
+}
 
 export default function Blog() {
-  const cats = useMemo(() => ["All", ...Array.from(new Set(POSTS.map((p) => p.category)))], []);
-  const [cat, setCat] = useState("All");
-  const shown = POSTS.filter((p) => cat === "All" || p.category === cat);
+  const featured = POSTS.find((p) => p.published);
+  const rest = POSTS.filter((p) => p !== featured);
 
   return (
-    <PageShell
-      seo={{
-        title: "Blog — Financial Wellness Insights",
-        path: "/blog",
-        description:
-          "Short, practical writing on employee financial wellness for HR and People teams — definitions, provider evaluation, privacy, rollout and measurement.",
-      }}
-    >
-      <PageHero
-        eyebrow="Blog"
-        title="Financial wellness, explained for People teams."
-        sub="Short pieces on the decisions HR actually faces — what financial wellness is, how to evaluate it, and how to run a program well."
-        primary={{ to: "/demo", label: "Book a demo" }}
-        secondary={{ to: "/resources", label: "All resources" }}
+    <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
+      <Seo
+        path="/blog"
+        title="Blog: Financial wellness insights"
+        description="Short, practical writing on employee financial wellness for HR and People teams: definitions, provider evaluation, privacy, rollout and measurement."
       />
+      <main id="main">
+        <MagentaHero
+          gradient={ORANGE}
+          small
+          padBottom={149}
+          tag="Blog"
+          title="Ideas on workplace money."
+          lead="Perspectives, research and practical thinking on employee financial wellbeing, for the leadership teams building workplaces where people feel financially confident."
+        />
 
-      <Section tone="white">
-        <div className="flex flex-wrap gap-2 mb-9">
-          {cats.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCat(c)}
-              className={`font-outfit font-semibold text-[13px] px-4 py-2 rounded-full border transition ${
-                cat === c
-                  ? "bg-primary text-[#fff] border-primary"
-                  : "bg-[#fff] text-[#3a4468] border-[#dfe3f2] hover:border-primary hover:text-primary"
-              }`}
-              style={cat === c ? { color: "#fff" } : undefined}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
-          {shown.map((p, i) => {
-            const card = (
-              <div
-                className={`h-full rounded-[20px] border p-6 flex flex-col ${
-                  p.published
-                    ? "bg-[#f7f8fd] border-[#e9ecf7] b2b-shadow hover:-translate-y-1 hover:shadow-[0_2px_6px_rgba(14,26,60,0.06),0_30px_60px_rgba(14,26,60,0.12)] transition-all duration-200"
-                    : "bg-[#f7f8fd] border-dashed border-[#dfe3f2]"
-                }`}
+        <section className="bg-white px-5 pb-16 pt-10 md:px-8 md:pb-[100px] md:pt-[100px]">
+          <div className="mx-auto max-w-[1276px]">
+            {featured && (
+              <Link
+                to={`/blog/${featured.slug}`}
+                className="group grid overflow-hidden rounded-[28px] bg-[#efefef] p-2 md:grid-cols-[minmax(0,1fr)_450px] md:rounded-[40px] lg:min-h-[457px]"
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="font-outfit font-semibold text-[11px] tracking-[0.1em] uppercase text-secondary-darkest">
-                    {p.category}
-                  </span>
-                  {p.published ? (
-                    <span className="font-jakarta text-[11px] text-[#8a95b4]">
-                      · {fmtDate(p.date)} · {p.readMins} min
-                    </span>
-                  ) : (
-                    <span className="font-jakarta text-[11px] text-[#a9b2ca]">· coming soon</span>
-                  )}
+                <div className="flex flex-col px-5 pb-6 pt-6 md:px-[56px] md:pb-[59px] md:pt-[57px]">
+                  <span className="self-start rounded-[8px] bg-[#dcdcdc] px-[8px] py-[3px] font-figtree text-[14px] leading-[22px] text-[#555]">{featured.category}</span>
+                  <h2 className="mt-[17px] max-w-[700px] font-figtree text-[clamp(30px,3.33vw,48px)] font-medium leading-[1] tracking-[-0.03em] [text-wrap:wrap]">{featured.title}</h2>
+                  <p className="mt-5 font-figtree text-[16px] text-[#333]">{fmtDate(featured.date)}</p>
+                  <span className="mt-8 inline-flex h-[46px] items-center self-start rounded-full bg-white px-6 font-figtree text-[16px] shadow-[0_3px_6px_rgba(0,0,0,0.18)] transition-transform duration-200 group-hover:-translate-y-0.5 md:mt-auto">Read more</span>
                 </div>
-                <h3 className={`font-outfit font-semibold text-[18px] leading-snug mb-2 ${p.published ? "text-[#0b1533]" : "text-[#8a95b4]"}`}>
-                  {p.title}
-                </h3>
-                <p className={`font-jakarta text-[13.5px] leading-[1.55] flex-1 ${p.published ? "text-[#3a4468]" : "text-[#a9b2ca]"}`}>
-                  {p.excerpt}
-                </p>
-                {p.published && (
-                  <span className="font-outfit font-semibold text-[13px] text-primary mt-4">Read →</span>
-                )}
-              </div>
-            );
-            return (
-              <Reveal key={p.slug} delay={(i % 3) * 0.05}>
-                {p.published ? <Link to={`/blog/${p.slug}`}>{card}</Link> : card}
-              </Reveal>
-            );
-          })}
-        </div>
-      </Section>
+                <img src="/img/pages/blog/coin-card.png" alt="" width="450" height="441" className="aspect-[450/441] w-full rounded-[24px] object-cover md:rounded-[32px] lg:h-full lg:rounded-[32px]" />
+              </Link>
+            )}
 
-      <PageCta
-        title="See the platform the articles describe."
-        sub="A 30-minute walkthrough of the employee experience and the HR dashboard."
-        secondary={{ to: "/platform", label: "See the platform" }}
-      />
-    </PageShell>
+            <ul className="mt-12 grid gap-x-[22px] gap-y-12 sm:grid-cols-2 lg:mt-[100px] lg:grid-cols-3 lg:gap-y-[80px]">
+              {rest.map((p, i) => (
+                <li key={p.slug}><Card p={p} i={i} /></li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <CtaBand cta="Book a demo" py={110}>Bring wellbeing to your workplace</CtaBand>
+      </main>
+      <Footer />
+    </div>
   );
 }

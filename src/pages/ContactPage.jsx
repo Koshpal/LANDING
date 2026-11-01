@@ -1,379 +1,164 @@
-import React, { useState } from 'react';
-import { Phone, Mail, Linkedin, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Seo from '../components/b2b/Seo';
+import React, { useState } from "react";
+import { Mail, MapPin } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Seo from "../components/b2b/Seo";
+import PillButton from "../components/site/PillButton";
 
-const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+/* Figma "Contact Us" (2:8860). Layout and styling follow the design; the
+   template's placeholder contact details are replaced with Koshpal's own.
+   The map is the design's raster (public/img/contact/map.png). */
+const OFFICE = "Jaipur, Rajasthan";
+const EMAIL = "koshpal@koshpal.com";
 
-  const [charCount, setCharCount] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+const field =
+  "w-full rounded-[28px] bg-white px-[30px] font-stack text-[18px] leading-6 text-[#0b0b0c] outline-none placeholder:text-[#8a8a8a] focus-visible:ring-2 focus-visible:ring-[#3b3fbc]";
+const label = "block pb-[14px] font-stack text-[20px] leading-6 text-[#0b0b0c]";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    if (name === 'message') {
-      setCharCount(value.length);
-    }
-  };
-
-  // Rate limiting: Check submission count
-  const checkRateLimit = () => {
-    const today = new Date().toDateString();
-    const storedData = localStorage.getItem('emailSubmissions');
-    
-    if (storedData) {
-      const { date, count } = JSON.parse(storedData);
-      
-      // Reset count if it's a new day
+function checkRateLimit() {
+  const today = new Date().toDateString();
+  try {
+    const stored = localStorage.getItem("emailSubmissions");
+    if (stored) {
+      const { date, count } = JSON.parse(stored);
       if (date !== today) {
-        localStorage.setItem('emailSubmissions', JSON.stringify({ date: today, count: 0 }));
+        localStorage.setItem("emailSubmissions", JSON.stringify({ date: today, count: 0 }));
         return true;
       }
-      
-      // Check if limit exceeded
-      if (count >= 10) {
-        return false;
-      }
-    } else {
-      // First submission
-      localStorage.setItem('emailSubmissions', JSON.stringify({ date: today, count: 0 }));
+      return count < 10;
     }
-    
-    return true;
-  };
+    localStorage.setItem("emailSubmissions", JSON.stringify({ date: today, count: 0 }));
+  } catch {
+    /* storage unavailable: do not block the send */
+  }
+  return true;
+}
 
-  const incrementSubmissionCount = () => {
-    const today = new Date().toDateString();
-    const storedData = localStorage.getItem('emailSubmissions');
-    const { count } = JSON.parse(storedData);
-    localStorage.setItem('emailSubmissions', JSON.stringify({ date: today, count: count + 1 }));
-  };
+function bumpSubmissionCount() {
+  try {
+    const { count } = JSON.parse(localStorage.getItem("emailSubmissions"));
+    localStorage.setItem("emailSubmissions", JSON.stringify({ date: new Date().toDateString(), count: count + 1 }));
+  } catch {
+    /* ignore */
+  }
+}
 
-  const handleSubmit = (e) => {
+export default function ContactPage() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" });
+
+  const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const onSubmit = (e) => {
     e.preventDefault();
-
-    // Client-side email validation
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      setSubmitStatus({ type: 'error', message: 'Please enter a valid email address.' });
-      return;
+    if (busy) return;
+    if (!form.name.trim()) return setStatus({ type: "error", message: "Please enter your name." });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      return setStatus({ type: "error", message: "Please enter a valid email address." });
     }
-
-    // Check rate limit
     if (!checkRateLimit()) {
-      setSubmitStatus({ 
-        type: 'error', 
-        message: 'Daily submission limit reached (10 per day). Please try again tomorrow.' 
-      });
-      return;
+      return setStatus({ type: "error", message: "Daily submission limit reached (10 per day). Please try again tomorrow." });
     }
-    
-    setIsSubmitting(true);
-    setSubmitStatus({ type: '', message: '' });
 
-    // EmailJS configuration from environment variables
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    // Template parameters
-    const templateParams = {
-      from_name: `${formData.firstName} ${formData.lastName}`,
-      from_email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-      to_email: 'koshpal@koshpal.com' // Your email
-    };
-
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
-      .then((response) => {
-        // Increment submission count
-        incrementSubmissionCount();
-        
-        setSubmitStatus({ 
-          type: 'success', 
-          message: 'Message sent successfully! We\'ll get back to you soon.' 
-        });
-        // Reset form
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        setCharCount(0);
+    setBusy(true);
+    setStatus({ type: "", message: "" });
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name.trim(),
+          from_email: form.email.trim(),
+          subject: "Website enquiry",
+          message: form.message,
+          to_email: EMAIL,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        bumpSubmissionCount();
+        setStatus({ type: "success", message: "Message sent successfully! We’ll get back to you soon." });
+        setForm({ name: "", email: "", message: "" });
       })
-      .catch((error) => {
-        setSubmitStatus({
-          type: 'error', 
-          message: 'Failed to send message. Please try again or email us directly.' 
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+      .catch(() => setStatus({ type: "error", message: "Failed to send message. Please try again or email us directly." }))
+      .finally(() => setBusy(false));
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
       <Seo path="/contact" title="Contact" description="Get in touch with the Koshpal team about employee financial wellness for your workplace." />
-      <Navbar />
-      
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full mb-6">
-              <Phone className="w-4 h-4" />
-              <span className="font-medium text-sm md:text-base">Let's Talk</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#101828] mb-4">
-              Get in <span className="text-[#17A2B8]">touch</span>
+      <main id="main">
+        <section className="relative" style={{ backgroundImage: "linear-gradient(180deg,#b24979 0%,#6b2645 100%)" }}>
+          <Navbar glass />
+          <div className="mx-auto flex max-w-[1440px] flex-col items-center px-5 pb-16 pt-[140px] md:px-10 md:pb-[120px] md:pt-[248px]">
+            <span className="rounded-full bg-[#ffbcfc] px-[18px] py-2 font-stack text-[20px] leading-[33px] text-black">Contact</span>
+            <h1 className="mt-6 text-balance text-center font-figtree font-medium text-white text-[clamp(38px,5vw,72px)] leading-[1.15] tracking-[-0.0127em]">
+              Tell us your requirements
             </h1>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Questions about Koshpal for your workplace? Write to us.
+            <p className="mt-6 max-w-[900px] text-balance text-center font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.25] text-white">
+              Whether it’s a product question, demo request, or data inquiry, our team will help you explore the right solution for your workplace.
             </p>
-          </div>
 
-          {/* Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Form Section */}
-            <div className="bg-white rounded-3xl shadow-lg p-8 md:p-10 relative overflow-hidden">
-              {/* Gradient Border Top */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
-              
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                Send us a Message
-              </h2>
-              <p className="text-gray-600 mb-8">
-                Fill out the form below and a member of our team will reply by email.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name Fields */}
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      placeholder="John"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder="Doe"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                    />
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="john.doe@company.com"
-                      required
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                    />
-                  </div>
-                </div>
-
-                {/* Subject */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Subject <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="How can we help you today?"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Your Message <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your needs and how we can help..."
-                    required
-                    maxLength={500}
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition resize-none"
-                  />
-                  <p className="text-sm text-gray-500 mt-2">
-                    {charCount}/500 characters
-                  </p>
-                </div>
-
-                {/* Status Message */}
-                {submitStatus.message && (
-                  <div className={`p-4 rounded-lg ${
-                    submitStatus.type === 'success' 
-                      ? 'bg-green-50 text-green-800 border border-green-200' 
-                      : 'bg-red-50 text-red-800 border border-red-200'
-                  }`}>
-                    <p className="text-sm font-medium">{submitStatus.message}</p>
-                  </div>
-                )}
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group ${
-                    isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                  }`}
+            <div className="mt-12 grid w-full max-w-[1240px] gap-[34px] md:mt-[88px] lg:grid-cols-[532px_minmax(0,1fr)]">
+              {/* map + contact cards */}
+              <div
+                className="relative mx-auto aspect-[532/560] w-full max-w-[532px] overflow-hidden rounded-[30px] bg-[#aee0f4] bg-cover bg-top [container-type:inline-size] lg:mx-0"
+                style={{ backgroundImage: "url(/img/contact/map.png)" }}
+              >
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="absolute flex flex-col justify-between rounded-[30px] bg-[#ffbcfc] text-[#0b0b0c] [padding:3.76cqw]"
+                  style={{ left: "3.76%", bottom: "3.57%", width: "45.1%", height: "29.5%" }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                  <Send className={`w-5 h-5 transition-transform ${
-                    isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1'
-                  }`} />
-                </button>
+                  <span className="flex items-center justify-center rounded-full bg-white [height:8.65cqw] [width:8.65cqw]"><Mail className="size-[55%]" aria-hidden="true" /></span>
+                  <span>
+                    <span className="block font-stack [font-size:max(11px,2.63cqw)]">Email</span>
+                    <span className="block break-all font-stack leading-tight [font-size:max(12px,3.38cqw)]">{EMAIL}</span>
+                  </span>
+                </a>
+                <div
+                  className="absolute flex flex-col justify-between rounded-[30px] bg-[#0b0b0c] text-white [padding:3.76cqw]"
+                  style={{ left: "50.9%", bottom: "3.57%", width: "45.9%", height: "29.5%" }}
+                >
+                  <span className="flex items-center justify-center rounded-full bg-white text-[#0b0b0c] [height:8.65cqw] [width:8.65cqw]"><MapPin className="size-[55%]" aria-hidden="true" /></span>
+                  <span>
+                    <span className="block font-stack [font-size:max(11px,2.63cqw)]">Office</span>
+                    <span className="block font-stack leading-tight [font-size:max(12px,3.38cqw)]">{OFFICE}</span>
+                  </span>
+                </div>
+              </div>
 
-                <p className="text-sm text-gray-500 text-center mt-4">
-                  We respect your privacy and will never share your information
+              {/* form */}
+              <form onSubmit={onSubmit} noValidate className="flex flex-col rounded-[30px] bg-[#f0f0f0] p-6 md:rounded-[40px] md:p-[30px] md:pb-[45px]">
+                <div>
+                  <label htmlFor="c-name" className={label}>Your Name</label>
+                  <input id="c-name" name="name" value={form.name} onChange={onChange} autoComplete="name" placeholder="Enter your full name" className={`${field} h-14`} />
+                </div>
+                <div className="mt-[34px]">
+                  <label htmlFor="c-email" className={label}>Work email address</label>
+                  <input id="c-email" name="email" type="email" value={form.email} onChange={onChange} autoComplete="email" placeholder="name@company.com" className={`${field} h-14`} />
+                </div>
+                <div className="mt-[34px]">
+                  <label htmlFor="c-msg" className={label}>Tell us what you are looking for?</label>
+                  <textarea id="c-msg" name="message" value={form.message} onChange={onChange} placeholder="A sentence or two about your goals and current setup." className={`${field} h-[121px] resize-none py-[18px]`} />
+                </div>
+                <div className="mt-8 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+                  <PillButton type="submit" tone="lime" size="sm" disabled={busy} className="!text-[18px] !leading-6 disabled:opacity-60">
+                    {busy ? "Sending…" : "Send message"}
+                  </PillButton>
+                  <p className="max-w-[240px] font-stack text-[18px] leading-6 text-[#0b0b0c] sm:text-right">We reply within one working day. No spam, ever.</p>
+                </div>
+                <p role="status" aria-live="polite" className={`mt-4 min-h-[24px] font-stack text-[16px] ${status.type === "error" ? "text-[#b42318]" : "text-[#067647]"}`}>
+                  {status.message}
                 </p>
               </form>
             </div>
-
-            {/* Contact Info Section */}
-            <div className="bg-gradient-to-br from-[#334EAC] to-[#4A5FC1] rounded-3xl shadow-lg p-8 md:p-10 text-white relative overflow-hidden min-h-[600px] flex flex-col">
-              {/* Contact Details */}
-              <div className="space-y-6 mb-auto">
-                {/* Phone */}
-                <a href="tel:+919983444740" className="flex items-center gap-4 group">
-                  <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Phone className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff] group-hover:underline">+91 9983444740</p>
-                  </div>
-                </a>
-
-                {/* Email */}
-                <a href="mailto:koshpal@koshpal.com" className="flex items-center gap-4 group">
-                  <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Mail className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff] group-hover:underline">koshpal@koshpal.com</p>
-                  </div>
-                </a>
-
-                {/* LinkedIn */}
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className=" p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Linkedin fill='#ffffff' className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <a href='https://www.linkedin.com/company/koshpal/' className="text-lg font-semibold text-[#fff]">Linkedin</a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative Illustration */}
-              <div className="relative mt-8">
-                <div className="flex items-center justify-center gap-6">
-                  {/* Yellow Circle */}
-                  <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-lg"></div>
-                  
-                  {/* Blue Shield with Checkmark */}
-                  <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  
-                  {/* Yellow Folder */}
-                  <div className="w-24 h-20 bg-yellow-500 rounded-2xl shadow-lg transform -rotate-12 relative">
-                    <div className="absolute -top-2 left-4 w-12 h-3 bg-yellow-600 rounded-t-lg"></div>
-                  </div>
-                </div>
-
-                {/* Bottom Elements */}
-                <div className="flex items-center justify-center gap-8 mt-6">
-                  {/* Pink Blob */}
-                  <div className="w-20 h-20 bg-pink-300 rounded-full shadow-lg" style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}></div>
-                  
-                  {/* Orange Bowl with Lock */}
-                  <div className="relative">
-                    <div className="w-32 h-20 bg-orange-500 rounded-t-full shadow-lg"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Small decorative stars */}
-                <div className="absolute top-0 right-10 w-6 h-6 text-orange-400">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <div className="absolute bottom-10 left-8 w-4 h-4 text-orange-400">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      </main>
       <Footer />
     </div>
   );
-};
-
-export default ContactPage;
+}

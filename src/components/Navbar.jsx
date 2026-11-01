@@ -6,10 +6,22 @@ import PillButton from "./site/PillButton";
    `glass` is the translucent bar that sits over the home hero; the default is
    a solid white bar for pages that have not been moved to the new design yet. */
 const MENU = [
-  { label: "Platform", items: [{ label: "Overview", to: "/platform" }, { label: "Privacy & Trust", to: "/privacy-trust" }] },
+  {
+    label: "Platform",
+    items: [
+      { label: "Overview", to: "/platform" },
+      { label: "Mobile app", to: "/platform/mobile-app" },
+      { label: "Employee dashboard", to: "/platform/dashboard" },
+      { label: "Spending insights", to: "/platform/spending-insights" },
+      { label: "Budgets & goals", to: "/platform/budgets-goals" },
+      { label: "Dues & reminders", to: "/platform/dues-reminders" },
+      { label: "Book a session", to: "/platform/book-a-session" },
+      { label: "Privacy & trust", to: "/privacy-trust" },
+    ],
+  },
   { label: "Solution", items: [{ label: "For employees", to: "/for-employees" }, { label: "For companies", to: "/for-hr" }] },
-  { label: "Resources", items: [{ label: "Blog", to: "/blog" }, { label: "Guides & reports", to: "/resources" }] },
-  { label: "Company", items: [{ label: "About", to: "/about" }, { label: "Contact us", to: "/contact" }] },
+  { label: "Resources", items: [{ label: "Blog", to: "/blog" }, { label: "FAQ & help", to: "/faq" }, { label: "Guides & reports", to: "/resources" }] },
+  { label: "Company", items: [{ label: "About", to: "/about" }, { label: "Our vision", to: "/our-vision" }, { label: "Advise with Koshpal", to: "/advise" }, { label: "Contact us", to: "/contact" }] },
   { label: "Pricing", items: [{ label: "Pricing", to: "/pricing" }] },
 ];
 
@@ -32,8 +44,8 @@ export default function Navbar({ glass = false }) {
   const bar = glass ? "bg-white/[0.08] border-b border-white/25 backdrop-blur-[2px]" : "bg-white border-b border-[#e6e8f2]";
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <div className={`mx-auto flex h-[101.6px] max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-20 max-md:h-[72px] ${bar}`}>
+    <header className={`absolute inset-x-0 top-0 z-50 ${bar}`}>
+      <div className="mx-auto flex h-[101.6px] max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-20 max-md:h-[72px]">
         <Logo />
 
         <nav aria-label="Primary" className="hidden flex-1 items-center justify-center gap-[10px] lg:flex">
@@ -80,7 +92,7 @@ export default function Navbar({ glass = false }) {
       </div>
 
       {open && (
-        <div className="mx-4 mt-2 rounded-[24px] bg-white p-5 shadow-[0_16px_40px_rgba(11,11,12,0.18)] lg:hidden">
+        <div className="mx-4 mt-2 max-h-[calc(100vh-96px)] overflow-y-auto rounded-[24px] bg-white p-5 shadow-[0_16px_40px_rgba(11,11,12,0.18)] lg:hidden">
           {MENU.map((m) => (
             <div key={m.label} className="border-b border-[#eceef6] py-3 last:border-0">
               <p className="font-stack text-[13px] uppercase tracking-wider text-[#7a7f99]">{m.label}</p>

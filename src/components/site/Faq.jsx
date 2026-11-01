@@ -19,19 +19,23 @@ const ITEMS = [
   { q: "Do you handle creative, or just media?" },
 ];
 
-export default function Faq() {
+export default function Faq({ tag = "questions leaders ask", title = "Before you book", items = ITEMS, narrow = false, className }) {
   const [open, setOpen] = useState(0);
 
+  /* narrow: the inner-page frames (title at x=84, list 567-1355) vs the home frame (60 / 590-1380). */
+  const shell = className ?? (narrow ? "px-5 py-16 md:px-8 md:py-[92px]" : "px-5 py-16 md:px-[60px] md:py-[92px]");
+  const grid = narrow ? "max-w-[1272px] lg:grid-cols-[minmax(0,1fr)_788px]" : "max-w-[1320px] lg:grid-cols-[minmax(0,1fr)_minmax(0,790px)]";
+
   return (
-    <section className="bg-white px-5 py-16 md:px-[60px] md:py-[92px]">
-      <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,790px)] lg:gap-[60px]">
+    <section className={`bg-white ${shell}`}>
+      <div className={`mx-auto grid gap-10 lg:gap-[60px] ${grid}`}>
         <div className="flex flex-col items-start">
-          <Tag>questions leaders ask</Tag>
-          <h2 className="mt-6 font-figtree text-[clamp(40px,3.89vw,56px)] font-medium leading-[1.1] tracking-[-0.02em] text-[#0b0b0c]">Before you book</h2>
+          {tag && <Tag>{tag}</Tag>}
+          <h2 className={`${tag ? "mt-6" : ""} font-figtree text-[clamp(40px,3.89vw,56px)] font-medium leading-[1.1] tracking-[-0.02em] text-[#0b0b0c]`}>{title}</h2>
         </div>
 
         <ul className="flex flex-col gap-3">
-          {ITEMS.map((it, i) => {
+          {items.map((it, i) => {
             const on = open === i;
             return (
               <li key={it.q} className="rounded-[20px] bg-[#f0f0f0]">

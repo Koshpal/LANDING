@@ -8,8 +8,8 @@ import { track } from "../lib/analytics";
 /* Figma "Koshpal Footer" (2:20832): CTA headline, newsletter, link columns,
    large logo with company blurb, legal lines. */
 const PLATFORM = [
-  { label: "Employee Dashboard", to: "/platform" },
-  { label: "Mobile App", to: "/platform" },
+  { label: "Employee Dashboard", to: "/platform/dashboard" },
+  { label: "Mobile App", to: "/platform/mobile-app" },
   { label: "Experts & Coaching", to: "/platform#connect" },
   { label: "Pricing", to: "/pricing" },
 ];
@@ -22,11 +22,11 @@ const RESOURCES = [
   { label: "Blogs", to: "/blog" },
   { label: "Guides", to: "/resources" },
   { label: "Reports", to: "/resources" },
-  { label: "FAQ & Help", to: "/contact" },
+  { label: "FAQ & Help", to: "/faq" },
 ];
 const COMPANY = [
   { label: "About", to: "/about" },
-  { label: "Our Vision", to: "/about" },
+  { label: "Our Vision", to: "/our-vision" },
   { label: "Privacy & Security", to: "/privacy-trust" },
   { label: "Resources", to: "/resources" },
 ];
@@ -123,7 +123,7 @@ function Newsletter() {
 
 export default function Footer() {
   return (
-    <footer className="bg-white px-2 pb-2 md:px-[6px] md:pb-[6px]">
+    <footer className="bg-white px-2 pb-2 pt-[30px] md:px-[6px] md:pb-[6px]">
       <div
         className="relative mx-auto max-w-[1420px] overflow-hidden rounded-[28px] px-4 pb-12 pt-14 md:rounded-[40px] md:px-8 md:pt-[100px]"
         style={{ backgroundImage: "linear-gradient(180deg,#3b3fbc 0%,#1b1d6e 100%)" }}
