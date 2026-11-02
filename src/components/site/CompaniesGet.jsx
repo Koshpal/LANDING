@@ -4,18 +4,9 @@ import Tag from "./Tag";
 /* Figma 20:4730 "What companies get": glass panel over a colour-wash photo,
    with a three-tab strip under the case-study image. */
 const TABS = [
-  {
-    title: "See it being used",
-    body: "A privacy-first dashboard shows take-up, engagement, and the money topics your team asks about most, as anonymised trends. Enough to report up, never traceable to a person.",
-  },
-  {
-    title: "Prove the return",
-    body: "Less money stress means fewer sick days, sharper focus, and people who stay. A benefit that pays itself back, with clear pricing and no commissions.",
-  },
-  {
-    title: "No admin, no IT project",
-    body: "We handle setup, data security, and privacy. You hand it to your team and watch it work.",
-  },
+  { title: "See it being used", body: "Sign-ups, sessions and the topics people ask about, as anonymised trends." },
+  { title: "Watch confidence grow", body: "Financial confidence across the company, measured over time and reported every quarter." },
+  { title: "Nothing new to run", body: "We handle setup, the kickoff webinar, the coaches and employee support." },
 ];
 
 export default function CompaniesGet() {
@@ -35,13 +26,10 @@ export default function CompaniesGet() {
       <div className="relative mt-4 border-y border-white/30 bg-[rgba(29,27,27,0.09)] px-4 py-14 backdrop-blur-[66px] md:px-6 md:pb-0 md:pt-[90px]">
         <div className="mx-auto flex max-w-[1392px] flex-col items-center gap-10 md:gap-16">
           <div className="flex w-full flex-col items-center">
-            <Tag tone="light">What companies get</Tag>
+            <Tag tone="light">What the company gets</Tag>
             <h2 className="mt-6 w-full text-balance text-center font-figtree font-medium text-white text-[clamp(34px,5.69vw,82px)] leading-[1.098] tracking-[-0.0127em]">
-              Everything your people need. Nothing new for companies to run.
+              A benefit people use, and numbers you can show leadership
             </h2>
-            <p className="mt-6 w-full max-w-[1100px] text-balance text-center font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.333] text-white">
-              You give employees the benefit. Koshpal handles the experts, the app and the rollout, and reports the impact back to you as anonymised, board-ready numbers.
-            </p>
           </div>
 
           <div className="flex w-full flex-col items-center gap-12">
@@ -49,13 +37,13 @@ export default function CompaniesGet() {
             <div className="w-full">
               <img
                 src="/img/home/companies-case.png"
-                alt="A smiling person holding a product jar against a blue sky"
+                alt="A smiling employee holding a jar, in front of a blue sky"
                 width="1392"
                 height="647"
                 loading="lazy"
                 className="aspect-[1392/647] w-full object-cover"
               />
-              <div role="tablist" aria-label="What companies get" className="mt-8 grid gap-6 md:grid-cols-3 md:gap-9">
+              <div role="tablist" aria-label="What the company gets" className="mt-8 grid gap-6 md:grid-cols-3 md:gap-9">
                 {TABS.map((t, i) => {
                   const on = i === active;
                   return (

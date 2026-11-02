@@ -1,6 +1,5 @@
 import React from "react";
-import Tag from "./Tag";
-import { H2, Lead } from "./Heading";
+import { H2 } from "./Heading";
 import PillButton from "./PillButton";
 
 /* Figma 2:20655 "private by design": white-to-navy gradient with floating photo tiles.
@@ -36,13 +35,12 @@ export default function FinalCta() {
       </div>
 
       <div className="relative mx-auto flex max-w-[1440px] flex-col items-center px-5 pb-24 pt-32 text-center md:min-h-[1146px] md:justify-center md:px-10 md:pb-[160px] md:pt-[180px]">
-        <Tag tone="light">private by design</Tag>
         <H2 className="mt-6 max-w-[1080px] text-white">
-          See what <span className="text-[#c8f169]">lower financial</span> stress does for your business.
+          Give your people <span className="text-[#c8f169]">someone to talk to</span> about money.
         </H2>
-        <Lead className="mt-6 max-w-[700px] text-white">Book a 30-minute demo. We’ll walk you through the dashboard and the app, and tailor a 60-day pilot to your team.</Lead>
-        <div className="mt-10">
-          <PillButton to="/demo" tone="lime" size="sm" className="!text-[20px] !leading-[28px]">Book a Demo</PillButton>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <PillButton to="/demo" tone="lime" size="sm" className="!text-[20px] !leading-[28px]">Book a demo</PillButton>
+          <PillButton to="/demo?pilot=60-day" tone="white" size="sm" className="!text-[20px] !leading-[28px]">Start a 60-day pilot</PillButton>
         </div>
       </div>
     </section>

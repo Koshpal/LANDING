@@ -38,7 +38,7 @@ export default function BlogPost() {
   let seenH = false;
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo title={post.title} path={`/blog/${post.slug}`} description={post.excerpt} noindex={!!post.dummy} />
+      <Seo title={`${post.title} | Koshpal`} crumbs={[["Blog", "/blog"], [post.title, `/blog/${post.slug}`]]} path={`/blog/${post.slug}`} description={post.excerpt} noindex={!!post.dummy} />
       <div className="relative h-[84px] md:h-[100px]" style={{ backgroundImage: ORANGE.replace("#f5c27a 0%", "#f5b56a 0%") }}>
         <Navbar glass />
       </div>

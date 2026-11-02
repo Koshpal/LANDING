@@ -1,5 +1,6 @@
 import React from "react";
 import { Check, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { H2, Lead } from "./Heading";
 
 /* Figma 2:20524 "Privacy First": black card, two-column "sees / never sees" lists. */
@@ -19,7 +20,7 @@ function List({ items, icon: Icon, tone }) {
   );
 }
 
-export default function PrivacyFirst({ seeTitle = "What employers see", neverTitle = "What they never see", see = SEE, never = NEVER, tag = "Privacy First", title = "People ask about privacy first. Here is the answer.", lead = "Employees only speak freely when they trust the service. Employers still get useful insight, with no individual’s data changing hands." }) {
+export default function PrivacyFirst({ seeTitle = "What employers see", neverTitle = "What they never see", see = SEE, never = NEVER, tag = "Privacy First", title = "Employees speak freely. Employers still see what matters.", lead = "Employees only speak freely when they trust the service. Employers still get useful insight, with no individual’s data changing hands.", link = { to: "/privacy-trust", label: "How we protect data" } }) {
   return (
     <section className="bg-white px-4 py-10 md:px-[30px] md:py-20">
       <div className="mx-auto max-w-[1380px] rounded-[28px] bg-black px-5 pb-14 pt-14 md:rounded-[40px] md:px-[60px] md:pb-[84px] md:pt-20">
@@ -40,6 +41,12 @@ export default function PrivacyFirst({ seeTitle = "What employers see", neverTit
             <List items={never} icon={X} tone="text-white/60" />
           </div>
         </div>
+
+        {link && (
+          <div className="mt-10 text-center md:mt-14">
+            <Link to={link.to} className="font-stack text-[18px] text-white underline underline-offset-4 hover:text-[#a0fa6b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">{link.label}</Link>
+          </div>
+        )}
       </div>
     </section>
   );

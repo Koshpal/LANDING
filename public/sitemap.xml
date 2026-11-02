@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://koshpal.com/</loc></url>
-  <url><loc>https://koshpal.com/platform</loc></url>
+  <url><loc>https://koshpal.com/platform/mobile-app</loc></url>
+  <url><loc>https://koshpal.com/platform/dashboard</loc></url>
+  <url><loc>https://koshpal.com/platform/spending-insights</loc></url>
+  <url><loc>https://koshpal.com/platform/budgets-goals</loc></url>
+  <url><loc>https://koshpal.com/platform/dues-reminders</loc></url>
+  <url><loc>https://koshpal.com/platform/book-a-session</loc></url>
+  <url><loc>https://koshpal.com/platform/dashboard-insights</loc></url>
   <url><loc>https://koshpal.com/for-hr</loc></url>
   <url><loc>https://koshpal.com/pricing</loc></url>
   <url><loc>https://koshpal.com/for-employees</loc></url>
   <url><loc>https://koshpal.com/privacy-trust</loc></url>
   <url><loc>https://koshpal.com/about</loc></url>
-  <url><loc>https://koshpal.com/resources</loc></url>
+  <url><loc>https://koshpal.com/faq</loc></url>
+  <url><loc>https://koshpal.com/our-vision</loc></url>
+  <url><loc>https://koshpal.com/coach-with-us</loc></url>
   <url><loc>https://koshpal.com/blog</loc></url>
   <url><loc>https://koshpal.com/blog/what-financial-wellness-means</loc></url>
   <url><loc>https://koshpal.com/blog/evaluating-financial-wellness-providers</loc></url>

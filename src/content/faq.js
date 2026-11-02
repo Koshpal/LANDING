@@ -1,59 +1,78 @@
-/* FAQ copy. Answers use only approved ideas (brief section 9). Anything that
-   needs the team's confirmation is listed in CONTENT_NEEDED.md. */
+/* FAQ copy from "Koshpal Website: SEO Content Rewrite" (2 Nov 2026), FAQ page section.
+   Not published yet because the doc marks them "(confirm)": a starting price, the Android/iOS line.
+   Still to confirm before launch: the data-protection answer and the session policy. */
 export const HR_FAQ = [
   {
-    q: "Who are the experts?",
-    a: "Certified financial professionals, such as CFPs, CAs and CFAs. Sessions are about understanding the employee's goals and answering their questions. They are not about selling products.",
+    q: "What is an employee financial wellness program?",
+    a: "A benefit that helps employees manage money with less stress. With Koshpal, every employee gets 1:1 sessions with a certified CFP or CA, an app for budgets, goals and dues, and learning content. HR sees anonymised results.",
   },
   {
-    q: "Is it private?",
-    a: "Yes. Each employee's financial information belongs to them. Employers receive only aggregated, anonymised insights, and conversations with experts are private.",
+    q: "How much does Koshpal cost?",
+    a: "Koshpal is priced per employee per month and is free for employees. Talk to us and we’ll give you a number for your company size.",
   },
   {
-    q: "How do employees get started?",
-    a: "Your organisation invites its employees to Koshpal. They sign in, then book a first session with an expert or open the app.",
+    q: "How long does rollout take?",
+    a: "About one week: one setup call, your logo and an employee list. We run the kickoff webinar and the employee announcements.",
   },
   {
-    q: "Does it integrate with our systems?",
-    a: "Tell us what you use and we'll go through it with you in the demo.",
+    q: "Can we try it first?",
+    a: "Yes. Start with one team for 60 days, see usage and feedback on the dashboard, then decide on a company-wide plan.",
   },
   {
-    q: "What if few people use it?",
-    a: "You'll see adoption and engagement in the HR dashboard, so you know early. In the demo we'll talk through how to encourage take-up.",
+    q: "Who are the coaches?",
+    a: "Certified Financial Planners (CFPs) and Chartered Accountants (CAs). They are salaried by Koshpal, so they earn nothing from what an employee buys.",
   },
   {
-    q: "Do you sell financial products?",
-    a: "No. We don't earn commissions and we don't push products. Koshpal is not a budgeting app, a loan platform, an investment marketplace or an advisory firm.",
+    q: "What if only a few employees use it?",
+    a: "You’ll see sign-ups and sessions on the dashboard from week one. The kickoff webinar, free first sessions and in-app reminders are built to drive take-up.",
   },
   {
-    q: "How is success measured?",
-    a: "Through engagement with the benefit and through employees' financial confidence over time, reported in aggregate. Pilot results will be shared as they are measured.",
+    q: "How do you measure success?",
+    a: "Sign-ups, sessions, app use and changes in financial confidence over time, all reported in aggregate. Pilot results will be published as they are measured.",
   },
   {
-    q: "What does it cost?",
-    a: "Koshpal is priced per employee per month, so the cost depends on the size of your workforce. Talk to us for a number.",
+    q: "Do you sell financial products or earn commissions?",
+    a: "No. Koshpal is not a bank, a lender, an investment platform or a SEBI-registered investment adviser. Our only income is the employer’s subscription.",
   },
 ];
 
 export const EMPLOYEE_FAQ = [
   {
     q: "Will my employer see my finances?",
-    a: "No. Your financial information belongs to you. Your employer sees only aggregated, anonymised insights about the group.",
-  },
-  {
-    q: "Is anyone going to sell me something?",
-    a: "No. Koshpal doesn't earn commissions and doesn't push financial products. The experts are there to understand your goals and answer your questions.",
-  },
-  {
-    q: "Does using it affect my career?",
-    a: "It shouldn't, and it's not designed to. Asking for guidance should never count against anyone.",
+    a: "No. Your sessions, numbers and goals belong to you. Your employer only sees anonymised trends across the company.",
   },
   {
     q: "What does it cost me?",
-    a: "Nothing, if your employer sponsors it. Koshpal is offered as an employee benefit.",
+    a: "Nothing. Your employer pays for it.",
   },
   {
-    q: "Do I have to talk to someone?",
-    a: "Whatever suits you. Some people start with the app and the learning content, others book a session first.",
+    q: "How often can I talk to a coach?",
+    a: "As your plan needs. Most people book 2 to 3 sessions a month.",
+  },
+  {
+    q: "What can I ask about?",
+    a: "Anything about your money: salary planning, EMIs and loans, credit cards, tax and the old vs new regime, emergency funds, insurance, ESOPs, buying a car or a home, supporting parents.",
+  },
+  {
+    q: "Will anyone try to sell me something?",
+    a: "No. Coaches don’t earn commissions and Koshpal sells no financial products.",
   },
 ];
+
+export const PRIVACY_FAQ = [
+  {
+    q: "What exactly can my employer see?",
+    a: "Anonymised, aggregated trends: how many people use Koshpal, engagement over time and the topics people ask about most. Never an individual’s data, who asked what, or the content of any session.",
+  },
+  {
+    q: "Do you sell data?",
+    a: "No. We don’t sell data, earn commissions or push products.",
+  },
+  {
+    q: "How is my data protected?",
+    a: "Encrypted in transit and at rest, with role-based access.",
+  },
+];
+
+/* The five HR questions shown on the home page and the pricing page, in the doc's order. */
+export const HOME_FAQ = HR_FAQ.slice(1, 6);

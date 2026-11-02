@@ -2,16 +2,14 @@ import React from "react";
 import Tag from "./Tag";
 import { H2, Lead } from "./Heading";
 
-/* Figma 2:20444 "see the product": comparison table with a raised Koshpal column. */
-const COLS = ["One-off workshops", "Salary-advance apps", "Generic info & PF tie-ups"];
+/* Figma 2:20444 comparison table with a raised Koshpal column. Copy: "We sell nothing". */
+const COLS = ["One-off workshops", "Salary-advance apps", "Investing apps"];
 const ROWS = [
-  ["Certified 1:1 experts, real CAs", [0, 1, 0]],
-  ["Ongoing support, not a one-off", [0, 1, 0]],
-  ["A simple app people keep using", [1, 1, 0]],
-  ["Personalised money education", [0, 1, 1]],
-  ["No products sold, no commissions", [1, 1, 0]],
-  ["Privacy-first insight for HR", [0, 1, 1]],
-  ["Impact you can measure and report", [0, 1, 1]],
+  ["1:1 certified coach", [0, 0, 0]],
+  ["Support all year, not one session", [0, 1, 0]],
+  ["A daily app people keep using", [0, 1, 1]],
+  ["No products, no commissions", [1, 0, 0]],
+  ["Privacy-first insight for HR", [0, 1, 0]],
 ];
 
 function Badge({ className = "", check }) {
@@ -40,9 +38,9 @@ export default function Compare() {
     <section className="bg-white px-4 py-16 md:px-[30px] md:py-[92px]">
       <div className="mx-auto flex max-w-[1380px] flex-col items-center gap-12 md:gap-16">
         <div className="flex max-w-[1240px] flex-col items-center text-center">
-          <Tag>see the product</Tag>
-          <H2 className="mt-6 text-[#0b0b0c]">A dashboard for the people team. An app for every person.</H2>
-          <Lead className="mt-6 max-w-[560px] text-[#0b0b0c]">Every engagement starts with a target and ends with a number. Here’s the last twelve months.</Lead>
+          <Tag>Why Koshpal</Tag>
+          <H2 className="mt-6 text-[#0b0b0c]">Others sell to employees. Koshpal works for them.</H2>
+          <Lead className="mt-6 max-w-[760px] text-[#0b0b0c]">Banks earn from loans, apps from products, advisers from fees. Koshpal earns only from the employer’s subscription, so the only thing we’re paid to do is help.</Lead>
         </div>
 
         <div className="w-full overflow-x-auto">
@@ -55,7 +53,7 @@ export default function Compare() {
               <span className="rounded-full bg-[#6fc418] px-[21px] py-[6px] font-stack text-[13px] leading-[17px] text-black">We are here</span>
             </span>
 
-            <div className="relative grid grid-cols-[var(--lw)_var(--g1)_var(--kw)_var(--g2)_1fr_1fr_1fr] grid-rows-[170px_repeat(7,50.8px)]">
+            <div className="relative grid grid-cols-[var(--lw)_var(--g1)_var(--kw)_var(--g2)_1fr_1fr_1fr] grid-rows-[170px_repeat(5,60px)]">
               <div className="col-span-1" />
               <div />
               <div className="flex flex-col items-center justify-end gap-1 pb-[20px] text-white">
@@ -75,11 +73,13 @@ export default function Compare() {
                   <div />
                   <div className="flex items-center justify-center border-t border-white/15">
                     <Badge className="text-[#ffe0c2]" check="#3b3fbc" />
+                    <span className="sr-only">Yes</span>
                   </div>
                   <div />
                   {vals.map((v, i) => (
                     <div key={i} className="flex items-center justify-center border-t border-[#ecdcd0]">
                       {v ? <Badge className="text-[#111]" check="#fff" /> : <No />}
+                      <span className="sr-only">{v ? "Yes" : "No"}</span>
                     </div>
                   ))}
                 </React.Fragment>

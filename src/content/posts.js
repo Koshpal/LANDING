@@ -48,7 +48,7 @@ export const POSTS = [
       { t: "list", c: [
         "Does it cover the everyday (tracking, insights, budgets, goals) and the occasional (a real decision with an expert)?",
         "Is financial education delivered in context, or is it a separate portal employees have to remember to visit?",
-        "Are coaches qualified, and are they paid to advise rather than to sell products?",
+        "Are coaches qualified, and are they paid to coach rather than to sell products?",
       ] },
       { t: "h", c: "Privacy" },
       { t: "list", c: [
@@ -101,39 +101,16 @@ export const POSTS = [
       { t: "p", c: "Say it out loud in your launch comms, too. Employees are far more likely to connect their accounts when the privacy boundary is stated plainly up front rather than buried in a policy." },
     ],
   },
-  {
-    slug: "designing-a-financial-wellness-rollout",
-    title: "Designing a financial wellness rollout employees actually adopt",
-    category: "For HR",
-    date: "2026-10-01",
-    readMins: 5,
-    dummy: true,
-    published: true,
-    excerpt: "Launch mechanics, communication cadence and the first-90-days playbook.",
-    body: [{"t": "p", "c": "Dummy article. This text is placeholder content for layout review and is not guidance from Koshpal."}, {"t": "h", "c": "Start with the question employees will ask"}, {"t": "p", "c": "Most rollouts fail to land because the first message answers HR's questions, not the employee's. Lead with what employees get and who can see what."}, {"t": "list", "c": ["Name the benefit in one sentence.", "State the privacy boundary plainly.", "Say how to take the first step."]}],
-  },
-  {
-    slug: "measuring-financial-wellness-impact",
-    title: "Measuring the impact of a financial wellness program",
-    category: "Measurement",
-    date: "2026-10-05",
-    readMins: 6,
-    dummy: true,
-    published: true,
-    excerpt: "Which signals to track, what's realistic in year one, and how to report it upward.",
-    body: [{"t": "p", "c": "Dummy article. Placeholder content for layout review."}, {"t": "h", "c": "Measure engagement before outcomes"}, {"t": "p", "c": "In the first months, adoption and engagement are the honest signals. Outcomes follow, and they should be reported as measured, not promised."}, {"t": "list", "c": ["Activation: who has started.", "Engagement: who is still active.", "Confidence: how people say they feel, in aggregate."]}],
-  },
-  {
-    slug: "education-vs-coaching",
-    title: "Financial education vs. financial coaching: where each one helps",
-    category: "Fundamentals",
-    date: "2026-10-09",
-    readMins: 4,
-    dummy: true,
-    published: true,
-    excerpt: "When a three-minute explainer is enough, and when someone needs to talk to a person.",
-    body: [{"t": "p", "c": "Dummy article. Placeholder content for layout review."}, {"t": "h", "c": "When a short lesson is enough"}, {"t": "p", "c": "A three-minute explainer works when someone needs a fact. A conversation works when someone needs a decision, and a second opinion on it."}],
-  },
+  /* Queued from the SEO content doc (publish one a week). Each needs ~1,200 words reviewed by a CFP or CA,
+     naming them as reviewer, and must explain options without recommending a product. */
+  { slug: "employee-financial-wellness-program-guide-india", title: "What is an employee financial wellness program? A guide for Indian HR teams", category: "For HR", readMins: 6, published: false, excerpt: "" },
+  { slug: "financial-stress-at-work-productivity-retention", title: "How financial stress at work hurts productivity and retention", category: "For HR", readMins: 6, published: false, excerpt: "" },
+  { slug: "employee-benefits-ideas-india-startups-2026", title: "Employee benefits ideas for startups in 2026: beyond health insurance", category: "For HR", readMins: 6, published: false, excerpt: "" },
+  { slug: "esop-buyback-tax-india-employees", title: "ESOP buyback: what your employees need to know about tax and next steps", category: "Employees", readMins: 6, published: false, excerpt: "" },
+  { slug: "old-vs-new-tax-regime-salaried", title: "Old vs new tax regime: how salaried employees should choose", category: "Employees", readMins: 6, published: false, excerpt: "" },
+  { slug: "emi-to-income-ratio", title: "How much of your salary should go to EMIs?", category: "Employees", readMins: 6, published: false, excerpt: "" },
+  { slug: "emergency-fund-for-salaried", title: "How to build an emergency fund on a salary", category: "Employees", readMins: 6, published: false, excerpt: "" },
+  { slug: "broke-by-the-25th", title: "Why you’re broke by the 25th (and what to do about it)", category: "Employees", readMins: 6, published: false, excerpt: "" },
 ];
 
 export const getPost = (slug) => POSTS.find((p) => p.slug === slug && p.published);

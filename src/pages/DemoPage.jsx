@@ -7,17 +7,18 @@ import Needs from "../components/b2b/Needs";
 const NEXT = [
   ["You send the form", "It takes about a minute."],
   ["We email you", "A member of the team replies to find a time that suits."],
-  ["We show you the program", "The employee experience, and the anonymised view HR gets."],
+  ["We show you the program", "The coach, the app, and the anonymised view HR gets, in about 30 minutes. Then you can try it with one team for 60 days."],
 ];
 
 export default function DemoPage() {
   return (
     <PageShell
       seo={{
-        title: "Book a demo",
+        title: "Book a Demo or Start a 60-Day Pilot | Koshpal",
         path: "/demo",
+        crumbs: [["Book a demo", "/demo"]],
         description:
-          "Book a Koshpal demo. See the employee experience and the anonymised HR dashboard for your workplace.",
+          "See the coach, app and HR dashboard in 30 minutes, then try Koshpal with one team for 60 days.",
       }}
     >
       <section className="b2b-dark-band relative overflow-hidden pt-28 sm:pt-32 pb-16">

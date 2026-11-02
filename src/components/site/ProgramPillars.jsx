@@ -5,10 +5,10 @@ import Tag from "./Tag";
    sticky 4-item menu on the left and four stacked pillar panels on the right.
    The menu highlights whichever panel is in view and scrolls to it on click. */
 const PANELS = [
-  { menu: "Financial Planning", title: "Learn · Money lessons that fit real life", body: "Budgeting, EMIs, tax, investing, explained simply, so your people actually know what to do with their pay." },
-  { menu: "Insights", title: "Understand · Insights that do the thinking", body: "Each person sees where their money goes and what to fix next, without touching a spreadsheet." },
-  { menu: "Sessions", title: "Connect · A real expert to talk to", body: "Unlimited 1:1 time with a certified CA for any money question. No scripts, and nothing to sell." },
-  { menu: "Goals", title: "Grow · Help that keeps up with life", body: "From a first salary to a home loan to retirement, the guidance grows as their needs do." },
+  { menu: "Learn", title: "Money lessons that fit their stage of life", body: "First salary, EMIs, tax and saving, taught in lessons practical enough to use the same week." },
+  { menu: "Understand", title: "Where the month went, in plain language", body: "The app shows where the month went, by category, across UPI, cards and cash, with insights in plain language." },
+  { menu: "Connect", title: "A certified CFP or CA, in private", body: "Private 1:1 sessions with a certified CFP or CA. Most people book 2 to 3 a month. The coach listens first, then writes a plan with them." },
+  { menu: "Grow", title: "A plan that becomes daily habits", body: "The plan becomes budgets, goals and reminders in the app. Every check-in builds on the last, from a first salary to an ESOP payout to retirement." },
 ];
 
 const CORNERS = [
@@ -65,18 +65,15 @@ export default function ProgramPillars() {
     <section className="bg-white px-4 pb-10 pt-16 md:px-[30px] md:pb-20 md:pt-[120px]">
       <div className="mx-auto max-w-[1380px]">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center">
-          <Tag>what your people get</Tag>
-          <h2 className="mt-6 text-balance text-center font-figtree font-medium text-[#0b0b0c] text-[clamp(36px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em]">
-            One benefit. Four ways it helps.
+          <Tag>What every employee gets</Tag>
+          <h2 className="mt-6 text-balance text-center font-figtree font-medium text-[#0b0b0c] text-[clamp(32px,4.3vw,62px)] leading-[1.1] tracking-[-0.0127em]">
+            Learn, understand, connect, grow: one program that stays with them
           </h2>
-          <p className="mt-6 max-w-[1100px] text-balance text-center font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.333] text-[#0b0b0c]">
-            Learn, Understand, Connect and Grow, the four parts of a Koshpal membership that work together all year.
-          </p>
         </div>
 
         <div className="mt-12 rounded-[28px] bg-gradient-to-b from-[#3b3fbc] to-[#05075b] px-4 py-10 md:mt-20 md:rounded-[40px] md:px-[30px] md:py-[90px]">
           <div className="mx-auto flex max-w-[1224px] flex-col items-start gap-10 lg:flex-row lg:gap-14">
-            <nav aria-label="What your people get" className="relative w-full shrink-0 lg:sticky lg:top-28 lg:w-[392px]">
+            <nav aria-label="What every employee gets" className="relative w-full shrink-0 lg:sticky lg:top-28 lg:w-[392px]">
               <span aria-hidden="true" className="absolute bottom-0 left-0 top-0 hidden w-px bg-[#e5e5e5]/30 lg:block" />
               <span
                 aria-hidden="true"
@@ -109,7 +106,7 @@ export default function ProgramPillars() {
               {PANELS.map((p, i) => (
                 <article key={p.menu} ref={(el) => (refs.current[i] = el)} data-i={i} className="flex scroll-mt-28 flex-col gap-[30px]">
                   <div className="flex flex-col items-start gap-5">
-                    <span className="rounded-full bg-[#ffbcfc] px-[18px] py-2 font-stack text-[16px] leading-[33px] text-black md:text-[20px]">The Problem we see</span>
+                    <span className="rounded-full bg-[#ffbcfc] px-[18px] py-2 font-stack text-[16px] leading-[33px] text-black md:text-[20px]">{p.menu}</span>
                     <div className="flex flex-col gap-4 text-white">
                       <h3 className="font-figtree text-[26px] font-medium leading-[1.2] tracking-[-1px] md:text-[40px] md:leading-[48px]">{p.title}</h3>
                       <p className="max-w-[698px] font-figtree text-[16px] leading-[26px] tracking-[-0.3px] md:text-[18px]">{p.body}</p>
@@ -121,6 +118,8 @@ export default function ProgramPillars() {
             </div>
           </div>
         </div>
+
+        <p className="mx-auto mt-10 max-w-[900px] text-balance text-center font-stack text-[clamp(18px,1.67vw,24px)] leading-[1.333] text-[#0b0b0c] md:mt-14">The coach builds the plan. The app keeps it alive every day.</p>
       </div>
     </section>
   );

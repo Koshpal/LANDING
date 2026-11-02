@@ -9,7 +9,6 @@ const MENU = [
   {
     label: "Platform",
     items: [
-      { label: "Overview", to: "/platform" },
       { label: "Mobile app", to: "/platform/mobile-app" },
       { label: "Employee dashboard", to: "/platform/dashboard" },
       { label: "Spending insights", to: "/platform/spending-insights" },
@@ -20,8 +19,8 @@ const MENU = [
     ],
   },
   { label: "Solution", items: [{ label: "For employees", to: "/for-employees" }, { label: "For companies", to: "/for-hr" }] },
-  { label: "Resources", items: [{ label: "Blog", to: "/blog" }, { label: "FAQ & help", to: "/faq" }, { label: "Guides & reports", to: "/resources" }] },
-  { label: "Company", items: [{ label: "About", to: "/about" }, { label: "Our vision", to: "/our-vision" }, { label: "Advise with Koshpal", to: "/advise" }, { label: "Contact us", to: "/contact" }] },
+  { label: "Resources", items: [{ label: "Blog", to: "/blog" }, { label: "FAQ & help", to: "/faq" }] },
+  { label: "Company", items: [{ label: "About", to: "/about" }, { label: "Our vision", to: "/our-vision" }, { label: "Coach with Koshpal", to: "/coach-with-us" }, { label: "Contact us", to: "/contact" }] },
   { label: "Pricing", items: [{ label: "Pricing", to: "/pricing" }] },
 ];
 

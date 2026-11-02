@@ -88,7 +88,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo path="/contact" title="Contact" description="Get in touch with the Koshpal team about employee financial wellness for your workplace." />
+      <Seo path="/contact" title="Contact Us | Koshpal" crumbs={[["Contact", "/contact"]]} description="Get in touch with the Koshpal team about employee financial wellness for your workplace, or ask us anything." />
       <main id="main">
         <section className="relative" style={{ backgroundImage: "linear-gradient(180deg,#b24979 0%,#6b2645 100%)" }}>
           <Navbar glass />

@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
   return (
     <PageShell
       seo={{
-        title: "Privacy policy",
+        title: "Privacy Policy | Koshpal",
         path: "/privacy-policy",
         description: "Koshpal privacy policy.",
         noindex: true,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Check, X } from "lucide-react";
 import Footer from "../components/Footer";
-import Seo from "../components/b2b/Seo";
+import Seo, { faqSchema } from "../components/b2b/Seo";
 import Tag from "../components/site/Tag";
 import PillButton from "../components/site/PillButton";
 import Faq from "../components/site/Faq";
@@ -15,7 +15,7 @@ const PRICE_BLUE =
   "radial-gradient(55% 20% at 50% 0%, #228eff 0%, rgba(34,142,255,0) 100%), linear-gradient(180deg,#156fe6 0%,#005bdd 9%,#024fc5 23%,#0043ab 41%,#003a92 58%,#02327e 76%,#012765 93%,#002458 100%)";
 
 const INCLUDED = [
-  ["1:1 expert sessions", "with certified financial professionals, booked as often as needed."],
+  ["1:1 sessions", "with certified CFPs and CAs."],
   ["The Koshpal app", "to track spending, set budgets and goals, and never miss a due date."],
   ["AI insights", "to understand spending and improve finances in one place."],
   ["Financial education", "that meets people in context, with their progress over time."],
@@ -24,15 +24,26 @@ const INCLUDED = [
 
 const HR_GETS = [
   ["Onboarding support", "means you don’t have to do it alone."],
-  ["Employer dashboard", "shows programme usage and impact while protecting individuals’ privacy."],
+  ["Employer dashboard", "shows program usage and impact while protecting individuals’ privacy."],
   ["Ongoing workshops and insight", "keep employees informed and engaged with financial wellbeing."],
   ["Priced per employee, per month,", "so the cost scales with the size of your workforce."],
 ];
 
-const US = ["Certified experts, on call all year", "Spending, budgets and goals in one app", "Anonymised, aggregated insight for HR", "No commissions, no products pushed", "Education that meets people in context", "One fee per employee, per month"];
-const THEM = ["A helpline most people never call", "One-off webinars that fade by payday", "Little visibility on what it delivers", "Advice tied to products and commissions", "Scattered tools and separate logins", "Annual contracts, slow to show value"];
+const US = ["Certified CFPs and CAs, all year", "Spending, budgets and goals in one app", "Anonymised, aggregated insight for HR", "No commissions, no products pushed", "Education that meets people in context", "One fee per employee, per month"];
+const THEM = ["A helpline most people never call", "One-off webinars that fade by payday", "Little visibility on what it delivers", "Guidance tied to products and commissions", "Scattered tools and separate logins", "Long contracts before you see any value"];
 
-const FAQ = HR_FAQ.filter((f) => ["What does it cost?", "Do you sell financial products?", "How do employees get started?", "Does it integrate with our systems?", "What if few people use it?"].includes(f.q));
+const FAQ = HR_FAQ.filter((f) => ["How much does Koshpal cost?", "How long does rollout take?", "Can we try it first?", "Do you sell financial products or earn commissions?", "What if only a few employees use it?"].includes(f.q));
+
+const SERVICE = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Koshpal employee financial wellness program",
+  serviceType: "Employee financial wellness program",
+  provider: { "@type": "Organization", name: "Koshpal", url: "https://koshpal.com" },
+  areaServed: { "@type": "Country", name: "India" },
+  audience: { "@type": "Audience", audienceType: "HR and people teams" },
+  description: "A per-employee, per-month financial wellness benefit: 1:1 sessions with certified CFPs and CAs, a money app and an anonymised HR dashboard. Free for employees.",
+};
 
 function PlanCard() {
   return (
@@ -85,18 +96,24 @@ function Col({ items, icon: Icon, tone }) {
 export default function Pricing() {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo path="/pricing" title="Pricing" description="Free to employees, affordable to employers. Koshpal is priced per employee per month, so the cost scales with your workforce. Talk to us for a quote." />
+      <Seo
+        path="/pricing"
+        title="Pricing: Per Employee, Per Month | Koshpal"
+        description="Koshpal is priced per employee per month and free for employees. See what’s included and get a quote for your company size."
+        crumbs={[["Pricing", "/pricing"]]}
+        schema={[SERVICE, faqSchema(FAQ)]}
+      />
       <main id="main">
         <MagentaHero
           gradient={PRICE_BLUE}
           padBottom={107}
           leadMt={76}
           tag="Pricing"
-          title="Free to Employees Affordable to"
-          pill="Employers"
-          lead="Koshpal is an employer-sponsored benefit, so employees never pay to use it. You pay per employee, per month, so the cost scales with the size of your workforce. Talk to us and we’ll give you a number for your company size."
+          title="Free for employees. Priced per employee for"
+          pill="employers"
+          lead="Koshpal is an employer-paid benefit, so employees never pay to use it. You pay per employee, per month, so the cost scales with the size of your workforce. Talk to us and we’ll give you a number for your company size."
           primary={{ label: "Book a demo", to: "/demo" }}
-          secondary={{ label: "See the platform", to: "/platform" }}
+          secondary={{ label: "Start a 60-day pilot", to: "/demo?pilot=60-day" }}
         >
           <PlanCard />
         </MagentaHero>
@@ -105,7 +122,7 @@ export default function Pricing() {
         <section className="bg-white px-5 pb-16 pt-14 md:px-10 md:pb-[100px] md:pt-[80px]">
           <div className="mx-auto flex max-w-[1240px] flex-col items-center text-center">
             <Tag>why koshpal</Tag>
-            <H2 className="mt-6 max-w-[1000px] text-[#171b26]">Your team deserves better than <span className="text-[#3b3fbc]">one-off advice</span></H2>
+            <H2 className="mt-6 max-w-[1000px] text-[#171b26]">Your team deserves better than <span className="text-[#3b3fbc]">one-off sessions</span></H2>
             <Lead className="mt-6 max-w-[760px] text-[#0b0b0c]">Legacy benefits often treat the symptoms of financial stress, not the cause. Koshpal is the ongoing relationship employees actually use.</Lead>
             <div className="mt-8"><PillButton to="/demo" tone="lime" size="sm" className="!text-[18px]">Book a demo</PillButton></div>
 
@@ -119,7 +136,7 @@ export default function Pricing() {
                 <Col items={US} icon={Check} tone="text-[#8fd13c]" />
               </div>
               <div>
-                <h3 className="flex h-[72px] items-center justify-center rounded-[10px] bg-[#171717] font-stack text-[22px] text-white md:text-[24px]">Traditional EAP &amp; one-off advice</h3>
+                <h3 className="flex h-[72px] items-center justify-center rounded-[10px] bg-[#171717] font-stack text-[22px] text-white md:text-[24px]">Traditional EAP &amp; one-off sessions</h3>
                 <Col items={THEM} icon={X} tone="text-[#b5b5b5]" />
               </div>
               <span className="absolute left-1/2 top-[-0px] z-10 hidden size-[54px] -translate-x-1/2 items-center justify-center rounded-full border border-[#333] bg-[#171717] font-stack text-[16px] text-white md:flex" style={{ top: 9 }} aria-hidden="true">VS</span>
@@ -141,7 +158,7 @@ export default function Pricing() {
           <div className="mt-10 md:-mb-[32px] md:mt-[70px]"><PhotoCarousel /></div>
         </section>
 
-        <CtaBand wide py={130}>
+        <CtaBand wide py={130} cta="Get a quote">
           <span className="block [text-wrap:wrap]">Get a quote tailored</span>
           <span className="block text-[#c8f169] [text-wrap:wrap]">to your organisation.</span>
         </CtaBand>

@@ -54,8 +54,8 @@ export function MagentaHero({ tag, title, pillPrefix, pillSuffix, pill, lead, pr
         <p style={leadMt ? { "--lm": `${leadMt}px` } : undefined} className={`text-balance font-stack text-white ${leadMt ? "md:!mt-[var(--lm)] " : ""}${small ? "mt-4 max-w-[720px] text-[clamp(16px,1.67vw,24px)] leading-[1.3]" : "mt-8 max-w-[1000px] text-[clamp(17px,2.22vw,32px)] leading-[1.25] md:mt-10"}`}>{lead}</p>
         {(primary || secondary) && (
           <div className={`flex flex-wrap items-center justify-center gap-4 ${small ? "mt-8 md:mt-10" : "mt-8 md:mt-[34px]"}`}>
-            {primary && <PillButton to={primary.to} tone="lime" size="sm" className="!text-[18px]">{primary.label}</PillButton>}
-            {secondary && <PillButton to={secondary.to} tone="white" size="sm" className="!text-[18px]">{secondary.label}</PillButton>}
+            {primary && <PillButton to={primary.to} href={primary.href} tone="lime" size="sm" className="!text-[18px]">{primary.label}</PillButton>}
+            {secondary && <PillButton to={secondary.to} href={secondary.href} tone="white" size="sm" className="!text-[18px]">{secondary.label}</PillButton>}
           </div>
         )}
       </div>
@@ -65,7 +65,7 @@ export function MagentaHero({ tag, title, pillPrefix, pillSuffix, pill, lead, pr
 }
 
 /** Dark teal photographic closing band ("Let's build the third pillar…"). */
-export function CtaBand({ tag = "private by design", children, cta = "Book a demo", to = "/demo", wide = false, py = 120 }) {
+export function CtaBand({ tag = "Get started", children, cta = "Book a demo", to = "/demo", href, wide = false, py = 120 }) {
   return (
     <section
       className="relative overflow-hidden"
@@ -79,7 +79,7 @@ export function CtaBand({ tag = "private by design", children, cta = "Book a dem
         <Tag tone="light">{tag}</Tag>
         <h2 className={`mt-8 text-balance font-figtree font-medium text-white text-[clamp(34px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em] ${wide ? "max-w-[1200px]" : "max-w-[1000px]"}`}>{children}</h2>
         <div className="mt-8">
-          <PillButton to={to} tone="lime" size="sm" className="!text-[18px]">{cta}</PillButton>
+          <PillButton to={href ? undefined : to} href={href} tone="lime" size="sm" className="!text-[18px]">{cta}</PillButton>
         </div>
       </div>
     </section>
@@ -115,7 +115,7 @@ export function StepsSection({ id, tag, title, lead, steps, rowH = 197 }) {
 export { H2 };
 
 /** Gradient closing band with floating photo tiles (positions in 1440px design px). */
-export function PhotoCta({ tag = "private by design", tiles, heading, cta = "Book a demo", to = "/demo" }) {
+export function PhotoCta({ tag = "Get started", tiles, heading, cta = "Book a demo", to = "/demo" }) {
   const cq = (px) => `${((px / 1440) * 100).toFixed(3)}cqw`;
   return (
     <section

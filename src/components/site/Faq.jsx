@@ -2,24 +2,8 @@ import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import Tag from "./Tag";
 
-/* Figma 2:20737 "Before you book": questions left, accordion right.
-   Only the first answer exists in the Figma file; the rest use FALLBACK until real copy arrives. */
-const FALLBACK = "We’ll cover this on your demo call.";
-const ITEMS = [
-  {
-    q: "What kind of brands do you work with?",
-    a: "Mostly DTC, subscription, and B2B brands past their first stag of growth spending enough that a wasted dollar actually hurts.",
-  },
-  { q: "How does your pricing work?" },
-  { q: "Is there a minimum commitment?" },
-  { q: "Who actually runs my account day to day?" },
-  { q: "How fast will we see results?" },
-  { q: "What does reporting look like?" },
-  { q: "Do we own our accounts and data?" },
-  { q: "Do you handle creative, or just media?" },
-];
-
-export default function Faq({ tag = "questions leaders ask", title = "Before you book", items = ITEMS, narrow = false, className }) {
+/* Figma 2:20737 "Before you book": questions left, accordion right. Pass `items` ([{ q, a }]). */
+export default function Faq({ tag = "questions leaders ask", title = "Questions HR leaders ask", items, narrow = false, className }) {
   const [open, setOpen] = useState(0);
 
   /* narrow: the inner-page frames (title at x=84, list 567-1355) vs the home frame (60 / 590-1380). */
@@ -39,6 +23,7 @@ export default function Faq({ tag = "questions leaders ask", title = "Before you
             const on = open === i;
             return (
               <li key={it.q} className="rounded-[20px] bg-[#f0f0f0]">
+                <h3 className="m-0 font-normal">
                 <button
                   type="button"
                   aria-expanded={on}
@@ -51,9 +36,10 @@ export default function Faq({ tag = "questions leaders ask", title = "Before you
                     {on ? <Minus size={16} strokeWidth={2.5} aria-hidden="true" /> : <Plus size={16} strokeWidth={2.5} aria-hidden="true" />}
                   </span>
                 </button>
+                </h3>
                 <div id={`faq-${i}`} role="region" className={`grid transition-[grid-template-rows] duration-300 ease-out ${on ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                   <div className="overflow-hidden">
-                    <p className="px-[30px] pb-6 pt-2 font-figtree text-[18px] leading-[22px] text-[#0b0b0c] md:text-[20px]">{it.a || FALLBACK}</p>
+                    <p className="px-[30px] pb-6 pt-2 font-figtree text-[18px] leading-[22px] text-[#0b0b0c] md:text-[20px]">{it.a}</p>
                   </div>
                 </div>
               </li>

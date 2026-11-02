@@ -12,7 +12,7 @@ const model = "/img/pages/model.jpg";
 
 const VALUES = [
   { t: "Simplicity", s: "First", d: "We turn complex money decisions into clear, doable steps. Managing money should not feel like a chore.", Icon: Circle },
-  { t: "Trust", s: "Through Transparency", d: "No products to sell and no commissions. Our only job is advice that is right for the person in front of us.", Icon: ShieldCheck },
+  { t: "Trust", s: "Through Transparency", d: "No products to sell and no commissions. Our only job is guidance that is right for the person in front of us.", Icon: ShieldCheck },
   { t: "Built to last", s: "Not Quick Fixes", d: "We help people build habits that hold, not one-off tips that fade by next payday.", Icon: Lightbulb },
 ];
 
@@ -35,32 +35,24 @@ const LETTER = [
 export default function Story() {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo path="/about" title="Our story" description="Koshpal exists so that no one carries money stress alone. Read why we are building financial wellbeing for Indian workplaces." />
+      <Seo
+        path="/about"
+        title="About Koshpal: Financially Confident Workplaces"
+        description="Why we’re building Koshpal: real experts, useful tools and guidance that stays on the employee’s side. Built in Jaipur for India."
+        crumbs={[["About", "/about"]]}
+      />
       <main id="main">
         <MagentaHero
-          tag="Our story"
+          tag="About Koshpal"
           title="Building financially"
           pillPrefix="confident"
           pill="workplaces"
-          lead="Every company invests in health and in growth. We think financial wellbeing deserves the same place, and we are here to make it standard at work."
+          lead="Every company invests in health and in growth. We think financial wellbeing deserves the same place. Koshpal is built in Jaipur for India, to make it standard at work."
           primary={{ label: "Book a demo", to: "/demo" }}
-          secondary={{ label: "See the platform", to: "/platform" }}
+          secondary={{ label: "See the platform", to: "/platform/mobile-app" }}
         >
           <PhotoCarousel />
         </MagentaHero>
-
-        {/* what we believe (gradient card) */}
-        <section className="bg-white px-4 py-10 md:px-[30px] md:py-20">
-          <div className="mx-auto max-w-[1380px] rounded-[28px] px-5 py-14 text-center text-white md:rounded-[40px] md:px-10 md:pb-[84px] md:pt-[60px]" style={{ backgroundImage: "linear-gradient(180deg,#3c40bc 0%,#a0a2de 100%)" }}>
-            <PinkTag>What we believe</PinkTag>
-            <h2 className="mx-auto mt-6 max-w-[1000px] text-balance font-figtree text-[clamp(30px,4.2vw,60px)] font-medium leading-[1.17] tracking-[-0.02em]">
-              Most of us are taught how to earn, but never how to manage, protect or grow what we earn.
-            </h2>
-            <p className="mx-auto mt-6 max-w-[1030px] text-balance font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.3]">
-              When money worries build up, they follow people to work, into their health, and into how they treat the people around them. We believe the workplace is the best place to change that, with real help people will actually use.
-            </p>
-          </div>
-        </section>
 
         {/* editorial block */}
         <section className="bg-white px-5 py-12 md:px-[100px] md:py-[100px]">
@@ -71,10 +63,7 @@ export default function Story() {
             </h2>
             <div className="mt-10 grid items-start gap-8 md:mt-14 md:grid-cols-[718px_minmax(0,406px)] md:justify-between">
               <div>
-                <p className="font-figtree text-[clamp(52px,6.25vw,90px)] font-medium leading-none tracking-[-0.03em]">
-                  It was <span className="font-semibold italic text-[#3b3fbc]">money.</span>
-                </p>
-                <img src={model} alt="" width="718" height="413" loading="lazy" className="mt-6 aspect-[718/413] w-full rounded-[24px] object-cover md:mt-8" />
+                <img src={model} alt="" width="718" height="413" loading="lazy" className="aspect-[718/413] w-full rounded-[24px] object-cover" />
               </div>
               <img src={model} alt="" width="406" height="411" loading="lazy" className="aspect-[406/411] w-full max-w-[406px] justify-self-end rounded-[24px] object-cover [object-position:30%_40%] md:mt-0" />
             </div>

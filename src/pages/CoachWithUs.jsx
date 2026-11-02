@@ -1,13 +1,13 @@
 import React from "react";
 import { BookOpen, Briefcase, Building2, Check, Coins, GraduationCap, HandCoins, Landmark, Mail, PiggyBank, Target, TrendingUp, Wallet } from "lucide-react";
 import Footer from "../components/Footer";
-import Seo from "../components/b2b/Seo";
+import Seo, { faqSchema } from "../components/b2b/Seo";
 import Tag from "../components/site/Tag";
 import { H2, Lead } from "../components/site/Heading";
 import Faq from "../components/site/Faq";
 import { MagentaHero, PinkTag, CtaBand, StepsSection } from "../components/site/PageParts";
 
-/* Figma "Advice with koshpal" (advisor recruiting page). The template's placeholder copy
+/* Figma "Advice with koshpal", now "Coach with Koshpal" (coach recruiting page). The template's placeholder copy
    (hero tag/buttons, "Taylor Reed" cards, garbled step titles, duplicate FAQ) is replaced with
    real Koshpal wording; layout and styling follow the design. */
 const base = "/img/pages/advice";
@@ -30,34 +30,33 @@ const TOPICS = [
 const PEOPLE = [
   { t: "Certified Financial Planner", s: "CFP" },
   { t: "Chartered Accountant", s: "CA" },
-  { t: "CFA Charterholder", s: "CFA" },
 ];
 
 const STEPS = [
-  { t: "From application to first session.", d: "Tell us about your qualifications and experience. It takes a few minutes." },
-  { t: "Get verified", d: "We confirm your certification and background, so every advisor is someone employees can trust." },
+  { t: "Apply", d: "Tell us about your qualifications and experience. It takes a few minutes." },
+  { t: "Get verified", d: "We confirm your certification and background, so every coach is someone employees can trust." },
   { t: "Quick onboarding", d: "A short onboarding on the Koshpal approach, the tools, and how sessions work." },
-  { t: "Start advising", d: "Take your first 1:1 sessions through the app, with support whenever you need it." },
+  { t: "Start coaching", d: "Take your first 1:1 sessions through the app, with support whenever you need it." },
 ];
 
 const LOOKING = [
-  "Chartered Accountants, Certified Financial Planners, CFA charterholders and certified financial counsellors.",
-  "People who listen first, explain in plain language, and put the client’s interest ahead of everything.",
+  "Certified Financial Planners (CFPs) and Chartered Accountants (CAs).",
+  "People who listen first, explain in plain language, and put the employee’s interest ahead of everything.",
   "Comfortable across everyday money topics: budgeting, debt, savings, tax basics and planning.",
   "New to workplace financial wellbeing? We’ll help you get up to speed.",
 ];
 
 const GET = [
   "A steady stream of 1:1 sessions, booked and managed for you.",
-  "Fair, transparent pay for your time, with no commissions or product incentives.",
-  "The Koshpal app and scheduling, so your time goes to advising, not admin.",
+  "A salaried role with fair, fixed pay, and no commissions or product targets.",
+  "The Koshpal app and scheduling, so your time goes to coaching, not admin.",
   "A community of finance professionals, and support whenever you need it.",
 ];
 
 const FAQ = [
-  { q: "Do I need to be certified to advise?", a: "Yes. We work with Chartered Accountants, Certified Financial Planners, CFA charterholders and certified financial counsellors, and we confirm your certification and background before your first session." },
-  { q: "How are advisors paid?", a: "Fair, transparent pay for your time. There are no commissions and no product incentives, so your advice stays on the employee’s side." },
-  { q: "Who handles scheduling and the platform?", a: "Koshpal does. The app and scheduling are taken care of, so your time goes to advising, not admin." },
+  { q: "Do I need to be certified to coach?", a: "Yes. We work with Certified Financial Planners and Chartered Accountants, and we confirm your certification and background before your first session." },
+  { q: "How are coaches paid?", a: "Coaches are salaried by Koshpal with fair, fixed pay. There are no commissions and no product targets, so the guidance stays on the employee’s side." },
+  { q: "Who handles scheduling and the platform?", a: "Koshpal does. The app and scheduling are taken care of, so your time goes to coaching, not admin." },
   { q: "What does a session look like?", a: "Employees book 1:1 sessions through the app and you take them through the app too, with support from us whenever you need it." },
 ];
 
@@ -78,19 +77,24 @@ function Bullets({ items, fluid = false }) {
   );
 }
 
-export default function Advise() {
+export default function CoachWithUs() {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo path="/advise" title="Advise with Koshpal" description="Join Koshpal's network of certified finance professionals and put your expertise where it matters most: helping employees build financial confidence." />
+      <Seo
+        path="/coach-with-us"
+        title="Become a Financial Coach | Koshpal"
+        description="CFPs and CAs: coach employees across India in salaried roles, with no commissions or product targets. Apply in minutes."
+        crumbs={[["Coach with Koshpal", "/coach-with-us"]]}
+        schema={faqSchema(FAQ)}
+      />
       <main id="main">
         <MagentaHero
-          tag="Advise with Koshpal"
-          title="Put your expertise"
-          pillPrefix="where it"
-          pill="matters most"
-          lead="Join a network of certified finance professionals helping employees across India build real financial confidence. We handle the app, the scheduling and the support, so you can focus on giving great advice."
-          primary={{ label: "Apply to advise", to: "/contact" }}
-          secondary={{ label: "How it works", to: "/advise#how-it-works" }}
+          tag="Coach with Koshpal"
+          title="Coach employees across India,"
+          pill="with nothing to sell"
+          lead="Join a network of CFPs and CAs coaching employees in salaried roles, with fair, fixed pay and no commissions or product targets. We handle the app, the scheduling and the support, so you can focus on the coaching."
+          primary={{ label: "Apply to coach", to: "/contact" }}
+          secondary={{ label: "How it works", to: "/coach-with-us#how-it-works" }}
         />
 
         {/* who you'll help */}
@@ -108,7 +112,7 @@ export default function Advise() {
                 <svg className="absolute inset-0 size-full overflow-visible" viewBox={`0 0 ${BOX.w} ${BOX.h}`} fill="none" aria-hidden="true">
                   <path d="M264 -10 V29 A425 298 0 0 0 1114 29 V-10" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" />
                 </svg>
-                <img src={`${base}/portrait.png`} alt="A Koshpal advisor" width="176" height="176" className="absolute rounded-full" style={place(687, 128, 176)} />
+                <img src={`${base}/portrait.png`} alt="A Koshpal coach" width="176" height="176" className="absolute rounded-full" style={place(687, 128, 176)} />
                 {PERSONAS.map(({ t, Icon, x, y, lx, ly, narrow }) => (
                   <React.Fragment key={t}>
                     <span className="absolute flex items-center justify-center rounded-[18.75%] bg-[#c8f169] text-black" style={place(x, y, 96)}>
@@ -127,7 +131,7 @@ export default function Advise() {
 
             {/* orbit: mobile / tablet fallback */}
             <div className="mt-10 px-5 lg:hidden">
-              <img src={`${base}/portrait.png`} alt="A Koshpal advisor" width="176" height="176" className="mx-auto size-[140px] rounded-full" />
+              <img src={`${base}/portrait.png`} alt="A Koshpal coach" width="176" height="176" className="mx-auto size-[140px] rounded-full" />
               <ul className="mx-auto mt-8 grid max-w-[560px] grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3">
                 {PERSONAS.map(({ t, Icon }) => (
                   <li key={t} className="flex flex-col items-center gap-3">
@@ -164,9 +168,9 @@ export default function Advise() {
         {/* people you'd work alongside */}
         <section className="bg-white px-5 pb-12 pt-10 md:px-10 md:pb-[84px] md:pt-20">
           <div className="mx-auto flex max-w-[1240px] flex-col items-center text-center">
-            <Tag>why advise with koshpal</Tag>
+            <Tag>why coach with koshpal</Tag>
             <H2 className="mt-6 max-w-[1000px] text-[#0b0b0c]">These are the people you’d be working alongside.</H2>
-            <ul className="mt-12 grid w-full max-w-[1240px] gap-5 md:mt-[79px] md:grid-cols-3">
+            <ul className="mx-auto mt-12 grid w-full max-w-[820px] gap-5 md:mt-[79px] md:grid-cols-2">
               {PEOPLE.map((p) => (
                 <li key={p.t} className="flex flex-col items-center rounded-[40px] bg-[#f4f4f4] px-[11px] pb-[5px] pt-7 shadow-[0_0_0_4px_rgba(0,0,0,0.03)] md:pt-[34px]">
                   <h3 className="font-figtree text-[22px] font-medium leading-[30px] md:text-[24px]">{p.t}</h3>
@@ -215,11 +219,11 @@ export default function Advise() {
           </div>
         </section>
 
-        <CtaBand tag="Advise with Koshpal" cta="Apply to advise" to="/contact" wide py={144}>
-          Ready to <span className="text-[#c8f169]">advise with Koshpal?</span>
+        <CtaBand tag="Coach with Koshpal" cta="Apply to coach" to="/contact" wide py={144}>
+          Ready to <span className="text-[#c8f169]">coach with Koshpal?</span>
         </CtaBand>
 
-        <Faq narrow tag="Advisor questions" title="Questions from finance professionals" items={FAQ} />
+        <Faq narrow tag="Coach questions" title="Questions from finance professionals" items={FAQ} />
       </main>
       <Footer />
     </div>

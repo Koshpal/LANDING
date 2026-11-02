@@ -1,7 +1,7 @@
 import React from "react";
 import { Circle, Lightbulb, ShieldCheck, LayoutGrid, ChartNoAxesColumn, Bell, Wallet } from "lucide-react";
 import Footer from "../components/Footer";
-import Seo from "../components/b2b/Seo";
+import Seo, { faqSchema } from "../components/b2b/Seo";
 import Faq from "../components/site/Faq";
 import { CtaBand, AltRows } from "../components/site/PageParts";
 import {
@@ -11,7 +11,7 @@ import {
 
 /* Figma "Mobile App" (4 frames) and "Employee Dashboard" (3 frames). The frames share one layout:
    gradient hero with product imagery, scroll-reveal paragraph, rows / split / cards, closing CTA, FAQ.
-   Template copy in the frames (advisor-recruiting rows, "growth audit", duplicate FAQ questions) is
+   Template copy in the frames (coach-recruiting rows, "growth audit", duplicate FAQ questions) is
    replaced with copy about the feature each page covers. */
 const Blue = ({ children }) => <span className="text-[#3b3fbc]">{children}</span>;
 
@@ -26,13 +26,13 @@ const PEOPLE_BRING = {
   tag: "What People Bring",
   title: "Any money question, every stage of life",
   lead: "A first salary and the first tax return. Clearing a card or a loan. Planning for a home, a wedding, a child, retirement. There’s no question too small and no judgement, just trusted guidance when it matters.",
-  points: ["Unlimited sessions, booked as often as needed", "Certified, independent, commission-free experts", "Fully private, never shared with the employer"],
+  points: ["1:1 sessions with certified CFPs and CAs, as often as the plan needs", "Salaried coaches with no commissions", "Fully private, never shared with the employer"],
 };
 
-function Shell({ path, title, description, children, cta, faqTitle = "Questions about the app" }) {
+function Shell({ path, title, description, crumb, children, cta, faqTitle = "Questions about the app" }) {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo path={path} title={title} description={description} />
+      <Seo path={path} title={title} description={description} crumbs={[["Platform", "/platform/mobile-app"], [crumb, path]]} schema={faqSchema(APP_FAQ)} />
       <main id="main">
         {children}
         {cta}
@@ -60,7 +60,7 @@ const fade = "[mask-image:linear-gradient(to_right,transparent,#000_5%,#000_95%,
 /* ---------------- Mobile app ---------------- */
 export function SpendingInsights() {
   return (
-    <Shell path="/platform/spending-insights" title="Spending insights" description="See where your money actually goes: income against expenses and spending by category, in the Koshpal app." cta={Insight} faqTitle="Questions about insights">
+    <Shell path="/platform/spending-insights" title="Spending Insights App for Employees | Koshpal" crumb="Spending insights" description="See where the month went: income against expenses and spending by category, across UPI, cards and cash, in the Koshpal app." cta={Insight} faqTitle="Questions about insights">
       <Stage bg={BLUE} h={1384}>
         <Orbit pos={ORBIT_SPENDING} h={1384} />
         <HeroTitle y={476} tag="Spending Insights" lines={["See where your money", "actually goes"]} />
@@ -80,7 +80,7 @@ export function SpendingInsights() {
 
 export function DuesReminders() {
   return (
-    <Shell path="/platform/dues-reminders" title="Dues & reminders" description="Never miss a due date again: bills, EMIs and investments in one place, with timely reminders." cta={Insight}>
+    <Shell path="/platform/dues-reminders" title="Bill, EMI and Due Reminders App | Koshpal" crumb="Dues & reminders" description="Never miss a due date: bills, EMIs and card payments in one place, with timely reminders in the Koshpal app." cta={Insight}>
       <Stage bg={BLUE} h={876}>
         <HeroTitle y={182} tag="Dues & Reminder" lines={["Never misses a", "due date again!"]} lh={88} />
         <HeroImage src="/img/pages/app/bills.png" alt="A bill payment reminder card" x={205} y={494} w={1030} h={381} className={fade} />
@@ -128,7 +128,7 @@ function GoalArc() {
 
 export function BudgetsGoals() {
   return (
-    <Shell path="/platform/budgets-goals" title="Budgets & goals" description="Set a budget, reach the goal: budgets by category, savings goals and gentle nudges in the Koshpal app." cta={Insight} faqTitle="Questions about insights">
+    <Shell path="/platform/budgets-goals" title="Budgets and Savings Goals App | Koshpal" crumb="Budgets & goals" description="Set a budget, reach the goal: budgets by category, savings goals and gentle nudges in the Koshpal app." cta={Insight} faqTitle="Questions about insights">
       <Stage bg={BLUE} h={887}>
         <GoalArc />
         <HeroTitle y={457} tag="Budgets & Goals" lines={["Set a Budget", "Reach the Goal"]} lh={85} buttons={[{ label: "Book a demo", to: "/demo" }]} />
@@ -157,8 +157,9 @@ export function MobileApp() {
   return (
     <Shell
       path="/platform/mobile-app"
-      title="Mobile app"
-      description="Financial wellbeing in your pocket: spending, budgets, goals, 1:1 sessions and reminders in one calm place."
+      title="Financial Wellness Platform: Coach, App, Insights | Koshpal"
+      crumb="Mobile app"
+      description="One platform: certified coaches, an app for budgets, goals and dues, and an anonymised HR dashboard. Built for Indian workplaces."
       faqTitle="Questions about the app"
       cta={(
         <CtaBand wide py={150}>
@@ -175,17 +176,18 @@ export function MobileApp() {
           pill={{ prefix: "in your", text: "Pocket" }}
           fs={100}
           lh={122}
-          buttons={[{ label: "Book a demo", to: "/demo" }, { label: "See the platform", to: "/platform" }]}
+          buttons={[{ label: "Book a demo", to: "/demo" }, { label: "See the dashboard", to: "/platform/dashboard" }]}
         />
         <HeroImage src="/img/pages/app/pocket.png" alt="The Koshpal app on a phone" x={165} y={665} w={1110} h={684} className={fade} />
       </Stage>
       <RevealText>The Koshpal app is where employees see their whole money picture and act on it, book 1:1 financial sessions, track spending and budgets, set goals, grow savings, and stay on top of dues, all in one calm place.</RevealText>
       <section className="bg-white px-5 pb-12 md:px-10 md:pb-[40px]">
+        <h2 className="mx-auto mb-10 max-w-[900px] text-balance text-center font-figtree text-[clamp(26px,3vw,44px)] font-medium leading-[1.15] tracking-[-0.02em] md:mb-16">The coach builds the plan. The app keeps it alive every day.</h2>
         <RowsHead tag="Mobile app"><Blue>Everything in one app</Blue>, the way it should be.</RowsHead>
         <AltRows className="mt-12 md:mt-[128px]" rows={[
           { t: "Everything in one place", d: "Spending, budgets, goals, sessions and reminders live together, so the whole picture is one tap away." },
           { t: "Built for how people live", d: "Clear, simple screens that make everyday money tasks quick, on the phone people already carry." },
-          { t: "Experts on call", d: "Book a 1:1 session with a certified expert right from the app, whenever a question comes up." },
+          { t: "A coach in the app", d: "Book a 1:1 session with a certified CFP or CA right from the app, whenever a question comes up." },
           { t: "Private by design", d: "Everything in the app stays with the employee. Employers only ever see anonymised trends." },
         ]} />
       </section>
@@ -204,7 +206,7 @@ export function MobileApp() {
 /* ---------------- Employee dashboard ---------------- */
 export function DashboardOverview() {
   return (
-    <Shell path="/platform/dashboard" title="Employee dashboard" description="Your whole money life on one screen: spending, budget, sessions and savings in the Koshpal employee dashboard." cta={OnePlace}>
+    <Shell path="/platform/dashboard" title="Employee Money Dashboard | Koshpal" crumb="Employee dashboard" description="Your whole money life on one screen: spending, budgets, sessions and savings in the Koshpal employee dashboard." cta={OnePlace}>
       <Stage bg={TEAL} h={1255}>
         <HeroTitle
           y={201}
@@ -213,15 +215,15 @@ export function DashboardOverview() {
           pill={{ prefix: "on one", text: "screen" }}
           fs={100}
           lh={122}
-          buttons={[{ label: "Book a demo", to: "/demo" }, { label: "See the platform", to: "/platform" }]}
+          buttons={[{ label: "Book a demo", to: "/demo" }, { label: "See the platform", to: "/platform/mobile-app" }]}
         />
         <HeroImage src="/img/pages/app/dashboard-ui.png" alt="The Koshpal employee dashboard overview" x={100} y={655} w={1240} h={598} className={fade} />
       </Stage>
       <RevealText>Book a session, set budgets and goals, track your spending, and watch your progress. The Koshpal dashboard gives every employee one calm place to stay on top of money, on a screen big enough to see it all.</RevealText>
       <section className="bg-white px-5 pb-12 md:px-10 md:pb-[100px]">
         <AltRows className="mt-0" rows={[
-          { tag: "Book a session", t: "A 1:1 with a certified expert, in a few clicks.", d: "Browse available Chartered Accountants and advisors, pick a time that works, and join the session right from your dashboard." },
-          { tag: "Spending & budgets", t: "Only advice, never sales", d: "See income against expenses, spending by category, and your savings trend over time. Clear enough to act on, every month." },
+          { tag: "Book a session", t: "A 1:1 with a certified expert, in a few clicks.", d: "Browse available CFPs and CAs, pick a time that works, and join the session right from your dashboard." },
+          { tag: "Spending & budgets", t: "Only guidance, never sales", d: "See income against expenses, spending by category, and your savings trend over time. Clear enough to act on, every month." },
           { tag: "Private by design", t: "Private by design", d: "Everything you track stays private to you. Your employer only ever sees anonymised, company-wide trends, never your individual numbers." },
         ]} />
       </section>
@@ -238,7 +240,7 @@ const TRIO = [
 
 export function DashboardSessions() {
   return (
-    <Shell path="/platform/book-a-session" title="Book a session" description="Book a certified financial expert in a few clicks and talk it through, privately." cta={OnePlace} faqTitle="Questions about insights">
+    <Shell path="/platform/book-a-session" title="Book a Session with a CFP or CA | Koshpal" crumb="Book a session" description="Book a certified CFP or CA in a few clicks and talk it through privately. Paid for by your employer." cta={OnePlace} faqTitle="Questions about insights">
       <Stage bg={TEAL} h={1060}>
         <HeroTitle
           y={182}
@@ -259,7 +261,7 @@ export function DashboardSessions() {
 
 export function DashboardInsights() {
   return (
-    <Shell path="/platform/dashboard-insights" title="Spending insights dashboard" description="See where your money actually goes, on a screen big enough to see it all." cta={Insight} faqTitle="Questions about insights">
+    <Shell path="/platform/dashboard-insights" title="Spending Insights Dashboard | Koshpal" crumb="Spending insights dashboard" description="See where your money actually goes, on a screen big enough to see it all, in the Koshpal employee dashboard." cta={Insight} faqTitle="Questions about insights">
       <Stage bg={TEAL} h={1303}>
         <Orbit pos={ORBIT_INSIGHTS} h={1303} />
         <HeroTitle y={566} tag="Spending Insights" lines={["See where your money", "actually goes"]} />

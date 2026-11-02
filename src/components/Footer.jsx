@@ -10,25 +10,22 @@ import { track } from "../lib/analytics";
 const PLATFORM = [
   { label: "Employee Dashboard", to: "/platform/dashboard" },
   { label: "Mobile App", to: "/platform/mobile-app" },
-  { label: "Experts & Coaching", to: "/platform#connect" },
+  { label: "Book a Session", to: "/platform/book-a-session" },
   { label: "Pricing", to: "/pricing" },
 ];
 const SOLUTIONS = [
   { label: "For Employees", to: "/for-employees" },
   { label: "For HR & People", to: "/for-hr" },
-  { label: "For CFO’s & Finance", to: "/business-impact" },
 ];
 const RESOURCES = [
   { label: "Blogs", to: "/blog" },
-  { label: "Guides", to: "/resources" },
-  { label: "Reports", to: "/resources" },
   { label: "FAQ & Help", to: "/faq" },
 ];
 const COMPANY = [
   { label: "About", to: "/about" },
   { label: "Our Vision", to: "/our-vision" },
   { label: "Privacy & Security", to: "/privacy-trust" },
-  { label: "Resources", to: "/resources" },
+  { label: "Coach with Koshpal", to: "/coach-with-us" },
 ];
 
 const head = "font-figtree text-[16px] uppercase leading-5 text-white";
@@ -134,7 +131,7 @@ export default function Footer() {
 
         <div className="relative mx-auto flex max-w-[1100px] flex-col items-center">
           <H2 className="text-center text-[#f4f4f8]">
-            Ready to outpace your <span className="text-[#c8f169]">category?</span>
+            Build a financially <span className="text-[#c8f169]">confident workplace.</span>
           </H2>
         </div>
 
@@ -160,8 +157,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-8 max-w-[460px] font-figtree text-[14px] leading-[18px] text-white">
-              Koshpal provides an all-in-one financial management platform designed for businesses. From real-time expense tracking and automated budgeting to analytics and seamless integrations, we equip teams with the tools and insights they need to manage finances efficiently and scale with confidence.
-            </p>
+              Koshpal is an employee financial wellness program for Indian workplaces. Every employee gets a certified CFP or CA to talk to and an app for budgets, goals and dues. The company pays, HR sees only anonymised trends, and we sell nothing.</p>
             <div className="mt-9 flex items-center gap-5 text-white">
               <a href="https://www.linkedin.com/company/koshpal/" target="_blank" rel="noopener noreferrer" aria-label="Koshpal on LinkedIn" className="transition-opacity hover:opacity-80">
                 <Linkedin size={30} aria-hidden="true" />
@@ -193,7 +189,8 @@ export default function Footer() {
         </div>
 
         <div className="relative mx-auto mt-14 max-w-[540px] border-t border-white/40 pt-8 text-center font-figtree text-[14px] leading-5 text-white">
-          <p>Primeco Union City, Block B, 6th Floor, ITPL Main Rd, Jaipur, Rajasthan 560067</p>
+          <p>Koshpal provides financial education and guidance. It is not a SEBI-registered investment adviser and does not sell financial products.</p>
+          <p className="mt-4">Primeco Union City, Block B, 6th Floor, ITPL Main Rd, Jaipur, Rajasthan 560067</p>
           <p className="mt-4">ISO/IEC 27001:2013, SOC 2 Type 2, and GDPR certified</p>
           <p className="mt-4">
             Insurance products offered and serviced by Koshpal Fintech Pvt Ltd

@@ -1,43 +1,43 @@
 import React from "react";
 import Footer from "../components/Footer";
-import Seo from "../components/b2b/Seo";
+import Seo, { faqSchema } from "../components/b2b/Seo";
 import HomeHero from "../components/site/HomeHero";
 import PillarSection from "../components/site/PillarSection";
 import RealProblem from "../components/site/RealProblem";
-import ProblemWeSee from "../components/site/ProblemWeSee";
 import CompaniesGet from "../components/site/CompaniesGet";
 import ProgramPillars from "../components/site/ProgramPillars";
-import OnePlace from "../components/site/OnePlace";
 import Rollout from "../components/site/Rollout";
 import Compare from "../components/site/Compare";
 import Experts from "../components/site/Experts";
 import PrivacyFirst from "../components/site/PrivacyFirst";
 import FinalCta from "../components/site/FinalCta";
 import Faq from "../components/site/Faq";
+import { HOME_FAQ } from "../content/faq";
 
-/* Section order follows the Figma "Website 2.0" home frame (2:19331). */
+/* Eleven sections, in the order set out in the SEO content doc:
+   hero, the 25th, the third pillar, what every employee gets, what the company gets,
+   why Koshpal, the coaches, privacy, rollout and pilot, FAQ, final call to action. */
 export default function Home() {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
       <Seo
         path="/"
-        title=""
-        description="Koshpal is a privacy-first employee financial wellness platform. Every employee gets 1:1 sessions with certified financial experts and an app to act on the plan; HR gets anonymised insight."
+        title="Employee Financial Wellness Program in India | Koshpal"
+        description="Give every employee a certified financial coach and a money app. Employer-paid, private, and we sell nothing. Start a 60-day pilot."
+        schema={faqSchema(HOME_FAQ)}
       />
       <main id="main">
         <HomeHero />
-        <PillarSection />
         <RealProblem />
-        <ProblemWeSee />
-        <CompaniesGet />
+        <PillarSection />
         <ProgramPillars />
-        <OnePlace />
-        <Rollout />
+        <CompaniesGet />
         <Compare />
         <Experts />
         <PrivacyFirst />
+        <Rollout />
+        <Faq tag="questions leaders ask" title="Questions HR leaders ask" items={HOME_FAQ} />
         <FinalCta />
-        <Faq />
       </main>
       <Footer />
     </div>

@@ -7,7 +7,7 @@ export default function TermsOfService() {
   return (
     <PageShell
       seo={{
-        title: "Terms of service",
+        title: "Terms of Service | Koshpal",
         path: "/terms-of-service",
         description: "Koshpal terms of service.",
         noindex: true,

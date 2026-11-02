@@ -28,7 +28,12 @@ const photo = "/img/pages/model.jpg";
 export default function Vision() {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo path="/our-vision" title="Our vision" description="A future where financial wellbeing is standard at work. Koshpal is building India's first financial wellbeing infrastructure for workplaces." />
+      <Seo
+        path="/our-vision"
+        title="Our Vision: Financial Wellbeing at Work | Koshpal"
+        description="Workplaces support physical and mental health. We’re making financial wellbeing the third standard benefit in India."
+        crumbs={[["Our vision", "/our-vision"]]}
+      />
       <main id="main">
         <MagentaHero
           tag="Our vision"
@@ -36,7 +41,7 @@ export default function Vision() {
           pill="standard at work"
           lead="Workplaces have learned to support physical and mental health. Financial wellbeing is the missing third pillar, and we are bringing it to India, first."
           primary={{ label: "Book a demo", to: "/demo" }}
-          secondary={{ label: "See the platform", to: "/platform" }}
+          secondary={{ label: "See the platform", to: "/platform/mobile-app" }}
         />
 
         {/* what we are doing */}
@@ -64,7 +69,7 @@ export default function Vision() {
         {/* why now */}
         <section className="bg-white px-5 pb-10 pt-16 md:px-10 md:pt-20">
           <div className="mx-auto flex max-w-[1240px] flex-col items-center text-center">
-            <Tag>how we handle data</Tag>
+            <Tag>Why now</Tag>
             <H2 className="mt-6 text-[#171b26]">Why your people need this now.</H2>
             <Lead className="mt-4 max-w-[1000px] text-[#0b0b0c]">
               Financial stress is the most common pressure Indian employees carry, and the least supported. That makes it the biggest wellbeing opportunity most companies have not taken yet.
@@ -80,7 +85,7 @@ export default function Vision() {
               <PinkTag>Where we are going</PinkTag>
               <h2 className="mt-6 max-w-[900px] text-balance font-figtree text-[clamp(30px,4.2vw,60px)] font-medium leading-[1.18] tracking-[-0.02em]">India’s first financial wellbeing infrastructure for workplaces.</h2>
               <p className="mt-8 font-figtree text-[clamp(17px,1.94vw,28px)] leading-[1.55]">
-                Our ambition is not another HR platform. It is the trusted financial wellbeing infrastructure for workplaces across India, where every employee has real guidance within reach, and where companies measure success not only by revenue, but by the financial confidence of their people.
+                Our ambition is not another HR platform. It is the trusted financial wellbeing infrastructure for workplaces across India, where every employee has real guidance within reach, and where companies measure success not only by revenue, but by the financial confidence of their people. India first, then the UAE and Australia.
               </p>
             </div>
             <img src={photo} alt="" width="1320" height="531" loading="lazy" className="mt-10 aspect-[1320/531] w-full rounded-[24px] object-cover md:mt-12 md:rounded-[30px]" />

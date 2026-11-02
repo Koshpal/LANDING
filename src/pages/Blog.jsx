@@ -39,8 +39,9 @@ export default function Blog() {
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
       <Seo
         path="/blog"
-        title="Blog: Financial wellness insights"
-        description="Short, practical writing on employee financial wellness for HR and People teams: definitions, provider evaluation, privacy, rollout and measurement."
+        title="Employee Financial Wellness Blog | Koshpal"
+        description="Practical writing on employee financial wellness for HR teams and money questions for salaried employees in India: tax, EMIs, savings and benefits."
+        crumbs={[["Blog", "/blog"]]}
       />
       <main id="main">
         <MagentaHero
