@@ -44,7 +44,7 @@ export default function PillarSection() {
             Our belief
           </span>
           <h2 className="mt-6 font-figtree font-normal text-white text-balance text-[clamp(32px,7vw,56px)] leading-[1.05] tracking-[-0.0127em] lg:mt-[1.739cqw] lg:text-[5.942cqw] lg:leading-[6.232cqw]">
-            Body and mind are covered at work. <span className="text-[#c8f169]">Money is the missing third pillar.</span>
+            Body and mind are covered at work. <span className="text-[#c8f169]">Money is the missing next pillar.</span>
           </h2>
           <p className="mt-6 font-figtree text-white text-balance text-[17px] leading-[1.5] md:text-[22px] lg:mt-[2.464cqw] lg:text-[2.319cqw] lg:leading-[3.478cqw]">
             Workplaces learned to care for physical health, then mental health. Money, the worry employees carry most, still gets a webinar once a year. We believe financial wellbeing will become the third standard benefit at work, and we’re building it for India first.</p>

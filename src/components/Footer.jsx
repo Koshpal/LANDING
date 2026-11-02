@@ -46,14 +46,6 @@ function Col({ title, items }) {
   );
 }
 
-function XMark(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
 function Newsletter() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle"); // idle | sending | done | error
@@ -162,8 +154,9 @@ export default function Footer() {
               <a href="https://www.linkedin.com/company/koshpal/" target="_blank" rel="noopener noreferrer" aria-label="Koshpal on LinkedIn" className="transition-opacity hover:opacity-80">
                 <Linkedin size={30} aria-hidden="true" />
               </a>
-              <span aria-hidden="true" title="Instagram"><Instagram size={30} /></span>
-              <span aria-hidden="true" title="X"><XMark width="28" height="28" /></span>
+              <a href="https://www.instagram.com/kosh_pal/" target="_blank" rel="noopener noreferrer" aria-label="Koshpal on Instagram" className="transition-opacity hover:opacity-80">
+                <Instagram size={30} aria-hidden="true" />
+              </a>
             </div>
           </div>
 

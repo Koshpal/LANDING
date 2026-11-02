@@ -62,7 +62,7 @@ export default function BlogPost() {
           ...(post.faq?.length ? [faqSchema(post.faq)] : []),
         ]}
       />
-      <div className="relative h-[84px] md:h-[100px]" style={{ backgroundImage: ORANGE.replace("#f5c27a 0%", "#f5b56a 0%") }}>
+      <div className="relative h-[72px] md:h-[84px]" style={{ backgroundImage: ORANGE.replace("#f5c27a 0%", "#f5b56a 0%") }}>
         <Navbar glass />
       </div>
 
