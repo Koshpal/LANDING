@@ -119,7 +119,7 @@ export default function CoachWithUs() {
                       <Icon className="size-[46%]" strokeWidth={1.6} aria-hidden="true" />
                     </span>
                     <span
-                      className="absolute -translate-x-1/2 -translate-y-1/2 text-center font-figtree font-medium leading-[1.2] text-white"
+                      className="absolute -translate-x-1/2 -translate-y-1/2 text-center font-figtree font-normal leading-[1.2] text-white"
                       style={{ left: cq(lx), top: cq(ly), fontSize: "1.45cqw", width: narrow ? cq(140) : "max-content" }}
                     >
                       {t}

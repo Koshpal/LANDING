@@ -22,7 +22,7 @@ function PillarBar({ x, y, color, label, labelRight }) {
         style={{ ...at(x, y, 300.08, 578.894), borderRadius: cq(31.5), backgroundColor: color, boxShadow: `inset 0 ${cq(3.15)} ${cq(39.4)} rgba(255,255,255,0.25)` }}
       />
       <p
-        className="absolute -translate-x-full whitespace-nowrap text-right font-figtree font-medium uppercase text-[#0b0b0c]"
+        className="absolute -translate-x-full whitespace-nowrap text-right font-figtree font-normal uppercase text-[#0b0b0c]"
         style={{ left: cq(labelRight), top: `calc(${cq(y + 32)} - var(--oy))`, fontSize: cq(52.13), lineHeight: cq(69.51) }}
       >
         {label}
@@ -43,7 +43,7 @@ export default function PillarSection() {
           <span className="whitespace-nowrap rounded-full bg-[#ffbcfc] px-[18px] py-2 font-stack text-[16px] leading-[33px] text-black lg:px-[1.304cqw] lg:py-[0.58cqw] lg:text-[1.449cqw] lg:leading-[2.39cqw]">
             Our belief
           </span>
-          <h2 className="mt-6 font-figtree font-medium text-white text-balance text-[clamp(32px,7vw,56px)] leading-[1.05] tracking-[-0.0127em] lg:mt-[1.739cqw] lg:text-[5.942cqw] lg:leading-[6.232cqw]">
+          <h2 className="mt-6 font-figtree font-normal text-white text-balance text-[clamp(32px,7vw,56px)] leading-[1.05] tracking-[-0.0127em] lg:mt-[1.739cqw] lg:text-[5.942cqw] lg:leading-[6.232cqw]">
             Body and mind are covered at work. <span className="text-[#c8f169]">Money is the missing third pillar.</span>
           </h2>
           <p className="mt-6 font-figtree text-white text-balance text-[17px] leading-[1.5] md:text-[22px] lg:mt-[2.464cqw] lg:text-[2.319cqw] lg:leading-[3.478cqw]">
@@ -62,7 +62,7 @@ export default function PillarSection() {
                 <img src="/img/home/logo-light.svg" alt="" className="block size-full max-w-none" />
               </span>
             </span>
-            <p className="font-figtree font-medium uppercase text-[#c8f169]" style={{ fontSize: cq(81.19), lineHeight: cq(108.25) }}>Financial</p>
+            <p className="font-figtree font-normal uppercase text-[#c8f169]" style={{ fontSize: cq(81.19), lineHeight: cq(108.25) }}>Financial</p>
           </div>
           <img src="/img/home/pillar-column.png" alt="" className="absolute max-w-none" style={at(0, 370.77, 563, 962)} />
           <PillarBar x={496} y={905.44} color="#ffbcfc" label="Mental" labelRight={749} />

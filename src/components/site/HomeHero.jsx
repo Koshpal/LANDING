@@ -25,7 +25,7 @@ export default function HomeHero() {
       <div className="relative mx-auto flex max-w-[1440px] flex-col items-center px-5 pb-[92px] pt-[148px] md:px-10 md:pt-[181.6px] xl:px-[100px] max-md:pb-14">
         <div className="flex max-w-[1200px] flex-col items-center gap-5">
           <Tag tone="light">Employee financial wellness program, built for India</Tag>
-          <h1 className="text-center font-figtree font-medium text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.25)] text-[clamp(34px,6.25vw,90px)] leading-[1.2745]">
+          <h1 className="text-center font-figtree font-normal text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.25)] text-[clamp(34px,6.25vw,90px)] leading-[1.2745]">
             <span className="block">Every employee deserves</span>
             <span className="-mt-[0.235em] flex flex-wrap items-center justify-center gap-[0.147em]">
               <img src="/img/home/rupee-pill.svg" alt="" width="164" height="71" className="h-[0.7em] w-[1.613em]" />

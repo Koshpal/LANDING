@@ -4,7 +4,7 @@ import React from "react";
    (Stack Sans 24/32). Sized fluidly so the 1440px design scales down. */
 export function H2({ children, className = "", as: Tag = "h2" }) {
   return (
-    <Tag className={`text-balance font-figtree font-medium text-[clamp(36px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em] ${className}`}>
+    <Tag className={`text-balance font-figtree font-normal text-[clamp(36px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em] ${className}`}>
       {children}
     </Tag>
   );

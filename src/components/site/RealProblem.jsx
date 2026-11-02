@@ -16,7 +16,7 @@ export default function RealProblem() {
       <div className="mx-auto flex max-w-[1248px] flex-col items-center gap-10 md:gap-16">
         <div className="flex w-full flex-col items-center">
           <Tag>The real problem</Tag>
-          <h2 className="mt-6 w-full text-balance text-center font-figtree font-medium text-[#0b0b0c] text-[clamp(36px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em]">
+          <h2 className="mt-6 w-full text-balance text-center font-figtree font-normal text-[#0b0b0c] text-[clamp(36px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em]">
             Good salaries. Still broke by the 25th.
           </h2>
           <p className="mt-6 w-full max-w-[800px] text-center font-figtree text-[clamp(17px,1.67vw,24px)] leading-[1.333] text-black">

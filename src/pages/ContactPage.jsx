@@ -94,7 +94,7 @@ export default function ContactPage() {
           <Navbar glass />
           <div className="mx-auto flex max-w-[1440px] flex-col items-center px-5 pb-16 pt-[140px] md:px-10 md:pb-[120px] md:pt-[248px]">
             <span className="rounded-full bg-[#ffbcfc] px-[18px] py-2 font-stack text-[20px] leading-[33px] text-black">Contact</span>
-            <h1 className="mt-6 text-balance text-center font-figtree font-medium text-white text-[clamp(38px,5vw,72px)] leading-[1.15] tracking-[-0.0127em]">
+            <h1 className="mt-6 text-balance text-center font-figtree font-normal text-white text-[clamp(38px,5vw,72px)] leading-[1.15] tracking-[-0.0127em]">
               Tell us your requirements
             </h1>
             <p className="mt-6 max-w-[900px] text-balance text-center font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.25] text-white">

@@ -66,7 +66,7 @@ export default function ProgramPillars() {
       <div className="mx-auto max-w-[1380px]">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center">
           <Tag>What every employee gets</Tag>
-          <h2 className="mt-6 text-balance text-center font-figtree font-medium text-[#0b0b0c] text-[clamp(32px,4.3vw,62px)] leading-[1.1] tracking-[-0.0127em]">
+          <h2 className="mt-6 text-balance text-center font-figtree font-normal text-[#0b0b0c] text-[clamp(32px,4.3vw,62px)] leading-[1.1] tracking-[-0.0127em]">
             Learn, understand, connect, grow: one program that stays with them
           </h2>
         </div>

@@ -55,7 +55,7 @@ export function HeroTitle({ y, tag, lines, accent = 1, pill, buttons, tagTone = 
     <At x={720} y={y} top className="flex w-full flex-col items-center md:w-[90cqw]">
       <Tag tone={tagTone}>{tag}</Tag>
       <h1
-        className="mt-6 font-figtree font-medium text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.25)] text-[clamp(34px,9vw,52px)] leading-[1.1] md:mt-[2.08cqw] md:[font-size:var(--fs)] md:[line-height:var(--lh)]"
+        className="mt-6 font-figtree font-normal text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.25)] text-[clamp(34px,9vw,52px)] leading-[1.1] md:mt-[2.08cqw] md:[font-size:var(--fs)] md:[line-height:var(--lh)]"
         style={{ "--fs": c(fs), "--lh": c(lh) }}
       >
         {lines.map((l, i) => (
@@ -268,7 +268,7 @@ export function FloatingCta({ title, lead, cta = { label: "Book a demo", to: "/d
           ))}
           <At x={720} y={364} top className="flex w-full flex-col items-center md:w-[70cqw]">
             <Tag tone="light">{tag}</Tag>
-            <h2 className="mt-6 font-figtree font-medium text-white text-[clamp(34px,5.69vw,82px)] leading-[1.02] tracking-[-0.0127em] md:mt-[2.2cqw]">{title}</h2>
+            <h2 className="mt-6 font-figtree font-normal text-white text-[clamp(34px,5.69vw,82px)] leading-[1.02] tracking-[-0.0127em] md:mt-[2.2cqw]">{title}</h2>
             <p className="mt-6 max-w-[700px] font-stack text-[clamp(16px,1.39vw,20px)] leading-[1.3] text-white">{lead}</p>
             <div className="mt-8 md:mt-[2.6cqw]">
               <PillButton to={cta.to} tone="white" size="sm" className="!text-[18px] shadow-[0_8px_24px_rgba(0,0,0,0.3)]">{cta.label}</PillButton>

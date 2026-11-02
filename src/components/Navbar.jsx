@@ -26,7 +26,7 @@ const MENU = [
 
 function Logo() {
   return (
-    <Link to="/" aria-label="Koshpal home" className="relative block h-[45px] w-[182px] shrink-0 max-md:w-[128px] max-md:h-[32px]">
+    <Link to="/" aria-label="Koshpal home" className="relative block h-[36px] w-[146px] shrink-0 max-md:w-[112px] max-md:h-[28px]">
       <span className="absolute" style={{ top: "-60.67%", right: "-16.37%", bottom: "-68.22%", left: "-15.49%" }}>
         <img src="/img/home/logo.svg" alt="Koshpal" className="block size-full max-w-none" />
       </span>
@@ -74,7 +74,7 @@ export default function Navbar({ glass = false }) {
         </nav>
 
         <div className="hidden lg:block">
-          <PillButton to="/demo" size="lg" className="!text-[24px]">Book a demo</PillButton>
+          <PillButton to="/demo" size="lg" className="!text-[19px]">Book a demo</PillButton>
         </div>
 
         <button

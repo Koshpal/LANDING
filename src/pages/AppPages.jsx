@@ -117,7 +117,7 @@ function GoalArc() {
               <img src={`/img/pages/app/glyph-${g}.png`} alt="" style={{ width: c(30), height: c(30) }} />
             </span>
             <span className="absolute" style={{ left: c(CX + ux * q), top: c(CY + uy * q), width: 0, height: 0, transform: `rotate(${deg.toFixed(1)}deg)` }}>
-              <span className="absolute right-0 top-0 -translate-y-1/2 whitespace-nowrap font-figtree font-medium text-white" style={{ fontSize: c(24) }}>{label}</span>
+              <span className="absolute right-0 top-0 -translate-y-1/2 whitespace-nowrap font-figtree font-normal text-white" style={{ fontSize: c(24) }}>{label}</span>
             </span>
           </React.Fragment>
         );

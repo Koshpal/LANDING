@@ -41,7 +41,7 @@ export function MagentaHero({ tag, title, pillPrefix, pillSuffix, pill, lead, pr
         style={{ "--pt": `${padTop}px`, "--pb": `${pb}px` }}
       >
         <Tag tone="light">{tag}</Tag>
-        <h1 className={`${small ? "mt-6 md:mt-3" : "mt-8 md:mt-10"} font-figtree font-medium text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.25)] ${small ? "text-[clamp(36px,5.69vw,82px)] leading-[1.22]" : "text-[clamp(36px,6.25vw,90px)] leading-[1.11]"}`}>
+        <h1 className={`${small ? "mt-6 md:mt-3" : "mt-8 md:mt-10"} font-figtree font-normal text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.25)] ${small ? "text-[clamp(36px,5.69vw,82px)] leading-[1.22]" : "text-[clamp(36px,6.25vw,90px)] leading-[1.11]"}`}>
           <span className={`mx-auto block ${small ? "max-w-[1250px]" : "max-w-[1130px]"}`}>{title}</span>
           {pill && (
             <span className="mt-1 flex flex-wrap items-center justify-center gap-[0.25em] md:mt-3">
@@ -77,7 +77,7 @@ export function CtaBand({ tag = "Get started", children, cta = "Book a demo", to
     >
       <div className="mx-auto flex max-w-[1440px] flex-col items-center px-5 py-20 text-center md:py-[var(--py)]" style={{ "--py": `${py}px` }}>
         <Tag tone="light">{tag}</Tag>
-        <h2 className={`mt-8 text-balance font-figtree font-medium text-white text-[clamp(34px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em] ${wide ? "max-w-[1200px]" : "max-w-[1000px]"}`}>{children}</h2>
+        <h2 className={`mt-8 text-balance font-figtree font-normal text-white text-[clamp(34px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em] ${wide ? "max-w-[1200px]" : "max-w-[1000px]"}`}>{children}</h2>
         <div className="mt-8">
           <PillButton to={href ? undefined : to} href={href} tone="lime" size="sm" className="!text-[18px]">{cta}</PillButton>
         </div>
@@ -129,7 +129,7 @@ export function PhotoCta({ tag = "Get started", tiles, heading, cta = "Book a de
       </div>
       <div className="relative mx-auto flex max-w-[1440px] flex-col items-center px-5 pb-24 pt-32 text-center md:min-h-[1122px] md:justify-center md:px-10 md:pb-[160px] md:pt-[200px]">
         <Tag tone="light">{tag}</Tag>
-        <h2 className="mt-6 max-w-[1100px] text-balance font-figtree font-medium text-white text-[clamp(34px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em]">{heading}</h2>
+        <h2 className="mt-6 max-w-[1100px] text-balance font-figtree font-normal text-white text-[clamp(34px,5.69vw,82px)] leading-[1.05] tracking-[-0.0127em]">{heading}</h2>
         <div className="mt-10">
           <PillButton to={to} tone="lime" size="sm" className="!text-[18px]">{cta}</PillButton>
         </div>

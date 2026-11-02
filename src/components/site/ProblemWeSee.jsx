@@ -37,7 +37,7 @@ export default function ProblemWeSee() {
         <div className="relative flex w-full max-w-[1200px] flex-col items-center gap-10 md:gap-20">
           <div className="flex w-full flex-col items-center">
             <span className="rounded-full bg-[#ffbcfc] px-[18px] py-2 font-stack text-[16px] leading-[33px] text-black md:text-[20px]">In their own words</span>
-            <h2 className="mt-6 w-full text-balance text-center font-figtree font-medium text-[#0b0b0c] text-[clamp(28px,4.03vw,58px)] leading-[1.138] tracking-[-0.018em]">
+            <h2 className="mt-6 w-full text-balance text-center font-figtree font-normal text-[#0b0b0c] text-[clamp(28px,4.03vw,58px)] leading-[1.138] tracking-[-0.018em]">
               The worries we hear most, in people’s own words.
             </h2>
             <p className="mt-6 w-full text-balance text-center font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.25] text-[#0b0b0c]">

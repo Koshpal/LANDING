@@ -11,10 +11,10 @@ const TONES = {
 };
 
 export default function PillButton({ to, href, onClick, tone = "indigo", size = "lg", children, className = "", ...rest }) {
-  const text = size === "lg" ? "text-[clamp(16px,1.67vw,24px)]" : "text-[clamp(15px,1.25vw,18px)]";
+  const text = size === "lg" ? "text-[clamp(15px,1.39vw,20px)]" : "text-[clamp(15px,1.25vw,18px)]";
   const chipBg = tone === "lime" ? "bg-black" : "bg-white";
   const chip = size === "lg" ? "size-[clamp(30px,2.72vw,39.2px)]" : "size-[30px]";
-  const cls = `group inline-flex items-center gap-[clamp(12px,1.39vw,20px)] rounded-full py-[6px] pl-[clamp(20px,2.22vw,32px)] pr-[6px] font-stack font-light leading-[28px] text-white whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${TONES[tone]} ${text} ${className}`;
+  const cls = `group inline-flex items-center gap-[clamp(12px,1.39vw,20px)] rounded-full py-[6px] pl-[clamp(20px,2.22vw,32px)] pr-[6px] font-stack font-light leading-[28px] tracking-[-0.01em] text-white whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${TONES[tone]} ${text} ${className}`;
   const inner = (
     <>
       <span>{children}</span>

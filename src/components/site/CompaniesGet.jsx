@@ -27,7 +27,7 @@ export default function CompaniesGet() {
         <div className="mx-auto flex max-w-[1392px] flex-col items-center gap-10 md:gap-16">
           <div className="flex w-full flex-col items-center">
             <Tag tone="light">What the company gets</Tag>
-            <h2 className="mt-6 w-full text-balance text-center font-figtree font-medium text-white text-[clamp(34px,5.69vw,82px)] leading-[1.098] tracking-[-0.0127em]">
+            <h2 className="mt-6 w-full text-balance text-center font-figtree font-normal text-white text-[clamp(34px,5.69vw,82px)] leading-[1.098] tracking-[-0.0127em]">
               A benefit people use, and numbers you can show leadership
             </h2>
           </div>
