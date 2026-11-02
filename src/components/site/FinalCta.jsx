@@ -25,7 +25,7 @@ export default function FinalCta() {
         {TILES.map((t) => (
           <img
             key={t.n}
-            src={`/img/home/jars/j${t.n}.png`}
+            src={`/img/home/avatars/a${t.n + 2}.png`}
             alt=""
             loading="lazy"
             className="absolute rounded-[8px] object-cover"

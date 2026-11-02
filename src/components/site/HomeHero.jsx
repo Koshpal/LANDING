@@ -5,8 +5,33 @@ import Tag from "./Tag";
 
 /* Figma "Frame 2147259280 / Container" (1440 wide). The headline is sized in em off one fluid
    font-size so the 102px design scales down to phones without re-flowing the pill graphics.
-   The design's stat card (a 56% figure and a market size) is replaced by a trust line. */
-const TRUST = ["Certified CFPs and CAs", "No products, no commissions", "Private by design", "Live in one week"];
+   The stat card keeps the design's layout; its figures are the sourced India numbers from the SEO doc. */
+const TRUST = ["Certified financial experts", "No commissions, no products", "Private by design"];
+
+function StatCard() {
+  return (
+    <div className="flex flex-col items-center justify-center overflow-clip rounded-[22.7px] bg-[#122020] p-[7.57px] md:h-[524.755px]">
+      <div className="flex w-full flex-1 flex-col items-center justify-center gap-[30.3px] overflow-clip rounded-[19.7px] bg-[#122020] p-[22.7px]">
+        <div className="flex w-full max-w-[318px] flex-col gap-[22.7px] pb-[30.3px]">
+          <img src="/img/home/stat-dots.png" alt="" width="318" height="130" className="h-[130.5px] w-full object-contain" />
+          <div className="flex items-end justify-between">
+            <p className="font-figtree text-[62.1px] leading-[74.5px] tracking-[-1.24px] text-white">62%</p>
+            <p className="w-[175px] pb-[12px] text-right font-figtree text-[13.6px] leading-[16.4px] text-[#b7bcbc]">of Indian millennials live paycheque to paycheque</p>
+          </div>
+        </div>
+        <div className="flex w-full max-w-[318px] flex-col gap-[22.7px]">
+          <p className="font-figtree text-[21.2px] leading-[25.4px] tracking-[-0.42px] text-white">This is the gap Koshpal closes.</p>
+          <div className="flex min-h-[35px] items-center justify-between gap-3">
+            <p className="font-figtree text-[13.6px] leading-[16.4px] text-[#b7bcbc]">Of a salaried income goes to EMIs</p>
+            <p className="font-figtree text-[31.8px] leading-[35px] tracking-[-0.64px] text-[#ffbcfc]">33%+</p>
+          </div>
+          <img src="/img/home/stat-bars.png" alt="" width="318" height="45" className="h-[44.5px] w-full object-contain" />
+        </div>
+        <p className="w-full max-w-[318px] font-figtree text-[11px] leading-[14px] text-[#8e9494]">Sources: Deloitte 2025; Perfios and PwC India 2025</p>
+      </div>
+    </div>
+  );
+}
 
 export default function HomeHero() {
   return (
@@ -37,7 +62,8 @@ export default function HomeHero() {
             </span>
           </h1>
           <p className="mt-5 text-center font-stack font-light text-white text-[clamp(16px,2.22vw,32px)] leading-[1.19]">
-            Koshpal is a financial wellness program for Indian workplaces. Each employee gets a certified CFP or CA to talk to and an app that turns the plan into daily habits. The company pays. We sell nothing.
+            Building financially confident workplaces.
+            Give every employee continuous financial support through intelligent technology, personalised education and certified financial experts, so they build better habits and make confident money decisions at every stage of life.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-[30px] pt-[50px] max-md:gap-4 max-md:pt-6">
             <PillButton to="/demo" tone="indigo">Book a demo</PillButton>
@@ -45,7 +71,7 @@ export default function HomeHero() {
           </div>
         </div>
 
-        <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 max-md:mt-8 md:mt-14" aria-label="Why employers choose Koshpal">
+        <ul className="flex flex-wrap items-center justify-center mt-12 gap-x-8 gap-y-3 max-md:mt-8 md:mt-14" aria-label="Why employers choose Koshpal">
           {TRUST.map((t) => (
             <li key={t} className="flex items-center gap-2 font-stack text-[clamp(14px,1.25vw,18px)] text-white">
               <i aria-hidden="true" className="size-[6px] rounded-full bg-[#c8f169]" />
@@ -54,8 +80,11 @@ export default function HomeHero() {
           ))}
         </ul>
 
-        <div className="mt-14 w-full max-w-[1248px] overflow-clip rounded-[22.7px] max-md:mt-10 max-md:aspect-[846/525] md:h-[524.755px]">
-          <img src="/img/home/hero-photo.png" alt="Two colleagues smiling at their phones" width="846" height="525" className="size-full object-cover" />
+        <div className="mt-14 grid w-full max-w-[1248px] gap-[22.7px] max-md:mt-10 md:grid-cols-[minmax(0,1fr)_minmax(300px,378.6px)]">
+          <div className="overflow-clip rounded-[22.7px] max-md:aspect-[846/525] md:h-[524.755px]">
+            <img src="/img/home/hero-photo.png" alt="Two colleagues smiling at their phones" width="846" height="525" className="object-cover size-full" />
+          </div>
+          <StatCard />
         </div>
       </div>
     </section>

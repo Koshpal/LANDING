@@ -19,7 +19,7 @@ function Card({ p, i }) {
     <>
       <img src={postImage(i)} alt="" width="410" height="307" loading="lazy" className="aspect-[410/307] w-full rounded-[24px] object-cover transition-transform duration-300 group-hover:scale-[1.01]" />
       <p className="mt-3 font-figtree text-[14px] leading-5 text-[#666]">
-        {p.category} <span aria-hidden="true">•</span> {p.published ? `${p.readMins} min read` : "Coming soon"}
+        {p.category} <span aria-hidden="true">•</span> {p.readMins} min read
       </p>
       <h3 className={`mt-1 font-figtree text-[16px] leading-[22px] md:text-[17px] ${p.published ? "text-[#0b0b0c]" : "text-[#8a8a8a]"}`}>{p.title}</h3>
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PillButton from "./site/PillButton";
 
@@ -40,10 +40,25 @@ function Chevron() {
 
 export default function Navbar({ glass = false }) {
   const [open, setOpen] = useState(false);
-  const bar = glass ? "bg-white/[0.08] border-b border-white/25 backdrop-blur-[2px]" : "bg-white border-b border-[#e6e8f2]";
+  const [scrolled, setScrolled] = useState(false);
+
+  // Fixed to the top while scrolling. The glass bar only reads against the hero, so once the page
+  // scrolls it becomes a solid white bar that stays legible over any section.
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+
+  const bar = scrolled
+    ? "bg-white/95 border-b border-[#e6e8f2] shadow-[0_4px_20px_rgba(11,11,12,0.08)] backdrop-blur-md"
+    : glass
+      ? "bg-white/[0.08] border-b border-white/25 backdrop-blur-[2px]"
+      : "bg-white border-b border-[#e6e8f2]";
 
   return (
-    <header className={`absolute inset-x-0 top-0 z-50 ${bar}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-200 ${bar}`}>
       <div className="mx-auto flex h-[101.6px] max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-20 max-md:h-[72px]">
         <Logo />
 

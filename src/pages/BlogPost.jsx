@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Seo from "../components/b2b/Seo";
+import Seo, { faqSchema } from "../components/b2b/Seo";
 import { DummyBadge } from "../components/b2b/Dummy";
 import { CtaBand, ORANGE } from "../components/site/PageParts";
 import { getPost } from "../content/posts";
@@ -14,7 +14,12 @@ import { fmtDate } from "./Blog";
 export default function BlogPost() {
   const { slug } = useParams();
   const post = getPost(slug);
-  const heads = useMemo(() => (post ? post.body.map((b, i) => ({ b, i })).filter(({ b }) => b.t === "h") : []), [post]);
+  const faqId = post ? post.body.length : 0; // the FAQ section's contents-list id, after the last body block
+  const heads = useMemo(() => {
+    if (!post) return [];
+    const hs = post.body.map((b, i) => ({ b, i })).filter(({ b }) => b.t === "h");
+    return post.faq?.length ? [...hs, { b: { c: "FAQ" }, i: faqId }] : hs;
+  }, [post, faqId]);
   const [active, setActive] = useState(heads[0]?.i);
 
   useEffect(() => {
@@ -38,7 +43,25 @@ export default function BlogPost() {
   let seenH = false;
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
-      <Seo title={`${post.title} | Koshpal`} crumbs={[["Blog", "/blog"], [post.title, `/blog/${post.slug}`]]} path={`/blog/${post.slug}`} description={post.excerpt} noindex={!!post.dummy} />
+      <Seo
+        title={`${post.title} | Koshpal`}
+        crumbs={[["Blog", "/blog"], [post.title, `/blog/${post.slug}`]]}
+        path={`/blog/${post.slug}`}
+        description={post.excerpt}
+        noindex={!!post.dummy}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.title,
+            datePublished: post.date,
+            author: { "@type": "Organization", name: "Koshpal" },
+            publisher: { "@type": "Organization", name: "Koshpal" },
+            mainEntityOfPage: `https://koshpal.com/blog/${post.slug}`,
+          },
+          ...(post.faq?.length ? [faqSchema(post.faq)] : []),
+        ]}
+      />
       <div className="relative h-[84px] md:h-[100px]" style={{ backgroundImage: ORANGE.replace("#f5c27a 0%", "#f5b56a 0%") }}>
         <Navbar glass />
       </div>
@@ -59,7 +82,7 @@ export default function BlogPost() {
 
         <div className="mt-10 grid gap-8 lg:mt-[41px] lg:grid-cols-[220px_minmax(0,980px)] lg:gap-[79px]">
           <nav aria-label="Contents" className="hidden lg:block">
-            <ol className="sticky top-8 flex flex-col gap-2 font-stack text-[14px] leading-[18px]">
+            <ol className="sticky top-28 flex flex-col gap-2 font-stack text-[14px] leading-[18px]">
               {heads.map(({ b, i }) => (
                 <li key={i}>
                   <a href={`#s-${i}`} aria-current={active === i ? "true" : undefined} className={`block transition-colors hover:text-black ${active === i ? "font-semibold text-black" : "text-[#888]"}`}>
@@ -76,24 +99,59 @@ export default function BlogPost() {
                 const first = !seenH;
                 seenH = true;
                 return (
-                  <h2 key={i} id={`s-${i}`} data-i={i} className={`scroll-mt-8 font-figtree text-[clamp(28px,3.33vw,48px)] font-medium leading-[1.1] tracking-[-0.03em] text-black ${first ? "mt-12 md:mt-[84px]" : "mt-10 md:mt-[46px]"} mb-4 md:mb-5`}>
+                  <h2 key={i} id={`s-${i}`} data-i={i} className={`scroll-mt-28 font-figtree text-[clamp(28px,3.33vw,48px)] font-medium leading-[1.1] tracking-[-0.03em] text-black ${first ? "mt-12 md:mt-[84px]" : "mt-10 md:mt-[46px]"} mb-4 md:mb-5`}>
                     {b.c}
                   </h2>
                 );
               }
+              if (b.t === "h3")
+                return <h3 key={i} className="mt-8 font-figtree text-[22px] font-medium leading-[1.25] tracking-[-0.01em] text-black md:text-[26px]">{b.c}</h3>;
+              if (b.t === "quote")
+                return <blockquote key={i} className="my-6 border-l-4 border-[#3b3fbc] pl-5 font-figtree text-[20px] leading-[1.4] text-black md:text-[24px]">“{b.c}”</blockquote>;
+              if (b.t === "table")
+                return (
+                  <div key={i} className="my-6 overflow-x-auto">
+                    <table className="w-full min-w-[420px] border-collapse text-left font-figtree text-[16px] md:text-[18px]">
+                      <thead>
+                        <tr>{b.head.map((h) => <th key={h} scope="col" className="border-b-2 border-black px-4 py-3 font-medium">{h}</th>)}</tr>
+                      </thead>
+                      <tbody>
+                        {b.rows.map((r) => (
+                          <tr key={r[0]} className="border-b border-[#dcdcdc]">
+                            {r.map((c, k) => (k ? <td key={k} className="px-4 py-3">{c}</td> : <th key={k} scope="row" className="px-4 py-3 font-normal">{c}</th>))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                );
               if (b.t === "list")
                 return (
-                  <ul key={i} className="my-3 flex flex-col gap-1">
-                    {b.c.map((li) => (
-                      <li key={li} className="flex gap-3">
-                        <span aria-hidden="true">•</span>
-                        <span>{li}</span>
-                      </li>
-                    ))}
+                  <ul key={i} className="my-3 flex flex-col gap-2">
+                    {b.c.map((li) => {
+                      const [lead, text] = Array.isArray(li) ? li : [null, li];
+                      return (
+                        <li key={lead || li} className="flex gap-3">
+                          <span aria-hidden="true">•</span>
+                          <span>{lead && <b className="font-semibold">{lead}: </b>}{text}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 );
-              return <p key={i} className="mt-3 first:mt-0">{b.c}</p>;
+              return <p key={i} className="mt-3 first:mt-0">{b.b && <b className="font-semibold">{b.b} </b>}{b.c}</p>;
             })}
+            {post.faq?.length > 0 && (
+              <section aria-labelledby={`s-${faqId}`}>
+                <h2 id={`s-${faqId}`} data-i={faqId} className="mb-4 mt-10 scroll-mt-28 font-figtree text-[clamp(28px,3.33vw,48px)] font-medium leading-[1.1] tracking-[-0.03em] text-black md:mb-5 md:mt-[46px]">FAQ</h2>
+                {post.faq.map((f) => (
+                  <div key={f.q}>
+                    <h3 className="mt-6 font-figtree text-[20px] font-medium leading-[1.3] text-black md:text-[22px]">{f.q}</h3>
+                    <p className="mt-2">{f.a}</p>
+                  </div>
+                ))}
+              </section>
+            )}
           </article>
         </div>
       </main>

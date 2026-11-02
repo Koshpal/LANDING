@@ -14,9 +14,9 @@ import FinalCta from "../components/site/FinalCta";
 import Faq from "../components/site/Faq";
 import { HOME_FAQ } from "../content/faq";
 
-/* Eleven sections, in the order set out in the SEO content doc:
-   hero, the 25th, the third pillar, what every employee gets, what the company gets,
-   why Koshpal, the coaches, privacy, rollout and pilot, FAQ, final call to action. */
+/* Eleven sections, ordered to follow the pitch: the problem (the 25th), why nothing else works (we sell
+   nothing), the belief (third pillar), what employees get, who delivers it (the coaches), what the company
+   gets, privacy, how it starts, FAQ, final call to action. Backgrounds alternate to keep the page's rhythm. */
 export default function Home() {
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
@@ -29,11 +29,11 @@ export default function Home() {
       <main id="main">
         <HomeHero />
         <RealProblem />
+        <Compare />
         <PillarSection />
         <ProgramPillars />
-        <CompaniesGet />
-        <Compare />
         <Experts />
+        <CompaniesGet />
         <PrivacyFirst />
         <Rollout />
         <Faq tag="questions leaders ask" title="Questions HR leaders ask" items={HOME_FAQ} />

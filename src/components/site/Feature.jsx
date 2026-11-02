@@ -164,10 +164,10 @@ export function RowsHead({ tag, children }) {
 }
 
 /* ---- photo + copy split (light on white, or dark rounded card) ---- */
-export function Split({ dark = false, tag, title, lead, points, image = "/img/pages/model.jpg" }) {
+export function Split({ dark = false, tag, title, lead, points, image = "/img/home/hero-photo.png" }) {
   const body = (
     <div className={`grid items-center gap-10 ${dark ? "lg:grid-cols-[minmax(0,620px)_minmax(0,1fr)] lg:gap-[50px]" : "lg:grid-cols-[536px_minmax(0,1fr)] lg:gap-[60px]"}`}>
-      <img src={image} alt="A smiling person holding a product jar" width="536" height="628" loading="lazy" className={`w-full object-cover [object-position:62%_50%] ${dark ? "aspect-[620/700] rounded-[28px] lg:max-w-[620px]" : "aspect-[536/628] max-w-[536px] rounded-[30px]"}`} />
+      <img src={image} alt="Two colleagues smiling at their phones" width="536" height="628" loading="lazy" className={`w-full object-cover [object-position:92%_50%] ${dark ? "aspect-[620/700] rounded-[28px] lg:max-w-[620px]" : "aspect-[536/628] max-w-[536px] rounded-[30px]"}`} />
       <div className={dark ? "lg:pr-10" : ""}>
         <PinkTag>{tag}</PinkTag>
         <h2 className="mt-6 max-w-[660px] font-figtree text-[clamp(32px,3.89vw,56px)] font-medium leading-[1.04] tracking-[-0.02em]">{title}</h2>

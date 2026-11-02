@@ -23,7 +23,7 @@ const PRINCIPLES = [
   { t: "Confidence that lasts", d: "We measure success in lasting financial confidence, not sign-ups." },
 ];
 
-const photo = "/img/pages/model.jpg";
+const photo = "/img/home/hero-photo.png";
 
 export default function Vision() {
   return (
@@ -47,7 +47,7 @@ export default function Vision() {
         {/* what we are doing */}
         <section className="bg-[#122020] px-5 py-16 text-white md:px-10 md:py-[120px]">
           <div className="mx-auto grid max-w-[1240px] items-start gap-10 lg:grid-cols-[536px_minmax(0,1fr)] lg:gap-[78px]">
-            <img src={photo} alt="A smiling person holding a product jar" width="536" height="629" className="aspect-[536/629] w-full max-w-[536px] rounded-[30px] object-cover [object-position:62%_50%]" />
+            <img src={photo} alt="Two colleagues smiling at their phones" width="536" height="629" className="aspect-[536/629] w-full max-w-[536px] rounded-[30px] object-cover [object-position:92%_50%]" />
             <div className="lg:pt-[18px]">
               <PinkTag>What we are doing</PinkTag>
               <h2 className="mt-6 text-balance font-figtree text-[clamp(32px,3.89vw,56px)] font-medium leading-[1.05] tracking-[-0.02em]">Financial confidence, for everyone at work</h2>

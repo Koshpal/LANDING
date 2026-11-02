@@ -190,16 +190,8 @@ export default function Footer() {
 
         <div className="relative mx-auto mt-14 max-w-[540px] border-t border-white/40 pt-8 text-center font-figtree text-[14px] leading-5 text-white">
           <p>Koshpal provides financial education and guidance. It is not a SEBI-registered investment adviser and does not sell financial products.</p>
-          <p className="mt-4">Primeco Union City, Block B, 6th Floor, ITPL Main Rd, Jaipur, Rajasthan 560067</p>
-          <p className="mt-4">ISO/IEC 27001:2013, SOC 2 Type 2, and GDPR certified</p>
-          <p className="mt-4">
-            Insurance products offered and serviced by Koshpal Fintech Pvt Ltd
-            <br />
-            IRDAI Registration No: 897, Direct Broker (Life &amp; General)
-            <br />
-            CIN: U66000KA2022PTC160458
-          </p>
-          <nav aria-label="Legal" className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+          <p className="mt-4">Jaipur, Rajasthan, India</p>
+          <nav aria-label="Legal" className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
             <Link to="/terms-of-service" className={link}>Disclaimer</Link>
             <Link to="/privacy-policy" className={link}>Privacy policy</Link>
             <Link to="/contact" className={link}>Grievance redressal</Link>

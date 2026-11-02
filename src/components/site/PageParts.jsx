@@ -89,7 +89,7 @@ export function CtaBand({ tag = "Get started", children, cta = "Book a demo", to
 /** Dark "how it works" block: pink tag + big title on the left, numbered rows on the right. */
 export function StepsSection({ id, tag, title, lead, steps, rowH = 197 }) {
   return (
-    <section id={id} className="scroll-mt-20 bg-[#122020] px-5 py-16 text-white md:px-[80px] md:pb-[97px] md:pt-[95px]">
+    <section id={id} className="scroll-mt-28 bg-[#122020] px-5 py-16 text-white md:px-[80px] md:pb-[97px] md:pt-[95px]">
       <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[minmax(0,1fr)_656px] lg:gap-[60px]">
         <div className="lg:pt-[25px]">
           <PinkTag>{tag}</PinkTag>
@@ -160,7 +160,7 @@ export function PhotoCarousel() {
 }
 
 /** Alternating image/text rows with numbered dots. rows: [{ t, d }] */
-export function AltRows({ rows, image = "/img/pages/model.jpg", className = "mt-14" }) {
+export function AltRows({ rows, image = "/img/home/hero-photo.png", className = "mt-14" }) {
   return (
     <ol className={`mx-auto flex max-w-[1200px] flex-col gap-14 md:gap-[102px] ${className}`}>
       {rows.map((r, i) => (

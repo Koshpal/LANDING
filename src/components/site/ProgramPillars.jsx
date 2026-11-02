@@ -5,35 +5,17 @@ import Tag from "./Tag";
    sticky 4-item menu on the left and four stacked pillar panels on the right.
    The menu highlights whichever panel is in view and scrolls to it on click. */
 const PANELS = [
-  { menu: "Learn", title: "Money lessons that fit their stage of life", body: "First salary, EMIs, tax and saving, taught in lessons practical enough to use the same week." },
-  { menu: "Understand", title: "Where the month went, in plain language", body: "The app shows where the month went, by category, across UPI, cards and cash, with insights in plain language." },
-  { menu: "Connect", title: "A certified CFP or CA, in private", body: "Private 1:1 sessions with a certified CFP or CA. Most people book 2 to 3 a month. The coach listens first, then writes a plan with them." },
-  { menu: "Grow", title: "A plan that becomes daily habits", body: "The plan becomes budgets, goals and reminders in the app. Every check-in builds on the last, from a first salary to an ESOP payout to retirement." },
+  { menu: "Learn", img: "/img/pages/app/pocket.png", alt: "The Koshpal app on a phone, with spending and an upcoming session", title: "Money lessons that fit their stage of life", body: "First salary, EMIs, tax and saving, taught in lessons practical enough to use the same week." },
+  { menu: "Understand", img: "/img/pages/app/phones-insights.png", alt: "Spending insights in the Koshpal app: progress and spending by category", title: "Where the month went, in plain language", body: "The app shows where the month went, by category, across UPI, cards and cash, with insights in plain language." },
+  { menu: "Connect", img: "/img/pages/app/sessions-band.png", alt: "An employee booking a 1:1 session from available dates", title: "A certified CFP or CA, in private", body: "Private 1:1 sessions with a certified CFP or CA. Most people book 2 to 3 a month. The coach listens first, then writes a plan with them." },
+  { menu: "Grow", img: "/img/pages/app/dashboard-ui.png", alt: "The Koshpal dashboard: spending, budget, sessions attended and savings (sample data)", title: "A plan that becomes daily habits", body: "The plan becomes budgets, goals and reminders in the app. Every check-in builds on the last, from a first salary to an ESOP payout to retirement." },
 ];
 
-const CORNERS = [
-  ["right-[10px] top-[10px]", ""],
-  ["left-[10px] top-[10px]", "-scale-x-100"],
-  ["bottom-[10px] right-[10px]", "-scale-y-100"],
-  ["bottom-[10px] left-[10px]", "rotate-180"],
-];
-
-function Visual() {
+/* One product image per tab, from the Koshpal app and dashboard. */
+function Visual({ src, alt }) {
   return (
-    <div className="relative aspect-[776/420] w-full overflow-clip bg-[#f0f0f0]">
-      <div className="absolute left-[calc(50%+1px)] top-1/2 h-[284%] w-[102.3%] -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
-        <img src="/img/home/program/bg.png" alt="" loading="lazy" className="absolute size-full max-w-none object-cover" />
-        <div className="absolute inset-0 bg-[rgba(11,23,19,0.2)]" />
-      </div>
-      <img
-        src="/img/home/program/case.png"
-        alt=""
-        loading="lazy"
-        className="absolute left-1/2 top-1/2 h-[152%] w-[105.5%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover"
-      />
-      {CORNERS.map(([pos, flip]) => (
-        <img key={pos} src="/img/home/program/corner-a.svg" alt="" aria-hidden="true" className={`absolute size-[10px] ${pos} ${flip}`} />
-      ))}
+    <div className="relative aspect-[776/420] w-full overflow-clip rounded-[16px] bg-[#e8edff]">
+      <img src={src} alt={alt} loading="lazy" className="absolute inset-0 size-full object-cover" />
     </div>
   );
 }
@@ -112,7 +94,7 @@ export default function ProgramPillars() {
                       <p className="max-w-[698px] font-figtree text-[16px] leading-[26px] tracking-[-0.3px] md:text-[18px]">{p.body}</p>
                     </div>
                   </div>
-                  <Visual />
+                  <Visual src={p.img} alt={p.alt} />
                 </article>
               ))}
             </div>

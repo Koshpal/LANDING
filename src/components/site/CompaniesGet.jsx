@@ -36,12 +36,12 @@ export default function CompaniesGet() {
             <div className="hidden h-px w-full max-w-[1200px] bg-black/10 md:block" />
             <div className="w-full">
               <img
-                src="/img/home/companies-case.png"
-                alt="A smiling employee holding a jar, in front of a blue sky"
+                src="/img/pages/app/dashboard-ui.png"
+                alt="The Koshpal dashboard with spending, budget, sessions attended and savings (sample data)"
                 width="1392"
                 height="647"
                 loading="lazy"
-                className="aspect-[1392/647] w-full object-cover"
+                className="aspect-[1392/647] w-full rounded-[24px] object-cover object-top shadow-[0_24px_60px_rgba(0,20,90,0.35)]"
               />
               <div role="tablist" aria-label="What the company gets" className="mt-8 grid gap-6 md:grid-cols-3 md:gap-9">
                 {TABS.map((t, i) => {

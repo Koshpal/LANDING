@@ -81,7 +81,7 @@ export default function ForCompanies() {
         {/* employer dashboard */}
         <section className="bg-[#3b3fbc] px-5 py-16 text-white md:px-10 md:py-[120px]">
           <div className="mx-auto grid max-w-[1240px] items-center gap-10 lg:grid-cols-[536px_minmax(0,1fr)] lg:gap-[60px]">
-            <img src="/img/pages/model.jpg" alt="A smiling person holding a product jar" width="536" height="628" loading="lazy" className="aspect-[536/628] w-full max-w-[536px] rounded-[30px] object-cover [object-position:62%_50%]" />
+            <img src="/img/home/hero-photo.png" alt="Two colleagues smiling at their phones" width="536" height="628" loading="lazy" className="aspect-[536/628] w-full max-w-[536px] rounded-[30px] object-cover [object-position:92%_50%]" />
             <div>
               <PinkTag>Employer dashboard</PinkTag>
               <h2 className="mt-6 max-w-[660px] font-figtree text-[clamp(32px,3.89vw,56px)] font-medium leading-[1.04] tracking-[-0.02em]">The employer dashboard: insight you can report with confidence</h2>
