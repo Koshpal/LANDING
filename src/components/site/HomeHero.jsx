@@ -67,7 +67,6 @@ export default function HomeHero() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-[30px] pt-[50px] max-md:gap-4 max-md:pt-6">
             <PillButton to="/demo" tone="indigo">Book a demo</PillButton>
-            <PillButton to="/demo?pilot=60-day" tone="black">Start a 60-day pilot</PillButton>
           </div>
         </div>
 

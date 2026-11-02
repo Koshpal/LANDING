@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import PillButton from "./site/PillButton";
 import emailjs from "@emailjs/browser";
@@ -42,16 +41,9 @@ const bumpLimit = () => {
 
 export default function DemoForm() {
   const [v, setV] = useState({ name: "", email: "", company: "", size: "", message: "", website: "" });
-  const [params] = useSearchParams();
-  const pilot = params.get("pilot") === "60-day";
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | done | failed
   const openedAt = useRef(Date.now());
-
-  // Arriving from a "Start a 60-day pilot" button: say so in the message, set after mount so the prerendered form hydrates cleanly.
-  useEffect(() => {
-    if (pilot) setV((p) => (p.message ? p : { ...p, message: "I'd like to start a 60-day pilot with one team." }));
-  }, [pilot]);
 
   const set = (k) => (e) => {
     setV((p) => ({ ...p, [k]: e.target.value }));
@@ -96,7 +88,7 @@ export default function DemoForm() {
           from_name: v.name.trim(),
           from_email: v.email.trim(),
           company: v.company.trim(),
-          role: `Company size: ${v.size}${pilot ? " | Asked for: 60-day pilot" : ""}`,
+          role: `Company size: ${v.size}`,
           message: v.message.trim(),
           to_email: "koshpal@koshpal.com",
           submitted_at: new Date().toISOString(),

@@ -40,7 +40,6 @@ export default function FinalCta() {
         </H2>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <PillButton to="/demo" tone="lime" size="sm" className="!text-[20px] !leading-[28px]">Book a demo</PillButton>
-          <PillButton to="/demo?pilot=60-day" tone="white" size="sm" className="!text-[20px] !leading-[28px]">Start a 60-day pilot</PillButton>
         </div>
       </div>
     </section>

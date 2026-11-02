@@ -19,7 +19,6 @@ export default function Rollout() {
           <H2 className="mt-6 text-white lg:text-[clamp(36px,5.69vw,82px)] lg:text-left">Live in one week. Start with one team for 60 days.</H2>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <PillButton to="/demo" tone="lime" size="sm" className="!text-[18px]">Book a demo</PillButton>
-            <PillButton to="/demo?pilot=60-day" tone="white" size="sm" className="!text-[18px]">Start a 60-day pilot</PillButton>
           </div>
         </div>
 

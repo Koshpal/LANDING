@@ -47,7 +47,6 @@ export default function ForCompanies() {
           pill="HR can measure"
           lead="Koshpal improves what leadership already tracks: engagement, productivity and retention. You see anonymised workforce insight; no one ever sees an individual’s money."
           primary={{ label: "Book a demo", to: "/demo" }}
-          secondary={{ label: "Start a 60-day pilot", to: "/demo?pilot=60-day" }}
           padBottom={172}
         />
 
@@ -149,7 +148,7 @@ export default function ForCompanies() {
           rowH={206}
         />
 
-        <CtaBand cta="Start a 60-day pilot" to="/demo?pilot=60-day" wide py={140}>Start with one team for 60 days</CtaBand>
+        <CtaBand cta="Book a demo" wide py={140}>Start with one team for 60 days</CtaBand>
       </main>
       <Footer />
     </div>

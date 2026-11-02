@@ -113,7 +113,6 @@ export default function Pricing() {
           pill="employers"
           lead="Koshpal is an employer-paid benefit, so employees never pay to use it. You pay per employee, per month, so the cost scales with the size of your workforce. Talk to us and we’ll give you a number for your company size."
           primary={{ label: "Book a demo", to: "/demo" }}
-          secondary={{ label: "Start a 60-day pilot", to: "/demo?pilot=60-day" }}
         >
           <PlanCard />
         </MagentaHero>
