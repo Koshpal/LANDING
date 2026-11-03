@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Eye, EyeOff, CheckCircle, User, Users, Briefcase } from 'lucide-react';
+import { Eye, EyeOff, Check, User, Users, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import Seo from '../components/b2b/Seo';
+import Tag from '../components/site/Tag';
+import PillButton from '../components/site/PillButton';
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:3000/api/v1';
 
 const ROLES = [
   { id: 'EMPLOYEE', label: 'Employee', icon: User },
-  { id: 'HR', label: 'HR Manager', icon: Users },
-  { id: 'COACH', label: 'Financial Coach', icon: Briefcase },
+  { id: 'HR', label: 'HR', icon: Users },
+  { id: 'COACH', label: 'Coach', icon: Briefcase },
 ];
 
 const getPortalUrl = (role) => {
@@ -39,7 +41,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('EMPLOYEE');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -105,85 +106,54 @@ export default function LoginPage() {
     }
   };
 
+  const field = (bad) =>
+    `w-full rounded-full border bg-[#f0f0f0] px-[26px] py-[15px] font-figtree text-[17px] text-[#0b0b0c] outline-none placeholder:text-[#8a8a8a] focus:border-[#3b3fbc] focus:bg-white focus:ring-2 focus:ring-[#3b3fbc]/20 ${bad ? 'border-[#d92d20]' : 'border-transparent'}`;
+
   return (
-    <>
-    <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
-    <div className="flex min-h-screen" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
-      {/* Left panel — blue gradient, hidden on mobile */}
-      <div
-        className="relative flex-col justify-between hidden p-12 overflow-hidden lg:flex lg:w-1/2"
-        style={{ background: 'linear-gradient(150deg, #334EAC 0%, #081F5C 100%)' }}
+    <div className="min-h-screen bg-white font-figtree text-[#0b0b0c] lg:grid lg:grid-cols-2">
+      <Seo path="/login" title="Log in | Koshpal" description="Log in to your Koshpal employee, HR or coach portal." noindex />
+
+      {/* Left panel: the site's blue gradient, hidden on mobile */}
+      <aside
+        className="relative m-5 hidden flex-col justify-between overflow-hidden rounded-[30px] p-12 text-white lg:flex"
+        style={{ backgroundImage: 'radial-gradient(55% 20% at 50% 0%, #228eff 0%, rgba(34,142,255,0) 100%), linear-gradient(180deg,#156fe6 0%,#005bdd 9%,#024fc5 23%,#0043ab 41%,#003a92 58%,#02327e 76%,#012765 93%,#002458 100%)' }}
       >
-        <div className="relative z-10 flex items-center gap-3">
-          <img src="/logo.png" alt="Koshpal" className="h-10" />
-          <span style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: '22px', color: '#fff' }}>Koshpal</span>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative z-10"
-        >
-          <h2 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: '38px', lineHeight: '1.25', color: '#fff', marginBottom: '16px' }}>
-            Financial wellbeing,<br />built for your people
+        <Tag tone="light" className="self-start">Welcome back</Tag>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}>
+          <h2 className="font-figtree text-[clamp(40px,4.4vw,64px)] font-normal leading-[1.05] tracking-[-0.02em]">
+            Financial wellbeing, <span className="text-[#c8f169]">built for your people</span>
           </h2>
-          <p style={{ fontSize: '15px', lineHeight: '1.7', color: 'rgba(255,255,255,0.72)', maxWidth: '380px' }}>
-            Privacy-first expense tracking and coaching sessions designed to boost productivity and financial clarity for your workforce.
+          <p className="mt-6 max-w-[440px] font-stack text-[19px] leading-[1.35] text-white/90">
+            Log in to your employee, HR or coach portal to pick up where you left off.
           </p>
-          <div className="flex flex-wrap gap-3 mt-8">
-            {['Privacy First', 'Real-time Insights', 'Secure & Compliant'].map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '6px',
-                  padding: '6px 14px', borderRadius: '99px',
-                  background: 'rgba(255,255,255,0.12)',
-                  color: '#fff', fontSize: '13px', fontWeight: 500,
-                }}
-              >
-                <CheckCircle style={{ width: '14px', height: '14px' }} />
-                {tag}
-              </span>
+          <ul className="mt-8 flex flex-wrap gap-3">
+            {['Certified financial experts', 'No commissions, no products', 'Private by design'].map((t) => (
+              <li key={t} className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 font-stack text-[15px]">
+                <Check aria-hidden="true" className="size-4 text-[#c8f169]" strokeWidth={2.6} />
+                {t}
+              </li>
             ))}
-          </div>
+          </ul>
         </motion.div>
+        <p className="font-stack text-[14px] text-white/60">© 2026 Koshpal. All rights reserved.</p>
+      </aside>
 
-        <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', position: 'relative', zIndex: 10 }}>
-          © 2026 Koshpal. All rights reserved.
-        </p>
+      {/* Right panel: form */}
+      <main id="main" className="flex items-center justify-center px-5 py-10 sm:px-10 lg:py-12">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-[480px]">
+          <Link to="/" aria-label="Koshpal home" className="relative mb-10 block h-[34px] w-[138px]">
+            <span className="absolute" style={{ top: '-60.67%', right: '-16.37%', bottom: '-68.22%', left: '-15.49%' }}>
+              <img src="/img/home/logo.svg" alt="Koshpal" className="block size-full max-w-none" />
+            </span>
+          </Link>
 
-        {/* Decorative blobs */}
-        <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '320px', height: '320px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '-100px', left: '-60px', width: '280px', height: '280px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
-      </div>
+          <h1 className="font-figtree text-[clamp(34px,3.4vw,48px)] font-normal leading-[1.1] tracking-[-0.02em]">Welcome back</h1>
+          <p className="mt-3 font-stack text-[18px] text-[#4b4b4b]">Log in to access your dashboard.</p>
 
-      {/* Right panel — form */}
-      <div className="flex items-center justify-center w-full px-6 py-12 lg:w-1/2 sm:px-10" style={{ background: '#F9FAFB' }}>
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.55 }}
-          className="w-full max-w-md"
-        >
-          {/* Mobile-only logo */}
-          <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <img src="/logo.png" alt="Koshpal" className="h-8" />
-            <span style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: '18px', color: '#101828' }}>Koshpal</span>
-          </div>
-
-          <div className="mb-8">
-            <h1 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, fontSize: '28px', color: '#101828', marginBottom: '6px' }}>Welcome back</h1>
-            <p style={{ fontSize: '14px', color: '#667085' }}>Sign in to access your dashboard</p>
-          </div>
-
-          <form onSubmit={handleSubmit} noValidate>
-            {/* Role cards */}
-            <div className="mb-6">
-              <label style={{ fontWeight: 600, fontSize: '12px', letterSpacing: '0.05em', color: '#344054', display: 'block', marginBottom: '10px', textTransform: 'uppercase' }}>
-                Sign in as
-              </label>
-              <div className="grid grid-cols-3 gap-3">
+          <form onSubmit={handleSubmit} noValidate className="mt-8">
+            <fieldset className="mb-6">
+              <legend className="mb-3 font-figtree text-[16px] font-medium">Log in as</legend>
+              <div className="grid grid-cols-3 gap-2 rounded-full bg-[#f0f0f0] p-1.5">
                 {ROLES.map(({ id, label, icon: Icon }) => {
                   const selected = role === id;
                   return (
@@ -191,168 +161,84 @@ export default function LoginPage() {
                       key={id}
                       type="button"
                       aria-pressed={selected}
-                      aria-label={`Sign in as ${label}`}
                       onClick={() => setRole(id)}
-                      style={{
-                        position: 'relative',
-                        padding: '14px 8px 12px',
-                        borderRadius: '12px',
-                        border: selected ? '2px solid #334EAC' : '2px solid #E4E7EC',
-                        background: selected ? '#EEF2FF' : '#fff',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '7px',
-                        transition: 'all 0.18s',
-                        boxShadow: selected ? '0 0 0 3px rgba(51,78,172,0.1)' : 'none',
-                      }}
+                      className={`flex flex-col items-center gap-1 rounded-full px-2 py-2.5 font-stack text-[13px] leading-tight transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#3b3fbc] sm:flex-row sm:justify-center sm:gap-2 sm:text-[15px] ${selected ? 'bg-[#3b3fbc] text-white shadow-[0_4px_10px_rgba(59,63,188,0.35)]' : 'text-[#2a2a2a] hover:bg-white'}`}
                     >
-                      {selected && (
-                        <CheckCircle
-                          style={{ position: 'absolute', top: '6px', right: '6px', width: '15px', height: '15px', color: '#334EAC' }}
-                        />
-                      )}
-                      <Icon style={{ width: '22px', height: '22px', color: selected ? '#334EAC' : '#98A2B3' }} />
-                      <span style={{ fontWeight: 600, fontSize: '11px', color: selected ? '#334EAC' : '#667085', textAlign: 'center', lineHeight: 1.3 }}>
-                        {label}
-                      </span>
+                      <Icon aria-hidden="true" className="size-4 shrink-0" />
+                      {label}
                     </button>
                   );
                 })}
               </div>
-            </div>
+            </fieldset>
 
-            {/* Error banner */}
             {error && (
               <motion.div
+                role="alert"
                 animate={shake ? { x: [-6, 6, -5, 5, -3, 3, 0] } : { x: 0 }}
                 transition={{ duration: 0.45 }}
-                style={{
-                  padding: '11px 14px', borderRadius: '10px', marginBottom: '16px',
-                  background: '#FEF3F2', border: '1px solid #FDA29B',
-                  fontSize: '13px', color: '#B42318', lineHeight: '1.5',
-                }}
+                className="mb-5 rounded-[20px] bg-[#fde8e6] px-5 py-3 font-figtree text-[15px] text-[#8a1c14]"
               >
                 {error}
               </motion.div>
             )}
 
-            {/* Email */}
-            <div className="mb-4">
-              <label style={{ fontWeight: 600, fontSize: '13px', color: '#344054', display: 'block', marginBottom: '6px' }}>
-                Email Address
-              </label>
-              <div style={{ position: 'relative' }}>
-                <Mail style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '16px', height: '16px', color: '#98A2B3', pointerEvents: 'none' }} />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); }}
-                  onBlur={(e) => {
-                    const valid = validateEmail(email);
-                    e.target.style.boxShadow = 'none';
-                    e.target.style.borderColor = valid ? '#D0D5DD' : '#F04438';
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = emailError ? '#F04438' : '#334EAC';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(51,78,172,0.1)';
-                  }}
-                  placeholder="you@company.com"
-                  required
-                  style={{
-                    width: '100%', boxSizing: 'border-box',
-                    paddingLeft: '38px', paddingRight: '14px', paddingTop: '10px', paddingBottom: '10px',
-                    borderRadius: '10px', fontSize: '14px', color: '#101828',
-                    background: '#fff',
-                    border: `1.5px solid ${emailError ? '#F04438' : '#D0D5DD'}`,
-                    outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s',
-                  }}
-                />
-              </div>
-              {emailError && <p style={{ fontSize: '12px', color: '#F04438', marginTop: '4px' }}>{emailError}</p>}
+            <div className="mb-5">
+              <label htmlFor="login-email" className="mb-2.5 block font-figtree text-[16px] font-medium">Email address</label>
+              <input
+                id="login-email"
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); }}
+                onBlur={() => email && validateEmail(email)}
+                placeholder="you@company.com"
+                aria-invalid={!!emailError}
+                aria-describedby={emailError ? 'login-email-err' : undefined}
+                className={field(emailError)}
+              />
+              {emailError && <p id="login-email-err" className="mt-2 pl-[26px] font-figtree text-[14px] text-[#b21d15]">{emailError}</p>}
             </div>
 
-            {/* Password */}
-            <div className="mb-5">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                <label style={{ fontWeight: 600, fontSize: '13px', color: '#344054' }}>Password</label>
-                <Link to="/forgot-password" style={{ fontSize: '13px', color: '#334EAC', fontWeight: 600, textDecoration: 'none' }}>
-                  Forgot password?
-                </Link>
+            <div className="mb-7">
+              <div className="mb-2.5 flex items-center justify-between">
+                <label htmlFor="login-password" className="font-figtree text-[16px] font-medium">Password</label>
+                <Link to="/forgot-password" className="font-figtree text-[15px] font-medium text-[#3b3fbc] underline-offset-4 hover:underline">Forgot password?</Link>
               </div>
-              <div style={{ position: 'relative' }}>
-                <Lock style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '16px', height: '16px', color: '#98A2B3', pointerEvents: 'none' }} />
+              <div className="relative">
                 <input
+                  id="login-password"
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => { setPassword(e.target.value); if (passwordError) setPasswordError(''); }}
-                  onBlur={(e) => {
-                    const valid = validatePassword(password);
-                    e.target.style.boxShadow = 'none';
-                    e.target.style.borderColor = valid ? '#D0D5DD' : '#F04438';
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = passwordError ? '#F04438' : '#334EAC';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(51,78,172,0.1)';
-                  }}
                   placeholder="Enter your password"
-                  required
-                  style={{
-                    width: '100%', boxSizing: 'border-box',
-                    paddingLeft: '38px', paddingRight: '42px', paddingTop: '10px', paddingBottom: '10px',
-                    borderRadius: '10px', fontSize: '14px', color: '#101828',
-                    background: '#fff',
-                    border: `1.5px solid ${passwordError ? '#F04438' : '#D0D5DD'}`,
-                    outline: 'none', transition: 'border-color 0.15s, box-shadow 0.15s',
-                  }}
+                  aria-invalid={!!passwordError}
+                  aria-describedby={passwordError ? 'login-password-err' : undefined}
+                  className={`${field(passwordError)} pr-14`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#98A2B3', display: 'flex', alignItems: 'center' }}
+                  className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center rounded-full p-1.5 text-[#555] hover:text-[#0b0b0c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#3b3fbc]"
                 >
-                  {showPassword ? <EyeOff style={{ width: '17px', height: '17px' }} /> : <Eye style={{ width: '17px', height: '17px' }} />}
+                  {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
                 </button>
               </div>
-              {passwordError && <p style={{ fontSize: '12px', color: '#F04438', marginTop: '4px' }}>{passwordError}</p>}
+              {passwordError && <p id="login-password-err" className="mt-2 pl-[26px] font-figtree text-[14px] text-[#b21d15]">{passwordError}</p>}
             </div>
 
-            {/* Remember me */}
-            <label className="flex items-center gap-2.5 cursor-pointer mb-6">
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                style={{ width: '16px', height: '16px', accentColor: '#334EAC', cursor: 'pointer', flexShrink: 0 }}
-              />
-              <span style={{ fontSize: '14px', color: '#667085' }}>Remember me for 30 days</span>
-            </label>
-
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={loading}
-              style={{
-                width: '100%', padding: '12px',
-                borderRadius: '10px', border: 'none',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                background: loading ? '#9BAFDB' : 'linear-gradient(90deg, #334EAC 0%, #17A2B8 100%)',
-                color: '#fff', fontWeight: 700, fontSize: '15px',
-                letterSpacing: '0.02em',
-                transition: 'opacity 0.2s, box-shadow 0.2s',
-                boxShadow: loading ? 'none' : '0 4px 14px rgba(51,78,172,0.28)',
-              }}
-              onMouseEnter={(e) => { if (!loading) e.currentTarget.style.opacity = '0.9'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
-            >
-              {loading ? 'Signing in…' : 'Sign In'}
-            </button>
+            <PillButton type="submit" tone="lime" size="sm" disabled={loading} className="!text-[18px] disabled:opacity-70">
+              {loading ? 'Logging in…' : 'Log in'}
+            </PillButton>
           </form>
+
+          <p className="mt-10 font-stack text-[16px] text-[#4b4b4b]">
+            New to Koshpal? <Link to="/demo" className="font-medium text-[#3b3fbc] underline underline-offset-4">Book a demo</Link>
+          </p>
         </motion.div>
-      </div>
+      </main>
     </div>
-    </>
   );
 }

@@ -34,6 +34,19 @@ function Logo() {
   );
 }
 
+/* Outline pill next to "Book a demo"; sends existing users to the portal login. */
+function LoginButton({ onClick, onDark = false }) {
+  return (
+    <Link
+      to="/login"
+      onClick={onClick}
+      className={`inline-flex h-[46px] items-center justify-center rounded-full border-2 px-7 font-stack text-[18px] font-normal leading-none shadow-[0_2px_8px_rgba(11,11,12,0.12)] tracking-[-0.01em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${onDark ? "border-white bg-white text-[#3b3fbc] hover:bg-[#c8f169] hover:border-[#c8f169] hover:text-[#0b0b0c] focus-visible:outline-white" : "border-[#3b3fbc] bg-[#eef0ff] text-[#3b3fbc] hover:bg-[#3b3fbc] hover:text-white focus-visible:outline-[#3b3fbc]"}`}
+    >
+      Login
+    </Link>
+  );
+}
+
 function Chevron() {
   return <img src="/img/home/chevron.svg" alt="" width="10" height="6" className="transition-transform duration-200 group-hover/nav:rotate-180 group-focus-within/nav:rotate-180" />;
 }
@@ -88,7 +101,8 @@ export default function Navbar({ glass = false }) {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
+          <LoginButton onDark={glass && !scrolled} />
           <PillButton to="/demo" size="lg" className="!text-[19px]">Book a demo</PillButton>
         </div>
 
@@ -117,7 +131,8 @@ export default function Navbar({ glass = false }) {
               ))}
             </div>
           ))}
-          <div className="pt-4">
+          <div className="flex flex-wrap items-center gap-3 pt-4">
+            <LoginButton onClick={() => setOpen(false)} />
             <PillButton to="/demo" size="sm" onClick={() => setOpen(false)}>Book a demo</PillButton>
           </div>
         </div>
