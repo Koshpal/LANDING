@@ -1,282 +1,126 @@
-import React, { useState } from 'react';
-import { Phone, Mail, Linkedin, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React from "react";
+import { Mail, MapPin } from "lucide-react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import Seo from "../components/b2b/Seo";
+import DemoForm from "../components/DemoForm";
+import Tag from "../components/site/Tag";
+import PillButton from "../components/site/PillButton";
+import { NumDot } from "../components/site/PageParts";
+import { RevealText } from "../components/site/Feature";
+
+/* Figma "Book a demo": blue-to-cyan hero with the form card, a scroll-reveal paragraph, three steps
+   beside a photo, then the footer. The design's repeated list items, "growth audit" button and
+   template steps are replaced with Koshpal wording. */
+const HERO_BG =
+  "radial-gradient(60% 45% at 100% 0%, #25d4f6 0%, rgba(37,212,246,0) 100%), radial-gradient(45% 40% at 0% 25%, #3b9be6 0%, rgba(59,155,230,0) 100%), radial-gradient(50% 35% at 100% 100%, #2b80e4 0%, rgba(43,128,228,0) 100%), linear-gradient(180deg,#1f7fe3 0%,#0c4fd6 40%,#0a30c4 75%,#0a2bb8 100%)";
+
+const NEXT = [
+  ["Tell us about your team", "It takes about a minute."],
+  ["We email you", "We reply within one working day to find a time."],
+  ["We show you the program", "The coach, the app and the HR dashboard, in about 30 minutes."],
+];
+
+const STEPS = [
+  { chip: "bg-[#ffb800]", t: "Setup", d: "One call, your logo and an employee list. No IT project." },
+  { chip: "bg-[#6db3f2]", t: "Kickoff", d: "A money webinar for everyone, then free first sessions for anyone who wants one." },
+  { chip: "bg-[#8cc63f]", t: "Pilot", d: "One team for 60 days, with usage and feedback on your dashboard." },
+];
+
+const photo = "/img/photos/pair-laptop.jpg";
 
 export default function DemoPage() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    company: '',
-    role: '',
-    message: ''
-  });
-
-  const [charCount, setCharCount] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    if (name === 'message') {
-      setCharCount(value.length);
-    }
-  };
-
-  // Rate limiting: Check submission count
-  const checkRateLimit = () => {
-    const today = new Date().toDateString();
-    const storedData = localStorage.getItem('demoSubmissions');
-
-    if (storedData) {
-      const { date, count } = JSON.parse(storedData);
-
-      // Reset count if it's a new day
-      if (date !== today) {
-        localStorage.setItem('demoSubmissions', JSON.stringify({ date: today, count: 0 }));
-        return true;
-      }
-
-      // Check if limit exceeded
-      if (count >= 10) {
-        return false;
-      }
-    } else {
-      // First submission
-      localStorage.setItem('demoSubmissions', JSON.stringify({ date: today, count: 0 }));
-    }
-
-    return true;
-  };
-
-  const incrementSubmissionCount = () => {
-    const today = new Date().toDateString();
-    const storedData = localStorage.getItem('demoSubmissions');
-    const { count } = JSON.parse(storedData);
-    localStorage.setItem('demoSubmissions', JSON.stringify({ date: today, count: count + 1 }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Check rate limit
-    if (!checkRateLimit()) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Daily submission limit reached (10 per day). Please try again tomorrow.'
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus({ type: '', message: '' });
-
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_DEMO;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    const templateParams = {
-      from_name: `${formData.firstName} ${formData.lastName}`,
-      from_email: formData.email,
-      company: formData.company,
-      role: formData.role,
-      message: formData.message,
-      to_email: 'koshpal@koshpal.com',
-      submitted_at: new Date().toISOString(),
-    };
-
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
-      .then((response) => {
-        // Increment submission count
-        incrementSubmissionCount();
-
-        setSubmitStatus({
-          type: 'success',
-          message: 'Request sent successfully! We\'ll get back to you soon.'
-        });
-
-        setFormData({ firstName: '', lastName: '', email: '', company: '', role: '', message: '' });
-        setCharCount(0);
-      })
-      .catch((error) => {
-        setSubmitStatus({
-          type: 'error',
-          message: 'Failed to send request. Please try again or email us directly.'
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full mb-6">
-              <Phone className="w-4 h-4" />
-              <span className="font-medium text-sm md:text-base">Let's Meet</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#101828] mb-4">
-              Ready to <span className="text-[#17A2B8]">Transform</span>
-              <br /> Your Finances?
-            </h1>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Get in touch with our team and discover how Koshpal can help you achieve financial wellness.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            <div className="bg-white rounded-3xl shadow-lg p-8 md:p-10 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
-
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Request a Demo</h2>
-              <p className="text-gray-600 mb-6">Fill out the form below and we'll get back to you within 24 hours.</p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                    <input name="firstName" value={formData.firstName} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name <span className="text-red-500">*</span></label>
-                    <input name="lastName" value={formData.lastName} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Work Email <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input name="email" value={formData.email} onChange={handleChange} type="email" required placeholder="john.doe@company.com" className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Company Name <span className="text-red-500">*</span></label>
-                  <input name="company" value={formData.company} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Role <span className="text-red-500">*</span></label>
-                  <select name="role" value={formData.role} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                    <option value="">Select role</option>
-                    <option>HR</option>
-                    <option>Finance</option>
-                    <option>Admin</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
-                  <textarea name="message" value={formData.message} onChange={handleChange} maxLength={500} rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none" />
-                  <p className="text-sm text-gray-500 mt-2">{charCount}/500 characters</p>
-                </div>
-
-                {submitStatus.message && (
-                  <div className={`p-4 rounded-lg ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
-                    <p className="text-sm font-medium">{submitStatus.message}</p>
-                  </div>
-                )}
-
-                <button type="submit" disabled={isSubmitting} className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}>
-                  {isSubmitting ? 'Sending...' : 'Request demo'}
-                  <Send className={`w-5 h-5 transition-transform ${isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1'}`} />
-                </button>
-
-                <p className="text-sm text-gray-500 text-center mt-4">We respect your privacy and will never share your information</p>
-              </form>
+    <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
+      <Seo
+        path="/demo"
+        title="Book a Demo or Start a 60-Day Pilot | Koshpal"
+        description="See the coach, app and HR dashboard in 30 minutes, then try Koshpal with one team for 60 days."
+        crumbs={[["Book a demo", "/demo"]]}
+      />
+      <main id="main">
+        <section className="relative" style={{ backgroundImage: HERO_BG }}>
+          <Navbar glass />
+          <div className="mx-auto max-w-[1440px] px-5 pb-16 pt-[140px] md:px-[89px] md:pb-[149px] md:pt-[248px]">
+            <div className="flex flex-col items-center text-center">
+              <Tag tone="light">Book a Demo</Tag>
+              <h1 className="mt-8 max-w-[900px] font-figtree text-[clamp(36px,5.69vw,82px)] font-normal leading-[1.06] tracking-[-0.0127em] text-white [text-shadow:0_4px_10px_rgba(0,0,0,0.2)] md:mt-9">
+                Let’s build a financially confident <span className="text-[#a0fa6b]">workplace</span>
+              </h1>
+              <p className="mt-6 max-w-[800px] text-balance font-stack text-[clamp(17px,1.67vw,24px)] leading-[1.33] text-white">
+                Tell us a little about your organisation. We’ll walk you through the app, the coach sessions and the employer dashboard, and tailor it to your team. No commitment, no pressure.
+              </p>
             </div>
 
-            <div className="bg-[#2B8997] rounded-3xl shadow-lg p-8 md:p-10 text-white relative overflow-hidden min-h-[800px] flex flex-col">
-              <div className="space-y-6 mb-auto">
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Phone className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff]">Personalized Demo</p>
-                    <p className="text-sm text-[#e6eefc]">Tailored to your role and needs</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Mail className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff]">Quick Response</p>
-                    <p className="text-sm text-[#e6eefc]">We'll reach out within 48 hours</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className=" p-4 rounded-2xl group-hover:shadow-lg transition-all" style={{ backgroundColor: 'rgba(157, 176, 240, 0.4)' }}>
-                    <Linkedin fill='#ffffff' className="w-6 h-6 text-[#ffffff]" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-[#fff]">Privacy First</p>
-                    <p className="text-sm text-[#e6eefc]">Your data is secure and never shared</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative mt-8">
-                <div className="flex items-center justify-center gap-6">
-                  <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-lg"></div>
-                  <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div className="w-24 h-20 bg-yellow-500 rounded-2xl shadow-lg transform -rotate-12 relative">
-                    <div className="absolute -top-2 left-4 w-12 h-3 bg-yellow-600 rounded-t-lg"></div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center gap-8 mt-6">
-                  <div className="w-20 h-20 bg-pink-300 rounded-full shadow-lg" style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}></div>
-                  <div className="relative">
-                    <div className="w-32 h-20 bg-orange-500 rounded-t-full shadow-lg"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                        </svg>
+            <div className="mt-12 grid items-stretch gap-10 md:mt-[82px] lg:grid-cols-[minmax(0,1fr)_674px] lg:gap-[40px]">
+              <div className="flex flex-col justify-between gap-12 lg:pt-[48px]">
+                <ol className="flex flex-col gap-8 md:gap-[34px]">
+                  {NEXT.map(([t, d], i) => (
+                    <li key={t} className="flex items-start gap-4">
+                      <NumDot n={i + 1} className="!size-12 shrink-0 !text-[14px]" />
+                      <div>
+                        <h2 className="font-figtree text-[22px] font-normal leading-[1.2] text-white md:text-[24px]">{t}</h2>
+                        <p className="mt-2 font-figtree text-[17px] leading-6 text-white md:text-[18px]">{d}</p>
                       </div>
-                    </div>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="grid max-w-[540px] gap-4 sm:grid-cols-2 sm:gap-[30px]">
+                  <a href="mailto:koshpal@koshpal.com" className="flex min-h-[184px] flex-col justify-between rounded-[30px] bg-[#ffbcfc] p-6 text-[#0b0b0c] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                    <span className="flex size-[50px] items-center justify-center rounded-full bg-white"><Mail className="size-6" aria-hidden="true" /></span>
+                    <span>
+                      <span className="block font-figtree text-[14px] leading-5 text-[#3b3b3b]">Email</span>
+                      <span className="mt-1 block break-all font-figtree text-[18px] leading-6">koshpal@koshpal.com</span>
+                    </span>
+                  </a>
+                  <div className="flex min-h-[184px] flex-col justify-between rounded-[30px] bg-[#0b0b0b] p-6 text-white">
+                    <span className="flex size-[50px] items-center justify-center rounded-full bg-white text-[#0b0b0c]"><MapPin className="size-6" aria-hidden="true" /></span>
+                    <span>
+                      <span className="block font-figtree text-[14px] leading-5 text-white/70">Office</span>
+                      <span className="mt-1 block font-figtree text-[18px] leading-6">Jaipur, Rajasthan</span>
+                    </span>
                   </div>
                 </div>
-
-                <div className="absolute top-0 right-10 w-6 h-6 text-orange-400">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <div className="absolute bottom-10 left-8 w-4 h-4 text-orange-400">
-                  <svg fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
               </div>
+
+              <DemoForm />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
+        <RevealText>In about 30 minutes you’ll see how a certified coach, a daily app and an anonymised HR dashboard work together, and how one team can try Koshpal for 60 days before you decide.</RevealText>
+
+        <section className="bg-white px-5 pb-16 pt-4 md:px-[29px] md:pb-[110px]">
+          <div className="mx-auto grid max-w-[1382px] items-start gap-10 lg:grid-cols-[minmax(0,460px)_470px_minmax(0,317px)] lg:justify-between lg:gap-[40px]">
+            <div>
+              <Tag>what to expect</Tag>
+              <h2 className="mt-8 font-figtree text-[clamp(44px,5.6vw,80px)] font-normal leading-[1.06] tracking-[-0.02em] text-[#171b26] [text-wrap:wrap]">
+                <span className="text-[#3b3fbc]">Three steps</span> to a 60-day pilot.
+              </h2>
+              <p className="mt-8 max-w-[400px] font-figtree text-[clamp(18px,1.67vw,24px)] leading-[1.25]">
+                No long contracts and no IT project. Start with one team, watch usage and feedback on your dashboard, then decide on a company-wide plan.
+              </p>
+              <div className="mt-10">
+                <PillButton href="#book" tone="lime" size="sm" className="!text-[18px]">Book a demo</PillButton>
+              </div>
+            </div>
+
+            <img src={photo} alt="Two colleagues going through a plan on a laptop" width="470" height="698" loading="lazy" className="aspect-[470/698] w-full max-w-[470px] justify-self-center object-cover [object-position:52%_50%] lg:justify-self-auto" />
+
+            <ol className="flex flex-col gap-10 lg:gap-[84px]">
+              {STEPS.map((s, i) => (
+                <li key={s.t} className="border-b border-[#8a8a8a]/70 pb-8">
+                  <span className={`inline-block px-[10px] py-[3px] font-figtree text-[12px] uppercase leading-4 text-[#0b0b0c] ${s.chip}`}>Step {i + 1}</span>
+                  <h3 className="mt-5 font-figtree text-[clamp(26px,2.2vw,32px)] font-normal leading-[1.15] text-[#5b1a4a]">{s.t}</h3>
+                  <p className="mt-3 font-figtree text-[18px] leading-[1.25]">{s.d}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      </main>
       <Footer />
     </div>
-  )
+  );
 }

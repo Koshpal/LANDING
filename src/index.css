@@ -1,5 +1,4 @@
 /* Import Koshpal Design System Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -17,8 +16,15 @@
 }
 
 @layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
   body {
     @apply font-jakarta text-black-light;
+    background: #ffffff;
+    font-feature-settings: "ss01", "cv05";
   }
 
   h1,
@@ -28,6 +34,8 @@
   h5,
   h6 {
     @apply font-outfit;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
   }
 }
 
@@ -250,3 +258,299 @@
 }
 
 /* End of custom styles */
+
+/* ==========================================================
+   B2B homepage (2026 repositioning) — tokens + helpers
+   Palette maps to tailwind.config: primary #334eac, primary-darkest
+   #081f5c, primary-lightest #eff1f8, secondary #17a2b8,
+   secondary-darkest #117a8a. Extra neutrals below are B2B-only.
+   ========================================================== */
+:root {
+  --b2b-ink: #0b1533;      /* headings */
+  --b2b-ink-2: #3a4468;    /* body */
+  --b2b-ink-3: #6b7597;    /* muted */
+  --b2b-bg: #f7f8fd;       /* tinted page band */
+  --b2b-surface-2: #f1f3fb;
+  --b2b-line: #e9ecf7;
+  --b2b-line-2: #dfe3f2;
+
+  /* fintech accents */
+  --b2b-accent: #5d6ef6;   /* brighter interactive blue */
+  --b2b-teal:   #17a2b8;
+  --b2b-grad:   linear-gradient(100deg, #334eac 0%, #5d6ef6 52%, #17a2b8 100%);
+
+  /* layered, soft depth */
+  --b2b-shadow:    0 1px 2px rgba(11, 21, 51, 0.04), 0 8px 24px rgba(11, 21, 51, 0.06);
+  --b2b-shadow-lg: 0 2px 6px rgba(11, 21, 51, 0.05), 0 24px 60px rgba(11, 21, 51, 0.12);
+  --b2b-glow:      0 0 0 1px rgba(51, 78, 172, 0.08), 0 18px 50px rgba(51, 78, 172, 0.16);
+}
+
+/* thin brand gradient bar pinned to the very top of every page */
+.b2b-topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 40;
+  background: var(--b2b-grad);
+  background-size: 200% 100%;
+  animation: b2bShimmer 8s linear infinite;
+}
+@keyframes b2bShimmer { to { background-position: 200% 0; } }
+@media (prefers-reduced-motion: reduce) { .b2b-topbar { animation: none; } }
+
+/* dark section: layered mesh gradient + soft vignette. The interactive "jelly"
+   grid canvas sits on top of this; keep content above both. */
+.b2b-dark-band {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(55% 75% at 88% 6%, rgba(23, 162, 184, 0.18), transparent 62%),
+    radial-gradient(48% 62% at 6% 0%, rgba(93, 110, 246, 0.26), transparent 60%),
+    radial-gradient(130% 130% at 14% -8%, #24408f 0%, #142561 48%, #0a1338 100%);
+}
+.b2b-dark-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 -120px 140px -80px rgba(6, 12, 40, 0.9),
+    inset 0 90px 120px -90px rgba(6, 12, 40, 0.55);
+}
+/* lift real content above the mesh + grid — but never touch decorative
+   absolutely-positioned layers (glow orbs, canvases), which are aria-hidden */
+.b2b-dark-band > *:not(.b2b-jelly-grid):not([aria-hidden="true"]) {
+  position: relative;
+  z-index: 1;
+}
+
+/* interactive jelly-grid canvas — always a full-bleed backdrop */
+.b2b-jelly-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.b2b-shadow { box-shadow: var(--b2b-shadow); }
+.b2b-shadow-lg { box-shadow: var(--b2b-shadow-lg); }
+
+/* one or two accent words rendered in the brand gradient */
+.b2b-gradient-text {
+  background: var(--b2b-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* reusable surface card: hairline border, layered shadow, lift on hover.
+   Caller sets the background (bg-[#fff] / bg-[#f7f8fd]). */
+.b2b-card {
+  border: 1px solid var(--b2b-line);
+  border-radius: 20px;
+  box-shadow: var(--b2b-shadow);
+}
+/* self-contained hover interaction — works with or without .b2b-card */
+.b2b-card-hover {
+  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.24s ease, border-color 0.24s ease;
+  will-change: transform;
+}
+.b2b-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--b2b-glow);
+  border-color: rgba(51, 78, 172, 0.24);
+}
+.b2b-dark-band .b2b-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 60px -18px rgba(4, 10, 35, 0.7);
+}
+
+/* ---------- micro-interactions ---------- */
+
+/* press feedback for any clickable */
+.b2b-press { transition: transform 0.12s ease; }
+.b2b-press:active { transform: scale(0.97); }
+
+/* link / button with a trailing mark that slides on hover */
+.b2b-arrow .arw {
+  display: inline-block;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.b2b-arrow:hover .arw { transform: translateX(4px); }
+
+/* list row nudge */
+.b2b-row { transition: transform 0.18s ease, color 0.18s ease; }
+.b2b-row:hover { transform: translateX(4px); }
+
+/* icon tile grows slightly when its card is hovered */
+.b2b-ico { transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.group:hover .b2b-ico { transform: scale(1.08) rotate(-2deg); }
+
+/* moving-sheen sweep across the primary button on hover */
+.b2b-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.4) 50%, transparent 68%);
+  transform: translateX(-130%);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+.b2b-sheen:hover::after { transform: translateX(130%); }
+
+/* soft tag chips */
+.b2b-chip { transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .b2b-card-hover:hover,
+  .b2b-row:hover,
+  .b2b-arrow:hover .arw,
+  .group:hover .b2b-ico { transform: none; }
+  .b2b-sheen::after { display: none; }
+}
+
+/* eyebrow / section kicker — gradient-outlined pill with a gradient dot */
+.b2b-eyebrow {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px 6px 11px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    var(--b2b-grad) border-box;
+}
+.b2b-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--b2b-grad);
+  flex: none;
+}
+.b2b-dark-band .b2b-eyebrow {
+  color: #b9c6ff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)) padding-box,
+    linear-gradient(100deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.14)) border-box;
+}
+.b2b-dark-band .b2b-eyebrow::before {
+  background: linear-gradient(100deg, #9db4ff, #7fe3ef);
+}
+
+/* checkbox bullet for the capability table */
+.b2b-check li { position: relative; padding-left: 28px; }
+.b2b-check li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  background: var(--primary-lightest) center / 12px no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23334EAC' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  border: 1px solid #e1e6f5;
+}
+.b2b-check.b2b-check-teal li::before {
+  background-color: #e4f3f5;
+  border-color: #bfe3e8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23117A8A' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b2b-reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==========================================================
+   Koshpal logo cursor (desktop, fine-pointer only)
+   ========================================================== */
+.b2b-cursor { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  /* hide the OS cursor everywhere once our cursor has mounted */
+  html.has-koshpal-cursor,
+  html.has-koshpal-cursor * {
+    cursor: none !important;
+  }
+
+  .b2b-cursor {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;              /* center on the pointer */
+    z-index: 2147483000;
+    pointer-events: none;
+    will-change: transform;
+    transform: translate3d(-100px, -100px, 0);
+    transition: opacity 0.25s ease;
+  }
+  .b2b-cursor__mark {
+    position: absolute;
+    inset: 0;
+    background: center / contain no-repeat url("/assets/logo-removebg.png");
+    filter: drop-shadow(0 3px 8px rgba(8, 20, 60, 0.28));
+    transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1),
+      filter 0.16s ease;
+  }
+  .b2b-cursor__ring {
+    position: absolute;
+    inset: -9px;
+    border: 1.5px solid rgba(51, 78, 172, 0.5);
+    border-radius: 999px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  /* interactive hover state: mark grows, brand ring blooms */
+  .b2b-cursor.is-active .b2b-cursor__mark {
+    transform: scale(1.32);
+    filter: drop-shadow(0 4px 12px rgba(51, 78, 172, 0.45));
+  }
+  .b2b-cursor.is-active .b2b-cursor__ring {
+    opacity: 1;
+    transform: scale(1);
+  }
+  /* press feedback */
+  .b2b-cursor.is-down .b2b-cursor__mark { transform: scale(0.9); }
+  .b2b-cursor.is-hidden { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b2b-cursor,
+  .b2b-cursor__mark,
+  .b2b-cursor__ring { transition: none !important; }
+}
+
+/* --- text that sits directly on a navy band (not inside a white card) --- */
+.b2b-on-dark-h    { color: #f6f8ff; }
+.b2b-on-dark      { color: #d3dbf5; }
+.b2b-on-dark-soft { color: #c3cdec; }
+.b2b-on-dark-muted{ color: #aab6dd; }
+.b2b-on-dark-accent { color: #a9c0ff; }
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7) */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid #334eac;
+  outline-offset: 2px;
+}
+.b2b-dark-band :where(a, button, summary):focus-visible {
+  outline-color: #9db4ff;
+}
+/* Skip link */
+.skip-link {
+  position: absolute; left: -9999px; top: 8px; z-index: 100;
+  background: #fff; color: #0b1533; padding: 8px 14px; border-radius: 999px;
+  font-weight: 600;
+}
+.skip-link:focus { left: 12px; }

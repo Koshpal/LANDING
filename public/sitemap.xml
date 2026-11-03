@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://www.koshpal.com/</loc>
-  <lastmod>2025-11-02T21:48:41+00:00</lastmod>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://koshpal.com/</loc></url>
+  <url><loc>https://koshpal.com/platform/mobile-app</loc></url>
+  <url><loc>https://koshpal.com/platform/dashboard</loc></url>
+  <url><loc>https://koshpal.com/platform/spending-insights</loc></url>
+  <url><loc>https://koshpal.com/platform/budgets-goals</loc></url>
+  <url><loc>https://koshpal.com/platform/dues-reminders</loc></url>
+  <url><loc>https://koshpal.com/platform/book-a-session</loc></url>
+  <url><loc>https://koshpal.com/platform/dashboard-insights</loc></url>
+  <url><loc>https://koshpal.com/for-hr</loc></url>
+  <url><loc>https://koshpal.com/pricing</loc></url>
+  <url><loc>https://koshpal.com/for-employees</loc></url>
+  <url><loc>https://koshpal.com/privacy-trust</loc></url>
+  <url><loc>https://koshpal.com/about</loc></url>
+  <url><loc>https://koshpal.com/faq</loc></url>
+  <url><loc>https://koshpal.com/our-vision</loc></url>
+  <url><loc>https://koshpal.com/coach-with-us</loc></url>
+  <url><loc>https://koshpal.com/blog</loc></url>
+  <url><loc>https://koshpal.com/blog/what-is-employee-financial-wellness</loc></url>
+  <url><loc>https://koshpal.com/blog/hidden-financial-challenges-employees-face-at-work</loc></url>
+  <url><loc>https://koshpal.com/blog/employee-financial-stress-productivity-engagement-retention</loc></url>
+  <url><loc>https://koshpal.com/blog/salary-hike-still-not-financially-secure</loc></url>
+  <url><loc>https://koshpal.com/blog/what-financial-wellness-means</loc></url>
+  <url><loc>https://koshpal.com/blog/evaluating-financial-wellness-providers</loc></url>
+  <url><loc>https://koshpal.com/blog/financial-wellness-and-privacy</loc></url>
+  <url><loc>https://koshpal.com/demo</loc></url>
+  <url><loc>https://koshpal.com/contact</loc></url>
 </urlset>

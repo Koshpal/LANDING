@@ -1,0 +1,129 @@
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
+import JellyGrid from "./JellyGrid";
+import { track } from "../../lib/analytics";
+
+/* Shared building blocks for the B2B site. Everything routes through these, so
+   restyling them lifts every page. */
+
+const ease = [0.2, 0.8, 0.2, 1];
+
+/** Scroll-into-view reveal — soft fade + rise + blur-in. */
+export function Reveal({ children, delay = 0, y = 20, className = "", as = "div" }) {
+  const M = motion[as] || motion.div;
+  const reduce = useReducedMotion();
+  if (reduce) {
+    const Tag = as;
+    return <Tag className={`b2b-reveal ${className}`}>{children}</Tag>;
+  }
+  return (
+    <M
+      className={`b2b-reveal ${className}`}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 0.6, ease, delay }}
+    >
+      {children}
+    </M>
+  );
+}
+
+export function Eyebrow({ children, className = "" }) {
+  return <span className={`b2b-eyebrow ${className}`}>{children}</span>;
+}
+
+/** eyebrow + h2 + optional lede, consistent rhythm. */
+export function SectionHead({ eyebrow, title, lede, dark = false, className = "" }) {
+  return (
+    <div className={`max-w-[62ch] mb-8 sm:mb-10 lg:mb-12 ${className}`}>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h2
+        className="font-outfit font-bold tracking-[-0.028em] leading-[1.1] mt-4 text-[27px] sm:text-[34px] lg:text-[40px]"
+        style={{ color: dark ? "#f6f8ff" : "var(--b2b-ink)" }}
+      >
+        {title}
+      </h2>
+      {lede && (
+        <p
+          className="font-jakarta mt-3.5 text-[16px] sm:text-[17.5px] leading-[1.6] max-w-[58ch]"
+          style={{ color: dark ? "#c3cdec" : "var(--b2b-ink-2)" }}
+        >
+          {lede}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Pill button. `variant`: "solid" | "ghost". */
+export function CTA({ to = "/demo", children, variant = "solid", size = "md", dark = false, className = "", trackLabel, location }) {
+  const base =
+    "b2b-press relative inline-flex items-center justify-center gap-2 font-outfit font-semibold rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap overflow-hidden";
+  const sizes = { md: "px-[22px] py-[13px] text-[15px]", lg: "px-8 py-[16px] text-[16px]" };
+  const solid =
+    "b2b-sheen text-[#fff] shadow-[0_10px_28px_-8px_rgba(51,78,172,0.6)] hover:shadow-[0_16px_40px_-8px_rgba(51,78,172,0.72)] hover:-translate-y-0.5";
+  const ghost = dark
+    ? "text-[#fff] border border-[#ffffff33] bg-[#ffffff0f] backdrop-blur-sm hover:bg-[#ffffff1f] hover:border-[#ffffff66]"
+    : "text-primary border border-[#dfe3f2] bg-[#fff] hover:border-primary hover:bg-primary-lightest";
+  const cls = `${base} ${sizes[size]} ${variant === "solid" ? solid : ghost} ${className}`;
+  const isHash = typeof to === "string" && to.startsWith("#");
+  const isExternal = typeof to === "string" && /^https?:/.test(to);
+
+  const inner = (
+    <>
+      {variant === "solid" && (
+        <>
+          <span
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(100deg,#334eac 0%,#4459c9 52%,#3a86b0 100%)" }}
+          />
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-1/2 opacity-50"
+            style={{ background: "linear-gradient(180deg,rgba(255,255,255,0.4),transparent)" }}
+          />
+        </>
+      )}
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+    </>
+  );
+
+  const style = variant === "solid" ? { color: "#fff" } : undefined;
+  const onClick = () =>
+    track("cta_click", {
+      label: trackLabel || (typeof children === "string" ? children : String(to)),
+      to: String(to),
+      location: location || (typeof window !== "undefined" ? window.location.pathname : ""),
+    });
+  if (isHash || isExternal) {
+    return (
+      <a href={to} className={cls} style={style} onClick={onClick}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link to={to} className={cls} style={style} onClick={onClick}>
+      {inner}
+    </Link>
+  );
+}
+
+/** Standard section wrapper: vertical rhythm + centered container. */
+export function Section({ id, children, tone = "white", className = "" }) {
+  const tones = {
+    white: "bg-[#fff]",
+    tint: "bg-[#f7f8fd] border-y border-[#e9ecf7]",
+    surface2: "bg-[#f1f3fb] border-y border-[#e9ecf7]",
+    dark: "b2b-dark-band text-[#f6f8ff]",
+  };
+  return (
+    <section id={id} className={`relative ${tones[tone]} py-14 sm:py-[72px] lg:py-24 ${className}`}>
+      {tone === "dark" && <JellyGrid color="255, 255, 255" opacity={0.16} />}
+      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-16">{children}</div>
+    </section>
+  );
+}

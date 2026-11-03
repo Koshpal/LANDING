@@ -1,317 +1,127 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import PillButton from "./site/PillButton";
 
-export default function Navbar() {
+/* Figma nav: logo · five dropdown triggers · "Book a demo" pill.
+   `glass` is the translucent bar that sits over the home hero; the default is
+   a solid white bar for pages that have not been moved to the new design yet. */
+const MENU = [
+  {
+    label: "Platform",
+    items: [
+      { label: "Mobile app", to: "/platform/mobile-app" },
+      { label: "Employee dashboard", to: "/platform/dashboard" },
+      { label: "Spending insights", to: "/platform/spending-insights" },
+      { label: "Budgets & goals", to: "/platform/budgets-goals" },
+      { label: "Dues & reminders", to: "/platform/dues-reminders" },
+      { label: "Book a session", to: "/platform/book-a-session" },
+      { label: "Privacy & trust", to: "/privacy-trust" },
+    ],
+  },
+  { label: "Solution", items: [{ label: "For employees", to: "/for-employees" }, { label: "For companies", to: "/for-hr" }] },
+  { label: "Resources", items: [{ label: "Blog", to: "/blog" }, { label: "FAQ & help", to: "/faq" }] },
+  { label: "Company", items: [{ label: "About", to: "/about" }, { label: "Our vision", to: "/our-vision" }, { label: "Coach with Koshpal", to: "/coach-with-us" }, { label: "Contact us", to: "/contact" }] },
+  { label: "Pricing", items: [{ label: "Pricing", to: "/pricing" }] },
+];
+
+function Logo() {
+  return (
+    <Link to="/" aria-label="Koshpal home" className="relative block h-[34px] w-[138px] shrink-0 max-md:w-[112px] max-md:h-[28px]">
+      <span className="absolute" style={{ top: "-60.67%", right: "-16.37%", bottom: "-68.22%", left: "-15.49%" }}>
+        <img src="/img/home/logo.svg" alt="Koshpal" className="block size-full max-w-none" />
+      </span>
+    </Link>
+  );
+}
+
+function Chevron() {
+  return <img src="/img/home/chevron.svg" alt="" width="10" height="6" className="transition-transform duration-200 group-hover/nav:rotate-180 group-focus-within/nav:rotate-180" />;
+}
+
+export default function Navbar({ glass = false }) {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
 
-  const smoothScrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setOpen(false);
-    }
-  };
+  // Fixed to the top while scrolling. The glass bar only reads against the hero, so once the page
+  // scrolls it becomes a solid white bar that stays legible over any section.
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+
+  const bar = scrolled
+    ? "bg-white/95 border-b border-[#e6e8f2] shadow-[0_4px_20px_rgba(11,11,12,0.08)] backdrop-blur-md"
+    : glass
+      ? "bg-white/[0.08] border-b border-white/25 backdrop-blur-[2px]"
+      : "bg-white border-b border-[#e6e8f2]";
 
   return (
-    // fixed floating pill - adjusts spacing from top with padding
-    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
-      <div className="max-w-6xl px-3 mx-auto pointer-events-auto sm:px-4 md:px-6 pt-2 sm:pt-3 md:pt-4">
-        {/* outer pill frame (rounded + ring + subtle border) */}
-        <div className="mx-auto rounded-full bg-white/95 backdrop-blur-lg px-4 sm:px-5 md:px-6 flex items-center justify-between shadow-2xl ring-1 ring-grey-lightest border border-white-light h-[56px] sm:h-[64px] md:h-[70px]">
-          {/* left: logo */}
-          <Link
-            to="/"
-            className="flex items-center h-full gap-2 sm:gap-3 flex-shrink-0"
-          >
-            {/* larger responsive logo */}
-            <img
-              src="/assets/koshPal-logo.png"
-              alt="Koshpal"
-              className="h-[55px] sm:h-[64px] md:h-[70px] w-auto cursor-pointer"
-            />
-          </Link>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-200 ${bar}`}>
+      <div className="mx-auto flex h-[84px] max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-20 max-md:h-[72px]">
+        <Logo />
 
-          {/* center: nav links (desktop) */}
-          <nav className="hidden lg:flex items-center gap-3 xl:gap-5 text-black-light font-outfit font-medium px-2 py-2.5 text-sm xl:text-base flex-1 justify-center">
-            {isHomePage ? (
-              <a
-                href="#overview"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo("overview");
-                }}
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
+        <nav aria-label="Primary" className="hidden flex-1 items-center justify-center gap-[10px] lg:flex">
+          {MENU.map((m) => (
+            <div key={m.label} className="group/nav relative">
+              <button
+                type="button"
+                aria-haspopup="true"
+                className="flex h-[33.6px] items-center gap-[6px] rounded-full px-[9px] py-2 font-stack text-[18px] leading-[17.6px] text-[#0b0b0c] transition-colors hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#3b3fbc]"
               >
-                Overview
-              </a>
-            ) : (
-              <Link
-                to="/#overview"
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                Overview
-              </Link>
-            )}
-            {isHomePage ? (
-              <a
-                href="#how-it-works"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo("how-it-works");
-                }}
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                How it works
-              </a>
-            ) : (
-              <Link
-                to="/#how-it-works"
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                How it works
-              </Link>
-            )}
-            {isHomePage ? (
-              <a
-                href="#what-we-do"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo("what-we-do");
-                }}
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                What we do
-              </a>
-            ) : (
-              <Link
-                to="/#what-we-do"
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                What we do
-              </Link>
-            )}
-            {isHomePage ? (
-              <a
-                href="#finance-experts"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo("finance-experts");
-                }}
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                Finance Experts
-              </a>
-            ) : (
-              <Link
-                to="/#finance-experts"
-                className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-              >
-                Finance Experts
-              </Link>
-            )}
-            <Link
-              to="/contact"
-              className="transition cursor-pointer hover:text-primary whitespace-nowrap"
-            >
-              Contact us
-            </Link>
-          </nav>
+                {m.label}
+                <Chevron />
+              </button>
+              <div className="invisible absolute left-1/2 top-full z-10 w-max min-w-[190px] -translate-x-1/2 pt-3 opacity-0 transition duration-150 group-hover/nav:visible group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:opacity-100">
+                <ul className="rounded-[20px] bg-white p-2 shadow-[0_16px_40px_rgba(11,11,12,0.16)]">
+                  {m.items.map((it) => (
+                    <li key={it.to}>
+                      <Link to={it.to} className="block rounded-[14px] px-4 py-2.5 font-stack text-[16px] text-[#0b0b0c] transition-colors hover:bg-[#f1f1fb]">
+                        {it.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </nav>
 
-          {/* right side buttons */}
-          <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
-            {isHomePage && (
-              <>
-                <Link
-                  to="/demo"
-                  className="bg-primary text-white font-medium font-outfit px-4 xl:px-6 py-2 xl:py-2.5 text-sm xl:text-base rounded-full shadow-md hover:bg-primary-darkest transition-all cursor-pointer whitespace-nowrap"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  Request a Demo
-                </Link>
-                <Link
-                  to="/login"
-                  className="border-2 border-primary text-primary font-medium font-outfit px-4 xl:px-6 py-2 xl:py-2.5 text-sm xl:text-base rounded-full hover:bg-primary transition-all cursor-pointer whitespace-nowrap"
-                  style={{ color: "inherit" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "#FFFFFF")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "inherit")
-                  }
-                >
-                  Login
-                </Link>
-              </>
-            )}
-          </div>
-
-          {/* mobile menu button */}
-          <button
-            className="p-2 -mr-2 transition-transform duration-300 lg:hidden text-black-light touch-manipulation"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 transition-transform duration-300 rotate-90"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 transition-transform duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
+        <div className="hidden lg:block">
+          <PillButton to="/demo" size="lg" className="!text-[19px]">Book a demo</PillButton>
         </div>
 
-        {/* mobile dropdown */}
-        <div
-          className={`lg:hidden mt-3 bg-white/95 backdrop-blur-lg rounded-2xl text-black-light shadow-lg border border-grey-lightest transition-all duration-300 ease-in-out origin-top ${
-            open
-              ? "opacity-100 scale-y-100 max-h-[500px] p-5 space-y-4"
-              : "opacity-0 scale-y-0 max-h-0 p-0 border-0"
-          }`}
+        <button
+          type="button"
+          className="p-2 -mr-2 text-[#0b0b0c] lg:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
         >
-          {isHomePage ? (
-            <a
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              href="#overview"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo("overview");
-              }}
-            >
-              Overview
-            </a>
-          ) : (
-            <Link
-              to="/#overview"
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              onClick={() => setOpen(false)}
-            >
-              Overview
-            </Link>
-          )}
-          {isHomePage ? (
-            <a
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              href="#how-it-works"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo("how-it-works");
-              }}
-            >
-              How it works
-            </a>
-          ) : (
-            <Link
-              to="/#how-it-works"
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              onClick={() => setOpen(false)}
-            >
-              How it works
-            </Link>
-          )}
-          {isHomePage ? (
-            <a
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              href="#what-we-do"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo("what-we-do");
-              }}
-            >
-              What we do
-            </a>
-          ) : (
-            <Link
-              to="/#what-we-do"
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              onClick={() => setOpen(false)}
-            >
-              What we do
-            </Link>
-          )}
-          {isHomePage ? (
-            <a
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              href="#finance-experts"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo("finance-experts");
-              }}
-            >
-              Finance Experts
-            </a>
-          ) : (
-            <Link
-              to="/#finance-experts"
-              className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-              onClick={() => setOpen(false)}
-            >
-              Finance Experts
-            </Link>
-          )}
-          <Link
-            to="/contact"
-            className="block py-2 text-base font-medium transition cursor-pointer font-outfit hover:text-primary touch-manipulation"
-            onClick={() => setOpen(false)}
-          >
-            Contact us
-          </Link>
-          <div className="pt-3 space-y-2">
-            {isHomePage && (
-              <>
-                <Link
-                  to="/demo"
-                  onClick={() => setOpen(false)}
-                  className="block w-full px-4 py-3 text-base font-medium text-white transition-all rounded-full cursor-pointer bg-primary font-outfit hover:bg-primary-darkest touch-manipulation text-center"
-                  style={{ color: "#FFFFFF" }}
-                >
-                  Request a Demo
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
+        </button>
+      </div>
+
+      {open && (
+        <div className="mx-4 mt-2 max-h-[calc(100vh-96px)] overflow-y-auto rounded-[24px] bg-white p-5 shadow-[0_16px_40px_rgba(11,11,12,0.18)] lg:hidden">
+          {MENU.map((m) => (
+            <div key={m.label} className="border-b border-[#eceef6] py-3 last:border-0">
+              <p className="font-stack text-[13px] uppercase tracking-wider text-[#7a7f99]">{m.label}</p>
+              {m.items.map((it) => (
+                <Link key={it.to} to={it.to} onClick={() => setOpen(false)} className="block py-1.5 font-stack text-[18px] text-[#0b0b0c]">
+                  {it.label}
                 </Link>
-                <Link
-                  to="/login"
-                  onClick={() => setOpen(false)}
-                  className="block w-full px-4 py-3 text-base font-medium text-primary border-2 border-primary transition-all rounded-full cursor-pointer font-outfit hover:bg-primary touch-manipulation text-center"
-                  style={{ color: "inherit" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "#FFFFFF")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "inherit")
-                  }
-                >
-                  Login
-                </Link>
-              </>
-            )}
+              ))}
+            </div>
+          ))}
+          <div className="pt-4">
+            <PillButton to="/demo" size="sm" onClick={() => setOpen(false)}>Book a demo</PillButton>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

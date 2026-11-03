@@ -1,5 +1,80 @@
 {
+  "redirects": [
+    {
+      "source": "/advise",
+      "destination": "/coach-with-us",
+      "permanent": true
+    },
+    {
+      "source": "/platform",
+      "destination": "/platform/mobile-app",
+      "permanent": true
+    },
+    {
+      "source": "/business-impact",
+      "destination": "/for-hr",
+      "permanent": true
+    },
+    {
+      "source": "/customers",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/financial-wellness",
+      "destination": "/for-employees",
+      "permanent": true
+    },
+    {
+      "source": "/resources",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/resources/reports",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/resources/guides",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/financial-coaching",
+      "destination": "/platform/book-a-session",
+      "permanent": true
+    },
+    {
+      "source": "/financial-education",
+      "destination": "/platform/mobile-app",
+      "permanent": true
+    },
+    {
+      "source": "/security",
+      "destination": "/privacy-trust",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/hr",
+      "destination": "/for-hr",
+      "permanent": true
+    },
+    {
+      "source": "/employee-financial-wellness",
+      "destination": "/for-employees",
+      "permanent": true
+    },
+    {
+      "source": "/our-story",
+      "destination": "/about",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
