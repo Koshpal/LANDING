@@ -9,8 +9,8 @@ import { MagentaHero, PinkTag, PhotoCta, PhotoCarousel } from "../components/sit
 /* Figma "Our story" (2:6625). Hero tag/button labels replace template placeholders. */
 const base = "/img/pages/story";
 const photoWide = "/img/photos/pair-home-laptop.jpg";
-const photoSquare = "/img/photos/woman-portrait.jpg";
-const photoPortrait = "/img/photos/pair-walking.jpg";
+const photoSquare = "/img/coaches/cfp2.jpg";
+const photoPortrait = "/img/photos/team.jpg";
 
 const VALUES = [
   { t: "Simplicity", s: "First", d: "We turn complex money decisions into clear, doable steps. Managing money should not feel like a chore.", Icon: Circle },
@@ -67,7 +67,7 @@ export default function Story() {
               <div>
                 <img src={photoWide} alt="Two colleagues going through a plan on a laptop" width="718" height="413" loading="lazy" className="aspect-[718/413] w-full rounded-[24px] object-cover" />
               </div>
-              <img src={photoSquare} alt="A smiling employee in the office" width="406" height="411" loading="lazy" className="aspect-[406/411] w-full max-w-[406px] justify-self-end rounded-[24px] object-cover [object-position:66%_40%] md:mt-0" />
+              <img src={photoSquare} alt="A Koshpal financial coach" width="406" height="411" loading="lazy" className="aspect-[406/411] w-full max-w-[406px] justify-self-end rounded-[24px] object-cover [object-position:50%_26%] md:mt-0" />
             </div>
             <p className="mt-12 text-right font-figtree text-[clamp(22px,2.78vw,40px)] leading-[1.4] md:ml-auto md:mt-[100px] md:max-w-[1125px]">
               When money worries build up, they follow people to work, into their health, and into how they treat the people around them. We believe the workplace is the best place to change that, with real help people will actually use.
@@ -98,7 +98,7 @@ export default function Story() {
         {/* how we do it together */}
         <section className="bg-white px-5 py-14 md:px-[100px] md:py-[100px]">
           <div className="mx-auto grid max-w-[1240px] items-start gap-8 md:grid-cols-[536px_minmax(0,1fr)] md:gap-[61px]">
-            <img src={photoPortrait} alt="Two colleagues walking through the office, talking" width="536" height="628" loading="lazy" className="aspect-[536/628] w-full max-w-[536px] rounded-[30px] object-cover [object-position:50%_50%]" />
+            <img src={photoPortrait} alt="The Koshpal team at a fintech event" width="536" height="628" loading="lazy" className="aspect-[536/628] w-full max-w-[536px] rounded-[30px] object-cover [object-position:50%_30%]" />
             <div className="md:pt-[190px]">
               <PinkTag>How we do it, together</PinkTag>
               <h2 className="mt-6 max-w-[620px] text-balance font-figtree text-[clamp(30px,3.89vw,56px)] font-medium leading-[1.05] tracking-[-0.02em]">We bring it to your people. You make it count.</h2>
@@ -124,7 +124,6 @@ export default function Story() {
                 ))}
               </div>
             </div>
-            <img src="/img/photos/team.jpg" alt="The Koshpal team at a fintech event" width="560" height="623" loading="lazy" className="mt-10 aspect-[560/623] w-full max-w-[560px] rounded-[24px] object-cover md:mt-14 md:rounded-[30px]" />
           </div>
         </section>
 
