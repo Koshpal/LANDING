@@ -62,8 +62,10 @@ export default function HomeHero() {
             </span>
           </h1>
           <p className="mt-5 text-center font-stack font-light text-white text-[clamp(16px,2.22vw,32px)] leading-[1.19]">
+
             Building financially confident workplaces.
-            Give every employee continuous financial support through intelligent technology, personalised education and certified financial experts, so they build better habits and make confident money decisions at every stage of life.
+
+            Empower employees with personalised financial education, intelligent tools, and expert guidance to make better money decisions.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-[30px] pt-[50px] max-md:gap-4 max-md:pt-6">
             <PillButton to="/demo" tone="indigo">Book a demo</PillButton>

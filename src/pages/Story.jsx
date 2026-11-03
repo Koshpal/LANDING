@@ -124,6 +124,7 @@ export default function Story() {
                 ))}
               </div>
             </div>
+            <img src="/img/photos/team.jpg" alt="The Koshpal team at a fintech event" width="560" height="623" loading="lazy" className="mt-10 aspect-[560/623] w-full max-w-[560px] rounded-[24px] object-cover md:mt-14 md:rounded-[30px]" />
           </div>
         </section>
 
