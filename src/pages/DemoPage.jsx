@@ -27,7 +27,7 @@ const STEPS = [
   { chip: "bg-[#8cc63f]", t: "Pilot", d: "One team for 60 days, with usage and feedback on your dashboard." },
 ];
 
-const photo = "/img/home/hero-photo.png";
+const photo = "/img/photos/pair-laptop.jpg";
 
 export default function DemoPage() {
   return (
@@ -106,7 +106,7 @@ export default function DemoPage() {
               </div>
             </div>
 
-            <img src={photo} alt="Two colleagues smiling at their phones" width="470" height="698" loading="lazy" className="aspect-[470/698] w-full max-w-[470px] justify-self-center object-cover [object-position:92%_50%] lg:justify-self-auto" />
+            <img src={photo} alt="Two colleagues going through a plan on a laptop" width="470" height="698" loading="lazy" className="aspect-[470/698] w-full max-w-[470px] justify-self-center object-cover [object-position:52%_50%] lg:justify-self-auto" />
 
             <ol className="flex flex-col gap-10 lg:gap-[84px]">
               {STEPS.map((s, i) => (

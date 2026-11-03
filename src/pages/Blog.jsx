@@ -9,7 +9,7 @@ import { SHOW_DUMMY } from "../lib/dummy";
 /* Figma "Blog" (orange hero, featured post, 3-column grid). Posts come from content/posts.js;
    thumbnails are the design's illustrations, cycled across posts. */
 const POSTS = ALL_POSTS.filter((p) => SHOW_DUMMY || !p.dummy);
-const IMG = ["carabiner", "binders", "piggy", "coin-card"].map((n) => `/img/pages/blog/${n}.png`);
+const IMG = ["pair-table", "woman-laptop", "pair-home-laptop", "woman-office-phone", "pair-laptop", "man-turban-phone", "pair-walking", "woman-video-call", "woman-portrait", "man-reading"].map((n) => `/img/photos/${n}.jpg`);
 export const postImage = (i) => IMG[i % IMG.length];
 
 export const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "");
@@ -66,13 +66,13 @@ export default function Blog() {
                   <p className="mt-5 font-figtree text-[16px] text-[#333]">{fmtDate(featured.date)}</p>
                   <span className="mt-8 inline-flex h-[46px] items-center self-start rounded-full bg-white px-6 font-figtree text-[16px] shadow-[0_3px_6px_rgba(0,0,0,0.18)] transition-transform duration-200 group-hover:-translate-y-0.5 md:mt-auto">Read more</span>
                 </div>
-                <img src="/img/pages/blog/coin-card.png" alt="" width="450" height="441" className="aspect-[450/441] w-full rounded-[24px] object-cover md:rounded-[32px] lg:h-full lg:rounded-[32px]" />
+                <img src={postImage(ALL_POSTS.indexOf(featured))} alt="" width="450" height="441" className="aspect-[450/441] w-full rounded-[24px] object-cover md:rounded-[32px] lg:h-full lg:rounded-[32px]" />
               </Link>
             )}
 
             <ul className="mt-12 grid gap-x-[22px] gap-y-12 sm:grid-cols-2 lg:mt-[100px] lg:grid-cols-3 lg:gap-y-[80px]">
               {rest.map((p, i) => (
-                <li key={p.slug}><Card p={p} i={i} /></li>
+                <li key={p.slug}><Card p={p} i={ALL_POSTS.indexOf(p)} /></li>
               ))}
             </ul>
           </div>

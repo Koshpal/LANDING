@@ -159,16 +159,18 @@ export function PhotoCarousel() {
   );
 }
 
-/** Alternating image/text rows with numbered dots. rows: [{ t, d }] */
-export function AltRows({ rows, image = "/img/home/hero-photo.png", className = "mt-14" }) {
+const ROW_PHOTOS = ["pair-laptop", "pair-home-laptop", "pair-walking", "woman-office-phone", "pair-table", "woman-video-call", "woman-laptop", "man-turban-phone"].map((n) => `/img/photos/${n}.jpg`);
+
+/** Alternating image/text rows with numbered dots. rows: [{ t, d, img? }]; photos rotate unless `image` is set. */
+export function AltRows({ rows, image, className = "mt-14" }) {
   return (
     <ol className={`mx-auto flex max-w-[1200px] flex-col gap-14 md:gap-[102px] ${className}`}>
       {rows.map((r, i) => (
         <li key={r.t} className="grid items-center gap-8 md:grid-cols-2 md:gap-[58px]">
-          <img src={r.img || image} alt="" width="538" height="389" loading="lazy" className={`aspect-[538/389] w-full rounded-[30px] object-cover ${i % 2 ? "md:order-2" : ""}`} />
+          <img src={r.img || image || ROW_PHOTOS[i % ROW_PHOTOS.length]} alt="" width="538" height="389" loading="lazy" className={`aspect-[538/389] w-full rounded-[30px] object-cover ${i % 2 ? "md:order-2" : ""}`} />
           <div className={i % 2 ? "md:order-1" : ""}>
             {r.tag ? <PinkTag>{r.tag}</PinkTag> : <NumDot n={i + 1} />}
-            <h3 className="mt-6 max-w-[430px] text-balance font-figtree text-[clamp(28px,3.33vw,48px)] font-medium leading-[1.2] tracking-[-0.02em]">{r.t}</h3>
+            <h3 className="mt-6 max-w-[430px] text-balance font-figtree text-[clamp(28px,3.33vw,48px)] font-normal leading-[1.2] tracking-[-0.02em]">{r.t}</h3>
             <p className="mt-5 max-w-[470px] font-stack text-[clamp(17px,1.5vw,22px)] leading-[1.3]">{r.d}</p>
           </div>
         </li>

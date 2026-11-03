@@ -23,7 +23,8 @@ const PRINCIPLES = [
   { t: "Confidence that lasts", d: "We measure success in lasting financial confidence, not sign-ups." },
 ];
 
-const photo = "/img/home/hero-photo.png";
+const photoPortrait = "/img/photos/woman-video-call.jpg";
+const photoWide = "/img/photos/woman-laptop.jpg";
 
 export default function Vision() {
   return (
@@ -47,7 +48,7 @@ export default function Vision() {
         {/* what we are doing */}
         <section className="bg-[#122020] px-5 py-16 text-white md:px-10 md:py-[120px]">
           <div className="mx-auto grid max-w-[1240px] items-start gap-10 lg:grid-cols-[536px_minmax(0,1fr)] lg:gap-[78px]">
-            <img src={photo} alt="Two colleagues smiling at their phones" width="536" height="629" className="aspect-[536/629] w-full max-w-[536px] rounded-[30px] object-cover [object-position:92%_50%]" />
+            <img src={photoPortrait} alt="An employee on a video call with a financial coach" width="536" height="629" className="aspect-[536/629] w-full max-w-[536px] rounded-[30px] object-cover [object-position:50%_50%]" />
             <div className="lg:pt-[18px]">
               <PinkTag>What we are doing</PinkTag>
               <h2 className="mt-6 text-balance font-figtree text-[clamp(32px,3.89vw,56px)] font-medium leading-[1.05] tracking-[-0.02em]">Financial confidence, for everyone at work</h2>
@@ -88,7 +89,7 @@ export default function Vision() {
                 Our ambition is not another HR platform. It is the trusted financial wellbeing infrastructure for workplaces across India, where every employee has real guidance within reach, and where companies measure success not only by revenue, but by the financial confidence of their people. India first, then the UAE and Australia.
               </p>
             </div>
-            <img src={photo} alt="" width="1320" height="531" loading="lazy" className="mt-10 aspect-[1320/531] w-full rounded-[24px] object-cover md:mt-12 md:rounded-[30px]" />
+            <img src={photoWide} alt="An employee working on a laptop by a window" width="1320" height="531" loading="lazy" className="mt-10 aspect-[1320/531] w-full rounded-[24px] object-cover md:mt-12 md:rounded-[30px]" />
           </div>
         </section>
 

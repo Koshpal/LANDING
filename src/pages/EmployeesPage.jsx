@@ -57,7 +57,7 @@ export default function EmployeesPage() {
             <div className="grid gap-[10px] lg:grid-cols-[593fr_595fr]">
               <div className="flex flex-col gap-[10px]">
                 <article className={`${tile} flex flex-col bg-[#c8f169] p-[14px] text-[#132121] lg:min-h-[447px]`}>
-                  <img src={`${base}/experts.png`} alt="A coach going through documents with an employee" width="553" height="268" loading="lazy" className="aspect-[553/268] w-full rounded-[20px] object-cover" />
+                  <img src={`${base}/experts.png`} alt="An employee working on a laptop" width="553" height="268" loading="lazy" className="aspect-[553/268] w-full rounded-[20px] object-cover" />
                   <div className="px-[3px] pb-2 pt-[22px]">
                     <h3 className={h}>1:1 sessions with a certified expert</h3>
                     <p className={`${p} mt-[6px] max-w-[480px]`}>Most people book 2 to 3 a month. No commissions, no sales pitch.</p>
@@ -78,7 +78,7 @@ export default function EmployeesPage() {
                   <p className={`${p} mt-[6px] max-w-[480px] text-[#b9bdbd]`}>See where the month went, by category, in plain language.</p>
                 </article>
                 <article className={`${tile} flex min-h-[431px] flex-col justify-end bg-[#1e1e1e] p-[30px] text-white`}>
-                  <img src={`${base}/insights-photo.png`} alt="Someone checking dues and reminders on a laptop" width="595" height="304" loading="lazy" className="absolute inset-x-0 top-0 h-[70%] w-full object-cover [mask-image:linear-gradient(to_bottom,#000_70%,transparent)]" />
+                  <img src={`${base}/insights-photo.png`} alt="Two colleagues checking dues and reminders on a laptop" width="595" height="304" loading="lazy" className="absolute inset-x-0 top-0 h-[70%] w-full object-cover [mask-image:linear-gradient(to_bottom,#000_70%,transparent)]" />
                   <h3 className={`${h} relative`}>Dues &amp; reminders</h3>
                   <p className={`${p} relative mt-[6px] max-w-[480px] text-white/80`}>Bills, EMIs and card payments, with a reminder before each one falls due.</p>
                 </article>
@@ -86,7 +86,7 @@ export default function EmployeesPage() {
             </div>
             <div className="grid gap-[10px] lg:grid-cols-[612fr_576fr]">
               <article className={`${tile} flex min-h-[317px] flex-col justify-end bg-[#1e1e1e] p-[30px] text-white`}>
-                <img src={`${base}/health-photo.png`} alt="A notebook of charts, glasses and a calculator" width="612" height="260" loading="lazy" className="absolute inset-x-0 top-0 h-[82%] w-full object-cover [mask-image:linear-gradient(to_bottom,#000_75%,transparent)]" />
+                <img src={`${base}/health-photo.png`} alt="Two colleagues talking through a plan" width="612" height="260" loading="lazy" className="absolute inset-x-0 top-0 h-[82%] w-full object-cover [mask-image:linear-gradient(to_bottom,#000_75%,transparent)]" />
                 <div className="relative">
                   <h3 className={h}>A health check for money</h3>
                   <p className={`${p} mt-[6px] max-w-[480px] text-white/80`}>See where you stand on spending, savings and goals, and what to work on next.</p>

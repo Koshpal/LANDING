@@ -6,8 +6,8 @@ import Navbar from "../components/Navbar";
 import Seo, { faqSchema } from "../components/b2b/Seo";
 import { DummyBadge } from "../components/b2b/Dummy";
 import { CtaBand, ORANGE } from "../components/site/PageParts";
-import { getPost } from "../content/posts";
-import { fmtDate } from "./Blog";
+import { getPost, POSTS } from "../content/posts";
+import { fmtDate, postImage } from "./Blog";
 
 /* Figma "Blog post": orange nav strip, back button, category + date, big title, banner,
    sticky contents list on the left and the article on the right. */
@@ -78,7 +78,7 @@ export default function BlogPost() {
         </div>
         <h1 className="mt-6 max-w-[1280px] font-figtree text-[clamp(30px,4.17vw,60px)] font-semibold leading-[1.1] tracking-[-0.03em] text-black">{post.title}</h1>
 
-        <img src="/img/pages/blog/coin.png" alt="" width="1280" height="478" className="mt-10 aspect-[1280/478] w-full rounded-[28px] object-cover [object-position:60%_70%] md:mt-[47px] md:rounded-[40px]" />
+        <img src={postImage(POSTS.indexOf(post))} alt="" width="1280" height="478" className="mt-10 aspect-[1280/478] w-full rounded-[28px] object-cover [object-position:50%_35%] md:mt-[47px] md:rounded-[40px]" />
 
         <div className="mt-10 grid gap-8 lg:mt-[41px] lg:grid-cols-[220px_minmax(0,980px)] lg:gap-[79px]">
           <nav aria-label="Contents" className="hidden lg:block">

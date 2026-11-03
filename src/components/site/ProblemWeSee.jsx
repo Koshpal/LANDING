@@ -13,7 +13,7 @@ const ROW_2 = [
   ["plan", "No plan for what is next"],
   ["bill", "One bill away from trouble"],
 ];
-const AVATARS = Array.from({ length: 16 }, (_, i) => `/img/home/avatars/a${i + 1}.png`);
+const AVATARS = Array.from({ length: 12 }, (_, i) => `/img/home/avatars/a${i + 1}.png`);
 
 function Chip({ icon, label }) {
   return (

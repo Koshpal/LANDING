@@ -28,8 +28,8 @@ const TOPICS = [
 ];
 
 const PEOPLE = [
-  { t: "Certified Financial Planner", s: "CFP" },
-  { t: "Chartered Accountant", s: "CA" },
+  { t: "Certified Financial Planner", s: "CFP", img: "advisor-1.png" },
+  { t: "Chartered Accountant", s: "CA", img: "advisor-2.png" },
 ];
 
 const STEPS = [
@@ -175,7 +175,7 @@ export default function CoachWithUs() {
                 <li key={p.t} className="flex flex-col items-center rounded-[40px] bg-[#f4f4f4] px-[11px] pb-[5px] pt-7 shadow-[0_0_0_4px_rgba(0,0,0,0.03)] md:pt-[34px]">
                   <h3 className="font-figtree text-[22px] font-medium leading-[30px] md:text-[24px]">{p.t}</h3>
                   <p className="mt-[2px] font-figtree text-[16px] leading-[22px] md:text-[18px]">{p.s}</p>
-                  <img src={`${base}/advisor.png`} alt="" width="340" height="250" loading="lazy" className="mt-5 aspect-[378/280] w-full rounded-[28px] object-cover md:mt-[41px]" />
+                  <img src={`${base}/${p.img}`} alt="" width="340" height="250" loading="lazy" className="mt-5 aspect-[378/280] w-full rounded-[28px] object-cover md:mt-[41px]" />
                 </li>
               ))}
             </ul>
