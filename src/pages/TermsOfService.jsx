@@ -9,8 +9,7 @@ export default function TermsOfService() {
       seo={{
         title: "Terms of Service | Koshpal",
         path: "/terms-of-service",
-        description: "Koshpal terms of service.",
-        noindex: true,
+        description: "Terms of service for Koshpal's employee financial wellness program, covering the coaching sessions, the money app and the HR dashboard.",
       }}
     >
       <Section tone="white">

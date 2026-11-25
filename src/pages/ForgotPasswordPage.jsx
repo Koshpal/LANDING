@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import Seo from '../components/b2b/Seo';
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:3000/api/v1';
@@ -43,7 +43,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
-    <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
+    <Seo path="/forgot-password" title="Forgot Password | Koshpal" description="Reset your Koshpal password. Enter your work email and we will send you a link to set a new one." />
     <div
       className="flex items-center justify-center min-h-screen px-4 py-12"
       style={{ background: 'linear-gradient(150deg, #334EAC 0%, #081F5C 100%)', fontFamily: 'Plus Jakarta Sans, sans-serif' }}

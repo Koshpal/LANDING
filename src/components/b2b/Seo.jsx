@@ -11,7 +11,7 @@ const DEFAULT_TITLE = "Employee Financial Wellness Program in India | Koshpal";
  * the canonical path. `schema` is one JSON-LD object or an array of them.
  * Inner pages get a BreadcrumbList from `crumbs` ([[name, path], ...]).
  */
-export default function Seo({ title, description, path = "/", image = OG_IMAGE, noindex = false, schema, crumbs }) {
+export default function Seo({ title, description, path = "/", image = OG_IMAGE, schema, crumbs }) {
   const fullTitle = title || DEFAULT_TITLE;
   const url = `${SITE}${path}`;
   const graph = [
@@ -34,7 +34,7 @@ export default function Seo({ title, description, path = "/", image = OG_IMAGE, 
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      {noindex && <meta name="robots" content="noindex, follow" />}
+      <meta name="robots" content="index, follow" />
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Koshpal" />

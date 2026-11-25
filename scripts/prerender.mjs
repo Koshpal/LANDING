@@ -22,6 +22,7 @@ const STRIP = [
   /<title>[\s\S]*?<\/title>\s*/,
   /<meta\s+name="description"[\s\S]*?\/>\s*/,
   /<meta\s+name="keywords"[\s\S]*?\/>\s*/,
+  /<meta\s+name="robots"[\s\S]*?\/>\s*/,
   /<link rel="canonical"[^>]*>\s*/,
   /<meta property="og:(?:title|description|url|image|type|site_name|locale)"[\s\S]*?\/>\s*/g,
   /<meta\s+name="twitter:(?:title|description|url|image|card)"[\s\S]*?\/>\s*/g,

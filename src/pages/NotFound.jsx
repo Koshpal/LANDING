@@ -1,8 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 export default function NotFound() {
   return (
+    <>
+    <Helmet>
+      <title>Page Not Found | Koshpal</title>
+      <meta name="description" content="We could not find the page you were looking for. Head back to the Koshpal home page to explore employee financial wellness." />
+    </Helmet>
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
       <div className="max-w-3xl w-full text-center py-20">
         {/* Illustration - simple inline SVG to resemble the three-figure 404 art */}
@@ -15,5 +21,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </>
   )
 }

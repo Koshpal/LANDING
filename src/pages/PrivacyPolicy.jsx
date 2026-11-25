@@ -9,8 +9,7 @@ export default function PrivacyPolicy() {
       seo={{
         title: "Privacy Policy | Koshpal",
         path: "/privacy-policy",
-        description: "Koshpal privacy policy.",
-        noindex: true,
+        description: "How Koshpal handles personal and financial data: an employee's information belongs to them, and employers only ever see aggregated, anonymised insights.",
       }}
     >
       <Section tone="white">

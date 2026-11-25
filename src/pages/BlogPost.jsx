@@ -48,7 +48,6 @@ export default function BlogPost() {
         crumbs={[["Blog", "/blog"], [post.title, `/blog/${post.slug}`]]}
         path={`/blog/${post.slug}`}
         description={post.excerpt}
-        noindex={!!post.dummy}
         schema={[
           {
             "@context": "https://schema.org",

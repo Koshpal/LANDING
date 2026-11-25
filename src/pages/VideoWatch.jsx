@@ -27,7 +27,7 @@ const VideoWatchPage = () => {
       <Helmet>
         <title>{videoData.title}</title>
         <meta name="description" content={videoData.description} />
-        <meta name="robots" content="noindex, follow" />
+        <meta name="robots" content="index, follow" />
 
         {/* ✅ Video SEO Schema */}
         <script type="application/ld+json">
