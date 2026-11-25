@@ -29,7 +29,7 @@ export default function Privacy() {
       <Seo
         path="/privacy-trust"
         title="Privacy and Trust | Koshpal"
-        description="Employees speak freely; employers see only anonymised trends. How Koshpal protects personal financial data."
+        description="Employees speak freely; employers see only anonymised trends. How Koshpal protects personal financial data in its employee financial wellness program."
         crumbs={[["Privacy & trust", "/privacy-trust"]]}
         schema={faqSchema(FAQ)}
       />

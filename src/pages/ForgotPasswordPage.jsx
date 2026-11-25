@@ -43,7 +43,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
-    <Seo path="/forgot-password" title="Forgot Password | Koshpal" description="Reset your Koshpal password. Enter your work email and we will send you a link to set a new one." />
+    <Seo path="/forgot-password" title="Forgot Password | Koshpal" description="Reset your Koshpal password for the employee financial wellness portals. Enter your work email and we will send you a link." />
     <div
       className="flex items-center justify-center min-h-screen px-4 py-12"
       style={{ background: 'linear-gradient(150deg, #334EAC 0%, #081F5C 100%)', fontFamily: 'Plus Jakarta Sans, sans-serif' }}

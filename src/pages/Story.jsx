@@ -40,7 +40,7 @@ export default function Story() {
       <Seo
         path="/about"
         title="About Koshpal: Financially Confident Workplaces"
-        description="Why we’re building Koshpal: real experts, useful tools and guidance that stays on the employee’s side. Built in Jaipur for India."
+        description="Why we’re building Koshpal: an employee financial wellness program with real experts, useful tools and guidance on the employee’s side. Built in Jaipur."
         crumbs={[["About", "/about"]]}
       />
       <main id="main">

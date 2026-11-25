@@ -111,7 +111,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c] lg:grid lg:grid-cols-2">
-      <Seo path="/login" title="Log in | Koshpal" description="Log in to your Koshpal employee, HR or coach portal." />
+      <Seo path="/login" title="Log in | Koshpal" description="Log in to Koshpal’s employee financial wellness portals as an employee, HR leader or coach." />
 
       {/* Left panel: the site's blue gradient, hidden on mobile */}
       <aside

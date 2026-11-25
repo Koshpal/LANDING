@@ -32,7 +32,7 @@ export default function Vision() {
       <Seo
         path="/our-vision"
         title="Our Vision: Financial Wellbeing at Work | Koshpal"
-        description="Workplaces support physical and mental health. We’re making financial wellbeing the third standard benefit in India."
+        description="Workplaces support physical and mental health. We’re making employee financial wellness the third standard benefit in India."
         crumbs={[["Our vision", "/our-vision"]]}
       />
       <main id="main">

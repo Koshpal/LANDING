@@ -7,7 +7,17 @@ import Seo, { faqSchema } from "../components/b2b/Seo";
 import { DummyBadge } from "../components/b2b/Dummy";
 import { CtaBand, ORANGE } from "../components/site/PageParts";
 import { getPost, POSTS } from "../content/posts";
+import { PILLAR_SLUG, seoOf } from "../content/postSeo";
 import { fmtDate, postImage } from "./Blog";
+
+/** Plain text with [label](/path) links turned into router links, so articles can link to each other and to key pages. */
+function Inline({ text }) {
+  const parts = String(text).split(/(\[[^\]]+\]\(\/[^)]*\))/g);
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\((\/[^)]*)\)$/);
+    return m ? <Link key={i} to={m[2]} className="underline decoration-[#3b3fbc] underline-offset-4 hover:text-[#3b3fbc]">{m[1]}</Link> : part;
+  });
+}
 
 /* Figma "Blog post": orange nav strip, back button, category + date, big title, banner,
    sticky contents list on the left and the article on the right. */
@@ -40,23 +50,39 @@ export default function BlogPost() {
 
   if (!post) return <Navigate to="/blog" replace />;
 
+  const seo = seoOf(post);
+  const image = `https://koshpal.com${postImage(POSTS.indexOf(post))}`;
+  // Keep reading: the pillar article first (so every post links to the main topic page), then the newest others.
+  const related = [
+    ...POSTS.filter((x) => x.published && x.slug === PILLAR_SLUG && x.slug !== post.slug),
+    ...POSTS.filter((x) => x.published && x.slug !== PILLAR_SLUG && x.slug !== post.slug).sort((a, b) => (a.date < b.date ? 1 : -1)),
+  ].slice(0, 3);
+
   let seenH = false;
   return (
     <div className="min-h-screen bg-white font-figtree text-[#0b0b0c]">
       <Seo
-        title={`${post.title} | Koshpal`}
+        title={seo.title}
         crumbs={[["Blog", "/blog"], [post.title, `/blog/${post.slug}`]]}
         path={`/blog/${post.slug}`}
-        description={post.excerpt}
+        description={seo.description}
+        image={image}
+        article={{ published: seo.published, modified: seo.modified, section: post.category }}
         schema={[
           {
             "@context": "https://schema.org",
-            "@type": "Article",
+            "@type": "BlogPosting",
             headline: post.title,
-            datePublished: post.date,
-            author: { "@type": "Organization", name: "Koshpal" },
-            publisher: { "@type": "Organization", name: "Koshpal" },
-            mainEntityOfPage: `https://koshpal.com/blog/${post.slug}`,
+            description: seo.description,
+            image,
+            datePublished: seo.published,
+            dateModified: seo.modified,
+            articleSection: post.category,
+            inLanguage: "en-IN",
+            keywords: "employee financial wellness",
+            author: { "@type": "Organization", name: "Koshpal", url: "https://koshpal.com" },
+            publisher: { "@type": "Organization", name: "Koshpal", logo: { "@type": "ImageObject", url: "https://koshpal.com/assets/logo.png" } },
+            mainEntityOfPage: { "@type": "WebPage", "@id": `https://koshpal.com/blog/${post.slug}` },
           },
           ...(post.faq?.length ? [faqSchema(post.faq)] : []),
         ]}
@@ -77,7 +103,7 @@ export default function BlogPost() {
         </div>
         <h1 className="mt-6 max-w-[1280px] font-figtree text-[clamp(30px,4.17vw,60px)] font-semibold leading-[1.1] tracking-[-0.03em] text-black">{post.title}</h1>
 
-        <img src={postImage(POSTS.indexOf(post))} alt="" width="1280" height="478" className="mt-10 aspect-[1280/478] w-full rounded-[28px] object-cover [object-position:50%_35%] md:mt-[47px] md:rounded-[40px]" />
+        <img src={postImage(POSTS.indexOf(post))} alt={`Illustration for ${post.title}`} width="1280" height="478" className="mt-10 aspect-[1280/478] w-full rounded-[28px] object-cover [object-position:50%_35%] md:mt-[47px] md:rounded-[40px]" />
 
         <div className="mt-10 grid gap-8 lg:mt-[41px] lg:grid-cols-[220px_minmax(0,980px)] lg:gap-[79px]">
           <nav aria-label="Contents" className="hidden lg:block">
@@ -132,13 +158,13 @@ export default function BlogPost() {
                       return (
                         <li key={lead || li} className="flex gap-3">
                           <span aria-hidden="true">•</span>
-                          <span>{lead && <b className="font-semibold">{lead}: </b>}{text}</span>
+                          <span>{lead && <b className="font-semibold">{lead}: </b>}<Inline text={text} /></span>
                         </li>
                       );
                     })}
                   </ul>
                 );
-              return <p key={i} className="mt-3 first:mt-0">{b.b && <b className="font-semibold">{b.b} </b>}{b.c}</p>;
+              return <p key={i} className="mt-3 first:mt-0">{b.b && <b className="font-semibold">{b.b} </b>}<Inline text={b.c} /></p>;
             })}
             {post.faq?.length > 0 && (
               <section aria-labelledby={`s-${faqId}`}>
@@ -153,6 +179,23 @@ export default function BlogPost() {
             )}
           </article>
         </div>
+
+        <aside aria-labelledby="keep-reading" className="mt-16 border-t border-[#dcdcdc] pt-10 md:mt-[100px]">
+          <h2 id="keep-reading" className="font-figtree text-[clamp(26px,2.8vw,40px)] font-medium leading-[1.1] tracking-[-0.03em] text-black">Keep reading on employee financial wellness</h2>
+          <ul className="mt-6 grid gap-6 md:grid-cols-3">
+            {related.map((r) => (
+              <li key={r.slug}>
+                <Link to={`/blog/${r.slug}`} className="group block rounded-[20px] bg-[#f3f3f3] p-6 transition-colors hover:bg-[#ebebeb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#3b3fbc]">
+                  <span className="font-figtree text-[14px] text-[#666]">{r.category} · {r.readMins} min read</span>
+                  <span className="mt-2 block font-figtree text-[19px] font-medium leading-[1.25] text-black">{r.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 font-figtree text-[16px] leading-[1.6] text-[#333]">
+            Learn how Koshpal’s <Link to="/for-hr" className="underline underline-offset-4">financial wellness program for employees</Link> works for HR, what <Link to="/for-employees" className="underline underline-offset-4">financial coaching for employees</Link> looks like day to day, or see <Link to="/pricing" className="underline underline-offset-4">pricing per employee</Link>.
+          </p>
+        </aside>
       </main>
 
       <CtaBand cta="Book a demo" py={110}>Bring wellbeing to your workplace</CtaBand>

@@ -5,6 +5,7 @@ import Seo from "../components/b2b/Seo";
 import { MagentaHero, CtaBand, ORANGE } from "../components/site/PageParts";
 import { POSTS as ALL_POSTS } from "../content/posts";
 import { SHOW_DUMMY } from "../lib/dummy";
+import { seoOf } from "../content/postSeo";
 
 /* Figma "Blog" (orange hero, featured post, 3-column grid). Posts come from content/posts.js;
    thumbnails are the design's illustrations, cycled across posts. */
@@ -17,7 +18,7 @@ export const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("en-US", { mon
 function Card({ p, i }) {
   const body = (
     <>
-      <img src={postImage(i)} alt="" width="410" height="307" loading="lazy" className="aspect-[410/307] w-full rounded-[24px] object-cover transition-transform duration-300 group-hover:scale-[1.01]" />
+      <img src={postImage(i)} alt={`Illustration for ${p.title}`} width="410" height="307" loading="lazy" className="aspect-[410/307] w-full rounded-[24px] object-cover transition-transform duration-300 group-hover:scale-[1.01]" />
       <p className="mt-3 font-figtree text-[14px] leading-5 text-[#666]">
         {p.category} <span aria-hidden="true">•</span> {p.readMins} min read
       </p>
@@ -42,6 +43,23 @@ export default function Blog() {
         title="Employee Financial Wellness Blog | Koshpal"
         description="Practical writing on employee financial wellness for HR teams and money questions for salaried employees in India: tax, EMIs, savings and benefits."
         crumbs={[["Blog", "/blog"]]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Employee financial wellness blog",
+          url: "https://koshpal.com/blog",
+          inLanguage: "en-IN",
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: POSTS.filter((x) => x.published).map((x, n) => ({
+              "@type": "ListItem",
+              position: n + 1,
+              url: `https://koshpal.com/blog/${x.slug}`,
+              name: x.title,
+              description: seoOf(x).description,
+            })),
+          },
+        }}
       />
       <main id="main">
         <MagentaHero
@@ -49,8 +67,8 @@ export default function Blog() {
           small
           padBottom={149}
           tag="Blog"
-          title="Ideas on workplace money."
-          lead="Perspectives, research and practical thinking on employee financial wellbeing, for the leadership teams building workplaces where people feel financially confident."
+          title="Employee financial wellness: ideas for HR and employees."
+          lead="Guides and practical thinking on employee financial wellness: what it is, how to run a program, how to measure it, and the money questions salaried employees in India ask."
         />
 
         <section className="bg-white px-5 pb-16 pt-10 md:px-8 md:pb-[100px] md:pt-[100px]">
@@ -66,7 +84,7 @@ export default function Blog() {
                   <p className="mt-5 font-figtree text-[16px] text-[#333]">{fmtDate(featured.date)}</p>
                   <span className="mt-8 inline-flex h-[46px] items-center self-start rounded-full bg-white px-6 font-figtree text-[16px] shadow-[0_3px_6px_rgba(0,0,0,0.18)] transition-transform duration-200 group-hover:-translate-y-0.5 md:mt-auto">Read more</span>
                 </div>
-                <img src={postImage(ALL_POSTS.indexOf(featured))} alt="" width="450" height="441" className="aspect-[450/441] w-full rounded-[24px] object-cover md:rounded-[32px] lg:h-full lg:rounded-[32px]" />
+                <img src={postImage(ALL_POSTS.indexOf(featured))} alt={`Illustration for ${featured.title}`} width="450" height="441" className="aspect-[450/441] w-full rounded-[24px] object-cover md:rounded-[32px] lg:h-full lg:rounded-[32px]" />
               </Link>
             )}
 

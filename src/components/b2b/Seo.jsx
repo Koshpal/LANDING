@@ -10,8 +10,9 @@ const DEFAULT_TITLE = "Employee Financial Wellness Program in India | Koshpal";
  * tags. `title` is the full <title> (already ending in "| Koshpal"); `path` is
  * the canonical path. `schema` is one JSON-LD object or an array of them.
  * Inner pages get a BreadcrumbList from `crumbs` ([[name, path], ...]).
+ * `article` ({ published, modified, section }) marks a blog post for Open Graph.
  */
-export default function Seo({ title, description, path = "/", image = OG_IMAGE, schema, crumbs }) {
+export default function Seo({ title, description, path = "/", image = OG_IMAGE, schema, crumbs, article }) {
   const fullTitle = title || DEFAULT_TITLE;
   const url = `${SITE}${path}`;
   const graph = [
@@ -36,7 +37,10 @@ export default function Seo({ title, description, path = "/", image = OG_IMAGE, 
       <link rel="canonical" href={url} />
       <meta name="robots" content="index, follow" />
 
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={article ? "article" : "website"} />
+      {article?.published && <meta property="article:published_time" content={article.published} />}
+      {article?.modified && <meta property="article:modified_time" content={article.modified} />}
+      {article?.section && <meta property="article:section" content={article.section} />}
       <meta property="og:site_name" content="Koshpal" />
       <meta property="og:locale" content="en_IN" />
       <meta property="og:title" content={fullTitle} />

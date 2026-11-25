@@ -60,7 +60,7 @@ const fade = "[mask-image:linear-gradient(to_right,transparent,#000_5%,#000_95%,
 /* ---------------- Mobile app ---------------- */
 export function SpendingInsights() {
   return (
-    <Shell path="/platform/spending-insights" title="Spending Insights App for Employees | Koshpal" crumb="Spending insights" description="See where the month went: income against expenses and spending by category, across UPI, cards and cash, in the Koshpal app." cta={Insight} faqTitle="Questions about insights">
+    <Shell path="/platform/spending-insights" title="Spending Insights App for Employees | Koshpal" crumb="Spending insights" description="See where the month went by category across UPI, cards and cash. Part of Koshpal’s employee financial wellness program for Indian workplaces." cta={Insight} faqTitle="Questions about insights">
       <Stage bg={BLUE} h={1384}>
         <Orbit pos={ORBIT_SPENDING} h={1384} />
         <HeroTitle y={476} tag="Spending Insights" lines={["See where your money", "actually goes"]} />
@@ -80,7 +80,7 @@ export function SpendingInsights() {
 
 export function DuesReminders() {
   return (
-    <Shell path="/platform/dues-reminders" title="Bill, EMI and Due Reminders App | Koshpal" crumb="Dues & reminders" description="Never miss a due date: bills, EMIs and card payments in one place, with timely reminders in the Koshpal app." cta={Insight}>
+    <Shell path="/platform/dues-reminders" title="Bill, EMI and Due Reminders App | Koshpal" crumb="Dues & reminders" description="Never miss a bill, EMI or card due date. Reminders in the Koshpal app, part of an employer-paid employee financial wellness program." cta={Insight}>
       <Stage bg={BLUE} h={876}>
         <HeroTitle y={182} tag="Dues & Reminder" lines={["Never misses a", "due date again!"]} lh={88} />
         <HeroImage src="/img/pages/app/bills.png" alt="A bill payment reminder card" x={205} y={494} w={1030} h={381} className={fade} />
@@ -128,7 +128,7 @@ function GoalArc() {
 
 export function BudgetsGoals() {
   return (
-    <Shell path="/platform/budgets-goals" title="Budgets and Savings Goals App | Koshpal" crumb="Budgets & goals" description="Set a budget, reach the goal: budgets by category, savings goals and gentle nudges in the Koshpal app." cta={Insight} faqTitle="Questions about insights">
+    <Shell path="/platform/budgets-goals" title="Budgets and Savings Goals App | Koshpal" crumb="Budgets & goals" description="Set a budget and reach the goal: category budgets and savings goals in the Koshpal app, part of your employee financial wellness program." cta={Insight} faqTitle="Questions about insights">
       <Stage bg={BLUE} h={887}>
         <GoalArc />
         <HeroTitle y={457} tag="Budgets & Goals" lines={["Set a Budget", "Reach the Goal"]} lh={85} buttons={[{ label: "Book a demo", to: "/demo" }]} />
@@ -157,9 +157,9 @@ export function MobileApp() {
   return (
     <Shell
       path="/platform/mobile-app"
-      title="Financial Wellness Platform: Coach, App, Insights | Koshpal"
+      title="Employee Financial Wellness Platform: Coach & App | Koshpal"
       crumb="Mobile app"
-      description="One platform: certified coaches, an app for budgets, goals and dues, and an anonymised HR dashboard. Built for Indian workplaces."
+      description="Employee financial wellness platform: certified coaches, an app for budgets, goals and dues, and an anonymised HR dashboard. Built for India."
       faqTitle="Questions about the app"
       cta={(
         <CtaBand wide py={150}>
@@ -206,7 +206,7 @@ export function MobileApp() {
 /* ---------------- Employee dashboard ---------------- */
 export function DashboardOverview() {
   return (
-    <Shell path="/platform/dashboard" title="Employee Money Dashboard | Koshpal" crumb="Employee dashboard" description="Your whole money life on one screen: spending, budgets, sessions and savings in the Koshpal employee dashboard." cta={OnePlace}>
+    <Shell path="/platform/dashboard" title="Employee Money Dashboard | Koshpal" crumb="Employee dashboard" description="Spending, budgets, sessions and savings on one screen, in the Koshpal app for your employee financial wellness program." cta={OnePlace}>
       <Stage bg={TEAL} h={1255}>
         <HeroTitle
           y={201}
@@ -240,7 +240,7 @@ const TRIO = [
 
 export function DashboardSessions() {
   return (
-    <Shell path="/platform/book-a-session" title="Book a Session with a CFP or CA | Koshpal" crumb="Book a session" description="Book a certified CFP or CA in a few clicks and talk it through privately. Paid for by your employer." cta={OnePlace} faqTitle="Questions about insights">
+    <Shell path="/platform/book-a-session" title="Book a Session with a CFP or CA | Koshpal" crumb="Book a session" description="Book a certified CFP or CA in a few clicks and talk it through privately, as part of an employer-paid employee financial wellness program." cta={OnePlace} faqTitle="Questions about insights">
       <Stage bg={TEAL} h={1060}>
         <HeroTitle
           y={182}
@@ -261,7 +261,7 @@ export function DashboardSessions() {
 
 export function DashboardInsights() {
   return (
-    <Shell path="/platform/dashboard-insights" title="Spending Insights Dashboard | Koshpal" crumb="Spending insights dashboard" description="See where your money actually goes, on a screen big enough to see it all, in the Koshpal employee dashboard." cta={Insight} faqTitle="Questions about insights">
+    <Shell path="/platform/dashboard-insights" title="Spending Insights Dashboard | Koshpal" crumb="Spending insights dashboard" description="See where your money goes on a bigger screen. The Koshpal dashboard is part of an employee financial wellness program your employer pays for." cta={Insight} faqTitle="Questions about insights">
       <Stage bg={TEAL} h={1303}>
         <Orbit pos={ORBIT_INSIGHTS} h={1303} />
         <HeroTitle y={566} tag="Spending Insights" lines={["See where your money", "actually goes"]} />

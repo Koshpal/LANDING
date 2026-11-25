@@ -35,7 +35,7 @@ export default function DemoPage() {
       <Seo
         path="/demo"
         title="Book a Demo or Start a 60-Day Pilot | Koshpal"
-        description="See the coach, app and HR dashboard in 30 minutes, then try Koshpal with one team for 60 days."
+        description="See the coach, app and HR dashboard of Koshpal’s employee financial wellness program in 30 minutes, then pilot it with one team for 60 days."
         crumbs={[["Book a demo", "/demo"]]}
       />
       <main id="main">

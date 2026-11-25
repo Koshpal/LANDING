@@ -83,7 +83,7 @@ export default function CoachWithUs() {
       <Seo
         path="/coach-with-us"
         title="Become a Financial Coach | Koshpal"
-        description="CFPs and CAs: coach employees across India in salaried roles, with no commissions or product targets. Apply in minutes."
+        description="CFPs and CAs: coach employees on financial wellness across India, with no commissions or product targets. Apply in minutes."
         crumbs={[["Coach with Koshpal", "/coach-with-us"]]}
         schema={faqSchema(FAQ)}
       />

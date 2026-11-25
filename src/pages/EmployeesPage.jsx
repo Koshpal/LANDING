@@ -32,7 +32,7 @@ export default function EmployeesPage() {
       <Seo
         path="/for-employees"
         title="Free Financial Coaching for Employees | Koshpal"
-        description="Talk privately to a certified CFP or CA about EMIs, tax, savings and goals, paid for by your employer. Your company never sees your data."
+        description="Part of your employer’s employee financial wellness program: talk privately to a certified CFP or CA about EMIs, tax and savings. Your data stays yours."
         crumbs={[["For employees", "/for-employees"]]}
       />
       <main id="main">

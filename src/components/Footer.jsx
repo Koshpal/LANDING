@@ -18,6 +18,7 @@ const SOLUTIONS = [
   { label: "For HR & People", to: "/for-hr" },
 ];
 const RESOURCES = [
+  { label: "Employee Financial Wellness Guide", to: "/blog/what-is-employee-financial-wellness" },
   { label: "Blogs", to: "/blog" },
   { label: "FAQ & Help", to: "/faq" },
 ];

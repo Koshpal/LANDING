@@ -99,7 +99,7 @@ export default function Pricing() {
       <Seo
         path="/pricing"
         title="Pricing: Per Employee, Per Month | Koshpal"
-        description="Koshpal is priced per employee per month and free for employees. See what’s included and get a quote for your company size."
+        description="Employee financial wellness program pricing: per employee, per month, and free for employees. See what’s included and get a quote for your size."
         crumbs={[["Pricing", "/pricing"]]}
         schema={[SERVICE, faqSchema(FAQ)]}
       />
